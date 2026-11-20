@@ -1,0 +1,3 @@
+i.icon.steam.symbol:before {
+  content: "\f3f6";
+}

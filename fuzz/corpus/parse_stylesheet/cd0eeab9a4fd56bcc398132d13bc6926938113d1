@@ -1,0 +1,3 @@
+.bbs-solid {
+  border-bottom-style: solid !important;
+}

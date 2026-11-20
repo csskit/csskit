@@ -1,0 +1,7 @@
+.m-btn-group.open .dropdown-carettoggle,
+.m-btn-group.open .dropdown-toggle {
+  background-image: none;
+  -webkit-box-shadow: inset 0 1px 6px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: inset 0 1px 6px rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0 1px 6px rgba(0, 0, 0, 0.2);
+}

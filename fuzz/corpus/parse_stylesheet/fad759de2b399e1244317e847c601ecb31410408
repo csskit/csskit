@@ -1,0 +1,6 @@
+.cds--checkbox-label-text.cds--skeleton {
+  block-size: 1rem;
+  inline-size: 6.25rem;
+  margin-block: 0.0625rem 0;
+  margin-inline: 0.375rem 0;
+}

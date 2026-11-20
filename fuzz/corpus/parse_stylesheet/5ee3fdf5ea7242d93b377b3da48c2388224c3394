@@ -1,0 +1,3 @@
+.subtitleappearance-preview {
+  background: linear-gradient(140deg,rgba(var(--accent)),#111) !important;
+}

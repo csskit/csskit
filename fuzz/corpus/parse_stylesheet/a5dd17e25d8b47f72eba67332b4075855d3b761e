@@ -1,0 +1,3 @@
+panel .text-link {
+  color: AccentColor !important;
+}

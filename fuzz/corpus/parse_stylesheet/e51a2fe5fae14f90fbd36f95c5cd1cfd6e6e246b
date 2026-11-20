@@ -1,0 +1,3 @@
+.timing-1 {
+  display: frames(2);
+}

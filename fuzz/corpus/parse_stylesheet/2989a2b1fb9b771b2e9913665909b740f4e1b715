@@ -1,0 +1,3 @@
+.usa-tag:only-of-type{
+  margin-right:0;
+}

@@ -1,0 +1,2 @@
+.custom-range::-ms-fill-lower {
+    background-color: #f6f8fa; }

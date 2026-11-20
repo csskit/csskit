@@ -1,0 +1,3 @@
+:where([aria-busy="true" i]) {
+  cursor: progress;
+}

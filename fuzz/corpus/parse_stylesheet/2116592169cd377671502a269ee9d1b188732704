@@ -1,0 +1,3 @@
+.woah {
+  animation-fill-mode: both;
+}

@@ -1,0 +1,3 @@
+.float\:inline-end {
+  float: inline-end;
+}

@@ -1,0 +1,3 @@
+.usa-header a{
+  border-bottom:none;
+}

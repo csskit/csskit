@@ -1,0 +1,3 @@
+.ws1 {
+  width: var(--s-step) !important;
+}

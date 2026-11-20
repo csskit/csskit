@@ -1,0 +1,3 @@
+.theme-midnight .bodyGradient_d5200e {
+  background: linear-gradient(0deg, transparent 0, var(--background-base-lowest) 46.63%);
+}

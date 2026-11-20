@@ -1,0 +1,3 @@
+.shape.rotate > * {
+  animation: linear to-rotate infinite 12s reverse;
+}

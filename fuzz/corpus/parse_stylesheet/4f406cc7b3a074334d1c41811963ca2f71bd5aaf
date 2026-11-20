@@ -1,0 +1,6 @@
+.sidebar-placesTreechildren::-moz-tree-twisty(selected),
+.sidebar-placesTreechildren::-moz-tree-image(selected),
+.sidebar-placesTreechildren::-moz-tree-cell-text(selected)
+{
+    color: var(--uc-text) !important;
+}

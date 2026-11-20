@@ -1,0 +1,3 @@
+.right {
+  inset-inline-end: 0;
+}

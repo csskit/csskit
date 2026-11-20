@@ -1,0 +1,11 @@
+@-o-keyframes p-warp {
+  0%, 100% {
+    -o-perspective: 3600px;
+    perspective: 3600px;
+  }
+
+  50% {
+    -o-perspective: 100px;
+    perspective: 100px;
+  }
+}

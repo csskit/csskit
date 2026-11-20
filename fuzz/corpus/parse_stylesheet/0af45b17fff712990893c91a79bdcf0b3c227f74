@@ -1,0 +1,3 @@
+.multicol-1 {
+  display: balance-all;
+}

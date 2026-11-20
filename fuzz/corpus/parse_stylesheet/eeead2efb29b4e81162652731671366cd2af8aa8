@@ -1,0 +1,7 @@
+ol.colored > li:before {
+      content: counter(foo) ".";
+      top: 0;
+      left: -3.125rem;
+      width: 2.5rem;
+      -webkit-margin-start: 0;
+      font-size: 1rem; }

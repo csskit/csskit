@@ -1,0 +1,6 @@
+@supports (height: round(up, 100.1px, 1px)) {
+
+  .progress-tracker--dashed-even {
+    --path-dash-calc: round(up, var(--path-dash-percent), .5px);
+}
+ }

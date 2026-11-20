@@ -1,0 +1,3 @@
+.backdropImage {
+  filter: blur(0px) saturate(100%) contrast(110%) brightness(100%);
+}

@@ -1,0 +1,15 @@
+select {
+  background: #fff url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyIiBoZWlnaHQ9IjMiPjxwYXRoIGQ9Im0gMCwxIDEsMiAxLC0yIHoiLz48L3N2Zz4=) no-repeat scroll 95% center/10px 15px;
+  background-position: calc(100% - 15px) center;
+  border: 1px solid #aaa;
+  border-radius: 0.2em;
+  cursor: pointer;
+  width: 100%;
+  height: 2.2em;
+  box-sizing: border-box;
+  padding: 0.3em 0.45em;
+  transition: all 0.3s;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+}

@@ -1,0 +1,3 @@
+.pf-m-grid.pf-v6-c-table .pf-v6-c-table__action {
+  text-align: end;
+}

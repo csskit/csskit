@@ -1,0 +1,4 @@
+.set-persp-panel--red {
+  background: red;
+  transform: perspective(400px) rotateY(45deg);
+}

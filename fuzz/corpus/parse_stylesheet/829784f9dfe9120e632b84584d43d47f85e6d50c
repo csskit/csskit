@@ -1,0 +1,6 @@
+@supports (-moz-appearance: none) {
+  .ui.scrolling.table > thead,
+  .ui.scrolling.table > tfoot {
+    scrollbar-color: currentColor currentColor;
+  }
+}

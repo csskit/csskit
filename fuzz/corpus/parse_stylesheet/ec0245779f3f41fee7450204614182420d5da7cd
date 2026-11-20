@@ -1,0 +1,5 @@
+.menu-items .mode{
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+}

@@ -1,0 +1,10 @@
+.ui.items > .item > .image {
+  position: relative;
+  flex: 0 0 auto;
+  display: block;
+  float: none;
+  margin: 0;
+  padding: 0;
+  max-height: "";
+  align-self: start;
+}

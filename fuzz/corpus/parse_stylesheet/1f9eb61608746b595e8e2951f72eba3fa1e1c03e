@@ -1,0 +1,4 @@
+.plot {
+    color: var(--textColor);
+    text-shadow: 1px 1px var(--lighterGradientPointAlpha);
+}

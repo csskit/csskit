@@ -1,0 +1,3 @@
+i.icon.male:before {
+  content: "\f183";
+}

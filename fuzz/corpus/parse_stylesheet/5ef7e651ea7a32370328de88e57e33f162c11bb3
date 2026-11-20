@@ -1,0 +1,4 @@
+span[class^='icon-'].secondary {
+  -webkit-filter: invert(25%);
+  filter: invert(25%);
+}

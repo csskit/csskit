@@ -1,0 +1,3 @@
+.cds--date-picker__input:disabled:hover {
+  border-block-end: 1px solid transparent;
+}

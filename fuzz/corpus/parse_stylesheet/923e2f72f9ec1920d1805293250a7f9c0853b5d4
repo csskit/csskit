@@ -1,0 +1,4 @@
+.pf-m-tree-view-grid.pf-v6-c-table tr:where(.pf-v6-c-table__tr):not([hidden]) {
+  display: grid;
+  grid-template-columns: 1fr max-content;
+}

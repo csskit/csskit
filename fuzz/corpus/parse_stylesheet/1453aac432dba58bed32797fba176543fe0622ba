@@ -1,0 +1,6 @@
+.t {
+  transition-duration: var(--transition-time);
+  transition-property: all;
+  transition-timing-function: var(--te-ease-in);
+  transition-delay: 0s;
+}

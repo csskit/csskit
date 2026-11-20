@@ -1,0 +1,4 @@
+.flex--baseline, .grid--baseline {
+  -ms-flex-align: baseline;
+      align-items: baseline;
+}

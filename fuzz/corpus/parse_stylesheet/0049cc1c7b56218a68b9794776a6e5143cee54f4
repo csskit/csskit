@@ -1,0 +1,3 @@
+:is(header, footer).fixed.min {
+  margin-inline: auto;
+}

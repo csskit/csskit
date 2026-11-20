@@ -1,0 +1,3 @@
+sub {
+  vertical-align: sub;
+}

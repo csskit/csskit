@@ -1,0 +1,37 @@
+.fill-stroke-3 {
+  fill-rule: auto;
+  fill-break: auto;
+  fill-color: auto;
+  fill-image: auto;
+  fill-origin: auto;
+  fill-position: auto;
+  fill-size: auto;
+  fill-repeat: auto;
+  fill: auto;
+  fill-opacity: auto;
+  stroke-width: auto;
+  stroke-align: auto;
+  stroke-linecap: auto;
+  stroke-linejoin: auto;
+  stroke-miterlimit: auto;
+  stroke-break: auto;
+  stroke-dasharray: auto;
+  stroke-dashoffset: auto;
+  stroke-dash-corner: auto;
+  stroke-dash-justify: auto;
+  stroke-color: auto;
+  stroke-image: auto;
+  stroke-origin: auto;
+  stroke-position: auto;
+  stroke-size: auto;
+  stroke-repeat: auto;
+  stroke: auto;
+  stroke-opacity: auto;
+  display: butt;
+  display: arcs;
+  display: stupid;
+  display: compress;
+  display: dashes;
+  display: gaps;
+  display: bounding-box;
+}

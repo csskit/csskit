@@ -1,0 +1,3 @@
+aside:not(.fixed, .absolute).left {
+  float: left;
+}

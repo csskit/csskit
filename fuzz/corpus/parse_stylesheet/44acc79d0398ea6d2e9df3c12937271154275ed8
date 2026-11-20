@@ -1,0 +1,3 @@
+i.icon.divide::before {
+  content: "\f529";
+}

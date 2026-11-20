@@ -1,0 +1,7 @@
+.callout.callout[data-callout*="hibox"] .callout-content {
+  position: relative;
+  height: auto;
+  overflow: hidden;
+  background: radial-gradient(circle at 0px 0px, var(--background-modifier-box-shadow), 0, var(--background-modifier-box-shadow), var(--hibox), transparent var(--hibox), transparent 0);
+  transition: --hibox 0.6s linear;
+}

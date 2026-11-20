@@ -1,0 +1,10 @@
+.ts-gauge::before {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    -webkit-mask: radial-gradient(farthest-side, #f000 calc(99% - var(--thickness)), #0000001a calc(100% - var(--thickness)));
+    mask: radial-gradient(farthest-side, #f000 calc(99% - var(--thickness)), #0000001a calc(100% - var(--thickness)));
+    background: conic-gradient(currentColor calc(var(--value) * var(--length) * 1%), #0000 0);
+}

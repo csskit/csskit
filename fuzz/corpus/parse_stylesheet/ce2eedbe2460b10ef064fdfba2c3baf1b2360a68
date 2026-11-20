@@ -1,0 +1,21 @@
+.flex-bottom,
+.flex-center,
+.flex-left,
+.flex-middle,
+.flex-right,
+.flex-top,
+.flex-vertical.flex-bottom,
+.flex-vertical.flex-center,
+.flex-vertical.flex-left,
+.flex-vertical.flex-middle,
+.flex-vertical.flex-right,
+.flex-vertical.flex-top {
+    -ms-flex-align: stretch;
+    -ms-flex-pack: start;
+    -webkit-align-items: stretch;
+    -webkit-box-align: stretch;
+    -webkit-box-pack: start;
+    -webkit-justify-content: flex-start;
+    align-items: stretch;
+    justify-content: flex-start;
+}

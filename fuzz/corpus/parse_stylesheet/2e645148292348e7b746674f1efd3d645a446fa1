@@ -1,0 +1,1 @@
+.spinner-dot:nth-child(5):before{animation-delay:calc(var(--spinner-speed)*-.5)}

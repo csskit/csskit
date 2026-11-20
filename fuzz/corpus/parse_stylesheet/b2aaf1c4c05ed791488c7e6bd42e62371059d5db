@@ -1,0 +1,3 @@
+.bg-cover {
+  background-size: cover;
+}

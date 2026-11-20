@@ -1,0 +1,2 @@
+.tab.audible:not(.muted) .tab-icon-overlay-audible,.tab.muted:hover .tab-icon-overlay-muted { background-color: var(--background); -moz-context-properties: fill; fill: var(--tab-loading-fill, var(--general-color)); border-width: 0px;
+}

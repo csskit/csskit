@@ -1,0 +1,5 @@
+.x-chart-grid-horizontal line,
+.x-chart-grid-vertical line {
+    stroke: #34383D !important;
+    stroke-opacity: 1 !important;
+}

@@ -1,0 +1,5 @@
+.cds--page-header__tab-bar--tablist {
+  display: grid;
+  grid-gap: 4rem;
+  grid-template-columns: auto minmax(0, 1fr);
+}

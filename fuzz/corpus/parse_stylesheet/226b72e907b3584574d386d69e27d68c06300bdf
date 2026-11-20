@@ -1,0 +1,3 @@
+.hint--top:hover:before {
+  transform: translateY(-8px) rotate(var(--rotation));
+}

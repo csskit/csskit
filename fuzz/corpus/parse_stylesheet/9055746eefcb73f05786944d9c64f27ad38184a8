@@ -1,0 +1,5 @@
+@supports (hanging-punctuation: first) and (font: -apple-system-body) and (-webkit-appearance: none) {
+  .cds--tag.cds--skeleton {
+    transform: translateZ(0);
+  }
+}

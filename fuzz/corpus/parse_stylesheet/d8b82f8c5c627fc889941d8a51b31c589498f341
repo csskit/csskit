@@ -1,0 +1,3 @@
+table.directory td.desc {
+    min-width: 250px;
+}

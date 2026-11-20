@@ -1,0 +1,3 @@
+.ow-anywhere {
+  overflow-wrap: anywhere !important;
+}

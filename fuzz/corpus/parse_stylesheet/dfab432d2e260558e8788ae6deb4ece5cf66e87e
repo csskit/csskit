@@ -1,0 +1,3 @@
+#s8 .panel:nth-child(3n+1) .top {
+  background-position: 70% 80%;
+}

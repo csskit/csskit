@@ -1,0 +1,3 @@
+.sups {
+  font-variant-position: super;
+}

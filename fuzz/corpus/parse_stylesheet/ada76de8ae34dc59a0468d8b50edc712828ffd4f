@@ -1,0 +1,3 @@
+.icondoc {
+    filter: saturate(0.2);
+}

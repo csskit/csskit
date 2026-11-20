@@ -1,0 +1,3 @@
+.bg-left {
+  background-position: left;
+}

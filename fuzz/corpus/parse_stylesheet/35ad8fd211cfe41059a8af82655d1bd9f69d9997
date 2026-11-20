@@ -1,0 +1,3 @@
+input[type=number] {
+  appearance: textfield;
+}

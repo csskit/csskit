@@ -1,0 +1,3 @@
+.progress:indeterminate::-ms-fill {
+  animation-name: none;
+}

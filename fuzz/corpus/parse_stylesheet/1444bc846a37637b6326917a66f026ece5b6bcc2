@@ -1,0 +1,3 @@
+.uk-blend-darken {
+  mix-blend-mode: darken;
+}

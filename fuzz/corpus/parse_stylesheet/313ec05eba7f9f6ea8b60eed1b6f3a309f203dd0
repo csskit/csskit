@@ -1,0 +1,3 @@
+.sg-page {
+  overflow: hidden;
+  padding: 8% 0; }

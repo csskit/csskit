@@ -1,0 +1,3 @@
+.Root__top-bar {
+    border: var(--border-width) solid transparent;
+}

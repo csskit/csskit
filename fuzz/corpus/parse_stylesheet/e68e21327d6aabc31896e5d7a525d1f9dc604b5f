@@ -1,0 +1,4 @@
+.ui.indeterminate.loader::after {
+  animation-direction: reverse;
+  animation-duration: 1.2s;
+}

@@ -1,0 +1,5 @@
+@media (forced-colors: active){
+  .usa-checkbox__input:checked + [class*=__label]::before{
+    background-color:SelectedItem;
+  }
+}

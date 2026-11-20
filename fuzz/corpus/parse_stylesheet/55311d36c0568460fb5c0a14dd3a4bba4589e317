@@ -1,0 +1,3 @@
+.highlight-api-1::highlight(test) {
+  display: auto;
+}

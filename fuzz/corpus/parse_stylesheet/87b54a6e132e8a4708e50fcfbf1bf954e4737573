@@ -1,0 +1,3 @@
+.bg-contain {
+  background-size: contain;
+}

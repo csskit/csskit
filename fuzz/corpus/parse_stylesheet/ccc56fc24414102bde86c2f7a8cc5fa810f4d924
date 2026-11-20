@@ -1,0 +1,6 @@
+.contain-1 {
+  contain: auto;
+  display: layout;
+  display: paint;
+  display: size;
+}

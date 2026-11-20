@@ -24,6 +24,13 @@ jobs:
         with:
           nightly: "true"
 
+      - name: Restore corpus
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: fuzz/corpus/parse_stylesheet
+          key: fuzz-corpus-parse_stylesheet-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: fuzz-corpus-parse_stylesheet-
+
       - name: Run fuzzer
         # Continue on error so we can collect artifacts even on crash/timeout finds.
         continue-on-error: true
@@ -32,7 +39,8 @@ jobs:
           cargo +nightly fuzz run parse_stylesheet \
             corpus/parse_stylesheet \
             --target x86_64-unknown-linux-gnu \
-            -- -max_total_time=600 -max_len=4096 \
+            -- -max_total_time=600 -max_len=4096 -fork="$(nproc)" \
+            -timeout=10 -ignore_timeouts=0 -ignore_ooms=0 \
             -artifact_prefix=artifacts/parse_stylesheet/
 
       - name: Minimise artifacts
@@ -45,16 +53,28 @@ jobs:
             echo "Minimising $f"
             cargo +nightly fuzz tmin parse_stylesheet "$f" \
               --target x86_64-unknown-linux-gnu \
-              -- -max_total_time=30 || true
+              -- -max_total_time=30 -timeout=10 || true
           done
 
       - name: Minimise corpus
+        id: cmin
+        # Continue on error so a failed merge skips the cache save but still reports findings.
+        continue-on-error: true
         working-directory: fuzz
         run: |
+          set -o pipefail
           cargo +nightly fuzz cmin parse_stylesheet \
             corpus/parse_stylesheet \
             --target x86_64-unknown-linux-gnu \
-            -- -max_len=4096 -use_counters=0 -use_value_profile=0
+            -- -max_len=4096 2>&1 | tee "$RUNNER_TEMP/cmin.log"
+          ! grep -q 'Failed to minimize' "$RUNNER_TEMP/cmin.log"
+
+      - name: Save corpus
+        if: steps.cmin.outcome == 'success'
+        uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: fuzz/corpus/parse_stylesheet
+          key: fuzz-corpus-parse_stylesheet-${{ github.run_id }}-${{ github.run_attempt }}
 
       - name: Collect coverage
         continue-on-error: true
@@ -117,9 +137,9 @@ jobs:
               printf '### `%s` (%d bytes)\n\n```\n%s\n```\n\n```css\n%s\n```\n\n' \
                 "$name" "$size" "$hex" "$readable"
               cp "$f" "fuzz/corpus/parse_stylesheet/${name}"
+              git add "fuzz/corpus/parse_stylesheet/${name}"
             done
           } > /tmp/fuzz-pr-body-rendered.md
-          git add -A fuzz/corpus/parse_stylesheet/
 
       - name: Open PR with findings
         if: steps.findings.outputs.found == 'true'

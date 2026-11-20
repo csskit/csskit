@@ -1,0 +1,3 @@
+.cds--menu--with-icons {
+  min-inline-size: 12rem;
+}

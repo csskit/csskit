@@ -1,0 +1,16 @@
+.s-prose kbd {
+  border: var(--su-static1) solid var(--_pr-kbd-bc);
+  border-top-color: var(--_pr-kbd-btc, var(--_pr-kbd-bc));
+  box-shadow: var(--_pr-kbd-bs);
+  background-color: var(--black-200);
+  border-radius: var(--br-sm);
+  color: var(--black-600);
+  display: inline-block;
+  font-family: var(--ff-sans);
+  font-size: var(--fs-fine);
+  line-height: var(--_pr-lh);
+  margin: 0 0.1em;
+  overflow-wrap: break-word;
+  padding: 0.1em 0.6em;
+  text-shadow: 0 var(--su-static1) 0 var(--white);
+}

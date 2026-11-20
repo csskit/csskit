@@ -1,0 +1,1 @@
+.stroke-error{stroke:rgb(var(--error))}

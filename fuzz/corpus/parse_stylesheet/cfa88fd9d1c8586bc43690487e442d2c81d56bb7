@@ -1,0 +1,5 @@
+#reactRoot > div:nth-child(3) {
+    container-name: skinHeader;
+    container-type: size;
+    height: var(--appBarHeight);
+}

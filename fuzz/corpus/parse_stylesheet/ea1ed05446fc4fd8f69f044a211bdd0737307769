@@ -1,0 +1,5 @@
+@media screen and (-ms-high-contrast: active), (forced-colors: active) {
+  .cds--checkbox-label::before {
+    border: 1px solid ButtonBorder;
+  }
+}

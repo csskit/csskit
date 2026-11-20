@@ -1,0 +1,1 @@
+.caps{ text-transform:uppercase!important; letter-spacing:.2em!important; letter-spacing:var(--caps-letter-spacing)!important; }

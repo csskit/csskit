@@ -1,0 +1,3 @@
+.gap-y-0 {
+  row-gap: 0px;
+}

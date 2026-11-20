@@ -1,0 +1,5 @@
+.slider.vertical > .tooltip.bottom {
+  inset-block: auto;
+  margin-block: 0 calc(-1 * var(--_thumb, 0)) !important;
+  transform: rotate(90deg) translate(75%, 50%) !important;
+}

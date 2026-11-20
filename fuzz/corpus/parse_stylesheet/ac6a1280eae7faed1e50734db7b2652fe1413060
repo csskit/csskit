@@ -1,0 +1,5 @@
+@keyframes progress-indeterminate {
+  50% {
+    background-position: var(--track-bg-end);
+  }
+}

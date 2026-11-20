@@ -1,0 +1,3 @@
+a {
+  color: color-mix(in oklch shorter hue, currentcolor, red);
+}

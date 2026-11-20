@@ -1,0 +1,4 @@
+.ui.multiple.dropdown .dropdown.icon {
+  margin: '';
+  padding: '';
+}

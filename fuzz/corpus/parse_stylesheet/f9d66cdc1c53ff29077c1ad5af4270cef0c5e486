@@ -1,0 +1,4 @@
+.markdown-body code br,
+.markdown-body tt br {
+  display: none;
+}

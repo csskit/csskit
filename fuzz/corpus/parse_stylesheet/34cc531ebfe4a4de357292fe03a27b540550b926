@@ -1,0 +1,10 @@
+#s10 .de {
+  position: absolute;
+  top: 6em;
+  left: 2em;
+  -webkit-transition: none;
+  -moz-transition: none;
+  -ms-transition: none;
+  -o-transition: none;
+  transition: none;
+}

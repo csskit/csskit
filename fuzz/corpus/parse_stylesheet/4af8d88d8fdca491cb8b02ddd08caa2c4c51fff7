@@ -1,0 +1,3 @@
+.link-offset-2 {
+  text-underline-offset: 0.25em !important;
+}

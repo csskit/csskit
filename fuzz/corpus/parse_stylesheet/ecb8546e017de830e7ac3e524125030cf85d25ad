@@ -1,0 +1,5 @@
+.table-paper tbody tr th:first-child,
+.table-paper tbody tr td:first-child {
+  border-right:4px double #EE3531;
+  padding-left:10px;
+}

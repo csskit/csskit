@@ -1,0 +1,5 @@
+.ts-progress.is-indeterminate .bar {
+    animation: ts-progress-indeterminate 1s ease infinite normal none running;
+    width: 40% !important;
+    min-width: 0;
+}

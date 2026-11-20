@@ -1,0 +1,3 @@
+.slider.max.vertical > span:not([class]) {
+  inset: var(--_end) 0 var(--_start) 0;
+}

@@ -1,0 +1,3 @@
+i.icon.power:before {
+  content: "\f011";
+}

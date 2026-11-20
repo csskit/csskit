@@ -1,0 +1,5 @@
+@media (any-hover: hover) {
+  .cds--btn--tertiary:hover {
+    color: var(--cds-text-inverse, #ffffff);
+  }
+}

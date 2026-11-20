@@ -1,0 +1,3 @@
+.scroll-anchoring-1 {
+  overflow-anchor: auto;
+}

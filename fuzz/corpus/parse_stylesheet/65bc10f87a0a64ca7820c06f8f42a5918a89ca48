@@ -1,0 +1,5 @@
+.gridlist ul ul {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(10px, 1fr));
+  gap: 0.5rem;
+}

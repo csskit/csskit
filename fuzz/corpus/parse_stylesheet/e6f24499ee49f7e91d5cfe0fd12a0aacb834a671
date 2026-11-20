@@ -1,0 +1,10 @@
+.pf-v6-c-description-list.pf-m-fill-columns .pf-v6-c-description-list__group,
+.pf-v6-c-description-list.pf-m-fill-columns > .pf-v6-c-card {
+  display: inline-grid;
+  width: 100%;
+  margin-block-end: var(--pf-v6-c-description-list--RowGap);
+  break-inside: avoid;
+  page-break-inside: avoid;
+  -webkit-column-break-inside: avoid;
+  -moz-column-break-inside: avoid;
+}

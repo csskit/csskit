@@ -1,0 +1,5 @@
+@media screen and (min-width: 36rem) {
+  .pf-v6-l-flex > * {
+    order: var(--pf-v6-l-flex--item--Order-on-sm, var(--pf-v6-l-flex--item--Order));
+  }
+}

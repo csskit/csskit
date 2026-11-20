@@ -1,0 +1,3 @@
+div.math.math-block mjx-math {
+  color: var(--mjx-math-color);
+}

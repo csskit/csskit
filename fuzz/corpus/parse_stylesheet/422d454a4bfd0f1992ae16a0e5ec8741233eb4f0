@@ -1,0 +1,10 @@
+.cds--pagination-nav__page--select {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  max-block-size: var(--cds-layout-size-height-local);
+  text-indent: calc(50% - 4.5px);
+  /* This is for targeting styles specific to firefox */
+  /* https://sass-lang.com/documentation/breaking-changes/moz-document/ */
+  /* stylelint-disable-next-line at-rule-no-vendor-prefix */
+}

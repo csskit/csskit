@@ -1,0 +1,3 @@
+.grid-cols-none {
+  grid-template-columns: none;
+}

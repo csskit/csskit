@@ -1,0 +1,7 @@
+.pf-v6-c-form__field-group {
+  --pf-v6-c-form__field-group--BorderBlockStartWidth: var(--pf-v6-c-form__field-group--border-width-base);
+  display: grid;
+  grid-template-columns: minmax(var(--pf-v6-c-form__field-group--GridTemplateColumns--toggle), max-content) 1fr;
+  border-block-start: var(--pf-v6-c-form__field-group--BorderBlockStartWidth) solid var(--pf-v6-c-form__field-group--BorderBlockStartColor);
+  border-block-end: var(--pf-v6-c-form__field-group--BorderBlockEndWidth) solid var(--pf-v6-c-form__field-group--BorderBlockEndColor);
+}

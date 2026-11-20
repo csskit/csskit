@@ -1,0 +1,3 @@
+i.icon.power.off:before {
+  content: "\f011";
+}

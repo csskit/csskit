@@ -1,0 +1,3 @@
+.pf-v6-c-progress.pf-m-singleline {
+  grid-template-rows: 1fr;
+}

@@ -1,0 +1,5 @@
+@supports selector(::details-content) {
+  details:target::details-content {
+    content-visibility: visible;
+  }
+}

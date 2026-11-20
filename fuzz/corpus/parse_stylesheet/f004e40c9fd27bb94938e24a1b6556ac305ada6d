@@ -1,0 +1,5 @@
+@media (prefers-color-scheme: dark) and (not (forced-colors)) {
+  :root[dialogroot] {
+    --background-color-canvas: var(--uc-panel-background) !important;
+  }
+}

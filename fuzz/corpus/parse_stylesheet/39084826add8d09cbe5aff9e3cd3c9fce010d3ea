@@ -1,0 +1,3 @@
+.cds--search-close:hover {
+  border-block-end: 1px solid var(--cds-border-strong);
+}

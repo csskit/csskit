@@ -1,0 +1,6 @@
+@supports ((-webkit-mask: url("")) or (mask: url(""))){
+  .usa-alert--slim .usa-alert__body:before{
+    -webkit-mask-size:1.5rem;
+            mask-size:1.5rem;
+  }
+}

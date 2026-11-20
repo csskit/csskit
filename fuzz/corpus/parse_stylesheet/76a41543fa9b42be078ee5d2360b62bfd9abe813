@@ -1,0 +1,7 @@
+@supports (overflow: -webkit-marquee) and (justify-content: inherit) {
+
+  .sinf {
+    vertical-align: sub;
+    font-size: smaller;
+  }
+}

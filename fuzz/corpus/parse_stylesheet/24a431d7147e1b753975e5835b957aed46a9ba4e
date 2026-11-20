@@ -1,0 +1,10 @@
+@media all and (min-width: 40em){
+  .usa-identifier__required-links-list{
+    -moz-column-count:2;
+         column-count:2;
+    -moz-column-gap:2rem;
+         column-gap:2rem;
+    -moz-column-fill:balance;
+         column-fill:balance;
+  }
+}

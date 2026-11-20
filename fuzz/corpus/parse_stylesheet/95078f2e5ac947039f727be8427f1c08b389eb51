@@ -1,0 +1,25 @@
+.a {
+  break-inside: auto;
+  break-before: auto;
+  break-after: auto;
+}
+
+.b {
+  break-inside: avoid;
+}
+
+.c {
+  break-inside: avoid-column;
+}
+
+.d {
+  break-inside: avoid-page;
+}
+
+.e {
+  break-inside: avoid-region;
+}
+
+.f {
+  break-inside: region;
+}

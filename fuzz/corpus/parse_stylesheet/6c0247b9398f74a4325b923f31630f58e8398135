@@ -1,0 +1,3 @@
+#nav-tree a:focus {
+    outline-style: auto;
+}

@@ -1,0 +1,10 @@
+.suraido-container ul li {
+  display: block;
+  float: left;
+  width: 33%;
+  min-height: 25rem;
+  -moz-background-size: 100% 100%;
+  -o-background-size: 100% 100%;
+  -webkit-background-size: 100% 100%;
+  background-size: 100% 100%;
+}

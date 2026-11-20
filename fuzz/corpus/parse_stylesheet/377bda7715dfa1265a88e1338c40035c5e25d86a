@@ -1,0 +1,33 @@
+@-moz-document url-prefix("https://meta.stackexchange.com"), url-prefix("https://meta.stackexchange.com/users/login?ssrc=head") {
+  #hlogo a {
+    text-indent: -9999px !important;
+  }
+  #footer {
+    background-color: #182030 !important;
+    background-image: url("https://meta.stackexchange.com/content/Sites/stackexchangemeta/img/icon-cloud-footer.png?v=ac80a4525ace") !important;
+  }
+  .s-btn, .s-btn:focus {
+    background-color: rgba(0, 119, 204, 0);
+  }
+  .s-btn__google {
+    color: #eee;
+  }
+  html:not(#X) button.s-btn__facebook {
+    border-color: transparent !important;
+    background-color: #385499 !important;
+    color: #eee !important;
+  }
+  html:not(#X) button.s-btn__facebook:hover, .s-btn__google:hover {
+    color: #eee;
+    filter: brightness(115%);
+  }
+  .fc-powder-700 {
+    color: #46a2d9 !important;
+  }
+  .page-numbers {
+    border-radius: 2px !important;
+    padding: 4px 8px !important;
+    font-size: 100%;
+    background-color: #222;
+  }
+}

@@ -1,0 +1,4 @@
+i.flag.ic::before,
+i.flag.canary.islands::before {
+  background-image: url("https://cdn.jsdelivr.net/gh/jdecked/twemoji@latest/assets/svg/1f1ee-1f1e8.svg");
+}

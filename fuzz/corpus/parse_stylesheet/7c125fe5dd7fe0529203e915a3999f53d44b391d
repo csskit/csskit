@@ -1,0 +1,6 @@
+@-moz-document regexp("^https://(chat|meta|chat\.meta)\.stackexchange\.com.*$"), domain("chat.stackoverflow.com"){#room-tags a.tag {
+    color: /*[[base-color]]*/;
+    background-color: rgba(/*[[base-color-rgb]]*/, .2) !important;
+    border-bottom-color: rgba(/*[[base-color-rgb]]*/, .3) !important;
+    border-right-color: rgba(/*[[base-color-rgb]]*/, .5) !important;
+  }}

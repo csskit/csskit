@@ -1,0 +1,3 @@
+i.icon.car.alternate::before {
+  content: "\f5de";
+}

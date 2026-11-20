@@ -1,0 +1,7 @@
+.view-transitions-1::view-transition,
+.view-transitions-1::view-transition-group(*),
+.view-transitions-1::view-transition-image-pair(*),
+.view-transitions-1::view-transition-old(*),
+.view-transitions-1::view-transition-new(*) {
+  view-transition-name: auto;
+}

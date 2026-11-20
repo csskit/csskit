@@ -1,0 +1,8 @@
+.cds--tabs .cds--tab--list {
+  display: flex;
+  inline-size: auto;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  will-change: scroll-position;
+}

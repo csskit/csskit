@@ -1,0 +1,4 @@
+[dir=rtl] .cds--snippet--multi .cds--snippet-container {
+  -webkit-mask-image: linear-gradient(to left, #000000 calc(100% - 2rem), transparent 100%), linear-gradient(to bottom, #000000 calc(100% - 1rem), transparent 100%);
+          mask-image: linear-gradient(to left, #000000 calc(100% - 2rem), transparent 100%), linear-gradient(to bottom, #000000 calc(100% - 1rem), transparent 100%);
+}

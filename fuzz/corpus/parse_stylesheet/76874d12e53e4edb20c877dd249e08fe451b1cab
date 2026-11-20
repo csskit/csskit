@@ -1,0 +1,3 @@
+.database-plugin__cell_size_normal div.dataview-error-box {
+  min-height: auto;
+}

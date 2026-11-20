@@ -1,0 +1,11 @@
+.sidebar-placesTree {
+    appearance: none;
+    background-color: transparent !important;
+    color: var(--uc-accent-color-2) !important;
+    @media (prefers-color-scheme: light) {color: var(--uc-accent-color-1) !important;}
+    border-radius: var(--border-radius-medium) !important;
+/*     box-shadow: 0.2rem 0.3rem 0.3rem 0.1rem rgba(25,25,25,0.5) !important;
+    @media (prefers-color-scheme: light) {box-shadow: 0.2rem 0.3rem 0.3rem 0.1rem rgba(25,25,25,0.15) !important;} */
+    margin-inline: 2% !important;
+    padding-top:12px !important;
+}

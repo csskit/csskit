@@ -1,0 +1,1 @@
+toolbar { &:-moz-window-inactive {background-color: var(--toolbar-bgcolor) !important;}}

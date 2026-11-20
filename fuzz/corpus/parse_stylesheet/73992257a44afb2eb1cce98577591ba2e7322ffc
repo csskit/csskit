@@ -1,0 +1,5 @@
+.slanted-book {
+  --lean-lift: 2px;
+  transform: translateZ(0) rotateY(0) rotateZ(var(--lean-angle))
+    translateY(var(--lean-lift));
+}

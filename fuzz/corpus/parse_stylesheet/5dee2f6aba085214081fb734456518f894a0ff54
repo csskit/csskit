@@ -1,0 +1,51 @@
+table {
+  --table-border-color: var(--form-border-color, ButtonBorder);
+  --table-border-width: var(--form-border-width, 1px);
+  --table-layout: fixed;
+  --table-border-collapse: collapse;
+  --table-border-spacing: 0;
+  --table-zebra: 0%;
+  --table-caption-color: GrayText;
+
+  width: 100%;
+  table-layout: var(--table-layout, fixed);
+  border-spacing: var(--table-border-spacing, 0);
+  border-collapse: var(--table-border-collapse, collapse);
+  color: var(--on-surface, CanvasText);
+
+  /* Légende */
+  & caption {
+    margin-block: var(--spacing-8, 0.5rem);
+    color: var(--table-caption-color);
+    text-align: left;
+  }
+
+  /* Cellules */
+  & th,
+  & td {
+    padding: var(--spacing-8, 0.5rem) var(--spacing-12, 0.75rem);
+    border: var(--table-border-width) solid var(--table-border-color);
+    text-align: left;
+    vertical-align: top;
+  }
+
+  /* En-têtes */
+  & thead th {
+    background-color: var(--layer-1, Canvas);
+    font-weight: var(--font-weight-semibold, 600);
+  }
+
+  /* Pied de tableau */
+  & tfoot th,
+  & tfoot td {
+    background-color: var(--layer-1, Canvas);
+    font-weight: var(--font-weight-medium, 500);
+  }
+
+  /* Zébrage (conditionné par --table-zebra */
+  & tbody tr:nth-child(odd) {
+    background-color: oklch(
+      from var(--color-black, #000000) l c h / var(--table-zebra, 0%)
+    );
+  }
+}

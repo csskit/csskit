@@ -1,0 +1,3 @@
+.channelPrograms {
+  white-space: wrap;
+}

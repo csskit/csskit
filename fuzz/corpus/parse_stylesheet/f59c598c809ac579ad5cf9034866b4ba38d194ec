@@ -1,0 +1,5 @@
+.subs,
+.sinf {
+  font-size: inherit;
+  font-variant-position: sub;
+}

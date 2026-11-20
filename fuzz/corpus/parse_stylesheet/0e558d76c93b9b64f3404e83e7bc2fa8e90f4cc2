@@ -1,0 +1,8 @@
+.s-sidebarwidget .s-sidebarwidget--subnav li {
+  background-image: url("data:image/svg+xml;,%3C?xml%20version%3D%221.0%22%20encoding%3D%22UTF-8%22?%3E%3Csvg%20version%3D%221.1%22%20viewBox%3D%220%200%207%2010%22%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%3E%3Cpath%20d%3D%22m0.72153%200.68446%204.1336%204.3077-4.1336%204.3077%22%20fill%3D%22none%22%20stroke%3D%22var%28--black-225%29%22%20stroke-width%3D%222%22/%3E%3C/svg%3E");
+  background-position: 0 calc((1.2em - calc(var(--su-static8) + var(--su-static2))) / 2);
+  background-repeat: no-repeat;
+  background-size: auto calc(var(--su-static8) + var(--su-static2));
+  margin-top: var(--su-static12);
+  padding-left: var(--su-static16);
+}

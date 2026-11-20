@@ -1,0 +1,9 @@
+.main-devicePicker-header>.main-devicePicker-nowPlayingActiveIcon[src*="equaliser"] {
+  mask-image: var(--equalizer-svg);
+  -webkit-mask-image: var(--equalizer-svg);
+  background: var(--spice-button);
+  content-visibility: hidden;
+  mask-repeat: no-repeat;
+  -webkit-mask-repeat: no-repeat;
+  scale: 0.8;
+}

@@ -1,0 +1,3 @@
+.pb-auto {
+  padding-bottom: auto !important;
+}

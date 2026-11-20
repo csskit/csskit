@@ -1,0 +1,6 @@
+@utility slide-out-to-right-* {
+  --tw-exit-translate-x: calc(--value(integer) * var(--spacing));
+  --tw-exit-translate-x: calc(--value(--percentage-*, --percentage-translate-*) * 100%);
+  --tw-exit-translate-x: calc(--value(ratio) * 100%);
+  --tw-exit-translate-x: --value(--translate-*, [percentage], [length]);
+}

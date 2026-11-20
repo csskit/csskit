@@ -1,0 +1,3 @@
+.text-no-tabular{
+  font-feature-settings:"kern" 1;
+}

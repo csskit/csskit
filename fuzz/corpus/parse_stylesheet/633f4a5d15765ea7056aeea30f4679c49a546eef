@@ -1,0 +1,3 @@
+.LayoutResizer__resize-bar {
+    cursor: w-resize;
+}

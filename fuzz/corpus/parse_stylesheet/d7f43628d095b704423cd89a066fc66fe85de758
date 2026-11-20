@@ -1,0 +1,3 @@
+.animated.infinite.alternate {
+  animation-direction: alternate;
+}

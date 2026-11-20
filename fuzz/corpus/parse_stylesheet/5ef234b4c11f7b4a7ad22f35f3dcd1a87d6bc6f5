@@ -1,0 +1,5 @@
+@-moz-document regexp("^https?://((education|graphql|guides|raw|resources|status|support|vscode-auth)\\.)?github\\.com((?!(/(sponsors|readme)$)).)*$"), domain("githubusercontent.com"), domain("www.githubstatus.com"){.timeline-comment-group[aria-selected=true] .timeline-comment::before {
+    border-right-color: /*[[base-color]]*/ !important;
+    left: -17px !important;
+    filter: none !important;
+  }}

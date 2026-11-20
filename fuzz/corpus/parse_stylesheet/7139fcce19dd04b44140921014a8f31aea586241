@@ -1,0 +1,22 @@
+@supports not (font-variant-position: sup) {
+
+  .sups {
+    -webkit-font-feature-settings: "sups", "sups";
+    font-feature-settings: "sups", "sups";
+  }
+
+  @supports ((-webkit-font-feature-settings: "sups") or (font-feature-settings: "sups")) {
+
+    .sups {
+      font-size: 1em;
+      vertical-align: baseline;
+    }
+  }
+
+  @supports (overflow: -webkit-marquee) and (justify-content: inherit) {
+
+    .sups {
+      vertical-align: super;
+    }
+  }
+}

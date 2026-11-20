@@ -1,0 +1,3 @@
+.card.show-animation .cardBox {
+    transition: transform 0.05s ease-out, -webkit-transform 0.05s ease-out;
+}

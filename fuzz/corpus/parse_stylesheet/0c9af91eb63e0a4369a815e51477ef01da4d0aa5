@@ -1,0 +1,3 @@
+.lnum {
+  font-variant-numeric: lining-nums;
+}

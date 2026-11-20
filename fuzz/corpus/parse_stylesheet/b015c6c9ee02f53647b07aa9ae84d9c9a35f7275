@@ -1,0 +1,3 @@
+.justify-self-auto {
+  justify-self: auto;
+}

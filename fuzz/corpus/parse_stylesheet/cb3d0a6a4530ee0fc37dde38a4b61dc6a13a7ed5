@@ -1,0 +1,3 @@
+.pf-v6-c-code-editor__main a.label-name {
+  text-decoration-line: none;
+}

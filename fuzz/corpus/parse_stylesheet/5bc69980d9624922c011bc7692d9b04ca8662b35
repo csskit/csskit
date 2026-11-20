@@ -1,0 +1,3 @@
+.swagger-ui .topbar .topbar-wrapper {
+  -ms-flex-align: center
+}

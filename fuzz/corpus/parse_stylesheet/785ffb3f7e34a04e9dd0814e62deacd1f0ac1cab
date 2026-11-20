@@ -1,0 +1,3 @@
+.ff-column-wrap {
+  flex-flow: column wrap !important;
+}

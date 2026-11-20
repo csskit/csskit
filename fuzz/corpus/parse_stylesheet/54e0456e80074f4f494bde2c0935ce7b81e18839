@@ -1,0 +1,3 @@
+&.selected.current {
+  --tree-card-background: #e1e1e1;
+}

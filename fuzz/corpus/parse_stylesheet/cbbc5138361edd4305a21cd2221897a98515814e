@@ -1,0 +1,8 @@
+.floating-label .form-control:-ms-input-placeholder, .floating-label .custom-select:-ms-input-placeholder, .floating-label .form-control-file:-ms-input-placeholder {
+  transition-duration: 0.3s;
+  -ms-transition-property: opacity;
+  transition-property: opacity;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  color: transparent;
+  opacity: 0;
+}

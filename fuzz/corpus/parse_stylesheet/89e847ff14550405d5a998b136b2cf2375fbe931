@@ -1,0 +1,5 @@
+.cds--definition-term {
+  border-radius: 0;
+  border-block-end: 1px dotted var(--cds-border-strong);
+  color: var(--cds-text-primary, #161616);
+}

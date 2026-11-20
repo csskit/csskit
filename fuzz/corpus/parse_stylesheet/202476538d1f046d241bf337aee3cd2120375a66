@@ -1,0 +1,4 @@
+.layout-desktop .cardOverlayButton-br button {
+    color: white;
+    text-shadow: var(--shadow);
+}

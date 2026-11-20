@@ -1,0 +1,5 @@
+.title-bar button.close::before {
+  background: linear-gradient(var(--secondary) 0%, var(--secondary) 100%) left center, linear-gradient(var(--secondary) 0%, var(--secondary) 100%) right center, linear-gradient(var(--secondary) 0%, var(--secondary) 100%) center top, linear-gradient(var(--secondary) 0%, var(--secondary) 100%) center bottom;
+  background-size: 30% 4px, 30% 4px, 4px 30%, 4px 30%;
+  background-repeat: no-repeat;
+}

@@ -1,0 +1,3 @@
+.bg-clip-content {
+  background-clip: content-box;
+}

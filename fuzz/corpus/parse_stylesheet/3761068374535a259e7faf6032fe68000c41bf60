@@ -1,0 +1,5 @@
+@media (pointer: fine) {
+  .field > input::-webkit-calendar-picker-indicator {
+    z-index: -1 !important;
+  }
+}

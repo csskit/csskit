@@ -1,0 +1,1 @@
+.la-timer.la-3x>div:before,.la-timer.la-3x>div:after{top:42px;left:42px;width:6px;margin-top:-3px;margin-left:-3px;border-radius:6px;-webkit-transform-origin:3px 3px 0;-moz-transform-origin:3px 3px 0;-ms-transform-origin:3px 3px 0;-o-transform-origin:3px 3px 0;transform-origin:3px 3px 0}

@@ -1,0 +1,4 @@
+.unofficials {
+  backdrop-filter: auto;
+  display: env(safe-area-inset-top, 20px);
+}

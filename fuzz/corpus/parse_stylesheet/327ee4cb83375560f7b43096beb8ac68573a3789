@@ -1,0 +1,4 @@
+.requirements p:nth-child(-n+3) {
+  clear: left;
+  margin-right: 5%;
+}

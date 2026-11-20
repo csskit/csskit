@@ -1,0 +1,3 @@
+@-moz-document regexp("^https?://((education|graphql|guides|raw|resources|status|support|vscode-auth)\\.)?github\\.com((?!(/(sponsors|readme)$)).)*$"), domain("githubusercontent.com"), domain("www.githubstatus.com"){line, rect, path {
+    shape-rendering: geometricPrecision !important;
+  }}

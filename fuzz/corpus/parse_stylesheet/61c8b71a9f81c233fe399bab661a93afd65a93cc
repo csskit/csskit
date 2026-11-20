@@ -1,0 +1,9 @@
+.alert .close {
+    position: absolute;
+    right: 0;
+    top: 0m;
+    background-color: transparent;
+    border: none;
+    color: inherit;
+    font-size: 1.17rem;
+    font-weight: bold; }

@@ -232,7 +232,7 @@ jobs:
         run: |
           cargo +nightly fuzz run parse_stylesheet corpus/parse_stylesheet \
             --target x86_64-unknown-linux-gnu \
-            -- -runs=0
+            -- -runs=0 -timeout=10
 
   deploy-dryrun:
     name: Deploy Dry Run

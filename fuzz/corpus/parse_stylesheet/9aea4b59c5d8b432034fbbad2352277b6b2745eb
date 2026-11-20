@@ -1,0 +1,5 @@
+@media (-moz-platform: windows) {
+  #navigator-toolbox {
+    background: transparent !important;
+  }
+}

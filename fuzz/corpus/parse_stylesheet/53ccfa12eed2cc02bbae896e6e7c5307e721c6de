@@ -1,0 +1,2 @@
+.boilerform .c-input-field[type="number"] {
+  padding-right: 11px 15px 10px 15px / 2; }

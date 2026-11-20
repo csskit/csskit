@@ -1,0 +1,3 @@
+.uk-blend-color-dodge {
+  mix-blend-mode: color-dodge;
+}

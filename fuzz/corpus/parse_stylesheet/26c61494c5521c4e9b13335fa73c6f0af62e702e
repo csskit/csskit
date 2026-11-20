@@ -1,0 +1,11 @@
+#tabbrowser-tabs .tab-split-view-container {
+    tab-split-view-wrapper:not([hasactivetab]) & {
+        & .tabbrowser-tab {
+            &:last-child {
+                tab-split-view-wrapper:not([hasactivetab]) & {
+                    border-inline-start: 1px solid var(--uc-accent-color-2) !important;
+                }
+            }
+        }
+    }
+}

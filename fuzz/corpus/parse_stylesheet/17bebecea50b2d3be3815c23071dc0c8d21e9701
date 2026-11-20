@@ -1,0 +1,3 @@
+.pf-v6-c-table__thead .pf-v6-c-table__tr {
+  border-block-end: 0;
+}

@@ -1,0 +1,3 @@
+.ui.form .field.info select {
+  -webkit-appearance: menulist-button;
+}

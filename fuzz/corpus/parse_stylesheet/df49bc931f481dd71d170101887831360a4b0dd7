@@ -1,0 +1,1 @@
+a{border-width:var(--bw,1px);border-style:var(--bs,solid);border-color:var(--bc,red)}

@@ -1,0 +1,20 @@
+a {
+  column-rule-color: red;
+  row-rule-color: red;
+}
+b {
+  column-rule-style: solid;
+  row-rule-style: solid;
+}
+c {
+  column-rule-width: 1px;
+  row-rule-width: 1px;
+}
+d {
+  column-rule-break: intersection;
+  row-rule-break: intersection;
+}
+e {
+  column-rule-visibility-items: all;
+  row-rule-visibility-items: all;
+}

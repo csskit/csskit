@@ -1,0 +1,11 @@
+kbd kbd {
+  display: inline-block;
+  padding-block: 0;
+  padding-inline: .3em;
+  font-size: .8em;
+  line-height: 1.1em;
+  background: var(--interactive-bg);
+  border: 1px outset var(--bg);
+  border-block-end-width: 3px;
+  border-radius: var(--interactive-border-radius);
+}

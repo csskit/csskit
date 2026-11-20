@@ -1,0 +1,3 @@
+i.icon.play:before {
+  content: "\f04b";
+}

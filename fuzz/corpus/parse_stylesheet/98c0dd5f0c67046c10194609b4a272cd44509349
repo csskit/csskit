@@ -1,0 +1,3 @@
+.auto-cols-auto {
+  grid-auto-columns: auto;
+}

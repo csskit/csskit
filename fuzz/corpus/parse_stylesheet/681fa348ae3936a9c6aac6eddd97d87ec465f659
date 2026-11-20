@@ -1,0 +1,3 @@
+.theme-midnight .bodyControls__8a031:after {
+  background: radial-gradient(88.69% 87.5% at 50% 87.5%, transparent 0, var(--background-base-lowest) 100%);
+}

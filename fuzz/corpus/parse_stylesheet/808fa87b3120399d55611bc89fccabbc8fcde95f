@@ -1,0 +1,3 @@
+.g-af-column {
+  grid-auto-flow: column;
+}

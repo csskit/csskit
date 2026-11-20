@@ -1,0 +1,5 @@
+@supports (-moz-appearance: meterbar) {
+  .nes-btn {
+    border-image-repeat: stretch;
+  }
+}

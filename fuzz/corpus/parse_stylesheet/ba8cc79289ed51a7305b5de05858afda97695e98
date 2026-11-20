@@ -1,0 +1,5 @@
+@keyframes progress-bar-stripes {
+  0% {
+    background-position-x: 0.625rem;
+  }
+}

@@ -1,0 +1,3 @@
+i.icon.angle.up:before {
+  content: "\f106";
+}

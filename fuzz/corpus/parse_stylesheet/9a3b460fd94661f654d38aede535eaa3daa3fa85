@@ -1,0 +1,3 @@
+a {
+  writing-mode: horizontal-tb;
+}

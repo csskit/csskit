@@ -1,0 +1,5 @@
+.pf-v6-c-tree-view__node-content {
+  display: flex;
+  flex-direction: column;
+  overflow: var(--pf-v6-c-tree-view__node-content--Overflow);
+}

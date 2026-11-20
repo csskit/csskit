@@ -1,0 +1,9 @@
+.cds--accordion__item--active > .cds--accordion__wrapper {
+  display: block;
+  overflow: visible;
+  max-block-size: -moz-fit-content;
+  max-block-size: fit-content;
+  opacity: 1;
+  padding-block: 0.5rem;
+  padding-block-end: 1.5rem;
+}

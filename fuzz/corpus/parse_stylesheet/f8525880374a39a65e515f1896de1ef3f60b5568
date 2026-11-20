@@ -1,0 +1,8 @@
+.callout.callout[data-callout="timeline"] .callout-content>*:not(blockquote):not(hr) {
+  position: relative;
+  -ms-grid-column: 3;
+  -ms-grid-column-span: 1;
+  grid-column: 3 / span 1;
+  margin-block-start: 0;
+  margin-block-end: 0;
+}

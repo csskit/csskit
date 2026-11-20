@@ -1,0 +1,4 @@
+.titl {
+  -ms-font-feature-settings: "titl";
+  font-variant-caps: titling-caps;
+}

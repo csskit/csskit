@@ -1,0 +1,3 @@
+.cds--data-table-container + .cds--pagination {
+  border-block-start: 0;
+}

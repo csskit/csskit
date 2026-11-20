@@ -1,0 +1,8 @@
+.tui-input-fieldset {
+  border-top: 6px white double;
+  border-bottom: 6px white double;
+  border-left: 2px white solid;
+  border-right: 2px white solid;
+  padding: 5px;
+  background-color: inherit;
+}

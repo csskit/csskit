@@ -1,0 +1,5 @@
+i.flag:not(.icon) {
+  speak: none;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}

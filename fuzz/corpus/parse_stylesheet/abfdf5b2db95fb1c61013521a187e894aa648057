@@ -1,0 +1,3 @@
+@-moz-document domain("gist.github.com"){@layer primer-react{:is(:where([data-caret=right]) .prc-Popover-PopoverContent-2x-Aj, :where([data-caret=right-top]) .prc-Popover-PopoverContent-2x-Aj, :where([data-caret=right-bottom]) .prc-Popover-PopoverContent-2x-Aj)::after {
+      border-left-color: var(--overlay-bgColor, var(--ghd-bg-color));
+    }}}

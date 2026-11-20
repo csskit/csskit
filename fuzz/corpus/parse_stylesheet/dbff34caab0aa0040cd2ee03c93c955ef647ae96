@@ -1,0 +1,7 @@
+@supports not ((-webkit-font-feature-settings: "onum" inherit) or (font-feature-settings: "onum" inherit)) {
+
+  .onum.zero {
+    -webkit-font-feature-settings: "onum", "zero";
+    font-feature-settings: "onum", "zero";
+  }
+}

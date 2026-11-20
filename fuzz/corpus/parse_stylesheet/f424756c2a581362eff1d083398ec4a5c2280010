@@ -1,0 +1,11 @@
+@-moz-document regexp("^https?://((chat|meta|es|ja|pt|ru)\\.)*stackoverflow\\.com.*"),
+domain("serverfault.com"),
+domain("superuser.com"),
+domain("stackapps.com"),
+domain("mathoverflow.net"),
+domain("askubuntu.com"),
+regexp("^https?:\/\/((?!area51)\w+\.)*?stackexchange\.com.*"),
+regexp("^https?:\/\/stackoverflow.[^\.]*\.com.*"){#privilege-category-descriptions .privilege-icon,
+  .privilege-table-row .privilege-icon, .favicon-stackexchangemeta {
+    filter: grayscale(100%) !Important;
+  }}

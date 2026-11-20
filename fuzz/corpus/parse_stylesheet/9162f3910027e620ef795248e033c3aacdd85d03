@@ -1,0 +1,17 @@
+.writing-modes-3 {
+  writing-mode: auto;
+  text-orientation: auto;
+  text-combine-upright: auto;
+  glyph-orientation-vertical: auto;
+  display: before;
+  display: after;
+  display: mixed;
+  display: upright;
+  display: plaintext;
+  display: sideways;
+  display: isolate;
+  display: isolate-override;
+  display: horizontal-tb;
+  display: vertical-rl;
+  display: vertical-lr;
+}

@@ -1,0 +1,3 @@
+.share.icon:after {
+  top: 4px;
+}

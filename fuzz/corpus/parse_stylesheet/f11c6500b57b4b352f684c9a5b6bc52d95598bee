@@ -1,0 +1,11 @@
+.section-the-fox-and-the-grapes {
+    background: #2E334A;
+    cursor: url('../images/the-fox-and-the-grapes/fox.png'), auto; /*ie*/
+    cursor: -webkit-image-set(
+      url('../images/the-fox-and-the-grapes/fox.png') 1x,
+      url('../images/the-fox-and-the-grapes/fox@2x.png') 2x
+    ), auto;
+    padding: 40px 0 310px 0;
+    position: relative;
+    overflow: hidden;
+}

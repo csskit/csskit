@@ -1,0 +1,3 @@
+.swagger-section .swagger-ui-wrap span.weak {
+  color: #666666;
+}

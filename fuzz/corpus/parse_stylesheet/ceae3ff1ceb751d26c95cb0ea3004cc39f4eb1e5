@@ -1,0 +1,3 @@
+a {
+  animation: steps(1, start) fade;
+}

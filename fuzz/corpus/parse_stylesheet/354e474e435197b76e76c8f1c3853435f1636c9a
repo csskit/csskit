@@ -1,0 +1,3 @@
+.paint-api-1 {
+  display: paint(my_logo);
+}

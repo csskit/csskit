@@ -1,0 +1,4 @@
+.layout-mobile .listViewUserDataButtons {
+    flex-direction: column;
+    font-size: x-small;
+}

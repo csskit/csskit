@@ -1,0 +1,5 @@
+.tab {-moz-appearance: none !important;
+color: #7E7E7E !important;
+background: #474749 !important;
+border-left: 0px solid rgba(127,127,127) !important;
+border-right: 0px solid rgba(127,127,127) !important;}

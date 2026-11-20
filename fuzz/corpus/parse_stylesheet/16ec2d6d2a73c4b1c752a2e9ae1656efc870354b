@@ -1,0 +1,11 @@
+.s-post-summary .s-post-summary--content-title a {
+  /* stylelint-disable-next-line declaration-property-value-keyword-no-deprecated */
+  word-break: break-word !important;
+  overflow-wrap: break-word !important;
+  -webkit-hyphens: auto !important;
+  -moz-hyphens: auto !important;
+  -ms-hyphens: auto !important;
+  hyphens: auto !important;
+  color: var(--_ps-content-title-a-fc);
+  font-family: var(--theme-post-title-font-family, var(--theme-body-font-family));
+}

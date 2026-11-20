@@ -1,0 +1,1 @@
+@supports not (hanging-punctuation:first){a{text-indent:1em}}

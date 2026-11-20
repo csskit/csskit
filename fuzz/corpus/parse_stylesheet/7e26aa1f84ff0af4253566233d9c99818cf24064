@@ -1,0 +1,3 @@
+.cds--file {
+  inline-size: 100%;
+}

@@ -1,0 +1,3 @@
+@-moz-document domain("gist.github.com"){.map-background {
+    fill: /*[[base-color]]*/;
+  }}

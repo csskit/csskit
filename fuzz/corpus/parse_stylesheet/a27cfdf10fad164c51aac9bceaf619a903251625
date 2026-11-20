@@ -1,0 +1,103 @@
+.svg2,
+animate,
+animateMotion,
+animateTransform,
+circle,
+clipPath,
+cursor,
+defs,
+desc,
+discard,
+ellipse,
+feBlend,
+feColorMatrix,
+feComponentTransfer,
+feComposite,
+feConvolveMatrix,
+feDiffuseLighting,
+feDisplacementMap,
+feDistantLight,
+feDropShadow,
+feFlood,
+feFuncA,
+feFuncB,
+feFuncG,
+feFuncR,
+feGaussianBlur,
+feImage,
+feMerge,
+feMergeNode,
+feMorphology,
+feOffset,
+fePointLight,
+feSpecularLighting,
+feSpotLight,
+feTile,
+feTurbulence,
+filter,
+foreignObject,
+g,
+hatch,
+hatchpath,
+image,
+line,
+linearGradient,
+marker,
+mesh,
+meshgradient,
+meshpatch,
+meshrow,
+metadata,
+mpath,
+path,
+pattern,
+polygon,
+polyline,
+radialGradient,
+rect,
+set,
+solidcolor,
+stop,
+switch,
+symbol,
+text,
+textPath,
+tspan,
+unknown,
+use,
+view {
+  color-interpolation: auto;
+  color-rendering: auto;
+  cx: auto;
+  cy: auto;
+  d: auto;
+  marker-end: auto;
+  marker-mid: auto;
+  marker-start: auto;
+  r: auto;
+  rx: auto;
+  ry: auto;
+  shape-rendering: auto;
+  solid-color: auto;
+  solid-opacity: auto;
+  stop-color: auto;
+  stop-opacity: auto;
+  text-anchor: auto;
+  vector-effect: auto;
+  x: auto;
+  y: auto;
+  display: crispEdges;
+  display: geometricPrecision;
+  display: optimizeQuality;
+  display: viewport;
+  display: context-fill;
+  display: context-stroke;
+  display: fixed-position;
+  display: miter;
+  display: miter-clip;
+  display: non-scaling-stroke;
+  display: non-scaling-size;
+  display: non-rotation;
+  display: child(1);
+  display: icc-color(foo);
+}

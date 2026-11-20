@@ -1,0 +1,2 @@
+#zotero-collections-tree treechildren::-moz-tree-cell(selected) { background: #474749 !important; border: 0 !important;
+border-bottom: 1px solid #1d1d1d !important; }

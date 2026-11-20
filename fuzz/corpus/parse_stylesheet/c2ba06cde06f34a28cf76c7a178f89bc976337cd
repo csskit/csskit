@@ -1,0 +1,5 @@
+@-moz-document url-prefix() {
+  .markdown h1 {
+    display: block;
+  }
+}

@@ -1,0 +1,3 @@
+[class*="uk-transition-scale"] {
+  -webkit-backface-visibility: hidden;
+}

@@ -1,0 +1,4 @@
+.pf-v6-l-flex.pf-m-row {
+  flex-direction: row;
+  align-items: var(--pf-v6-l-flex--m-row--AlignItems);
+}

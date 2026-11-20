@@ -1,0 +1,15 @@
+.pf-v6-c-alert {
+  position: relative;
+  display: grid;
+  grid-template-areas: var(--pf-v6-c-alert--GridTemplateAreas);
+  grid-template-columns: var(--pf-v6-c-alert--GridTemplateColumns);
+  padding-block-start: var(--pf-v6-c-alert--PaddingBlockStart);
+  padding-block-end: var(--pf-v6-c-alert--PaddingBlockEnd);
+  padding-inline-start: var(--pf-v6-c-alert--PaddingInlineStart);
+  padding-inline-end: var(--pf-v6-c-alert--PaddingInlineEnd);
+  font-size: var(--pf-v6-c-alert--FontSize);
+  background-color: var(--pf-v6-c-alert--BackgroundColor);
+  border: var(--pf-v6-c-alert--BorderWidth) solid var(--pf-v6-c-alert--BorderColor);
+  border-radius: var(--pf-v6-c-alert--BorderRadius);
+  box-shadow: var(--pf-v6-c-alert--BoxShadow);
+}

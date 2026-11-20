@@ -1,0 +1,12 @@
+.ui-4 {
+  caret-shape: auto;
+  caret-animation: auto;
+  caret: auto;
+  interactivity: auto;
+  interest-delay-start: auto;
+  interest-delay-end: auto;
+  interest-delay: auto;
+  accent-color: auto;
+  display: underscore;
+  display: inert;
+}

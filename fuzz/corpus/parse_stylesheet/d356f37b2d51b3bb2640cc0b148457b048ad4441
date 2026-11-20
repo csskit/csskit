@@ -1,0 +1,5 @@
+.hyphens-auto {
+  -ms-hyphens: auto !important;
+  -webkit-hyphens: auto !important;
+  hyphens: auto !important;
+}

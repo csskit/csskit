@@ -1,0 +1,13 @@
+.layout-desktop .headerLeft,
+.layout-tv .headerLeft {
+  -webkit-flex-grow: 1;
+  flex-grow: 1;
+  -webkit-justify-content: flex-start;
+  justify-content: flex-start;
+  overflow: hidden;
+  max-width: fit-content;
+  border-radius: 0.25em;
+  z-index: 90;
+  background: rgba(var(--tint), 0.6);
+  margin-left: 0.1em;
+}

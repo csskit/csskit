@@ -1,0 +1,3 @@
+.markdown-body a:has(>p,>div,>pre,>blockquote) {
+  display: block;
+}

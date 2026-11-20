@@ -1,0 +1,1 @@
+@media (max-width: 768px){.section-astronomer p { -webkit-column-count: 1; -moz-column-count: 1; column-count: 1; }}

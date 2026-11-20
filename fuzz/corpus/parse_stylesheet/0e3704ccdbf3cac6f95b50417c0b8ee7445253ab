@@ -1,0 +1,5 @@
+@media (forced-colors: active){
+  .usa-nav__close img{
+    display:none;
+  }
+}

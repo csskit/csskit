@@ -1,0 +1,3 @@
+.grid-flow-col-dense {
+  grid-auto-flow: column dense;
+}

@@ -1,0 +1,3 @@
+.noUi-draggable {
+  cursor: ew-resize;
+}

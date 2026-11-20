@@ -1,0 +1,6 @@
+.progress-bar-animated.bg-dark::before,
+.progress-bar-striped.bg-dark::before {
+  background-image: repeating-radial-gradient(0.125rem 0.125rem, #757575, #757575 0.125rem, transparent 0.125rem, transparent 100%);
+  background-image: -webkit-repeating-radial-gradient(0.125rem 0.125rem, #757575, #757575 0.125rem, transparent 0.125rem, transparent 100%);
+  background-image: -moz-repeating-radial-gradient(0.125rem 0.125rem, #757575, #757575 0.125rem, transparent 0.125rem, transparent 100%);
+}

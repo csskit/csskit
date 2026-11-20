@@ -1,0 +1,3 @@
+.resize-x {
+  resize: horizontal;
+}

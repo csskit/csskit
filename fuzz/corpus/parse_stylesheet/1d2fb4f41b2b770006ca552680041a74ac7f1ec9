@@ -1,0 +1,4 @@
+.cds--data-table--slug-row,
+.cds--data-table--ai-label-row {
+  box-shadow: inset 1px 0 var(--cds-ai-border-strong, #4589ff);
+}

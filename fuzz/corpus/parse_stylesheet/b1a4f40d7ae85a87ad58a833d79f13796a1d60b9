@@ -1,0 +1,13 @@
+.ruby-1 {
+  ruby-position: auto;
+  ruby-merge: auto;
+  ruby-align: auto;
+  ruby-overhang: auto;
+  display: ruby;
+  display: ruby-base;
+  display: ruby-text;
+  display: ruby-base-container;
+  display: ruby-text-container;
+  display: inter-character;
+  display: merge;
+}

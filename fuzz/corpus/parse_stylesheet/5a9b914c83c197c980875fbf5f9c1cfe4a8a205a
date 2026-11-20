@@ -1,0 +1,9 @@
+@media screen and (-ms-high-contrast: active), (forced-colors: active) {
+  .cds--icon--skeleton {
+    background: CanvasText;
+  }
+  .cds--icon--skeleton::before {
+    background: Canvas;
+    forced-color-adjust: none;
+  }
+}

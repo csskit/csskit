@@ -1,0 +1,3 @@
+.rounded-bl {
+  border-bottom-left-radius: 0.25rem;
+}

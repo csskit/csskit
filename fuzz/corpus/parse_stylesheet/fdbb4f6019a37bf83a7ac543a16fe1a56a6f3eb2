@@ -1,0 +1,5 @@
+.table--responsive td::before {
+    color: #969da6;
+    content: attr(data-th) ": ";
+    display: block;
+    font-weight: normal; }

@@ -1,0 +1,23 @@
+a,
+.\<a\> {
+  color: var(--link-fg, var(--accent));
+  border-radius: var(--interactive-border-radius);
+  outline-offset: 1px;
+  background: none;
+  border: none;
+  font-size: 1em;
+  font-family: inherit;
+  text-decoration: 1px dotted underline;
+  &:is(button) {
+    padding: 0;
+  }
+  .list-of-links & {
+    text-decoration: none;
+  }
+  &:hover,
+  &:focus {
+    text-decoration: 2px solid underline;
+    cursor: pointer;
+    outline: none;
+  }
+}

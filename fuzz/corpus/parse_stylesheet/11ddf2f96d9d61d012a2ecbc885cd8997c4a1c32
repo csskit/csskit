@@ -1,0 +1,3 @@
+a {
+  opacity: calc(3 / 2);
+}

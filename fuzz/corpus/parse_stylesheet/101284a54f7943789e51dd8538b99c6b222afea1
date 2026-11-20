@@ -1,0 +1,3 @@
+.cds--batch-summary__scroll {
+  box-shadow: 0.5px 0 0.2px var(--cds-link-primary-hover, #0043ce);
+}

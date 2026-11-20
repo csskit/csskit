@@ -1,0 +1,4 @@
+.ui.shape .side * {
+  -webkit-backface-visibility: visible !important;
+  backface-visibility: visible !important;
+}

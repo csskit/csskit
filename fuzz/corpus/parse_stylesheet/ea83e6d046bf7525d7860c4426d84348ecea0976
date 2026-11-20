@@ -1,0 +1,10 @@
+.author {
+  display: -ms-grid;
+  display: grid;
+      -ms-grid-columns: 60px auto;
+      grid-template-columns: 60px auto;
+      -ms-grid-rows: 60px;
+      grid-template-rows: 60px;
+      grid-template-areas:
+    "authorImage authorInfo";
+}

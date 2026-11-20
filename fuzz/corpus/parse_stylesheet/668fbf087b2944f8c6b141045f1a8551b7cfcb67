@@ -1,0 +1,3 @@
+.i0 {
+  inset: var(--su0) !important;
+}

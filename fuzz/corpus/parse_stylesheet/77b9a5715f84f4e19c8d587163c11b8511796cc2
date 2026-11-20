@@ -1,0 +1,3 @@
+#footer .photostream div a {
+  border: solid 1 px #eeeeee;
+}

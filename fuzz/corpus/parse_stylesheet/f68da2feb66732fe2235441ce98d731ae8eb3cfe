@@ -1,0 +1,3 @@
+.field .label {
+    z-index: 2;
+}

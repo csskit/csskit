@@ -1,0 +1,7 @@
+.pf-v6-c-button--hamburger-icon path {
+  fill: none;
+  stroke: currentcolor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: d var(--pf-v6-c-button--hamburger-icon--TransitionDuration) var(--pf-v6-c-button--hamburger-icon--TransitionTimingFunction);
+}

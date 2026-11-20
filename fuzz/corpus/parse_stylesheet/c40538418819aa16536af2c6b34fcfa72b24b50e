@@ -1,0 +1,7 @@
+@font-face{
+  font-family:"Roboto Mono Web";
+  font-style:normal;
+  font-weight:700;
+  font-display:fallback;
+  src:url(../fonts/roboto-mono/roboto-mono-v5-latin-700.woff2) format("woff2");
+}

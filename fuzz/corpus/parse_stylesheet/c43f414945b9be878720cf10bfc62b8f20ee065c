@@ -1,0 +1,3 @@
+.table-auto {
+  table-layout: auto;
+}

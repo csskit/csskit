@@ -1,0 +1,3 @@
+.nes-balloon.is-dark.from-right::after {
+  box-shadow: -4px 0, 4px 0, 4px 4px #212529, 0 4px, 8px 4px, 4px 8px, 8px 8px;
+}

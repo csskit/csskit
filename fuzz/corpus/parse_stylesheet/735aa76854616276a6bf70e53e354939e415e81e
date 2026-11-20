@@ -1,0 +1,3 @@
+.s1 {
+  grid-area: auto/span 1;
+}

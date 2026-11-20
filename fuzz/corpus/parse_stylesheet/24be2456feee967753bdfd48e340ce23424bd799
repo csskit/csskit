@@ -1,0 +1,5 @@
+.pf-v6-c-compass {
+  interpolate-size: allow-keywords;
+  height: 100dvh;
+  background-color: var(--pf-v6-c-compass--BackgroundColor);
+}

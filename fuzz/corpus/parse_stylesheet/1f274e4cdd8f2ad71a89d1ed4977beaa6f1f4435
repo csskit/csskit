@@ -1,0 +1,13 @@
+.text-3 {
+  tab-size: auto;
+  text-align-all: auto;
+  display: loose;
+  display: strict;
+  display: match-parent;
+  display: hanging;
+  display: each-line;
+  display: full-width;
+  display: anywhere;
+  display: justify-all;
+  display: break-spaces;
+}

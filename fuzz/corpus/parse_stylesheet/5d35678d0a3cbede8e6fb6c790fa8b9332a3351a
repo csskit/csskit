@@ -1,0 +1,5 @@
+@media (pointer: coarse) {
+  .uk-background-fixed {
+    background-attachment: scroll;
+  }
+}

@@ -1,0 +1,13 @@
+:-moz-any(:unknown, a) {
+  color: red;
+}
+:-webkit-any(:unknown, a) {
+  color: red;
+}
+:matches(:unknown, a) {
+  color: red;
+}
+
+:-moz-any(:unknown, b) {
+  color: tan;
+}

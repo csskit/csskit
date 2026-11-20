@@ -1,0 +1,4 @@
+.pf-v6-c-modal-box .pf-v6-c-wizard {
+  flex: 1 1 var(--pf-v6-c-wizard--Height, var(--pf-v6-c-modal-box--c-wizard--Height--base));
+  min-height: 0;
+}

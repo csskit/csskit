@@ -1,0 +1,3 @@
+.text-tabular{
+  font-feature-settings:"tnum" 1, "kern" 1;
+}

@@ -1,0 +1,3 @@
+.pe-auto {
+  pointer-events: auto !important;
+}

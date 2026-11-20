@@ -1,0 +1,85 @@
+@media print {
+  :root {
+    --bg: transparent;
+    --fg: black;
+    color-scheme: light;
+  }
+  .titlebar,
+  role[menuitem] {
+    --bg: white;
+    text-shadow: none;
+  }
+  main,
+  .container {
+    max-inline-size: unset;
+    inline-size: auto;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  table,
+  tr,
+  th,
+  td,
+  blockquote,
+  pre,
+  code,
+  ol,
+  li,
+  dt,
+  dd,
+  .box,
+  dialog,
+  details,
+  summary,
+  img,
+  figure,
+  figcaption,
+  video,
+  audio,
+  object,
+  embed,
+  fieldset,
+  legend,
+  input,
+  textarea,
+  select,
+  button,
+  header,
+  footer,
+  nav,
+  aside,
+  search,
+  section {
+    break-inside: avoid-page;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    break-after: avoid-page;
+  }
+  @supports (orphans: 2) {
+    p {
+      orphans: 2;
+      widows: 2;
+    }
+  }
+  a:not([href^="#"]):not(:has(> *))::after {
+    content: " (" attr(href) ")";
+    font-size: 80%;
+  }
+  abbr[title]::after {
+    content: " (" attr(title) ")";
+  }
+  @supports selector(::details-content) {
+    details::details-content {
+      content-visibility: visible;
+    }
+  }
+}

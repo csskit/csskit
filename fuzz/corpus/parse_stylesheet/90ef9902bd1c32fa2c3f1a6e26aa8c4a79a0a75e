@@ -1,0 +1,1 @@
+.whirly-loader:not(:required){-moz-border-radius: 100%;}

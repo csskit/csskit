@@ -1,0 +1,3 @@
+a {
+  column-count: calc(5 - 2);
+}

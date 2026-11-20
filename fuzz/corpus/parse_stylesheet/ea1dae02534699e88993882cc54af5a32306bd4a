@@ -1,0 +1,39 @@
+small[role=note],
+aside[role=note] {
+  --sidenote-width: 20ch;
+  --gutter-width: calc( (var(--full-width) - var(--eff-line-length)) / 2 );
+  --margin-inline: min( 0px, calc( 0px - min( var(--gutter-width) - var(--rhythm, 1rlh), var(--sidenote-width) + var(--rhythm, 1rlh) ) + var(--rhythm, 1rlh) - 1ch ) );
+  --density: 0.5;
+  display: block;
+  max-inline-size: var(--sidenote-width);
+  padding-block: 1ch;
+  padding-inline: 1.5ch 1ch;
+  font-family: var(--secondary-font);
+  background: var(--bg);
+  border-block-start: var(--border-block-start-width) var(--border-block-start-style) transparent;
+  border-block-end: var(--border-block-end-width) var(--border-block-end-style) transparent;
+  border-inline-start: var(--border-inline-start-width) var(--border-inline-start-style) transparent;
+  border-inline-end: var(--border-inline-end-width) var(--border-inline-end-style) transparent;
+  float: inline-end;
+  clear: inline-end;
+  margin-inline: 1ch var(--margin-inline);
+  text-align: start;
+  &.flip {
+    float: inline-start;
+    clear: inline-start;
+    margin-inline: var(--margin-inline) 1ch;
+    text-align: end;
+  }
+  & p:first-child {
+    margin-block-start: 0;
+  }
+  & p:last-child {
+    margin-block-end: 0;
+  }
+  &:hover,
+  &:focus-within {
+    border-color: var(--graphical-fg);
+    border-radius: var(--border-radius);
+    background: var(--box-bg);
+  }
+}

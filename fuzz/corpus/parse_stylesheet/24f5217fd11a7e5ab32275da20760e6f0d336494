@@ -1,0 +1,6 @@
+.layout-tv .card:focus {
+  -webkit-filter: none !important;
+  box-shadow: 0 0 5px 0, 255, 222;
+  filter: none !important;
+  transition: transform 1s ease;
+}

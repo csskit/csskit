@@ -1,0 +1,3 @@
+.cds--css-grid--end {
+  margin-inline-end: 0;
+}

@@ -1,0 +1,5 @@
+.noUi-handle:active {
+  cursor: grabbing;
+  cursor: -webkit-grabbing;
+  cursor: -moz-grabbing;
+}

@@ -1,0 +1,10 @@
+.capsule {
+  --o-angle-composite: 0deg;
+  display: flex;
+  width: inherit;
+  height: auto;
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+  rotate: calc(var(--o-angle-composite));
+}

@@ -1,0 +1,5 @@
+.slider > :focus ~ .tooltip {
+  inset-block: -1rem auto;
+  opacity: 1 !important;
+  visibility: visible !important;
+}

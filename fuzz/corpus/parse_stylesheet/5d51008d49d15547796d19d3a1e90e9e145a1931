@@ -1,0 +1,3 @@
+.slider > .tooltip::before {
+  content: var(--_value1);
+}

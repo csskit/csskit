@@ -1,0 +1,5 @@
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+  .cds--copy-btn .cds--copy-btn__feedback {
+    inline-size: auto;
+  }
+}

@@ -1,0 +1,3 @@
+.ts-text {
+    color: var(--accent-color, inherit);
+}

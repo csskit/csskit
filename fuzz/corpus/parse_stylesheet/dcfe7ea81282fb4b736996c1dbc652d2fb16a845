@@ -1,0 +1,3 @@
+.cds--data-table--sticky-header.cds--data-table--sm th .cds--table-header-label {
+  padding-block: 0.5rem 0;
+}

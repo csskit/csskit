@@ -1,0 +1,3 @@
+@-moz-document regexp("https?:\/\/.*wik(i|t).*(org|jp).*"){.cm-hr {
+    color: var(--cm-14);
+  }}

@@ -1,0 +1,7 @@
+body:not(.remove-cloze-style) :is(.markdown-preview-view, .markdown-rendered) mark>del,
+:is(.markdown-preview-view,
+  .markdown-rendered).cloze mark>del {
+  background-color: var(--cloze-bg-color);
+  color: var(--cloze-bg-color);
+  text-decoration: underline var(--cloze-decoration) var(--cloze-decoration-color);
+}

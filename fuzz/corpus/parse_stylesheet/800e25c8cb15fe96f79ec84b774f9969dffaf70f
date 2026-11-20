@@ -1,0 +1,3 @@
+.insideShadow {
+  border: 8px solid var(--modeBorderColor, #ef2);
+}

@@ -1,0 +1,3 @@
+.border-double {
+  border-style: double;
+}

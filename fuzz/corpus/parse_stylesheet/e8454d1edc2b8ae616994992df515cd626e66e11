@@ -1,0 +1,3 @@
+.object-none {
+  object-fit: none;
+}

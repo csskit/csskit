@@ -1,0 +1,3 @@
+@layer input-common { #input {
+    accent-color: var(--uc-accent-color-5) !important;
+}}

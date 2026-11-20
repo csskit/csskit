@@ -1,0 +1,3 @@
+[dir=rtl] .cds--css-grid-column {
+  margin-inline: var(--cds-grid-gutter-end) var(--cds-grid-gutter-start);
+}

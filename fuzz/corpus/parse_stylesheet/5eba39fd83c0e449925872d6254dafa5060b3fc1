@@ -1,0 +1,9 @@
+#s3 .sandbox {
+  -webkit-perspective: 600px;
+  -moz-perspective: 600px;
+  -ms-perspective: 600px;
+  -o-perspective: 600px;
+  perspective: 600px;
+  text-align: center;
+  position: absolute;
+}

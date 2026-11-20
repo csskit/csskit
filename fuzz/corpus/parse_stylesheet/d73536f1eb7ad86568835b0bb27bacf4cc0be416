@@ -1,0 +1,13 @@
+@media (min-width: 1440px) {
+    .section-crow-pitcher .container p { font-size: 150px;    }
+  .section-pomegranate {
+  background-image: url(../images/pomegranate/pomegranate.png), url(../images/pomegranate/apple.png), url(../images/pomegranate/bkg.jpg);
+  background-repeat: no-repeat, no-repeat, no-repeat;
+  background-position: -200px 0, 125% 100%, center center;
+  -webkit-background-size: auto, auto, cover;
+  -moz-background-size: auto, auto, cover;
+  -o-background-size: auto, auto, cover;
+  background-size: auto, auto, cover;
+  }
+  .section-pomegranate .container img#bramble{left: 25%;}
+}

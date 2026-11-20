@@ -1,0 +1,4 @@
+.afrc {
+  -ms-font-feature-settings: "afrc";
+  font-variant-numeric: stacked-fractions;
+}

@@ -1,0 +1,3 @@
+i.icon.sort.up:before {
+  content: "\f0de";
+}

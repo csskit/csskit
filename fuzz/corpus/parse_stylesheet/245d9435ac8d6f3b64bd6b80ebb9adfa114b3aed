@@ -1,0 +1,3 @@
+.cds--label--no-margin {
+  margin-block-end: 0;
+}

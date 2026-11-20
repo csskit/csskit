@@ -1,0 +1,7 @@
+a {
+  color: hsla(var(--bs-link-color-hsl), var(--bs-link-opacity, 1));
+  text-decoration: var(--bs-link-decoration);
+  text-underline-offset: var(--bs-link-decoration-offset);
+  -webkit-font-smoothing: auto;
+  -moz-osx-font-smoothing: auto;
+}

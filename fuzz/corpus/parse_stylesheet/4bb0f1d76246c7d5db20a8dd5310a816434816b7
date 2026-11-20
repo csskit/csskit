@@ -1,0 +1,6 @@
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) {
+  /* line 398, ../../scss/furatto/_navigation_bar.scss */
+  .navigation-bar {
+    overflow: hidden;
+  }
+}

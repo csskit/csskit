@@ -1,0 +1,6 @@
+aside:after {
+  -webkit-animation: rise 1.5s 1 ease;
+  -moz-animation: rise 1.5s 1 ease;
+  -ms-animation: rise 1.5s 1 ease;
+  -o-animation: rise 1.5s 1 ease;
+}

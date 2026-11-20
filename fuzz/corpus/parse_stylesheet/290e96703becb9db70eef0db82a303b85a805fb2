@@ -1,0 +1,3 @@
+.wb-normal {
+  word-break: normal !important;
+}

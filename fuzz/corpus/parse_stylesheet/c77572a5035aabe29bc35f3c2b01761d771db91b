@@ -1,0 +1,7 @@
+.alert-link {
+  font-weight: var(--bs-font-weight-normal);
+  color: var(--bs-alert-link-color);
+  text-decoration: underline;
+  -webkit-font-smoothing: var(--bs-body-webkit-font-smoothing);
+  -moz-osx-font-smoothing: var(--bs-body-moz-osx-font-smoothing);
+}

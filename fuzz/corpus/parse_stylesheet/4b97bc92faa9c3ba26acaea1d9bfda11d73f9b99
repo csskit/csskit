@@ -1,0 +1,5 @@
+.pf-v6-c-progress-stepper.pf-m-compact .pf-v6-c-progress-stepper__step-connector {
+  grid-row: var(--pf-v6-c-progress-stepper--m-compact__step-connector--GridRow);
+  min-width: var(--pf-v6-c-progress-stepper--m-compact__step-connector--MinWidth);
+  padding-block-end: var(--pf-v6-c-progress-stepper--m-compact__step-connector--PaddingBlockEnd);
+}

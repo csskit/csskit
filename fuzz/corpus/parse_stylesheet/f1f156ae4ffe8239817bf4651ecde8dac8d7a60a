@@ -1,0 +1,7 @@
+@color-profile swopc {
+  src: url("http://example.org/swop-coated.icc");
+  components: auto;
+  display: relative-colorimetric;
+  display: absolute-colorimetric;
+  display: perceptual;
+}

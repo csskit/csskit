@@ -1,0 +1,13 @@
+a, abbr, acronym, address,
+b, big, cite, code, del, em,
+i, ins, kbd, mark, output,
+q, ruby, s, samp, small,
+strong, sub, sup, div,
+time, u, dfn,
+h1, h2, h3, h4, h5, h6, p, pre,
+table, caption, tbody, tfoot,
+thead, tr, th, td, canvas,
+embed, figure, iframe {
+  margin: 0;
+  padding: 0;
+}

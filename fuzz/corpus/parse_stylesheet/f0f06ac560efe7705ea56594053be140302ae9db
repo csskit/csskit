@@ -1,0 +1,11 @@
+.pf-v6-c-button__icon {
+  margin-inline-start: var(--pf-v6-c-button__icon--MarginInlineStart);
+  margin-inline-end: var(--pf-v6-c-button__icon--MarginInlineEnd);
+  color: var(--pf-v6-c-button__icon--Color);
+  transition-delay: var(--pf-v6-c-button__icon--TransitionDelay);
+  transition-timing-function: var(--pf-v6-c-button__icon--TransitionTimingFunction);
+  transition-duration: var(--pf-v6-c-button__icon--TransitionDuration);
+  transition-property: var(--pf-v6-c-button__icon--TransitionProperty);
+  rotate: var(--pf-v6-c-button__icon--Rotate);
+  scale: var(--pf-v6-c-button__icon--ScaleX) var(--pf-v6-c-button__icon--ScaleY);
+}

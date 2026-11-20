@@ -1,0 +1,5 @@
+@supports (-ms-ime-align: auto) {
+  .cds--copy-btn .cds--copy-btn__feedback {
+    inline-size: auto;
+  }
+}

@@ -1,0 +1,6 @@
+.cds--contained-list-item--with-icon .cds--contained-list-item__content {
+  display: grid;
+  -moz-column-gap: 0.75rem;
+       column-gap: 0.75rem;
+  grid-template-columns: 1rem 1fr;
+}

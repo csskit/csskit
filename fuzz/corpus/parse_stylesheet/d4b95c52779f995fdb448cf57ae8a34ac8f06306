@@ -1,0 +1,6 @@
+.dialog-title {
+  margin: 0;
+  color: var(--dialog-text-color);
+  font-size: var(--text-xl, 1.25rem);
+  font-weight: var(--font-weight-semibold, 600);
+}

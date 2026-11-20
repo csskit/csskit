@@ -1,0 +1,2 @@
+[self~="size-1of5"] {
+  width: 20%; }

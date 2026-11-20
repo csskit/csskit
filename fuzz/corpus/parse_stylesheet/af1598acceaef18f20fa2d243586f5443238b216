@@ -1,0 +1,3 @@
+:is(.markdown-preview-view, .markdown-rendered).matrix table tr {
+  display: flex;
+}

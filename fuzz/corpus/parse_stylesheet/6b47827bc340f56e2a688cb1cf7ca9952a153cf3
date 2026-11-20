@@ -1,0 +1,4 @@
+@-moz-document domain("ru.wikipedia.org"),
+               domain("ru.wiktionary.org"){div#mw-panel div.portal .body {
+    background-image: none !important;
+  }}

@@ -1,0 +1,4 @@
+code,
+code * {
+  font-family: monospace;
+}

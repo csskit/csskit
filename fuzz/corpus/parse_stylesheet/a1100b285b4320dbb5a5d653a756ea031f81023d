@@ -1,0 +1,16 @@
+@-moz-keyframes po-warp {
+  0%, 100% {
+    -moz-perspective-origin: 50% 50%;
+    perspective-origin: 50% 50%;
+  }
+
+  33% {
+    -moz-perspective-origin: 200% -200%;
+    perspective-origin: 200% -200%;
+  }
+
+  66% {
+    -moz-perspective-origin: 400% 250%;
+    perspective-origin: 400% 250%;
+  }
+}

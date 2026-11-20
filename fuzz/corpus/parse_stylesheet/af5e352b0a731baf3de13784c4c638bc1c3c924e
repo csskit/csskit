@@ -1,0 +1,5 @@
+.tab,
+.tab.active {
+background-color: var(identity-color, var(--tab-loading-fill));
+    border-bottom: none !important;
+    margin: 0px; }

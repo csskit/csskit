@@ -1,0 +1,4 @@
+.frac {
+  -ms-font-feature-settings: "frac";
+  font-variant-numeric: diagonal-fractions;
+}

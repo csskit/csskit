@@ -1,0 +1,1 @@
+.outline-error{outline-color:rgb(var(--error))}

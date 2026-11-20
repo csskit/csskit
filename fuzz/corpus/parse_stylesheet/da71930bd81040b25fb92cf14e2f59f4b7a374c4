@@ -1,0 +1,3 @@
+i.icon.running::before {
+  content: "\f70c";
+}

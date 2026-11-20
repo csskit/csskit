@@ -1,0 +1,9 @@
+.position-3 {
+  inset-block-start: auto;
+  inset-block-end: auto;
+  inset-inline-start: auto;
+  inset-inline-end: auto;
+  inset-block: auto;
+  inset-inline: auto;
+  inset: auto;
+}

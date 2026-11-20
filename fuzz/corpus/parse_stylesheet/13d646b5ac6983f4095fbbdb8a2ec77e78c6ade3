@@ -1,0 +1,3 @@
+i.icon.draw.polygon::before {
+  content: "\f5ee";
+}

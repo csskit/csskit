@@ -1,0 +1,3 @@
+::-webkit-scrollbar-corner {
+  background-color: #cacaca;
+}

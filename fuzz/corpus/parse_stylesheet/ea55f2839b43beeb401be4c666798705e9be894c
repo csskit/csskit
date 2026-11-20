@@ -1,0 +1,3 @@
+.markdown-rendered hr {
+  border-color: var(--background-modifier-border-hr);
+}

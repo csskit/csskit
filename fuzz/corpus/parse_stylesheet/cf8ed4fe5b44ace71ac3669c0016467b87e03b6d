@@ -1,0 +1,9 @@
+.grid {
+  display: grid;
+  grid-auto-columns: var(--grid-col-width, 1fr);
+  grid-auto-rows: var(--grid-row-width, auto);
+  gap: var(--gap);
+  & > * {
+    margin: 0;
+  }
+}

@@ -1,0 +1,3 @@
+.bg-clip-padding {
+  background-clip: padding-box;
+}

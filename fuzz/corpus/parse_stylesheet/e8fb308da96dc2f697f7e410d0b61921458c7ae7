@@ -1,0 +1,3 @@
+.ui.two.steps > .step {
+  width: 50%;
+}

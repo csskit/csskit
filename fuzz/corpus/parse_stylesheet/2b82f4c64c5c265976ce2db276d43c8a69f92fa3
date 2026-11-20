@@ -1,0 +1,13 @@
+.ui.items > .item {
+  display: flex;
+  margin: 1em 0;
+  width: 100%;
+  min-height: 0;
+  background: transparent;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  transition: box-shadow 0.1s ease;
+  z-index: "";
+}

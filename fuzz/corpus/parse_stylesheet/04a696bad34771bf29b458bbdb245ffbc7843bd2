@@ -1,0 +1,4 @@
+.pf-v6-c-dual-list-selector__header {
+  grid-area: var(--pf-v6-c-dual-list-selector__header--GridArea);
+  margin-block-end: var(--pf-v6-c-dual-list-selector__header--MarginBlockEnd);
+}

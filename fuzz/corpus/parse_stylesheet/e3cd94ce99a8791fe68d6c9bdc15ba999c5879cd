@@ -1,0 +1,7 @@
+blockquote[cite]:after {
+  font-style: normal;
+  font-size: 0.75em;
+  font-weight: 700;
+  content: "\a—  " attr(cite);
+  white-space: pre;
+}

@@ -1,0 +1,1 @@
+@scope(.card)to (.card .content){a{color:red}}

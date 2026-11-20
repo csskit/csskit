@@ -1,0 +1,4 @@
+@-moz-document domain("ru.wikipedia.org"),
+               domain("ru.wiktionary.org"){input.mw-ui-button:hover {
+    opacity: .8;
+  }}

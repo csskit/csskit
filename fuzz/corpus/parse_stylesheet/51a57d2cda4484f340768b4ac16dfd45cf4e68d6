@@ -1,0 +1,3 @@
+[layout="none"] {
+  -ms-flex: none;
+      flex: none; }

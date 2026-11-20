@@ -1,0 +1,7 @@
+.flex-bottom,
+.flex-vertical.flex-right {
+    -ms-flex-align: end;
+    -webkit-align-items: flex-end;
+    -webkit-box-align: end;
+    align-items: flex-end;
+}

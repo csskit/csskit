@@ -1,0 +1,6 @@
+.cds--data-table--sticky-header tbody {
+  flex-direction: column;
+  -ms-overflow-style: none;
+  overflow-x: scroll;
+  will-change: transform;
+}

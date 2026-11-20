@@ -1,0 +1,1 @@
+.spinner-circle:after{border-color:transparent transparent transparent rgb(var(--spinner-color))}

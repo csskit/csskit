@@ -1,0 +1,4 @@
+.progress-tracker--marker-dataset .progress-step::before {
+      content: attr(data-text);
+      content: attr(data-text, "");
+    }

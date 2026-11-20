@@ -1,0 +1,5 @@
+[layout*="column"]:not([layout*="row"]) > * {
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+  -ms-flex-preferred-size: auto;
+      flex-basis: auto; }

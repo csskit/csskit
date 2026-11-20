@@ -1,0 +1,12 @@
+.cbutton--effect-zorka .cbutton__helper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -35px 0 0 -100px;
+  width: 200px;
+  height: 70px;
+  opacity: 0;
+  -webkit-filter: url(../index.html#lb-goo-filter);
+  filter: url(../index.html#lb-goo-filter);
+  pointer-events: none;
+}

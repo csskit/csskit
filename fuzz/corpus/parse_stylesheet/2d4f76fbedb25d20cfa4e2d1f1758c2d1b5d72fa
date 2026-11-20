@@ -1,0 +1,3 @@
+@function --light-dark(--light, --dark) {
+  result: if(color-scheme(dark): var(--dark); else: var(--light));
+}

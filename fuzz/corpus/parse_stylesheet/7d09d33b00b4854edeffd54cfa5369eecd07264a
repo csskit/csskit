@@ -1,0 +1,13 @@
+body:not(.default-loading-page).loading-animation-cat .progress-bar-message::before {
+  content: "GIF creator: Jake Fleming";
+  display: block;
+  background: no-repeat center/cover url(https://cdn.dribbble.com/users/53712/screenshots/9948351/media/2397850c7727f8e70b0ec50b5a83fe76.gif);
+  width: 800px;
+  height: 500px;
+  margin-top: -20px;
+  font-size: initial;
+  color: var(--text-muted);
+  filter: hue-rotate(-55deg) saturate(120%);
+  position: initial;
+  animation: unset;
+}

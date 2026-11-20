@@ -1,0 +1,4 @@
+:focus {
+  /*px*/ outline: 1px dotted #222222 5px auto -webkit-focus-ring-color;
+  /*rem*/ outline: 0.0625rem dotted #222222 0.3125rem auto -webkit-focus-ring-color;
+}

@@ -1,0 +1,3 @@
+.datepicker table tr td.old, .datepicker table tr td.new {
+  color: #c3c7cc;
+}

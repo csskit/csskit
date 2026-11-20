@@ -1,0 +1,152 @@
+select {
+  --picker-icon: var(--chevron-down-icon);
+  --focus-color: var(--accent);
+  --hover-color: color-mix(currentColor 10%, transparent);
+  --checked-color: color-mix(var(--graphical-fg) 50%, var(--box-bg));
+  --active-color: color-mix(var(--graphical-fg) 75%, var(--box-bg));
+  --padding: calc(var(--rhythm, 1rlh) / 4);
+  --indented: 1em;
+  &[multiple],
+  &[size]:not([size="1"]) {
+    padding: unset;
+  }
+  @supports (appearance: base-select) {
+    appearance: base-select;
+    field-sizing: fixed;
+    display: inline-flex !important;
+    &::picker(select) {
+      appearance: base-select;
+      color: inherit;
+      background: inherit;
+      border: inherit;
+      border-radius: inherit;
+      scrollbar-width: inherit;
+    }
+    &::picker-icon {
+      background-color: var(--accent);
+      opacity: 0.7;
+      mask-size: contain;
+      mask-position: center;
+      mask-repeat: no-repeat;
+      mask-image: var(--picker-icon);
+    }
+    & > button:first-child {
+      all: unset;
+      display: contents;
+      interactivity: inert;
+      white-space: normal;
+    }
+    & > optgroup > legend {
+      all: unset;
+      display: block;
+      unicode-bidi: isolate;
+      padding-inline: var(--padding);
+    }
+    &[multiple][size="1"] {
+      padding: var(--padding);
+    }
+  }
+  @supports selector(option::checkmark) {
+    & option::checkmark {
+      content: "";
+      visibility: hidden;
+      block-size: 1em;
+      aspect-ratio: 1 / 1;
+      background-color: var(--accent);
+      mask-size: contain;
+      mask-position: center;
+      mask-repeat: no-repeat;
+      opacity: 0.7;
+    }
+    &:not([multiple], .checks, .checkboxes) {
+      & option::checkmark {
+        display: none;
+      }
+    }
+    &:is([multiple], .checks, .checkboxes) {
+      & option:checked::checkmark {
+        visibility: visible;
+        mask-image: var(--check-icon);
+      }
+      & > optgroup > option {
+        padding-inline-start: var(--padding);
+      }
+    }
+    &.checkboxes {
+      & option:not(:checked)::checkmark {
+        visibility: visible;
+        mask-image: var(--square-icon);
+      }
+      & option:checked::checkmark {
+        visibility: visible;
+        mask-image: var(--square-check-icon);
+      }
+    }
+    &.flip {
+      & option::checkmark {
+        order: 1;
+        margin-inline-start: auto;
+      }
+      & > optgroup > option {
+        padding-inline-start: var(--indented);
+      }
+    }
+  }
+  & > optgroup {
+    color: var(--muted-fg);
+    font-style: normal;
+    font-weight: bolder;
+    &:disabled {
+      cursor: not-allowed;
+      filter: grayscale(1);
+      opacity: 0.7;
+    }
+    & > option {
+      padding-inline: var(--indented) var(--padding);
+    }
+  }
+  & option {
+    color: var(--fg);
+    font-weight: normal;
+    padding-inline: var(--padding);
+    &:focus-visible {
+      outline: 2px dotted var(--focus-color);
+    }
+    &:enabled:hover {
+      background-color: var(--hover-color);
+    }
+    &:enabled:checked {
+      background-color: var(--checked-color);
+    }
+    &:enabled:checked:hover,
+    &:enabled:active {
+      background-color: var(--active-color);
+    }
+    :not(optgroup:disabled &):disabled {
+      cursor: not-allowed;
+      filter: grayscale(1);
+      opacity: 0.7;
+    }
+  }
+  &:focus option:checked {
+    background:
+      linear-gradient(
+        0deg,
+        var(--focus-color) 0%,
+        var(--focus-color) 100%);
+    color: var(--bg);
+    @supports (appearance: base-select) {
+      &::checkmark {
+        background-color: var(--bg);
+      }
+    }
+  }
+  @supports not (appearance: base-select) {
+    &:focus option:checked {
+      color: var(--fg);
+    }
+    & > optgroup::before {
+      padding-inline: var(--padding);
+    }
+  }
+}

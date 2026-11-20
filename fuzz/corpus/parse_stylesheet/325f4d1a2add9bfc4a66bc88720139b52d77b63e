@@ -1,0 +1,7 @@
+.noBorder:after {
+  top: 7px;
+  left: -1px;
+  width: 17px;
+  height: 0;
+  border-top: dotted 1px currentColor;
+}

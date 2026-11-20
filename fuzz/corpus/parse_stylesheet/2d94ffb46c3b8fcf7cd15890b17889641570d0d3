@@ -1,0 +1,3 @@
+.cds--dropdown-item:first-of-type .cds--dropdown-link {
+  border-block-start-color: transparent;
+}

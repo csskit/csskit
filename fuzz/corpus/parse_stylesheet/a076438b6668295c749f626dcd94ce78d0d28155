@@ -1,0 +1,3 @@
+.ts-box.is-end-indicated {
+    border-right: var(--indicator-width) solid var(--indicator-color);
+}

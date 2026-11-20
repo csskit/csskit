@@ -1,0 +1,6 @@
+@font-feature-values Test {
+  @swash {
+    swishy: 1;
+    flowing: 2;
+  }
+}

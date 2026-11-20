@@ -1,0 +1,6 @@
+ul:has(> li > [data-heading] > [href*="#mcl/list-column"]),
+    ul:has(> li > [href*="#mcl/list-column"]) {
+      margin-top: 0;
+            column-width: var(--list-min-width); column-gap: 1rem;
+            column-rule: var(--col-rule-width) solid var(--col-rule-color);
+        }

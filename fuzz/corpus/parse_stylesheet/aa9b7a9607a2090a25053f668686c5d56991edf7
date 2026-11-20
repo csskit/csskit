@@ -1,0 +1,22 @@
+body.style-options-for-buttons-plugin button.grad_button {
+  margin: 5PX;
+  line-height: inherit;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 90px;
+  padding: 0 18px;
+  height: 38px;
+  font-size: 16px;
+  color: #fff;
+  text-align: center;
+  box-sizing: border-box;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 30px;
+  transition: box-shadow .5s ease, transform .2s ease;
+  will-change: transform;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, .2);
+  transform:
+    translateY(var(--ty, 0)) rotateX(var(--rx, 0)) rotateY(var(--ry, 0)) translateZ(var(--tz, -12px));
+}

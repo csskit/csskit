@@ -1,0 +1,3 @@
+.grid.is-auto-fill {
+  grid-template-columns: repeat(auto-fill, minmax(var(--bulma-grid-column-min), 1fr));
+}

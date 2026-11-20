@@ -1,0 +1,3 @@
+@media screen and (max-width: calc(62rem - 1px)){.pf-m-tree-view-grid-lg.pf-v6-c-table .pf-v6-c-table__thead {
+    display: none;
+  }}

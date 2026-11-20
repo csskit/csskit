@@ -1,0 +1,3 @@
+.normal-nums {
+  font-variant-numeric: normal;
+}

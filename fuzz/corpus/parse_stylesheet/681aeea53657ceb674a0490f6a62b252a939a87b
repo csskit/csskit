@@ -1,0 +1,15 @@
+.cs-fieldset{&:disabled {
+    input[type="radio"] {
+      + label {
+        color: var(--disabled-text);
+        text-shadow: var(--disabled-text-shadow) 1px 1px;
+        pointer-events: none;
+      }
+    }
+
+    legend {
+      color: var(--disabled-text);
+      text-shadow: var(--disabled-text-shadow) 1px 1px;
+      pointer-events: none;
+    }
+  }}

@@ -1,0 +1,1 @@
+[data-theme=dark]{--pico-contrast-hover-border: var(--pico-contrast-hover-background);}

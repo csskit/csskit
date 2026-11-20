@@ -1,0 +1,4 @@
+.row {
+  display: block;
+  text-rendering: optimizespeed;
+}

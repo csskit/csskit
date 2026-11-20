@@ -1,0 +1,3 @@
+.s-prose li pre {
+  overflow-wrap: normal;
+}

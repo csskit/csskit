@@ -1,0 +1,5 @@
+.kanban ul>li:nth-of-type(n) {
+  background-color: var(--p-kanban-color-simple);
+  padding-left: 1em;
+  backdrop-filter: blur(calc(var(--blur-p-kanban-frosted-glass)*2px));
+}

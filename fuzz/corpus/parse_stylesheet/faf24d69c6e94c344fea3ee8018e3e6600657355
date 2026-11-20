@@ -1,0 +1,5 @@
+.control__label {
+  display: block;
+  margin: 0 0 0 0 0.5rem;
+  font-weight: 600;
+}

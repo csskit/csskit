@@ -1,0 +1,6 @@
+.cds--file-browse-btn--disabled {
+  color: var(--cds-text-disabled, rgba(22, 22, 22, 0.25));
+  cursor: no-drop;
+  text-decoration: none;
+  transition: none;
+}

@@ -1,0 +1,5 @@
+i.fa.fa-icon {
+ -webkit-font-smoothing: antialiased;
+ -moz-osx-font-smoothing: grayscale;
+ text-rendering: auto;
+}

@@ -1,0 +1,3 @@
+.ts-switch input:checked::after {
+    background: var(--accent-color, var(--ts-primary-700));
+}

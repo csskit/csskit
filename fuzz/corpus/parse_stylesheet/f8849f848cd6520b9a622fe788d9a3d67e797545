@@ -1,0 +1,4 @@
+::-ms-placeholder {
+  color: var(--input-fore-color);
+  opacity: 0.54;
+}

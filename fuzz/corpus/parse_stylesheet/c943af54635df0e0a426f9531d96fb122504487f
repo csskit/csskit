@@ -1,0 +1,18 @@
+@supports not (left: calc(cos(45deg) * 1px)) {
+  .bigbang {
+    background-color: rgba(255, 0, 0, 0.3098039216);
+    border: 2px dotted red !important;
+    height: 100px !important;
+    width: 250px !important;
+  }
+  .bigbang > * {
+    display: none;
+  }
+  .bigbang::before {
+    content: "Trigometric functions not supported. Update this browser to use Orbit";
+    font-size: 18px;
+    padding: 10px;
+    color: red;
+    text-align: center;
+  }
+}

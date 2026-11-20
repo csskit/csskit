@@ -1,0 +1,4 @@
+.usa-select:-webkit-autofill{
+  -webkit-appearance:menulist;
+          appearance:menulist;
+}

@@ -1,0 +1,8 @@
+.cds--snippet--multi .cds--snippet-container {
+  inline-size: 100%;
+  -webkit-mask-composite: source-in, xor;
+          mask-composite: intersect;
+  -webkit-mask-image: linear-gradient(to right, #000000 calc(100% - 2rem), transparent 100%), linear-gradient(to bottom, #000000 calc(100% - 1rem), transparent 100%);
+          mask-image: linear-gradient(to right, #000000 calc(100% - 2rem), transparent 100%), linear-gradient(to bottom, #000000 calc(100% - 1rem), transparent 100%);
+  pointer-events: auto;
+}

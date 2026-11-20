@@ -1,0 +1,1 @@
+.range:hover::-webkit-slider-thumb{cursor:grab}

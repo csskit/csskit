@@ -1,0 +1,11 @@
+.foo {
+  .bar {
+    input {
+      &:active {
+        &:hover {
+          color: red;
+        }
+      }
+    }
+  }
+}

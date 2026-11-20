@@ -1,0 +1,3 @@
+.s-btn.s-btn__dropdown {
+  padding-right: calc(var(--_bu-px, var(--_bu-p)) * 2.5);
+}

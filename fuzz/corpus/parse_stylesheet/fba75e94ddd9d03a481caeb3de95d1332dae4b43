@@ -1,0 +1,19 @@
+#zen-media-controls-toolbar.playing {
+  toolbaritem {
+    background-color: light-dark(#fffd, #24273afa) !important;
+  }
+
+  padding: 16px 24px;
+  position: relative;
+  border-radius: 8px;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.01);
+
+  &::after {
+    opacity: 1 !important;
+    animation: animateGlow 5s cubic-bezier(0.1, 0.7, 0.5, 0.1) infinite;
+  }
+
+  &:hover::after {
+    height: 150%;
+  }
+}

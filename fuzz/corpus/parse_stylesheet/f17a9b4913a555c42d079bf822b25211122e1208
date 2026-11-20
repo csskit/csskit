@@ -1,0 +1,6 @@
+.cds--pagination-nav__page:disabled, .cds--pagination-nav__page.cds--pagination-nav__page--disabled {
+  background: none;
+  color: rgba(var(--cds-text-secondary, #525252), 0.5);
+  outline: none;
+  pointer-events: none;
+}

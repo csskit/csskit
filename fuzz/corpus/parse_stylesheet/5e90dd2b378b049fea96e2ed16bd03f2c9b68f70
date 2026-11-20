@@ -1,0 +1,4 @@
+.pico [type=checkbox]::-ms-check,
+.pico [type=radio]::-ms-check {
+  display: none;
+}

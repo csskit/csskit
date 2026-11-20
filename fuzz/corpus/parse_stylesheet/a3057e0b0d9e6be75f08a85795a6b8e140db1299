@@ -1,0 +1,4 @@
+@-moz-document domain("github.com"){.summary-stats li a .num {
+    font: bold var(--font) !important;
+    text-decoration-color: transparent !important;
+  }}

@@ -1,0 +1,5 @@
+[data-lock],
+[data-lock] body {
+  overflow: hidden;
+  -ms-touch-action: none;
+      touch-action: none; }

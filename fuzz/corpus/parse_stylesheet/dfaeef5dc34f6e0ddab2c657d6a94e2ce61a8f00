@@ -1,0 +1,6 @@
+div.collapsible_headings_toggle .fa-caret-down:before,
+div.collapsible_headings_toggle .fa-caret-right:before {
+ font-size: xx-large;
+ transition: transform 1000ms;
+ transform: none !important;
+}

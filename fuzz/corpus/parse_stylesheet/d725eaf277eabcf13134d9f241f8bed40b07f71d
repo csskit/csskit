@@ -1,0 +1,4 @@
+.flex--stretch, .grid--stretch {
+  -ms-flex-align: stretch;
+      align-items: stretch;
+}

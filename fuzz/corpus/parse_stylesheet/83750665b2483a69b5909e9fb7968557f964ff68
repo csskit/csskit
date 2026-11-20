@@ -1,0 +1,3 @@
+.shadow-parts::part(textspan) {
+  display: auto;
+}

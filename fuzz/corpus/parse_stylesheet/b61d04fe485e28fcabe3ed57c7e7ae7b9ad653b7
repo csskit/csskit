@@ -1,0 +1,5 @@
+@media print, screen and (min-width: 40em) {
+  .reveal {
+    min-height: 0;
+  }
+}

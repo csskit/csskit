@@ -1,0 +1,3 @@
+.page_nav br {
+  display: none;
+}

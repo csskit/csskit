@@ -1,0 +1,3 @@
+.overscroll-x-auto {
+  overscroll-behavior-x: auto;
+}

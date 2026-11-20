@@ -1,0 +1,4 @@
+.contents img, .contents .center, .contents center, .contents div.image object {
+    max-width: 100%;
+    overflow: auto;
+}

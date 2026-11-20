@@ -1,0 +1,3 @@
+.ji-start {
+  justify-items: start !important;
+}

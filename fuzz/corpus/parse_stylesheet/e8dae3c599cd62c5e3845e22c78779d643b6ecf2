@@ -1,0 +1,10 @@
+.lb-flag-belarus {
+  display:inline-block;
+  vertical-align:middle;
+    width: 3px;
+    height: 12px;
+  margin-left:-16px;
+  margin-top:-2px;
+  background-color: red;
+  border-left: 3px double rgba(238,238,238,1.00) !important;
+}

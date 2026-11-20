@@ -1,0 +1,10 @@
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes pf-v6-c-menu-toggle-m-danger-motion {
+    33% {
+      --pf-v6-c-menu-toggle--m-danger--TranslateX: -2px;
+    }
+    66% {
+      --pf-v6-c-menu-toggle--m-danger--TranslateX: 3px;
+    }
+  }
+}

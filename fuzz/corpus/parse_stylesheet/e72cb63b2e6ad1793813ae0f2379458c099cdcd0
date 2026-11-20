@@ -1,0 +1,3 @@
+.woah.infinite {
+  animation-iteration-count: infinite;
+}

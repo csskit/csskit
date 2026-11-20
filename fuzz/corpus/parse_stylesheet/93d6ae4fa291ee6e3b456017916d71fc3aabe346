@@ -1,0 +1,9 @@
+@supports (font-variant-caps: small-caps) {
+
+  .smcp {
+    text-transform: inherit;
+    -webkit-font-feature-settings: "c2sc";
+    font-feature-settings: "c2sc";
+    font-variant-caps: small-caps;
+  }
+}

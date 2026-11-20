@@ -1,0 +1,7 @@
+.sizing-4 {
+  contain-intrinsic-size: auto;
+  min-intrinsic-sizing: auto;
+  display: fit-content;
+  display: zero-if-scroll;
+  display: zero-if-extrinsic;
+}

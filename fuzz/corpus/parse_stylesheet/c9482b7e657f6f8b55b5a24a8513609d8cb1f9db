@@ -1,0 +1,7 @@
+.cds--progress-line {
+  position: absolute;
+  border: 1px inset transparent;
+  block-size: 2px;
+  inline-size: 8rem;
+  inset-inline-start: 0;
+}

@@ -1,0 +1,4 @@
+.x-surface text,
+svg text {
+    fill: #DEE0E3 !important;
+}

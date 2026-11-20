@@ -1,0 +1,3 @@
+.transition.swing {
+  animation-duration: 800ms;
+}

@@ -1,0 +1,20 @@
+.compositing-1 {
+  mix-blend-mode: auto;
+  isolation: auto;
+  background-blend-mode: auto;
+  display: multiply;
+  display: screen;
+  display: overlay;
+  display: darken;
+  display: lighten;
+  display: color-dodge;
+  display: color-burn;
+  display: hard-light;
+  display: soft-light;
+  display: difference;
+  display: exclusion;
+  display: hue;
+  display: saturation;
+  display: color;
+  display: luminosity;
+}

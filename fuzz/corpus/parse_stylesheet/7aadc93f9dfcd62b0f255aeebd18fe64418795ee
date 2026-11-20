@@ -1,0 +1,3 @@
+i.circular.icon.colored {
+  box-shadow: 0 0 0 0.1em currentColor inset;
+}

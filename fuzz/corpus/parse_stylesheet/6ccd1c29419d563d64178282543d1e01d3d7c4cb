@@ -1,0 +1,3 @@
+.cds--dropdown--open {
+  border-block-end-color: var(--cds-border-subtle);
+}

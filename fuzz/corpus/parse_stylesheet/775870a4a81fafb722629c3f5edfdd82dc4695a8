@@ -1,0 +1,3 @@
+@-moz-document regexp("^https?://((education|graphql|guides|raw|resources|status|support|vscode-auth)\\.)?github\\.com((?!(/(sponsors|readme)$)).)*$"), domain("githubusercontent.com"), domain("www.githubstatus.com"){.DiffSquares-module__deletion__Hmhav {
+    background: repeating-linear-gradient(to right bottom, hsla(0, 0%, 0%, .6), hsla(0, 0%, 0%, .6) .11rem, var(--bgColor-danger-emphasis) .11rem, var(--bgColor-danger-emphasis) .22rem);
+  }}

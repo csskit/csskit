@@ -1,0 +1,3 @@
+::-webkit-scrollbar-thumb:hover {
+    background: #0b3cc1;
+}

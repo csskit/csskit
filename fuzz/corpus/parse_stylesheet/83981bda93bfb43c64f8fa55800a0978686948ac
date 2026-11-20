@@ -1,0 +1,4 @@
+@-moz-document domain("de.wikipedia.org"){table.rahmenfarbe3 {
+    border: 1px solid var(--red-2) !important;
+    border-width: thick !important;
+  }}

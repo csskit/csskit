@@ -1,0 +1,2 @@
+[layout][self*="left"] {
+  margin-left: 0; }

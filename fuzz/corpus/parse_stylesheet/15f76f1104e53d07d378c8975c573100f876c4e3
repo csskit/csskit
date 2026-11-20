@@ -1,0 +1,3 @@
+.pause.icon:after {
+  right: 0;
+}

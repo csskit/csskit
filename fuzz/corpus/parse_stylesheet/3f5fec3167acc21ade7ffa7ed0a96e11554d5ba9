@@ -1,0 +1,45 @@
+@supports (color: color-mix(in lch, red, blue)) {
+  .theme-midnight {
+    --message-background-hover: color-mix(
+        in oklab,
+        var(--opacity-8) 100%,
+        hsl(var(--theme-base-color-hsl, 0 0% 0%) / 0.0784313725490196)
+            var(--theme-base-color-amount, 0%)
+    ) !important;
+    --background-secondary-alt: color-mix(
+        in oklab,
+        var(--neutral-88) 100%,
+        var(--theme-base-color, #000) var(--theme-base-color-amount, 0%)
+    ) !important;
+    --card-background-default: color-mix(
+        in oklab,
+        var(--background-base-low) 100%,
+        var(--theme-base-color, #000) var(--theme-base-color-amount, 0%)
+    ) !important;
+    --modal-background: color-mix(
+        in oklab,
+        var(--background-base-lowest) 100%,
+        var(--theme-base-color, #000) var(--theme-base-color-amount, 0%)
+    ) !important;
+    --modal-footer-background: color-mix(
+        in oklab,
+        var(--background-base-lowest) 100%,
+        var(--theme-base-color, #000) var(--theme-base-color-amount, 0%)
+    ) !important;
+    --scrollbar-auto-scrollbar-color-thumb: color-mix(
+        in oklab,
+        var(--neutral-80) 100%,
+        var(--theme-base-color, #000) var(--theme-base-color-amount, 0%)
+    ) !important;
+    --scrollbar-auto-thumb: color-mix(
+        in oklab,
+        var(--neutral-80) 100%,
+        var(--theme-base-color, #000) var(--theme-base-color-amount, 0%)
+    ) !important;
+    --scrollbar-thin-thumb: color-mix(
+        in oklab,
+        var(--neutral-79) 100%,
+        var(--theme-base-color, #000) var(--theme-base-color-amount, 0%)
+    ) !important;
+  }
+}

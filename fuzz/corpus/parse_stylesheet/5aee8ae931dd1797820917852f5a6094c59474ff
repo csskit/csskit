@@ -1,0 +1,3 @@
+.x-tool-img {
+    filter: brightness(175%);
+}

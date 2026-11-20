@@ -1,0 +1,4 @@
+.object-scale-down {
+  -o-object-fit: scale-down;
+     object-fit: scale-down;
+}

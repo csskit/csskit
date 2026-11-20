@@ -1,0 +1,3 @@
+.pt6 {
+  padding-top: var(--su6) !important;
+}

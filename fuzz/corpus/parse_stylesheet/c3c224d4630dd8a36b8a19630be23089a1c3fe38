@@ -1,0 +1,3 @@
+.object-scale-down {
+  object-fit: scale-down;
+}

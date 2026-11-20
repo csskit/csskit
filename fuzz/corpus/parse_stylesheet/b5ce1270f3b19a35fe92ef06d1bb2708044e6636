@@ -1,0 +1,5 @@
+.vivify {
+  -webkit-animation-duration: .8s;
+  -webkit-animation-fill-mode: both;
+  animation-duration: .8s;
+  animation-fill-mode: both; }

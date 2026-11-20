@@ -1,0 +1,1 @@
+.tab-active{--tw-border-opacity:1;--tw-text-opacity:1;border-bottom-color:rgb(var(--primary)/var(--tw-border-opacity));color:rgb(var(--primary)/var(--tw-text-opacity))}

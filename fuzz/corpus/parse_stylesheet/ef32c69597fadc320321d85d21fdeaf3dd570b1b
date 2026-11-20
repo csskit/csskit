@@ -1,0 +1,4 @@
+::-moz-progress-bar {
+    background: var(--uiAccentColor) !important;
+    border-radius: var(--smallRadius) inherit var(--smallRadius) 0;
+}

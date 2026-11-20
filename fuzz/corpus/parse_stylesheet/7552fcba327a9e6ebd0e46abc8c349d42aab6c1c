@@ -1,0 +1,7 @@
+.pf-v6-c-menu__list-item {
+  align-items: baseline;
+  min-width: 0;
+  transition-timing-function: var(--pf-v6-c-menu__list-item--TransitionTimingFunction);
+  transition-duration: var(--pf-v6-c-menu__list-item--TransitionDuration);
+  transition-property: var(--pf-v6-c-menu__list-item--TransitionProperty);
+}

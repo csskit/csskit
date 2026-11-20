@@ -1,0 +1,1 @@
+a{order:1000000;column-count:1000000;grid-row:1000000;counter-reset:x 1000000;font-feature-settings:"liga"1000000}@counter-style x{system:fixed 1000000;symbols:a}@counter-style y{system:cyclic;symbols:a;range:1 1000000}@media(min-color-index:1000000){b{color:red}}

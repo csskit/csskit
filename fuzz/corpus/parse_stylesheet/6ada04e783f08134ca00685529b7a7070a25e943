@@ -1,0 +1,9 @@
+.logo plate {
+  z-index: 500;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 0;
+  opacity: .5;
+  transition: all opacity .1s ease-out;
+}

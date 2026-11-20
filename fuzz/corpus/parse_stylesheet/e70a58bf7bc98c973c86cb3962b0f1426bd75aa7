@@ -1,0 +1,5 @@
+.uk-animation-stroke {
+  animation-name: uk-stroke;
+  animation-duration: 2s;
+  stroke-dasharray: var(--uk-animation-stroke);
+}

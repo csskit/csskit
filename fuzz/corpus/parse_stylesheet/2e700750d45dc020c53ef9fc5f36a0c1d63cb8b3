@@ -1,0 +1,3 @@
+.reveal .column {
+  min-width: 0;
+}

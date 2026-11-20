@@ -1,0 +1,3 @@
+.uk-blend-color-burn {
+  mix-blend-mode: color-burn;
+}

@@ -1,0 +1,3 @@
+.cds--toolbar-search-container-persistent .cds--search-input:not(:-moz-placeholder-shown) {
+  background-color: var(--cds-field-hover);
+}

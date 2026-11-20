@@ -1,0 +1,3 @@
+.noUi-vertical .noUi-draggable {
+  cursor: ns-resize;
+}

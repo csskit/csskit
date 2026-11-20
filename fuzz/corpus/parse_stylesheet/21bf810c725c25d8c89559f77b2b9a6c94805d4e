@@ -1,0 +1,3 @@
+a {
+  line-height: calc(10 / 2);
+}

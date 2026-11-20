@@ -1,0 +1,4 @@
+.scrollbars-1 {
+  scrollbar-color: auto;
+  scrollbar-width: auto;
+}

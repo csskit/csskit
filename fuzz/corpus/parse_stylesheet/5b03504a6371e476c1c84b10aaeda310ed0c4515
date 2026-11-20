@@ -1,0 +1,3 @@
+.auto-rows-max {
+  grid-auto-rows: max-content;
+}

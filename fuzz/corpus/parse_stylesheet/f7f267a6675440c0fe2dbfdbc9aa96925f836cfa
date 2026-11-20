@@ -1,0 +1,3 @@
+.marketplace-card--installed {
+  border: 1px rgba(var(--spice-rgb-accent), 0.7) solid !important;
+}

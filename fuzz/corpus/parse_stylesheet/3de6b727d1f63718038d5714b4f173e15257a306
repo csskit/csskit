@@ -1,0 +1,4 @@
+.fixed-grid {
+  container-name: bulma-fixed-grid;
+  container-type: inline-size;
+}

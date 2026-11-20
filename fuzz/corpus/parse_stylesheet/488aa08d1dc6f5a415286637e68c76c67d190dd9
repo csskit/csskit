@@ -1,0 +1,4 @@
+.s-input::-webkit-contacts-auto-fill-button,
+.s-textarea::-webkit-contacts-auto-fill-button {
+  background-color: var(--black);
+}

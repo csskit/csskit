@@ -1,0 +1,3 @@
+[layout^="row"] {
+  -ms-flex-direction: row;
+      flex-direction: row; }

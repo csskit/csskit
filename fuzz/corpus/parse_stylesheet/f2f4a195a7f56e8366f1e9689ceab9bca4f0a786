@@ -1,0 +1,3 @@
+[class^="blend"] img {
+  mix-blend-mode: luminosity;
+}

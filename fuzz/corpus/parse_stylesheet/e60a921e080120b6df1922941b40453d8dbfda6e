@@ -1,0 +1,3 @@
+.skinHeader {
+  pointer-events: none;
+}

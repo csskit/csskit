@@ -1,0 +1,6 @@
+.page.active {
+  opacity: 1;
+  position: relative;
+  display: inherit;
+  animation: var(--speed4) to-page ease;
+}

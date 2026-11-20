@@ -1,0 +1,10 @@
+progress:not(.circle, [value])::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  clip-path: none;
+  background: currentcolor;
+  animation: 3.2s to-linear-progress ease infinite;
+}

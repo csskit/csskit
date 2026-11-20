@@ -1,0 +1,5 @@
+@-moz-document url-prefix("https://data.stackexchange.com/askubuntu") {
+  img[src*="logo.png"] {
+    filter: none !important;
+  }
+}

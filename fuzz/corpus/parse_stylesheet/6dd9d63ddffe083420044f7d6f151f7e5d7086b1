@@ -1,0 +1,6 @@
+.dev-orbit o-arc {
+  --o-fill: var(--o-red-lighter);
+  --o-stroke: var(--o-red-lighter);
+  --o-stroke-width: 1;
+  fill-opacity: 0.5;
+}

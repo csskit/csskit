@@ -1,0 +1,3 @@
+.toolbar-items > spacer:first-of-type {
+  display: none !important;
+}

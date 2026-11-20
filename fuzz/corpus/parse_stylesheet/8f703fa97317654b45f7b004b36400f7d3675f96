@@ -1,0 +1,8 @@
+@page {
+  /* You can only change the size, margins, orphans, widows and page breaks here */
+
+  /* Require that at least this many lines of a paragraph must be left at the bottom of a page */
+  orphans: 4;
+  /* Require that at least this many lines of a paragraph must be left at the top of a new page */
+  widows: 2;
+}

@@ -1,0 +1,4 @@
+i.flag.ci::before,
+i.flag.côte.d’ivoire::before {
+  background-image: url("https://cdn.jsdelivr.net/gh/jdecked/twemoji@latest/assets/svg/1f1e8-1f1ee.svg");
+}

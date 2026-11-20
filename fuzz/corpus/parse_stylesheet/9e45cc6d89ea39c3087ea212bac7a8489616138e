@@ -1,0 +1,9 @@
+.faq-page .faq-hero {
+  position: relative;
+  padding: 3rem 1.5rem 2.5rem;
+  margin-top: 1rem;
+  overflow: hidden;
+  background: radial-gradient(ellipse at top left, rgba(var(--bs-primary-rgb), 0.12), transparent 60%), radial-gradient(ellipse at bottom right, rgba(var(--bs-info-rgb), 0.1), transparent 65%), var(--bs-body-bg);
+  border: 1px solid var(--bs-border-color);
+  border-radius: 1rem;
+}

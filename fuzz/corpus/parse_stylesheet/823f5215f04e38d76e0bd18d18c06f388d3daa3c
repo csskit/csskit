@@ -1,0 +1,3 @@
+.cds--slider__thumb--upper::before {
+  inset-inline: 0 auto;
+}

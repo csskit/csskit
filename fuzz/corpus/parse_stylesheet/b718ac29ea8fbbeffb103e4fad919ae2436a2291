@@ -1,0 +1,3 @@
+.carousel.no-transition > figure {
+    -webkit-transition-duration: 0s !important;
+            transition-duration: 0s !important; }

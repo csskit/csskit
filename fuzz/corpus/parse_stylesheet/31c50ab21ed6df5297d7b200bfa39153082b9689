@@ -1,0 +1,11 @@
+.pf-v6-c-masthead__brand {
+  display: flex;
+  flex-shrink: 0;
+  grid-column: var(--pf-v6-c-masthead__brand--GridColumn, revert);
+  row-gap: var(--pf-v6-c-masthead__brand--RowGap, var(--pf-v6-c-masthead--RowGap));
+  align-self: stretch;
+  order: var(--pf-v6-c-masthead__brand--Order, revert);
+  min-width: 0.25rem;
+  padding-block-end: var(--pf-v6-c-masthead__brand--PaddingBlockEnd);
+  border-block-end: var(--pf-v6-c-masthead__brand--BorderBlockEnd);
+}

@@ -1,0 +1,3 @@
+.faq-page .faq-section-items .faq-item .faq-answer a:hover {
+  text-decoration-thickness: 2px;
+}

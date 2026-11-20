@@ -1,0 +1,1 @@
+.section-crow-raven q:after, .section-crow-raven q q:after { content: close-quote; }

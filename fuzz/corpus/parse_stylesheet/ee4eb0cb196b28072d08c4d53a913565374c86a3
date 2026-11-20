@@ -1,0 +1,8 @@
+.form-ext-control {
+  padding-left: 1rem;
+  position: relative;
+  /* Checkbox */
+  /* Radio Button */
+  /* Hides the original input */
+  /* Toggle Switches */
+}

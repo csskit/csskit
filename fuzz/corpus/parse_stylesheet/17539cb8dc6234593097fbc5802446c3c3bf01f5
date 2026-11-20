@@ -1,0 +1,3 @@
+.ts-box.is-start-indicated {
+    border-left: var(--indicator-width) solid var(--indicator-color);
+}

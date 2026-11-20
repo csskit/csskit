@@ -1,0 +1,3 @@
+.tooltip:not(.bottom):before {
+  border-top-color: var(--tooltip-back-color);
+}

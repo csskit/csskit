@@ -1,0 +1,5 @@
+.side.outer-orbit {
+  --o-y: calc(var(--o-radius));
+  width: calc(var(--o-radius) * tan(var(--o-angle) / 2) * 2);
+  /* cateto adyacente = cateto opuesto * tan(angulo) */
+}

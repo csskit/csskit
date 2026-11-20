@@ -1,0 +1,5 @@
+.ud-none {
+  -webkit-user-drag: none !important;
+  -moz-user-drag: none !important;
+  -ms-user-drag: none !important;
+}

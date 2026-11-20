@@ -1,0 +1,3 @@
+i.icon.vector.square::before {
+  content: "\f5cb";
+}

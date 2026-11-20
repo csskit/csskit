@@ -1,0 +1,7 @@
+.callout.callout[data-callout*=cards] table.dataview tbody {
+  display: flex;
+  flex-flow: wrap;
+  margin-top: 20px;
+  margin-left: 0.5em;
+  width: 105%;
+}

@@ -1,0 +1,5 @@
+.cds--loading__svg circle {
+  stroke-dasharray: 276.4608 276.4608;
+  stroke-linecap: butt;
+  stroke-width: 10;
+}

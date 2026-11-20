@@ -1,0 +1,8 @@
+.cds--search-input:focus ~ .cds--search-close:hover::after {
+  position: absolute;
+  background-color: var(--cds-field-hover);
+  content: "";
+  inset-block: 0.125rem;
+  inset-inline: 0 0.125rem;
+  pointer-events: none;
+}

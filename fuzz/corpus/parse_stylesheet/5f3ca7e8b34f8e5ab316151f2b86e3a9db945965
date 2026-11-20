@@ -1,0 +1,13 @@
+.pf-v6-c-form-control {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  column-gap: var(--pf-v6-c-form-control--ColumnGap);
+  align-items: start;
+  width: var(--pf-v6-c-form-control--Width);
+  font-size: var(--pf-v6-c-form-control--FontSize);
+  line-height: var(--pf-v6-c-form-control--LineHeight);
+  resize: var(--pf-v6-c-form-control--Resize);
+  background-color: var(--pf-v6-c-form-control--BackgroundColor);
+  border-radius: var(--pf-v6-c-form-control--BorderRadius);
+}

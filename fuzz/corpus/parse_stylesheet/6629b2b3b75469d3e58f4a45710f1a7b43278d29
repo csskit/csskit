@@ -1,0 +1,10 @@
+body.style-options-for-kanban-plugin-dynamic-neon-one .kanban-plugin__lane-wrapper:nth-child(n) {
+  background: unset !important;
+  position: relative;
+  z-index: 0;
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: .3s;
+  -webkit-box-reflect: below 10px linear-gradient(transparent, rgba(0, 0, 0, .4));
+}

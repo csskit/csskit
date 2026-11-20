@@ -1,0 +1,6 @@
+p {
+  font-size: var(--cds-body-02-font-size, 1rem);
+  font-weight: var(--cds-body-02-font-weight, 400);
+  line-height: var(--cds-body-02-line-height, 1.5);
+  letter-spacing: var(--cds-body-02-letter-spacing, 0);
+}

@@ -1,0 +1,3 @@
+.justify-self-start {
+  justify-self: start;
+}

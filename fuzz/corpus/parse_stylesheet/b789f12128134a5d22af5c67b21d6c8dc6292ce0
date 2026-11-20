@@ -1,0 +1,7 @@
+.titlebar-spacer[type="post-tabs"] {
+  width: 50px !important;
+  order: 1;
+  @media -moz-pref("sidebar.verticalTabs") {
+    display: flex !important;
+  }
+}

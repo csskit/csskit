@@ -1,0 +1,3 @@
+.cds--combo-button__top {
+  transform: translate(0, calc(-100% - var(--cds-popover-offset, 3rem)));
+}

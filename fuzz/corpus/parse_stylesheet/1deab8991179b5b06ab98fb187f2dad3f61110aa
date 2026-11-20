@@ -1,0 +1,3 @@
+input {
+  outline-offset: 0;
+}

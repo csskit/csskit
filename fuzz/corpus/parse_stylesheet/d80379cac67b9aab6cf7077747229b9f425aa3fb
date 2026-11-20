@@ -1,0 +1,5 @@
+.flatpickr-calendar.inline {
+  position: absolute;
+  display: block;
+  inset-block-start: auto;
+}

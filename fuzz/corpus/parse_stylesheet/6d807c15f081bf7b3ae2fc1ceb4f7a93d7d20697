@@ -1,0 +1,5 @@
+.usa-identifier__required-links-item{
+  -moz-column-break-inside:avoid;
+       break-inside:avoid;
+  margin-bottom:0.75rem;
+}

@@ -1,0 +1,11 @@
+.pf-v6-c-tabs__list {
+  scrollbar-width: none;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+  position: relative;
+  display: var(--pf-v6-c-tabs__list--Display);
+  max-width: 100%;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scroll-snap-type: var(--pf-v6-c-tabs__list--ScrollSnapType);
+  -webkit-overflow-scrolling: touch;
+}

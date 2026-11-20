@@ -1,0 +1,3 @@
+[label="Stylebot"] image {
+  list-style-image: url("https://cdn3.iconfinder.com/data/icons/feather-5/24/command-128.png") !important;
+}

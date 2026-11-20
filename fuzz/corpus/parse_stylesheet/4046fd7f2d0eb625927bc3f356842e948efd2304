@@ -1,0 +1,3 @@
+.nav-folder-title-content.is-being-renamed {
+  white-space: break-spaces;
+}

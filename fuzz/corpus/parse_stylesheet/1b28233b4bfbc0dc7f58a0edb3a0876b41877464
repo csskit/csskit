@@ -1,0 +1,3 @@
+.border-inline-start\:none {
+  border-inline-start: none;
+}

@@ -1,0 +1,4 @@
+.ts-grid.is-stacked > .column {
+    flex: var(--16-wide);
+    max-width: var(--16-wide);
+}

@@ -1,0 +1,12 @@
+.s-btn--radio {
+  border: 0;
+  clip-path: inset(50%);
+  clip: rect(var(--su-static1), var(--su-static1), var(--su-static1), var(--su-static1));
+  height: var(--su-static1);
+  margin: calc(var(--su-static1) * -1);
+  overflow-wrap: normal;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: var(--su-static1);
+}

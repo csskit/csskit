@@ -1,0 +1,3 @@
+.cds--btn-set--fluid {
+  container-type: inline-size;
+}

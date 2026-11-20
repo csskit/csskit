@@ -1,0 +1,3 @@
+.auto-rows-min {
+  grid-auto-rows: min-content;
+}

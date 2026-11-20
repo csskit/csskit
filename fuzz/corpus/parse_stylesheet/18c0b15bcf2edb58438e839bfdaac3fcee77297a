@@ -1,0 +1,3 @@
+.gap-x-0 {
+  column-gap: 0px;
+}

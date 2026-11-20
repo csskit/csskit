@@ -1,0 +1,3 @@
+.detailsGroupItem:not(:last-child) {
+    border-bottom: var(--defaultBorder);
+}

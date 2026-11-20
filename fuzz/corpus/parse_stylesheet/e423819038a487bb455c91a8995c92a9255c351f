@@ -1,0 +1,3 @@
+i.icon.compose:before {
+  content: "\f303";
+}

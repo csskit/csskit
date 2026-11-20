@@ -1,0 +1,3 @@
+.pr-auto {
+  padding-right: auto !important;
+}

@@ -1,0 +1,4 @@
+.object-left-top {
+  -o-object-position: left top;
+     object-position: left top;
+}

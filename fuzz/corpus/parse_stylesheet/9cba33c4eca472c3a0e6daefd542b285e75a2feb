@@ -1,0 +1,3 @@
+@function --ratio(--value, --to-value) {
+  result: tan(atan2(var(--value), var(--to-value)));
+}

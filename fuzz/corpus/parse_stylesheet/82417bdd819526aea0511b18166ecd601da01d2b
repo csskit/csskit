@@ -1,0 +1,5 @@
+.ts-timeline {
+    display: grid;
+    grid-template-columns: min-content min-content auto;
+    gap: 0rem 1rem;
+}

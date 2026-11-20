@@ -1,0 +1,3 @@
+.pl-auto {
+  padding-left: auto !important;
+}

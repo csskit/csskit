@@ -1,0 +1,4 @@
+.form-control::-webkit-datetime-edit {
+  display: block;
+  padding: 0;
+}

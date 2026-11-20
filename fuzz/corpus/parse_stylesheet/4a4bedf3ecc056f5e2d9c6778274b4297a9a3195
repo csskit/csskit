@@ -1,0 +1,2 @@
+input[type='file']::-ms-browse:active {
+    background-color: #e7e7e7; }

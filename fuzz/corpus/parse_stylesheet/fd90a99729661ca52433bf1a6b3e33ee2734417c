@@ -1,0 +1,5 @@
+@media (hover: none) {
+  .uk-hidden-touch {
+    display: none !important;
+  }
+}

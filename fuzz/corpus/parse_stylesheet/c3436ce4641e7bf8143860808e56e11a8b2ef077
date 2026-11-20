@@ -1,0 +1,3 @@
+.g--equalHeight > .g-col > * {
+    -ms-flex-preferred-size: 100%;
+        flex-basis: 100%; }

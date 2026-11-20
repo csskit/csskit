@@ -1,0 +1,3 @@
+.ts-table :is(tr, tr th, tr td).is-indicated {
+    box-shadow: 2px 0 0 var(--ts-gray-900) inset;
+}

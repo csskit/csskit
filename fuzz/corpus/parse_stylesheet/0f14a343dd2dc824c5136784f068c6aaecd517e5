@@ -1,0 +1,6 @@
+.pf-v6-c-dual-list-selector {
+  display: grid;
+  grid-template-areas: "pane-header . pane-header-c" "pane-tools . pane-tools-c" "pane-status . pane-status-c" "pane-menu controls pane-menu-c";
+  grid-template-rows: repeat(3, auto) auto;
+  grid-template-columns: minmax(var(--pf-v6-c-dual-list-selector--GridTemplateColumns--pane--MinMax--min), var(--pf-v6-c-dual-list-selector--GridTemplateColumns--pane--MinMax--max)) min-content minmax(var(--pf-v6-c-dual-list-selector--GridTemplateColumns--pane--MinMax--min), var(--pf-v6-c-dual-list-selector--GridTemplateColumns--pane--MinMax--max));
+}

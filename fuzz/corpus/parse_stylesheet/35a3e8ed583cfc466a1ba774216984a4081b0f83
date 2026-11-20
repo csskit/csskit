@@ -1,0 +1,4 @@
+.yue em:lang(en) {
+  font-style: italic !important;
+  text-emphasis: none !important;
+}

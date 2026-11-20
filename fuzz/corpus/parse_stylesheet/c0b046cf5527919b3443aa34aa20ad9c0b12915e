@@ -1,0 +1,6 @@
+.weightWord {
+  display: inline-block;
+  font-size: 0.7em;
+  baseline-shift: 0.2em;
+  font-weight: inherit;
+  }

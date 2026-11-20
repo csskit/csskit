@@ -1,0 +1,5 @@
+@scope .scoping-1 {
+  div {
+    display: auto;
+  }
+}

@@ -1,0 +1,15 @@
+@media (prefers-color-scheme: dark) {
+    #main-window:not([sizemode="fullscreen"]) #appcontent browser {
+        border-radius: 15px !important;
+        margin: 15px 15px 15px 15px !important;
+        border: 3px solid rgba(0, 0, 0, 0);
+        transition: border 0.3s ease;
+        box-shadow: 0 0 10px 5px rgba(0,0,0,0.5);
+        clip-path: circle(80%) !important;
+    }
+
+    #main-window:not([sizemode="fullscreen"]) #appcontent browser:hover {
+        border: 3px solid rgba(204, 204, 204, 0.6);
+        box-shadow: 0 0 10px 5px rgba(0,0,0,0.5);
+    }
+}

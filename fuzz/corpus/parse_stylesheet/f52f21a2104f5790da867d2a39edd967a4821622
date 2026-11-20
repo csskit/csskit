@@ -1,0 +1,7 @@
+.is-loading:after {
+  animation: s-spinner-rotate 0.9s infinite cubic-bezier(0.5, 0.1, 0.5, 0.9);
+  border-color: transparent;
+  border-left-color: currentColor;
+  filter: invert(0);
+  transform-origin: 50% 50% var(--su-static1);
+}

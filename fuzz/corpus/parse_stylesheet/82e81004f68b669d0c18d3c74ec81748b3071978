@@ -1,0 +1,3 @@
+.border-block-start\:none {
+  border-block-start: none;
+}

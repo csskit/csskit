@@ -1,0 +1,4 @@
+.main-yourLibraryX-listItem span.LineClamp {
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+}

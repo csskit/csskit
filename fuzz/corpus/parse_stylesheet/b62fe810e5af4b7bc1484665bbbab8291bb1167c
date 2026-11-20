@@ -1,0 +1,3 @@
+tfoot > tr > th {
+  border-block-start: 0.0625rem solid var(--outline);
+}

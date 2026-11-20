@@ -1,0 +1,7 @@
+#dribbblish-back-shadow {
+    z-index: 5;
+    grid-area: 1 / 2 / 5 / 5;
+    box-shadow: 0 0 10px 3px #0000003b;
+    border-radius: var(--corner-radius);
+    pointer-events: none;
+}

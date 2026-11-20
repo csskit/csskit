@@ -1,0 +1,6 @@
+.tui-fieldset {
+  border: 6px white double;
+  padding: 12px;
+  background-color: inherit;
+  margin-bottom: 6px;
+}

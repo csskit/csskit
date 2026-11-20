@@ -1,0 +1,6 @@
+@-moz-document domain("data.stackexchange.com"){nav.primary .nav li:hover + .site-selector-arrow,
+  nav.primary .nav .site-selector-arrow:hover,
+  nav.primary .nav .site-selector-arrow.youarehere {
+    background-color: /*[[base-color]]*/;
+    border-left-color: /*[[base-color]]*/;
+  }}

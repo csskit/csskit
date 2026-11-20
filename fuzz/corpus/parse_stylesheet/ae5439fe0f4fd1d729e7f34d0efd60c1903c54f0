@@ -1,0 +1,3 @@
+.usa-banner__lock-image path{
+  fill:currentColor;
+}

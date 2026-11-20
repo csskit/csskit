@@ -1,0 +1,3 @@
+.uk-blend-soft-light {
+  mix-blend-mode: soft-light;
+}

@@ -1,0 +1,3 @@
+.pf-v6-c-progress.pf-m-outside, .pf-v6-c-progress.pf-m-singleline {
+  grid-template-columns: 1fr fit-content(50%);
+}

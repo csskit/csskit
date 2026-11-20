@@ -1,0 +1,3 @@
+a {
+  color: color-mix(in srgb, rgb(100 100 0 / none), rgb(100 0 100 / 0.5));
+}

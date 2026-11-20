@@ -1,0 +1,3 @@
+.backdropImage {
+    background-position-y: clamp(0%, calc(var(--backdropTrimFromTop) * 5), 100%);
+}

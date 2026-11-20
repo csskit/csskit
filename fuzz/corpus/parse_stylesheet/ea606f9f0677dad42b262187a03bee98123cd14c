@@ -1,0 +1,8 @@
+.ui.button > .icon:not(.button) {
+  height: 0.85714286em;
+  opacity: 0.8;
+  margin: 0em 0.42857143em 0em -0.21428571em;
+  transition: opacity 0.1s ease;
+  vertical-align: '';
+  color: '';
+}

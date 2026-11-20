@@ -1,0 +1,16 @@
+.callout.callout[data-callout="timeline"] .callout-content blockquote {
+  display: block;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 1;
+  grid-column: 1 / span 1;
+  position: relative;
+  -ms-flex-item-align: start;
+  -ms-grid-row-align: start;
+  align-self: start;
+  text-align: left;
+  box-shadow: none;
+  margin: 0;
+  border: none;
+  padding: 0;
+  background-color: unset;
+}

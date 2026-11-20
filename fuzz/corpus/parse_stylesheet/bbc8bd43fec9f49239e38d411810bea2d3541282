@@ -1,0 +1,11 @@
+.align-3 {
+  place-self: auto;
+  place-content: auto;
+  place-items: auto;
+  row-gap: auto;
+  display: safe;
+  display: unsafe;
+  display: self-start;
+  display: self-end;
+  display: legacy;
+}

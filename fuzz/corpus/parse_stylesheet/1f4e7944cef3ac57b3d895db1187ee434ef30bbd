@@ -1,0 +1,3 @@
+.grid__auto {
+  grid-template-columns: auto 1fr;
+}

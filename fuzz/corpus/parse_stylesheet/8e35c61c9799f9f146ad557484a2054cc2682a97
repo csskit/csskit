@@ -1,0 +1,4 @@
+.s-banner[aria-hidden="false"].is-pinned {
+  --_no-ty-offset: 0;
+  z-index: calc(var(--zi-navigation-fixed) + 1);
+}

@@ -1,0 +1,3 @@
+.baw1 {
+  border-width: var(--su-static1) !important;
+}

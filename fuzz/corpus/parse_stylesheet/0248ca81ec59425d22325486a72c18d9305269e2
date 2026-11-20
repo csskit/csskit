@@ -1,0 +1,5 @@
+[data-effeckt-type="fly"] {
+  -webkit-perspective: 400px;
+          perspective: 400px;
+  -webkit-perspective-origin: 50% 50%;
+          perspective-origin: 50% 50%; }

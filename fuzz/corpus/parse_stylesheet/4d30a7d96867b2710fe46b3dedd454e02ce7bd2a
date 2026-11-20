@@ -1,0 +1,4 @@
+.will-change-1 {
+  will-change: auto;
+  display: scroll-position;
+}

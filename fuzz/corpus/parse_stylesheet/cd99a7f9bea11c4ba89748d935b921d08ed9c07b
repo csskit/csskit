@@ -1,0 +1,3 @@
+.hbtn.hb-border-top2 {
+  transition: all 0.2s 0s linear;
+}

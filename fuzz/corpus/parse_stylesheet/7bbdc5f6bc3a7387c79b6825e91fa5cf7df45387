@@ -1,0 +1,4 @@
+[dir=rtl] menu > li > :is(menu, menu.right),
+menu > li > menu.left {
+  inset: auto 100% calc(3rem * (var(--_child, 0) - var(--_type, 0))) auto;
+}

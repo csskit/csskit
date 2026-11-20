@@ -1,0 +1,10 @@
+.hbtn.hb-border-top-br4:after {
+  top: 0;
+  right: 0;
+  border-bottom-width: 2px;
+  transition: border-bottom-width 0.1s 0.2s,
+ height  0.2s 0.1s,
+ width   0.2s 0.0s,
+ margin  0.2s 0.0s,
+ border-top-width 0.2s 0.0s;
+}

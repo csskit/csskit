@@ -1,0 +1,3 @@
+.justify-items-auto {
+  justify-items: auto;
+}

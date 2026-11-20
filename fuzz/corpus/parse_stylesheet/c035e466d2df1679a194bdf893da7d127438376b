@@ -1,0 +1,7 @@
+@media print {
+  .cds--checkbox-label::before,
+  .cds--checkbox-label::after {
+    -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+  }
+}

@@ -1,0 +1,9 @@
+@media (width <= 630px) {
+    #audio-scrubber {
+        display: block !important;
+        position: fixed !important;
+        bottom: 38x !important;
+        right: 122px !important;
+        transform: translateX(-50%) !important;
+    }
+}

@@ -1,0 +1,5 @@
+.customers .item img:hover {
+  max-width: auto;
+  filter: none;
+  -webkit-filter: none;
+}

@@ -1,0 +1,37 @@
+.fonts-4 {
+  font-synthesis-position: auto;
+  font-synthesis-weight: auto;
+  font-synthesis-style: auto;
+  font-synthesis-small-caps: auto;
+  font-named-instance: auto;
+  font-display: auto;
+  ascent-override: auto;
+  descent-override: auto;
+  line-gap-override: auto;
+  font-optical-sizing: auto;
+  font-variation-settings: auto;
+  font-palette: auto;
+  font-variant-emoji: auto;
+  font-presentation: auto;
+  display: oblique-only;
+  display: system-ui;
+  display: emoji;
+  display: math;
+  display: fangsong;
+  display: ui-serif;
+  display: ui-sans-serif;
+  display: ui-monospace;
+  display: ui-rounded;
+  display: xxx-large;
+  display: swap;
+  display: fallback;
+  display: historical-forms;
+  display: stylistic(feature-value-name);
+  display: styleset(feature-value-name #);
+  display: character-variant(feature-vlue-name #);
+  display: swash(feature-value-name);
+  display: ornaments(feature-value-name);
+  display: annotation(feature-value-name);
+  display: light;
+  display: dark;
+}

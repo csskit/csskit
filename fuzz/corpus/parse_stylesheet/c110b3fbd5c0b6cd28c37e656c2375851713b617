@@ -1,0 +1,16 @@
+body.style-options-for-kanban-plugin-dynamic-neon-three .kanban-plugin__lane-wrapper:nth-child(n)::before {
+  content: '';
+  position: absolute;
+  z-index: -2;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 250%;
+  height: 300%;
+  background-color: var(--background-secondary-alt) !important;
+  background-repeat: no-repeat;
+  background-size: 50% 50%;
+  background-position: 0 0;
+  background-image: conic-gradient(var(--kanban-shadow), var(--kanban-shadow));
+  animation: rotate 2s linear infinite;
+}

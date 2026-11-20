@@ -1,0 +1,3 @@
+.multicol-2::column {
+  display: auto:
+}

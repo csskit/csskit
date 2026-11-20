@@ -1,0 +1,5 @@
+#nav-tree {
+    overflow-x: auto;
+    overflow-y: auto;
+    overflow-y: overlay;
+}

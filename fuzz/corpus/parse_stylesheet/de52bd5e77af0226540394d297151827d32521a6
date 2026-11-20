@@ -1,0 +1,1 @@
+.la-ball-atom>div:not(:nth-child(1)){position:absolute;left:0;z-index:0;width:100%;height:100%;background:none;-webkit-animation:ball-atom-zindex 1.5s 0s infinite steps(2, end);-moz-animation:ball-atom-zindex 1.5s 0s infinite steps(2, end);-o-animation:ball-atom-zindex 1.5s 0s infinite steps(2, end);animation:ball-atom-zindex 1.5s 0s infinite steps(2, end)}

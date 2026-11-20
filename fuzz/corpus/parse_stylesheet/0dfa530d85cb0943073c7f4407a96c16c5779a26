@@ -1,0 +1,3 @@
+.border-block\:none {
+  border-block: none;
+}

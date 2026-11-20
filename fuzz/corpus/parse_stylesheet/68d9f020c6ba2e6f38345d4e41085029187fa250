@@ -1,0 +1,3 @@
+.pnum {
+  font-variant-numeric: proportional-nums;
+}

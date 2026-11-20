@@ -1,0 +1,3 @@
+.is-align-items-self-end {
+  align-items: self-end !important;
+}

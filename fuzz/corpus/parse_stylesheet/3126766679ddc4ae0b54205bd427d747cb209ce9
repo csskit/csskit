@@ -1,0 +1,7 @@
+@supports (display: auto) or
+  (display: auto) not
+  (display: auto) {
+  .conditional-3 {
+    display: auto;
+  }
+}

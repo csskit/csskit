@@ -1,0 +1,3 @@
+.cds--multi-select .cds--list-box__menu {
+  min-inline-size: auto;
+}

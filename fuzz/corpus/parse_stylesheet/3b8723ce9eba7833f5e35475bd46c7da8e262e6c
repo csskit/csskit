@@ -1,0 +1,4 @@
+.raised:focus {
+    background: inherit;
+    filter: brightness(1.2);
+}

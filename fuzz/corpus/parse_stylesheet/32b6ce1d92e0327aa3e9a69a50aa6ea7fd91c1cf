@@ -1,0 +1,5 @@
+.aasp {
+ -webkit-font-smoothing: subpixel-antialiased;
+ -moz-osx-font-smoothing: auto;
+ /*font-smooth: always;*/
+}

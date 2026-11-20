@@ -1,0 +1,3 @@
+.markdown-source-view.mod-cm6 .cm-content {
+  caret-color: var(--cursor-color);
+}

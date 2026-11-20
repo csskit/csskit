@@ -1,0 +1,4 @@
+.ui.red.rating .icon.partial.active {
+  background: linear-gradient(to right, #ff695e 0% var(--full), rgba(0, 0, 0, 0.15) var(--full) 100%);
+  -webkit-text-stroke: #db2828 0.78px;
+}

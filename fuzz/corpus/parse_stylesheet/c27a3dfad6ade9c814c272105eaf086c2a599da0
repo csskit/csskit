@@ -1,0 +1,1 @@
+.range:active::-moz-range-thumb{cursor:grabbing}

@@ -1,0 +1,4 @@
+.cds--contained-list .cds--search .cds--search-close {
+  border-inline-end: 2px solid transparent;
+  outline: none;
+}

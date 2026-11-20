@@ -1,0 +1,3 @@
+.padding-inline {
+  padding-inline: var(--gap);
+}

@@ -1,0 +1,5 @@
+@media -moz-pref("ultima.sidebar.compact.treeviews") {
+    sidebar-tab-row {
+      height:28px !important;
+    }
+}

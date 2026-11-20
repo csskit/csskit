@@ -1,0 +1,3 @@
+.nav-tabs-material.animate .nav-link::before {
+  opacity: 0;
+}

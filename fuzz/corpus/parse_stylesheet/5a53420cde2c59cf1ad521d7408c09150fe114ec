@@ -1,0 +1,3 @@
+.ts-icon.is-vertically-flipped::before {
+    transform: scaleY(-1);
+}

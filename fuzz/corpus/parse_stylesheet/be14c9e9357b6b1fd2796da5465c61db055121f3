@@ -1,0 +1,5 @@
+.ud-auto {
+  -webkit-user-drag: auto !important;
+  -moz-user-drag: auto !important;
+  -ms-user-drag: auto !important;
+}

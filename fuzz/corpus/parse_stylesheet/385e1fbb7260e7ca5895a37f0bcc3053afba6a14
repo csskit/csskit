@@ -1,0 +1,1 @@
+.checkbox:focus{outline-width:2px}

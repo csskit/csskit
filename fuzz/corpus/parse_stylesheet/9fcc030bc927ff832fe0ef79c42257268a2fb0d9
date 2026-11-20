@@ -1,0 +1,3 @@
+.layout-mobile .itemsContainer.padded-right.vertical-wrap {
+  gap: 2%;
+}

@@ -1,0 +1,4 @@
+.progress:indeterminate {
+  animation: progress-indeterminate 1.5s linear infinite;
+  background: #e9ecef linear-gradient(to right, var(--progress-color) 30%, #e9ecef 30%) top left/150% 150% no-repeat;
+}

@@ -1,0 +1,3 @@
+.ui.shape .side {
+  display: none;
+}

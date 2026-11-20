@@ -1,0 +1,8 @@
+.pf-v6-c-progress-stepper {
+  position: relative;
+  display: grid;
+  grid-template-rows: var(--pf-v6-c-progress-stepper--GridTemplateRows);
+  grid-template-columns: var(--pf-v6-c-progress-stepper--GridTemplateColumns);
+  grid-auto-columns: 1fr;
+  grid-auto-flow: var(--pf-v6-c-progress-stepper--GridAutoFlow);
+}

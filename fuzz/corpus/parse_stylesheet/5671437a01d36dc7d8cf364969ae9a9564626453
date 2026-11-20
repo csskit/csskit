@@ -1,0 +1,4 @@
+.infoContainer, .sliderContainer {
+  -webkit-filter: drop-shadow(0 0 2px rgba(2, 2, 2, 1));
+  filter: drop-shadow(0 0 2px rgba(2, 2, 2, 1));
+}

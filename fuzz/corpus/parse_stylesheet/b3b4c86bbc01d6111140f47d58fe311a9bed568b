@@ -1,0 +1,7 @@
+.win98 {
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: none;
+  font-size: 11px;
+  font-family: Tahoma, Verdana;
+  color: #070707;
+}

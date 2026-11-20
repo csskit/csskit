@@ -1,0 +1,3 @@
+.snackbar.top {
+  inset: 6rem auto auto 50%;
+}

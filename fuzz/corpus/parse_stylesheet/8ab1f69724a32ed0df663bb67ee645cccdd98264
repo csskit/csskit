@@ -1,0 +1,15 @@
+@supports (position-anchor: --i) {
+  [data-range-output="anchor"] input::-webkit-slider-thumb {
+    anchor-name: --thumb;
+  }
+
+  [data-range-output="anchor"] input::-moz-range-thumb {
+    anchor-name: --thumb;
+  }
+
+  [data-range-output="anchor"] .range-value {
+    position-anchor: --thumb;
+    position-area: bottom span-all;
+    inset: anchor(top);
+  }
+}

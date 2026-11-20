@@ -1,0 +1,7 @@
+@media (prefers-color-scheme: dark) {
+
+  fieldset {
+  border: 1px #0096bfab solid;
+  border: 1px var(--focus) solid;
+  }
+}

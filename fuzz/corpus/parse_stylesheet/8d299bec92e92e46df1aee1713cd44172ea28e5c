@@ -1,0 +1,4 @@
+.object-none {
+  -o-object-fit: none;
+     object-fit: none;
+}

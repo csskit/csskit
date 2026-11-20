@@ -1,0 +1,3 @@
+.m-btn.caret:hover {
+  opacity: 1;
+}

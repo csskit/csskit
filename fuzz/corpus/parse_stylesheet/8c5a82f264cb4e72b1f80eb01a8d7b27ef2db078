@@ -1,0 +1,4 @@
+.x-searchInput-searchInputInput:focus {
+  background-color: rgba(var(--spice-rgb-main), 0.7) !important;
+  border-bottom: var(--spice-accent) solid 2px;
+}

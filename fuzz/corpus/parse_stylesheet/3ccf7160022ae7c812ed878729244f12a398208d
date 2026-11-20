@@ -1,0 +1,13 @@
+@-moz-document regexp("^https?://((education|graphql|guides|raw|resources|status|support|vscode-auth)\\.)?github\\.com((?!(/(sponsors|readme)$)).)*$"), domain("githubusercontent.com"), domain("www.githubstatus.com"){#header .logo, img[src="/images/logo@2x.png"], .site-logo a,
+  .github-jobs-promotion a.jobs-logo strong, iframe[src*="polldaddy.com"],
+  .swipe .swipe-frame .swipe-bar .top-handle,
+  .swipe .swipe-frame .swipe-bar .bottom-handle,
+  .onion-skin .controls .transparent, .onion-skin .controls .opaque,
+  .onion-skin .controls .slider .slider-track,
+  .onion-skin .controls .slider .slider-track .dragger,
+  img[src$="favicons.githubusercontent.com/github.com"],
+  img[src$="invertocat.png"], .ghd-invert, #footer .github img,
+  #com span.octicon:not(.octicon-comment-discussion),
+  .developer-thanks-image img, img[alt="GitHub Support"] {
+    filter: invert(100%) hue-rotate(180deg) !important;
+  }}

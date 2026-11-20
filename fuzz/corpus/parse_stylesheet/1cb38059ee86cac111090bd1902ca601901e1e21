@@ -1,0 +1,31 @@
+.scroll-snap-1 {
+  scroll-snap-type: auto;
+  scroll-padding: auto;
+  scroll-margin: auto;
+  scroll-snap-align: auto;
+  scroll-snap-stop: auto;
+  scroll-padding-top: auto;
+  scroll-padding-right: auto;
+  scroll-padding-bottom: auto;
+  scroll-padding-left: auto;
+  scroll-padding-inline-start: auto;
+  scroll-padding-block-start: auto;
+  scroll-padding-inline-end: auto;
+  scroll-padding-block-end: auto;
+  scroll-padding-block: auto;
+  scroll-padding-inline: auto;
+  scroll-margin-top: auto;
+  scroll-margin-right: auto;
+  scroll-margin-bottom: auto;
+  scroll-margin-left: auto;
+  scroll-margin-inline-start: auto;
+  scroll-margin-block-start: auto;
+  scroll-margin-inline-end: auto;
+  scroll-margin-block-end: auto;
+  scroll-margin-block: auto;
+  scroll-margin-inline: auto;
+  display: x;
+  display: y;
+  display: mandatory;
+  display: proximity;
+}

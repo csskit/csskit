@@ -1,0 +1,1 @@
+:is(:unknown,a){color:red}:-moz-any(:unknown,b){color:tan}

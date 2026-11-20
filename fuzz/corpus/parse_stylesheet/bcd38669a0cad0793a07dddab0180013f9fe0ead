@@ -1,0 +1,12 @@
+.swagger-ui textarea.curl {
+  font-size: 12px;
+  min-height: 100px;
+  margin: 0;
+  padding: 10px;
+  resize: none;
+  border-radius: 4px;
+  background: #41444e;
+  font-family: Source Code Pro, monospace;
+  font-weight: 600;
+  color: #fff
+}

@@ -1,0 +1,4 @@
+:target {
+  outline: .2em solid var(--fg);
+  z-index: 2;
+}

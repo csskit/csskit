@@ -1,0 +1,3 @@
+.dense {
+  --density: 1;
+}

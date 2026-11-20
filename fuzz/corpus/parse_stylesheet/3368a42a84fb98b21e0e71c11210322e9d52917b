@@ -1,0 +1,3 @@
+.pf-v6-c-table.pf-m-animate-expand > .pf-v6-c-table__tbody > .pf-v6-c-table__expandable-row[hidden] {
+  display: var(--pf-v6-c-table__expandable-row--Display, revert);
+}

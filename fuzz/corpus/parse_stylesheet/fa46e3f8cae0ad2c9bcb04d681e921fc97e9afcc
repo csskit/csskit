@@ -1,0 +1,3 @@
+.bg-fixed {
+  background-attachment: fixed;
+}

@@ -1,0 +1,3 @@
+.brs-solid {
+  border-right-style: solid !important;
+}

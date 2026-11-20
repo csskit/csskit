@@ -1,0 +1,3 @@
+@-moz-document domain("gist.github.com"){.trial-banner-notice {
+    background-image: linear-gradient(/*[[base-color]]*/ 0%, #4f8cc9 100%);
+  }}

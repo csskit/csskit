@@ -1,0 +1,3 @@
+.is-justify-content-right {
+  justify-content: right !important;
+}

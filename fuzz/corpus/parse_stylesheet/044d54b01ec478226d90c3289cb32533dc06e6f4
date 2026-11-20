@@ -1,0 +1,18 @@
+select {
+  border: 1.5px solid;
+  height: auto;
+  width: 10rem;
+  font-family: Chicago_12;
+  font-size: 18px;
+  background-image: svg-load("./icon/select-button.svg");
+  background-position: top 2px right 2px;
+  background-repeat: no-repeat;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  position: relative;
+  padding-left: 20px;
+  -webkit-box-shadow: 2px 8px 0 0px var(--secondary);
+     -moz-box-shadow: 2px 8px 0 0px var(--secondary);
+          box-shadow: 2px 2px 0 -1px var(--secondary);
+}

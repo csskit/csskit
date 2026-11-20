@@ -1,0 +1,10 @@
+body.style-options-for-admonition-plugin .callout.admonition-col3>.admonition-content {
+  columns: 100px 3;
+  -moz-columns: 100px 3;
+  -webkit-columns: 100px 3;
+  column-gap: 1vw;
+  overflow: visible;
+  margin: 0;
+  break-inside: avoid;
+  column-rule: 1px solid #d4d2d2;
+}

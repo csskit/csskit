@@ -1,0 +1,4 @@
+.pf-v6-c-banner a {
+  color: var(--pf-v6-c-banner--link--Color);
+  text-decoration-line: var(--pf-v6-c-banner--link--TextDecoration);
+}

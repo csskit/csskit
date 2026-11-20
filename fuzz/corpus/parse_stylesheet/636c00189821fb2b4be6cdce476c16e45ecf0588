@@ -1,0 +1,3 @@
+[class*="col-"].border.right {
+  border-right-color: rgba(255, 255, 255, 0.5);
+}

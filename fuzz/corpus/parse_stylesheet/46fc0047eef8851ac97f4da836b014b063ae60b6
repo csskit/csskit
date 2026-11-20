@@ -1,0 +1,3 @@
+i.icon.x.ray::before {
+  content: "\f497";
+}

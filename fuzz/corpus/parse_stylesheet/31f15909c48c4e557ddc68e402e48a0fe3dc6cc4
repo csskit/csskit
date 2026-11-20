@@ -1,0 +1,3 @@
+.cm-url:hover {
+  transition: all 600ms;
+}

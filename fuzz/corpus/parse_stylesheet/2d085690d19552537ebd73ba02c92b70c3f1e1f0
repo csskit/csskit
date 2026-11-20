@@ -1,0 +1,5 @@
+.textActionButton:hover {
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  color: rgb(var(--accent));
+}

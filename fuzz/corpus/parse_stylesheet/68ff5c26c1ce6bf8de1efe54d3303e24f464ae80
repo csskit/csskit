@@ -1,0 +1,10 @@
+.vhidden.focusable:active, .vhidden.focusable:focus {
+    clip: auto;
+    -webkit-clip-path: none;
+            clip-path: none;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    position: static;
+    width: auto;
+    white-space: inherit; }
