@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+set -euo pipefail
+#MISE description="Print the Headline Changes section of a release PR or release body read from stdin, or with --strip, everything but it"
+
+awk -v strip="$([[ "${1:-}" == "--strip" ]] && echo 1 || echo 0)" '
+	{ sub(/\r$/, "") }
+	/^(#|##|###) / { in_headline = /^(##|###) Headline Changes[[:space:]]*$/; if (!strip) next }
+	strip { if (!in_headline) print; next }
+	/^<!--.*-->$/ { next }
+	in_headline && (NF || started) { started = 1; print }
+'

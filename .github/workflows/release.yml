@@ -8,9 +8,7 @@ on:
     - cron: "0 3 * * *"
 
 permissions:
-  contents: write
-  id-token: write
-  pull-requests: write
+  contents: read
 jobs:
   plan:
     name: Plan Release
@@ -351,39 +349,82 @@ jobs:
             fi
           done
 
-  deploy:
-    name: Deploy Release
+  github-release:
+    name: GitHub Release
     needs: [plan, publish-crates, publish-npm]
-    if: ${{ !cancelled() && needs.publish-crates.result == 'success' && needs.publish-npm.result == 'success' }}
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: read
     concurrency:
-      group: "release"
+      group: "github-release"
       cancel-in-progress: false
+    env:
+      GH_TOKEN: ${{ github.token }}
+      VERSION: ${{ needs.plan.outputs.version }}
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with:
-          fetch-depth: 0
-
-      - name: Setup
-        uses: ./.github/actions/setup
-        with:
-          key: release-deploy
-          tools: rust node npm cargo:git-cliff cargo:cargo-edit
-          components: ""
 
       - name: Download native artifacts
         uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
         with:
           pattern: binary-*
 
-      - name: Release
-        # SECURITY: mise tasks run with privileged secrets. This is safe only
-        # because CODEOWNERS (* @keithamus) prevents merging .mise-tasks/
-        # changes without explicit review. Do not relax CODEOWNERS.
-        run: mise r release-automation
-        env:
-          PUBLISH: ${{ needs.plan.outputs.publish }}
-          VERSION: ${{ needs.plan.outputs.version }}
-          NEXT: ${{ needs.plan.outputs.next }}
-          GH_TOKEN: ${{ secrets.RELEASE_PR_PAT }}
+      - name: Create release
+        if: needs.plan.outputs.publish == 'release'
+        id: release
+        run: |
+          if ! gh release view "v$VERSION" >/dev/null 2>&1; then
+            HEADLINE=$(gh pr list --state merged --head "release-v$VERSION" --json body --jq '.[0].body // ""' | .mise-tasks/release-headline)
+            NOTES=()
+            if [[ -n "$HEADLINE" ]]; then
+              NOTES=(--notes "$(printf '## Headline Changes\n\n%s\n' "$HEADLINE")")
+            fi
+            gh release create "v$VERSION" --target "$GITHUB_SHA" --generate-notes "${NOTES[@]}" binary-*/*
+          fi
+          RELEASE=$(gh release view "v$VERSION" --json name,url,body)
+          BODY=$(jq -r .body <<< "$RELEASE")
+          HEADLINE=$(.mise-tasks/release-headline <<< "$BODY")
+          if (( ${#HEADLINE} > 1900 )); then
+            HEADLINE=""
+          fi
+          {
+            echo "name=$(jq -r .name <<< "$RELEASE")"
+            echo "url=$(jq -r .url <<< "$RELEASE")"
+            echo "body<<RELEASE_NOTES_EOF"
+            if [[ -n "$HEADLINE" ]]; then
+              .mise-tasks/release-headline --strip <<< "$BODY"
+            else
+              echo "$BODY"
+            fi
+            echo "RELEASE_NOTES_EOF"
+            echo "content<<RELEASE_CONTENT_EOF"
+            if [[ -n "$HEADLINE" ]]; then
+              printf '%s\n\n' "$HEADLINE"
+            fi
+            echo "||@everyone||"
+            echo "RELEASE_CONTENT_EOF"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Update canary release
+        if: needs.plan.outputs.publish == 'canary'
+        run: |
+          git tag -f canary "$GITHUB_SHA"
+          git push --force origin refs/tags/canary
+          gh release upload canary binary-*/* --clobber
+
+      - name: Post release notes to Discord
+        if: needs.plan.outputs.publish == 'release'
+        uses: SethCohen/github-releases-to-discord@24d166886aee4646d448c8a389ff9e1ebcab3682 # v1.20.0
+        with:
+          webhook_url: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          release_name: ${{ steps.release.outputs.name }}
+          release_body: ${{ steps.release.outputs.body }}
+          release_html_url: ${{ steps.release.outputs.url }}
+          color: "2105893"
+          username: "Release Changelog"
+          avatar_url: "https://csskit.rs/images/android-chrome-512x512.png"
+          content: ${{ steps.release.outputs.content }}
+          footer_title: "Changelog"
+          reduce_headings: true
