@@ -1,6 +1,6 @@
 {
     "name": "csskit-darwin-arm64",
-    "version": "0.0.41",
+    "version": "0.0.42-canary.202611200315",
     "description": "Refreshing CSS - macOS arm64 binary",
     "keywords": [
         "css",
