@@ -1,7 +1,32 @@
+## [0.0.42] - 2026-11-20
+
+### Other Changes
+- Release: Replace `@release` markers with cargo set-version (#1718) ([#1718](https://github.com/csskit/csskit/pull/1718))
+
+
+### Css_ast
+- css_parse/css_ast/csskit_derives: Add VisitFlow to VisitMut (#1715) ([#1715](https://github.com/csskit/csskit/pull/1715))
+
+
+### Csskit_derives
+- csskit_derives: Remove unused itertools dependency (#1726) ([#1726](https://github.com/csskit/csskit/pull/1726))
+
+
+### Csskit_transform
+- csskit_transform: Skip subtrees via consider_node, drop Cell (#1728) ([#1728](https://github.com/csskit/csskit/pull/1728))
+
+
+### Csskit_wasm
+- csskit_wasm: Preserve comments when minifying (#1720) ([#1720](https://github.com/csskit/csskit/pull/1720))
+
 ## [0.0.41] - 2026-11-17
 
 ### Bytescan
 - bytescan: add lints workspace=true (#1712) ([#1712](https://github.com/csskit/csskit/pull/1712))
+
+
+### Csskit
+- Release v0.0.41 (#1713) ([#1713](https://github.com/csskit/csskit/pull/1713))
 
 ## [0.0.40] - 2026-11-17
 
