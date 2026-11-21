@@ -1,7 +1,7 @@
 use criterion::{BenchmarkId, Criterion, Throughput, criterion_group, criterion_main};
 use css_ast::{CssAtomSet, StyleSheet};
 use css_lexer::Lexer;
-use css_parse::{Arena, CursorCompactWriteSink, CursorOverlaySink, Parser, ToCursors};
+use css_parse::{Arena, CursorCompactWriteSink, Parser, ToCursors};
 use csskit_transform::{CssMinifierFeature, Transformer};
 use glob::glob;
 #[cfg(target_family = "unix")]
@@ -42,13 +42,7 @@ fn popular(c: &mut Criterion) {
 					let mut string = css_parse::String::new_in(&alloc);
 					if let Some(stylesheet) = result.output.as_mut() {
 						transformer.transform(stylesheet);
-						let overlays = transformer.overlays();
-						let mut sink = CursorOverlaySink::new(
-							source_text,
-							&overlays,
-							CursorCompactWriteSink::new(source_text, &mut string),
-						);
-						result.to_cursors(&mut sink);
+						result.to_cursors(&mut CursorCompactWriteSink::new(&transformer.text(), &mut string));
 					}
 				}
 				alloc

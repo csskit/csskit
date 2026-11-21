@@ -46,12 +46,8 @@ FAIL calc-advanced/0008
 +a{column-count:3}
 
 FAIL calc-advanced/0009
--a{opacity:calc(1.5)}
+-a{opacity:calc(3/2)}
 +a{opacity:1}
-
-FAIL calc/0001
--a{margin:3px 3px}
-+a{margin:3px}
 
 FAIL calc/0016
 -a{line-height:calc(5)}

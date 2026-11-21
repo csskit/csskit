@@ -2,7 +2,7 @@
 macro_rules! assert_transform {
 	($features: ident :: $transform: ident, $atoms: ident, $node: ident, $str: literal, $expected: literal) => {{
 		use css_lexer::{Lexer, QuoteStyle};
-		use css_parse::{Arena, CursorOverlaySink, CursorPrettyWriteSink, Parser, ToCursors};
+		use css_parse::{Arena, CursorPrettyWriteSink, Parser, ToCursors};
 
 		let source_text = $str;
 
@@ -23,13 +23,12 @@ macro_rules! assert_transform {
 		let mut actual = String::new();
 		if let Some(ref mut output) = result.output {
 			transformer.transform(output);
-			let overlays = transformer.overlays();
-			let mut overlay_stream = CursorOverlaySink::new(
-				source_text,
-				&*overlays,
-				CursorPrettyWriteSink::new(source_text, &mut actual, None, QuoteStyle::Double),
-			);
-			result.output.to_cursors(&mut overlay_stream);
+			result.output.to_cursors(&mut CursorPrettyWriteSink::new(
+				&transformer.text(),
+				&mut actual,
+				None,
+				QuoteStyle::Double,
+			));
 
 			assert!(transformer.has_changed(), "Transformer did not transform {}", source_text);
 		} else {
@@ -62,7 +61,7 @@ pub(crate) use assert_transform;
 macro_rules! assert_no_transform {
 	($features: ident :: $transform: ident, $atoms: ident, $node: ident, $str: literal) => {{
 		use css_lexer::{Lexer, QuoteStyle};
-		use css_parse::{Arena, CursorOverlaySink, CursorPrettyWriteSink, Parser, ToCursors};
+		use css_parse::{Arena, CursorPrettyWriteSink, Parser, ToCursors};
 
 		let source_text = $str;
 
@@ -77,13 +76,12 @@ macro_rules! assert_no_transform {
 		let mut actual = String::new();
 		if let Some(ref mut output) = result.output {
 			transformer.transform(output);
-			let overlays = transformer.overlays();
-			let mut overlay_stream = CursorOverlaySink::new(
-				source_text,
-				&*overlays,
-				CursorPrettyWriteSink::new(source_text, &mut actual, None, QuoteStyle::Double),
-			);
-			result.output.to_cursors(&mut overlay_stream);
+			result.output.to_cursors(&mut CursorPrettyWriteSink::new(
+				&transformer.text(),
+				&mut actual,
+				None,
+				QuoteStyle::Double,
+			));
 
 			assert!(!transformer.has_changed(), "Transformer claims to have changed! {} \"{}\"", source_text, actual);
 		} else {

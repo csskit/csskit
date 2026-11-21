@@ -1,14 +1,14 @@
 use crate::prelude::*;
-use css_ast::{CssTypes, Url, UrlOrString, VisitNode, Visitable};
+use css_ast::{CssTypes, Url, UrlOrString, VisitMut, VisitNode};
 use css_parse::format_in;
 
-pub struct ReduceUrls<'a, 'ctx, N: Visitable + NodeWithMetadata<CssMetadata>> {
+pub struct ReduceUrls<'a, 'ctx, N: NodeWithMetadata<CssMetadata>> {
 	pub transformer: &'ctx Transformer<'a, CssMetadata, N, CssMinifierFeature>,
 }
 
 impl<'a, 'ctx, N> Transform<'a, 'ctx, CssMetadata, N, CssMinifierFeature> for ReduceUrls<'a, 'ctx, N>
 where
-	N: Visitable + NodeWithMetadata<CssMetadata>,
+	N: NodeWithMetadata<CssMetadata>,
 {
 	fn skips_subtree(metadata: &CssMetadata) -> bool {
 		!metadata.has_value_kinds(CssTypes::Url)
@@ -20,9 +20,9 @@ where
 }
 
 #[visitor]
-impl<'a, 'ctx, N> Visit for ReduceUrls<'a, 'ctx, N>
+impl<'a, 'ctx, N> VisitMut<'a> for ReduceUrls<'a, 'ctx, N>
 where
-	N: Visitable + NodeWithMetadata<CssMetadata>,
+	N: NodeWithMetadata<CssMetadata>,
 {
 	fn consider_node(&self, node: VisitNode) -> VisitFlow {
 		if node.rule_subtree_metadata().is_some_and(|meta| Self::skips_subtree(&meta)) {
@@ -31,21 +31,18 @@ where
 		VisitFlow::DESCEND
 	}
 
-	fn visit_url_or_string(&mut self, url_or_string: &UrlOrString) {
+	fn visit_url_or_string(&mut self, url_or_string: &mut UrlOrString) {
 		let UrlOrString::Url(url) = url_or_string else {
 			return;
 		};
 		let arena = self.transformer.alloc();
-		match url {
+		let quoted = match url {
 			Url::UrlFunction(_, string, _) | Url::SrcFunction(_, string, _) => {
 				let sc = self.transformer.to_source_cursor((*string).into());
 				let token = sc.token();
 				let start = token.leading_len() as usize;
 				let end = sc.source().len() - token.trailing_len() as usize;
-				self.transformer.replace_parsed::<UrlOrString>(
-					url_or_string.to_span(),
-					format_in!(in arena, "\"{}\"", &sc.source()[start..end]).into_str(),
-				);
+				format_in!(in arena, "\"{}\"", &sc.source()[start..end]).into_str()
 			}
 			Url::Url(url_token) => {
 				let sc = self.transformer.to_source_cursor((*url_token).into());
@@ -54,11 +51,11 @@ where
 				let trailing_len = token.trailing_len() as usize;
 				let url_content = &sc.source()[leading_len..(sc.source().len() - trailing_len)];
 				let url_content = url_content.trim();
-				self.transformer.replace_parsed::<UrlOrString>(
-					url_or_string.to_span(),
-					format_in!(in arena, "\"{url_content}\"").into_str(),
-				);
+				format_in!(in arena, "\"{url_content}\"").into_str()
 			}
+		};
+		if let Some(reduced) = self.transformer.parse::<UrlOrString>(quoted) {
+			self.transformer.replace(url_or_string, reduced);
 		}
 	}
 }

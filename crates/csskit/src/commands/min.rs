@@ -1,6 +1,6 @@
 use super::prelude::*;
 use css_ast::Visitable;
-use css_parse::{CursorCompactWriteSink, CursorOverlaySink, CursorSink, ToCursors};
+use css_parse::{CursorCompactWriteSink, ToCursors};
 use csskit_highlight::{AnsiHighlightCursorStream, DefaultAnsiTheme, TokenHighlighter};
 use csskit_transform::{CssMinifierFeature, Transformer};
 
@@ -41,31 +41,18 @@ impl Min {
 				let mut transformer =
 					Transformer::new_in(&alloc, CssMinifierFeature::all_bits(), &CssAtomSet::ATOMS, source_text);
 				transformer.transform(stylesheet);
-				let overlays = transformer.overlays();
 
 				let mut str = css_parse::String::new_in(&alloc);
+				let text = transformer.text();
 				if color {
 					let mut highlighter = TokenHighlighter::new();
 					let _ = stylesheet.accept(&mut highlighter);
 					let ansi = AnsiHighlightCursorStream::new(&mut str, &highlighter, DefaultAnsiTheme);
-					{
-						let mut stream = CursorOverlaySink::new(
-							source_text,
-							&overlays,
-							CursorCompactWriteSink::new(source_text, ansi),
-						);
-						result.to_cursors(&mut stream as &mut dyn CursorSink);
-					}
+					result.to_cursors(&mut CursorCompactWriteSink::new(&text, ansi));
 				} else {
-					{
-						let mut stream = CursorOverlaySink::new(
-							source_text,
-							&overlays,
-							CursorCompactWriteSink::new(source_text, &mut str),
-						);
-						result.to_cursors(&mut stream);
-					}
+					result.to_cursors(&mut CursorCompactWriteSink::new(&text, &mut str));
 				};
+				drop(text);
 				if *check {
 					if str != source_text {
 						println!("{str}");
