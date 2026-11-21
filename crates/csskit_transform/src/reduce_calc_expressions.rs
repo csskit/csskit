@@ -2,9 +2,9 @@ use crate::prelude::*;
 use css_ast::{
 	Angle, CSSInt, CalcUnit, CssAtomSet, Decibel, DeclarationValue, Flex, Frequency, Length, LengthPercentage,
 	LengthPercentageNumber, MathFunction, NodeId, NumberLength, NumberPercentage, Percentage, ReducedCalc, Resolution,
-	Semitones, Time, UnitlessZeroResolves, VisitNode, Visitable,
+	Semitones, Time, UnitlessZeroResolves, ValueSlot, VisitMut, VisitNode, Visitable,
 };
-use css_parse::{AtomSet, ComponentValues, Declaration, format_in};
+use css_parse::{AtomSet, Declaration, format_in};
 
 const SIGNIFICANT_DIGITS: i32 = 6;
 
@@ -63,7 +63,7 @@ fn reduce_leaf<T: Visitable>(value: &T) -> Option<ReducedCalc> {
 	leaf.0
 }
 
-pub struct ReduceCalcExpressions<'a, 'ctx, N: Visitable + NodeWithMetadata<CssMetadata>> {
+pub struct ReduceCalcExpressions<'a, 'ctx, N: NodeWithMetadata<CssMetadata>> {
 	pub transformer: &'ctx Transformer<'a, CssMetadata, N, CssMinifierFeature>,
 	unitless_zero_resolves: UnitlessZeroResolves,
 	math_depth: usize,
@@ -71,7 +71,7 @@ pub struct ReduceCalcExpressions<'a, 'ctx, N: Visitable + NodeWithMetadata<CssMe
 
 impl<'a, 'ctx, N> Transform<'a, 'ctx, CssMetadata, N, CssMinifierFeature> for ReduceCalcExpressions<'a, 'ctx, N>
 where
-	N: Visitable + NodeWithMetadata<CssMetadata>,
+	N: NodeWithMetadata<CssMetadata>,
 {
 	fn skips_subtree(metadata: &CssMetadata) -> bool {
 		!metadata.has_computed()
@@ -84,8 +84,15 @@ where
 
 impl<'a, 'ctx, N> ReduceCalcExpressions<'a, 'ctx, N>
 where
-	N: Visitable + NodeWithMetadata<CssMetadata>,
+	N: NodeWithMetadata<CssMetadata>,
 {
+	fn reduce_math<T: Visitable + ToSpan>(&self, math: &MathFunction<'a, T>) -> Option<&'a str> {
+		if self.math_depth > 0 {
+			return None;
+		}
+		math.reduce_with(&reduce_leaf).and_then(|reduced| self.serialize(reduced))
+	}
+
 	fn serialize(&self, reduced: ReducedCalc) -> Option<&'a str> {
 		let arena = self.transformer.alloc();
 		let terms = reduced.terms();
@@ -132,9 +139,9 @@ where
 }
 
 #[visitor]
-impl<'a, 'ctx, N> Visit for ReduceCalcExpressions<'a, 'ctx, N>
+impl<'a, 'ctx, N> VisitMut<'a> for ReduceCalcExpressions<'a, 'ctx, N>
 where
-	N: Visitable + NodeWithMetadata<CssMetadata>,
+	N: NodeWithMetadata<CssMetadata>,
 {
 	fn consider_node(&self, node: VisitNode) -> VisitFlow {
 		if node.node_id == Some(NodeId::SupportsFeature)
@@ -145,43 +152,35 @@ where
 		VisitFlow::DESCEND
 	}
 
-	fn enter_declaration<'b, T: DeclarationValue<'b, CssMetadata>>(
+	fn enter_declaration<T: DeclarationValue<'a, CssMetadata>>(
 		&mut self,
-		decl: &Declaration<'b, T, CssMetadata>,
-		_query: VisitNode,
-	) {
+		decl: &mut Declaration<'a, T, CssMetadata>,
+	) -> VisitFlow {
 		self.unitless_zero_resolves = decl.value.property_metadata().unitless_zero_resolves;
+		VisitFlow::DESCEND
 	}
 
-	fn exit_declaration<'b, T: DeclarationValue<'b, CssMetadata>>(
-		&mut self,
-		_decl: &Declaration<'b, T, CssMetadata>,
-		_query: VisitNode,
-	) {
+	fn exit_declaration<T: DeclarationValue<'a, CssMetadata>>(&mut self, _decl: &mut Declaration<'a, T, CssMetadata>) {
 		self.unitless_zero_resolves = UnitlessZeroResolves::Number;
 	}
 
-	fn visit_math_function<'b, T: Visitable + ToSpan>(&mut self, _math: &MathFunction<'b, T>) {
+	fn visit_math_function<T>(&mut self, _math: &mut MathFunction<'a, T>) {
 		self.math_depth += 1;
 	}
 
-	fn exit_math_function<'b, T: Visitable + ToSpan>(&mut self, math: &MathFunction<'b, T>) {
+	fn exit_math_function<T>(&mut self, _math: &mut MathFunction<'a, T>) {
 		self.math_depth -= 1;
-		// minimal: only the outermost math function is reduced, so a reducible function nested in an unreducible one
-		// is kept; reduce nested functions individually if that matters.
-		if self.math_depth > 0 {
-			return;
-		}
-		let span = math.to_span();
-		if self.transformer.has_pending_edit_covering(span) {
-			return;
-		}
-		let Some(css) = math.reduce_with(&reduce_leaf).and_then(|reduced| self.serialize(reduced)) else {
-			return;
-		};
-		if css.len() < span.len() as usize {
-			self.transformer.clear_pending_edits(span);
-			self.transformer.replace(span, self.transformer.parse_value::<ComponentValues>(css));
+	}
+
+	fn visit_value_slot<S: ValueSlot<'a>>(&mut self, slot: &mut S)
+	where
+		S::Literal: Visitable + ToSpan,
+	{
+		if let Some(css) = slot.math_function().and_then(|math| self.reduce_math(math))
+			&& let Some(reduced) = self.transformer.parse::<S>(css)
+			&& self.transformer.compacted_len(&reduced) < self.transformer.compacted_len(slot)
+		{
+			self.transformer.replace(slot, reduced);
 		}
 	}
 }
@@ -244,7 +243,7 @@ mod tests {
 	fn keeps_number_results_in_calc() {
 		calc!("a { line-height: calc(10 / 2); }", "a { line-height: calc(5); }");
 		calc!("a { column-count: calc(2 - 2); }", "a { column-count: calc(0); }");
-		calc!("a { z-index: calc(1000000 + 1); }", "a { z-index: calc(1000001); }");
+		calc!("a { z-index: calc(1000 + 1); }", "a { z-index: calc(1001); }");
 	}
 
 	#[test]

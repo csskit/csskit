@@ -1,6 +1,6 @@
 use crate::prelude::*;
 use css_ast::{
-	CssAtomSet, DeclarationValue, NestedGroupRule, NodeId, Shorthand, StyleRule, StyleValue, VisitNode, Visitable,
+	CssAtomSet, DeclarationValue, NestedGroupRule, NodeId, Shorthand, StyleRule, StyleValue, VisitMut, VisitNode,
 };
 use css_parse::{AtomSet, Cursor, Declaration};
 
@@ -9,9 +9,10 @@ use css_parse::{AtomSet, Cursor, Declaration};
 ///
 /// A declaration is overridden when every property it sets is also set, or reset, by a later declaration of equal or
 /// greater importance.
-pub struct RemoveOverriddenDeclarations<'a, 'ctx, N: Visitable + NodeWithMetadata<CssMetadata>> {
+pub struct RemoveOverriddenDeclarations<'a, 'ctx, N: NodeWithMetadata<CssMetadata>> {
 	pub transformer: &'ctx Transformer<'a, CssMetadata, N, CssMinifierFeature>,
 	overriders: Vec<Overrider>,
+	overridden: Vec<usize>,
 }
 
 struct Property {
@@ -29,14 +30,8 @@ struct Overrider {
 
 impl<'a, 'ctx, N> RemoveOverriddenDeclarations<'a, 'ctx, N>
 where
-	N: Visitable + NodeWithMetadata<CssMetadata>,
+	N: NodeWithMetadata<CssMetadata>,
 {
-	fn delete<T: ToSpan>(&self, value: &T) {
-		let span = value.to_span();
-		self.transformer.clear_pending_edits(span);
-		self.transformer.delete(span);
-	}
-
 	fn can_override<'s>(declaration: &Declaration<'s, StyleValue<'s>, CssMetadata>) -> bool {
 		!declaration.is_unknown() && !declaration.metadata().has_substitution()
 	}
@@ -77,12 +72,13 @@ where
 		covered || earlier_reset_by.contains(&later.name)
 	}
 
-	fn remove_overridden<'b, 's, I>(&mut self, declarations: I)
+	fn find_overridden<'b, 's, I>(&mut self, declarations: I)
 	where
 		I: Clone + Iterator<Item = &'b Declaration<'s, StyleValue<'s>, CssMetadata>>,
 		's: 'b,
 	{
 		self.overriders.clear();
+		self.overridden.clear();
 		for (index, declaration) in declarations.clone().enumerate().skip(1) {
 			let Some(overrider) = Self::overrider(index, declaration) else {
 				continue;
@@ -108,29 +104,36 @@ where
 				StyleValue::longhand_by_name(earlier.name).map_or(&[][..], |longhand| longhand.reset_by);
 			let later = &self.overriders[self.overriders.partition_point(|later| later.index <= index)..];
 			if later.iter().any(|later| Self::later_property_overrides(&earlier, earlier_reset_by, later)) {
-				self.delete(declaration);
+				self.overridden.push(index);
 			}
 		}
+		if !self.overridden.is_empty() {
+			self.transformer.mark_changed();
+		}
+	}
+
+	fn is_overridden(&self, index: usize) -> bool {
+		self.overridden.binary_search(&index).is_ok()
 	}
 }
 
 impl<'a, 'ctx, N> Transform<'a, 'ctx, CssMetadata, N, CssMinifierFeature> for RemoveOverriddenDeclarations<'a, 'ctx, N>
 where
-	N: Visitable + NodeWithMetadata<CssMetadata>,
+	N: NodeWithMetadata<CssMetadata>,
 {
 	fn skips_subtree(metadata: &CssMetadata) -> bool {
 		!Self::may_contain_overrider(metadata)
 	}
 
 	fn new(transformer: &'ctx Transformer<'a, CssMetadata, N, CssMinifierFeature>) -> Self {
-		Self { transformer, overriders: Vec::new() }
+		Self { transformer, overriders: Vec::new(), overridden: Vec::new() }
 	}
 }
 
 #[visitor]
-impl<'a, 'ctx, N> Visit for RemoveOverriddenDeclarations<'a, 'ctx, N>
+impl<'a, 'ctx, N> VisitMut<'a> for RemoveOverriddenDeclarations<'a, 'ctx, N>
 where
-	N: Visitable + NodeWithMetadata<CssMetadata>,
+	N: NodeWithMetadata<CssMetadata>,
 {
 	fn consider_node(&self, node: VisitNode) -> VisitFlow {
 		if node.node_id == Some(NodeId::SelectorList)
@@ -141,17 +144,24 @@ where
 		VisitFlow::DESCEND
 	}
 
-	fn enter_declaration<'b, T: DeclarationValue<'b, CssMetadata>>(
+	fn enter_declaration<T: DeclarationValue<'a, CssMetadata>>(
 		&mut self,
-		_declaration: &Declaration<'b, T, CssMetadata>,
-		_query: VisitNode,
+		_declaration: &mut Declaration<'a, T, CssMetadata>,
 	) -> VisitFlow {
 		VisitFlow::SKIP_CHILDREN
 	}
 
-	fn exit_style_rule(&mut self, rule: &StyleRule) {
-		self.remove_overridden(rule.rule.block.declarations.iter());
-		for nested_rule in &rule.rule.block.rules {
+	fn exit_style_rule(&mut self, rule: &mut StyleRule<'a>) {
+		self.find_overridden(rule.rule.block.declarations.iter());
+		if !self.overridden.is_empty() {
+			let mut index = 0;
+			rule.rule.block.declarations.retain(|_| {
+				let keep = !self.is_overridden(index);
+				index += 1;
+				keep
+			});
+		}
+		for nested_rule in rule.rule.block.rules.iter_mut() {
 			if let NestedGroupRule::Declarations(group) = nested_rule {
 				let declarations = || {
 					group.declarations.iter().filter_map(|item| match item {
@@ -159,7 +169,19 @@ where
 						css_parse::DeclarationOrBad::Bad(_) => None,
 					})
 				};
-				self.remove_overridden(declarations());
+				self.find_overridden(declarations());
+				if self.overridden.is_empty() {
+					continue;
+				}
+				let mut index = 0;
+				group.declarations.retain(|item| match item {
+					css_parse::DeclarationOrBad::Declaration(_) => {
+						let keep = !self.is_overridden(index);
+						index += 1;
+						keep
+					}
+					css_parse::DeclarationOrBad::Bad(_) => true,
+				});
 			}
 		}
 	}
