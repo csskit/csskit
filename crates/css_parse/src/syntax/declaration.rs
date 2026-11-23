@@ -128,11 +128,32 @@ where
 		let name = p.parse::<T![Ident]>()?;
 		let colon = p.parse::<T![:]>()?;
 		let c: Cursor = name.into();
-		let value = <V>::parse_declaration_value(p, c)?;
-		let important = p.parse_if_peek::<Box<'a, BangImportant>>()?;
+		let checkpoint = p.checkpoint();
+		let mut value = <V>::parse_declaration_value(p, c)?;
+		let mut important = p.parse_if_peek::<Box<'a, BangImportant>>()?;
+		// https://drafts.csswg.org/css-syntax-3/#consume-a-declaration
+		// A declaration's value runs until the end of the declaration, and only a trailing `!important` is lifted out
+		// of it. If anything is left after the value and an optional `!important` (for example a second `!important`
+		// or a `!foo`), the value does not match the property's grammar. Re-parse it as unknown, so the leftover
+		// tokens stay in this declaration instead of leaking into the next one.
+		if !at_declaration_end(p) {
+			p.rewind(checkpoint);
+			value = <V>::parse_unknown_declaration_value(p, c)?;
+			important = p.parse_if_peek::<Box<'a, BangImportant>>()?;
+		}
 		let semicolon = p.parse_if_peek::<T![;]>()?;
 		Ok(Self { name, colon, value, important, semicolon, _phantom: PhantomData })
 	}
+}
+
+/// Whether the parser is at a token that ends a declaration: the end of input, `;`, `}`, `)` (for declarations such
+/// as `@supports (color: red)`), or the parser's current stop token.
+fn at_declaration_end<'a, Iter>(p: &Parser<'a, Iter>) -> bool
+where
+	Iter: Iterator<Item = crate::Cursor> + Clone,
+{
+	const END: KindSet = KindSet::new(&[Kind::Eof, Kind::RightCurly, Kind::Semicolon, Kind::RightParen]);
+	p.at_end() || p.peek_n(1) == END || p.next_is_stop()
 }
 
 impl<'a, V, M> ToCursors for Declaration<'a, V, M>
