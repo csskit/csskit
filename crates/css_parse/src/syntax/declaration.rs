@@ -152,8 +152,7 @@ fn at_declaration_end<'a, Iter>(p: &Parser<'a, Iter>) -> bool
 where
 	Iter: Iterator<Item = crate::Cursor> + Clone,
 {
-	const END: KindSet = KindSet::new(&[Kind::Eof, Kind::RightCurly, Kind::Semicolon, Kind::RightParen]);
-	p.at_end() || p.peek_n(1) == END || p.next_is_stop()
+	p.at_end() || p.peek_n(1) == KindSet::RIGHT_CURLY_SEMICOLON_OR_RIGHT_PAREN || p.next_is_stop()
 }
 
 impl<'a, V, M> ToCursors for Declaration<'a, V, M>

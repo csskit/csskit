@@ -89,8 +89,14 @@ impl<'a, T: SourceCursorSink<'a>> CursorCompactWriteSink<'a, T> {
 		let significant_pending_whitespace = self.pending.is_some_and(|p| p.token().whitespace_is_significant());
 		if let Some(prev) = self.pending.take() {
 			let keep = match prev.token().kind() {
+				// After a `}` the `;` is only redundant at the end of a block or of the input. Elsewhere it can end a
+				// declaration whose value ends in a `{}` block (`--x:{a};color:red`), so dropping it would merge the
+				// next declaration into that value.
 				Kind::Semicolon => {
-					kind != REDUNDANT_SEMI_KINDSET && self.last_token.is_some_and(|t| t != REDUNDANT_SEMI_KINDSET)
+					kind != REDUNDANT_SEMI_KINDSET
+						&& self
+							.last_token
+							.is_some_and(|t| t != Kind::Semicolon && (t != Kind::RightCurly || kind != Kind::Eof))
 				}
 				_ if suppress_separator || (!enforce_before && kind == NO_WHITESPACE_BEFORE_KINDSET) => false,
 				_ => (significant_pending_whitespace && self.last_token.is_some()) || self.needs_separator(c.token()),
@@ -307,6 +313,14 @@ mod test {
 	#[test]
 	fn test_removes_trailing_semis_when_after_curly() {
 		assert_format!("{foo};", "{foo}");
+	}
+
+	#[test]
+	fn test_preserves_semis_after_curly_before_more_tokens() {
+		assert_format!("a{--x:{x};background:tan}", "a{--x:{x};background:tan}");
+		assert_format!("a{--x:{x} ; background:tan}", "a{--x:{x};background:tan}");
+		assert_format!("a{--x:{x};}", "a{--x:{x}}");
+		assert_format!("a{--x:{x};;;background:tan}", "a{--x:{x};background:tan}");
 	}
 
 	#[test]

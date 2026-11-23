@@ -139,6 +139,11 @@ mod tests {
 				"a{background:red !important !important;background:tan}",
 			),
 			("a{color:red !foo;background:tan}", "a{color:red !foo;background:tan}"),
+			// A value that ends in a `{}` block keeps its `;` when another declaration follows.
+			("a{color:red !important {x};background:tan}", "a{color:red !important{x};background:tan}"),
+			("a{color:red !foo {x};background:tan}", "a{color:red !foo{x};background:tan}"),
+			("a{--x:{x};background:tan}", "a{--x:{x};background:tan}"),
+			("a{--x:{x};}", "a{--x:{x}}"),
 		] {
 			let (output, _) = minify(input, CssMinifierFeature::all_bits());
 			assert_eq!(output, expected, "input: {}", input);
