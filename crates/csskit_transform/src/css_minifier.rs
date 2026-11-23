@@ -132,6 +132,20 @@ mod tests {
 	}
 
 	#[test]
+	fn keeps_invalid_important_within_its_declaration() {
+		for (input, expected) in [
+			(
+				"a {\n  background: red !important !important;\n  background: tan;\n}",
+				"a{background:red !important !important;background:tan}",
+			),
+			("a{color:red !foo;background:tan}", "a{color:red !foo;background:tan}"),
+		] {
+			let (output, _) = minify(input, CssMinifierFeature::all_bits());
+			assert_eq!(output, expected, "input: {}", input);
+		}
+	}
+
+	#[test]
 	fn test_color_mix_with_math_percentage_commits() {
 		for (input, expected) in [
 			("a{color:color-mix(in srgb, red calc(50%), blue)}", "a{color:purple}"),

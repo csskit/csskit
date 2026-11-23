@@ -453,6 +453,26 @@ mod tests {
 		);
 
 		assert_parse!(CssAtomSet::ATOMS, Property, "float:none!important");
+		// Anything after the value other than one trailing `!important` makes the value invalid for the property. It is
+		// kept as an unknown value rather than leaking tokens into the next declaration.
+		assert_parse!(
+			CssAtomSet::ATOMS,
+			Property,
+			"background:red !important !important",
+			Property { value: StyleValue::Unknown(_), important: None, .. }
+		);
+		assert_parse!(
+			CssAtomSet::ATOMS,
+			Property,
+			"color:var(--a) !important !important;",
+			Property { value: StyleValue::Unknown(_), important: None, semicolon: Some(_), .. }
+		);
+		assert_parse!(
+			CssAtomSet::ATOMS,
+			Property,
+			"color:red !foo",
+			Property { value: StyleValue::Unknown(_), important: None, .. }
+		);
 		assert_parse!(CssAtomSet::ATOMS, Property, "width:1px");
 		assert_parse!(CssAtomSet::ATOMS, Property, "width:min(1px, 2px)");
 		assert_parse!(CssAtomSet::ATOMS, Property, "border:1px solid var(--red)");
