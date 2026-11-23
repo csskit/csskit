@@ -393,6 +393,10 @@ export declare class EllipseFunction extends Node { static readonly tag: 'ellips
 export declare class EmptyCellsStyleValue extends Node { static readonly tag: 'empty-cells-style-value'; }
 export declare class EnvFunction extends Node { static readonly tag: 'env-function'; static parse(source: string): never; }
 export declare class EnvironmentBlendingMediaFeature extends Node { static readonly tag: 'environment-blending-media-feature'; }
+export declare class EnvironmentIntensityStyleValue extends Node { static readonly tag: 'environment-intensity-style-value'; }
+export declare class EnvironmentMapStyleValue extends Node { static readonly tag: 'environment-map-style-value'; }
+export declare class EnvironmentRotateStyleValue extends Node { static readonly tag: 'environment-rotate-style-value'; }
+export declare class EnvironmentStyleValue extends Node { static readonly tag: 'environment-style-value'; }
 export declare class EventFunction extends Node { static readonly tag: 'event-function'; }
 export declare class EventTriggerNameStyleValue extends Node { static readonly tag: 'event-trigger-name-style-value'; }
 export declare class EventTriggerSourceStyleValue extends Node { static readonly tag: 'event-trigger-source-style-value'; }
@@ -513,6 +517,7 @@ export declare class ForcedColorsMediaFeature extends Node { static readonly tag
 export declare class FormatFunction extends Node { static readonly tag: 'format-function'; }
 export declare class FrameSizingStyleValue extends Node { static readonly tag: 'frame-sizing-style-value'; }
 export declare class Frequency extends Node { static readonly tag: 'frequency'; }
+export declare class FrontLimitStyleValue extends Node { static readonly tag: 'front-limit-style-value'; }
 export declare class FunctionalPseudoElement extends Node { static readonly tag: 'functional-pseudo-element'; }
 export declare class GapRepeatRule extends Node { static readonly tag: 'gap-repeat-rule'; }
 export declare class GapRuleList extends Node { static readonly tag: 'gap-rule-list'; }
@@ -607,14 +612,20 @@ export declare class InlineSizeContainerFeature extends Node { static readonly t
 export declare class InlineSizeStyleValue extends Node { static readonly tag: 'inline-size-style-value'; }
 export declare class InlineSizingStyleValue extends Node { static readonly tag: 'inline-sizing-style-value'; }
 export declare class InputSecurityStyleValue extends Node { static readonly tag: 'input-security-style-value'; }
+export declare class InsetBackStyleValue extends Node { static readonly tag: 'inset-back-style-value'; }
 export declare class InsetBlockEndStyleValue extends Node { static readonly tag: 'inset-block-end-style-value'; }
 export declare class InsetBlockStartStyleValue extends Node { static readonly tag: 'inset-block-start-style-value'; }
 export declare class InsetBlockStyleValue extends Node { static readonly tag: 'inset-block-style-value'; }
+export declare class InsetBottomStyleValue extends Node { static readonly tag: 'inset-bottom-style-value'; }
+export declare class InsetFrontStyleValue extends Node { static readonly tag: 'inset-front-style-value'; }
 export declare class InsetFunction extends Node { static readonly tag: 'inset-function'; }
 export declare class InsetInlineEndStyleValue extends Node { static readonly tag: 'inset-inline-end-style-value'; }
 export declare class InsetInlineStartStyleValue extends Node { static readonly tag: 'inset-inline-start-style-value'; }
 export declare class InsetInlineStyleValue extends Node { static readonly tag: 'inset-inline-style-value'; }
+export declare class InsetLeftStyleValue extends Node { static readonly tag: 'inset-left-style-value'; }
+export declare class InsetRightStyleValue extends Node { static readonly tag: 'inset-right-style-value'; }
 export declare class InsetStyleValue extends Node { static readonly tag: 'inset-style-value'; }
+export declare class InsetTopStyleValue extends Node { static readonly tag: 'inset-top-style-value'; }
 export declare class InsetValue extends Node { static readonly tag: 'inset-value'; }
 export declare class IntegerOrInfinite extends Node { static readonly tag: 'integer-or-infinite'; }
 export declare class InteractivityStyleValue extends Node { static readonly tag: 'interactivity-style-value'; }
@@ -1060,6 +1071,8 @@ export declare class PointerTimelineNameStyleValue extends Node { static readonl
 export declare class PointerTimelineStyleValue extends Node { static readonly tag: 'pointer-timeline-style-value'; }
 export declare class PolarColorSpace extends Node { static readonly tag: 'polar-color-space'; }
 export declare class PolygonFunction extends Node { static readonly tag: 'polygon-function'; }
+export declare class PortalStageStyleValue extends Node { static readonly tag: 'portal-stage-style-value'; }
+export declare class PortalTransformStyleValue extends Node { static readonly tag: 'portal-transform-style-value'; }
 export declare class Position extends Node { static readonly tag: 'position'; }
 export declare class PositionAnchorStyleValue extends Node { static readonly tag: 'position-anchor-style-value'; }
 export declare class PositionAndSize extends Node { static readonly tag: 'position-and-size'; }
@@ -1067,6 +1080,7 @@ export declare class PositionArea extends Node { static readonly tag: 'position-
 export declare class PositionAreaStyleValue extends Node { static readonly tag: 'position-area-style-value'; }
 export declare class PositionBlockAxis extends Node { static readonly tag: 'position-block-axis'; }
 export declare class PositionBlockAxisKeyword extends Node { static readonly tag: 'position-block-axis-keyword'; }
+export declare class PositionContextStyleValue extends Node { static readonly tag: 'position-context-style-value'; }
 export declare class PositionFour extends Node { static readonly tag: 'position-four'; static parse(source: string): never; }
 export declare class PositionHorizontal extends Node { static readonly tag: 'position-horizontal'; }
 export declare class PositionHorizontalKeyword extends Node { static readonly tag: 'position-horizontal-keyword'; }
@@ -1262,6 +1276,7 @@ export declare class SnapInlineFunction extends Node { static readonly tag: 'sna
 export declare class SpatialNavigationActionStyleValue extends Node { static readonly tag: 'spatial-navigation-action-style-value'; }
 export declare class SpatialNavigationContainStyleValue extends Node { static readonly tag: 'spatial-navigation-contain-style-value'; }
 export declare class SpatialNavigationFunctionStyleValue extends Node { static readonly tag: 'spatial-navigation-function-style-value'; }
+export declare class SpatialStyleValue extends Node { static readonly tag: 'spatial-style-value'; }
 export declare class SpeakAsStyleValue extends Node { static readonly tag: 'speak-as-style-value'; }
 export declare class SpeakStyleValue extends Node { static readonly tag: 'speak-style-value'; }
 export declare class SpreadShadow extends Node { static readonly tag: 'spread-shadow'; }
@@ -1327,6 +1342,7 @@ export declare class TechFunction extends Node { static readonly tag: 'tech-func
 export declare class TextAlignAllStyleValue extends Node { static readonly tag: 'text-align-all-style-value'; }
 export declare class TextAlignLastStyleValue extends Node { static readonly tag: 'text-align-last-style-value'; }
 export declare class TextAlignStyleValue extends Node { static readonly tag: 'text-align-style-value'; }
+export declare class TextAutospaceSizeStyleValue extends Node { static readonly tag: 'text-autospace-size-style-value'; }
 export declare class TextAutospaceStyleValue extends Node { static readonly tag: 'text-autospace-style-value'; }
 export declare class TextBoxEdgeStyleValue extends Node { static readonly tag: 'text-box-edge-style-value'; }
 export declare class TextBoxStyleValue extends Node { static readonly tag: 'text-box-style-value'; }
@@ -1593,5 +1609,7 @@ export declare class WrapThroughStyleValue extends Node { static readonly tag: '
 export declare class WritingModeStyleValue extends Node { static readonly tag: 'writing-mode-style-value'; }
 export declare class XywhFunction extends Node { static readonly tag: 'xywh-function'; }
 export declare class XyzChannelKeyword extends Node { static readonly tag: 'xyz-channel-keyword'; }
+export declare class ZAlignItemsStyleValue extends Node { static readonly tag: 'z-align-items-style-value'; }
+export declare class ZAlignSelfStyleValue extends Node { static readonly tag: 'z-align-self-style-value'; }
 export declare class ZIndexStyleValue extends Node { static readonly tag: 'z-index-style-value'; }
 export declare class ZoomStyleValue extends Node { static readonly tag: 'zoom-style-value'; }

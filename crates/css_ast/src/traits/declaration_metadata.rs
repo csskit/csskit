@@ -66,6 +66,7 @@ pub enum PropertyGroup {
 	SvgPainting,
 	SizeAdjust,
 	Sizing,
+	Spatial,
 	Speech,
 	Tables,
 	Text,
