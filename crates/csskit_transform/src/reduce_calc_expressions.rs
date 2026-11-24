@@ -5,6 +5,7 @@ use css_ast::{
 	Semitones, Time, UnitlessZeroResolves, ValueSlot, VisitMut, VisitNode, Visitable,
 };
 use css_parse::{AtomSet, Declaration, format_in};
+use std::fmt::Write;
 
 const SIGNIFICANT_DIGITS: i32 = 6;
 
@@ -131,7 +132,8 @@ where
 				return None;
 			}
 			let operator = if value < 0.0 { '-' } else { '+' };
-			css.push_str(format_in!(in arena, " {} {}{}", operator, value.abs(), unit_str(unit)).as_str());
+			write!(css, " {} {}{}", operator, value.abs(), unit_str(unit))
+				.expect("formatting into an arena String cannot fail");
 		}
 		css.push(')');
 		Some(css.into_str())

@@ -46,7 +46,7 @@ pub enum TransformedText<'t, 'a> {
 	/// No node has been parsed into the tree, so it reads only from the source.
 	Source(&'a str),
 	/// The source followed by the text of every parsed node.
-	Buffer(Ref<'t, std::string::String>),
+	Buffer(Ref<'t, css_parse::String<'a>>),
 }
 
 impl Deref for TransformedText<'_, '_> {
@@ -66,7 +66,7 @@ pub struct Transformer<'a, M: NodeMetadata, N: NodeWithMetadata<M>, F: Transform
 	pub(crate) features: F,
 	changed: Cell<bool>,
 	/// The source text followed by the text of every node parsed by [Transformer::parse]; empty until the first parse.
-	text: RefCell<std::string::String>,
+	text: RefCell<css_parse::String<'a>>,
 	source_text: &'a str,
 	_phantom: PhantomData<(M, N)>,
 }
@@ -78,7 +78,7 @@ impl<'a, M: NodeMetadata, N: NodeWithMetadata<M>, F: TransformerFeatures<M, N>> 
 			features,
 			atoms,
 			changed: Cell::new(false),
-			text: RefCell::default(),
+			text: RefCell::new(css_parse::String::new_in(alloc)),
 			source_text,
 			_phantom: PhantomData,
 		}

@@ -284,10 +284,12 @@ where
 			(&mix.parts).into_iter().filter_map(|(p, _)| p.percentage.as_ref().and_then(&resolve_pct)).sum();
 		let implicit_count = (&mix.parts).into_iter().filter(|(p, _)| p.percentage.is_none()).count();
 		let implicit_share = if implicit_count > 0 { (100.0 - explicit_sum) / implicit_count as f32 } else { 0.0 };
-		let pcts: Vec<f32> = (&mix.parts)
-			.into_iter()
-			.map(|(p, _)| p.percentage.as_ref().and_then(&resolve_pct).unwrap_or(implicit_share))
-			.collect();
+		let pcts = css_parse::Vec::from_iter_in(
+			(&mix.parts)
+				.into_iter()
+				.map(|(p, _)| p.percentage.as_ref().and_then(&resolve_pct).unwrap_or(implicit_share)),
+			arena,
+		);
 		let sum: f32 = pcts.iter().sum();
 
 		// If exactly one part has all the weight (sum == 100 and all others are 0), collapse to it.
@@ -305,17 +307,16 @@ where
 
 		// All identical colors with alpha_mult == 1 (sum >= 100): collapse to first.
 		if sum >= 100.0 {
-			let chromata: Vec<_> = (&mix.parts).into_iter().map(|(p, _)| p.color.to_chromashift()).collect();
-			if chromata.iter().all(Option::is_some) {
-				let first = chromata[0].unwrap();
-				if chromata[1..].iter().all(|c| c.unwrap().delta_e(first) < COLOR_EPSILON) {
-					return Some(
-						first
-							.shortest(usize::MAX, arena)
-							.and_then(|css| self.transformer.parse::<Color>(css))
-							.map_or(MixReplacement::Part(0), MixReplacement::Color),
-					);
-				}
+			let mut chromata = (&mix.parts).into_iter().map(|(p, _)| p.color.to_chromashift());
+			if let Some(Some(first)) = chromata.next()
+				&& chromata.all(|chroma| chroma.is_some_and(|chroma| chroma.delta_e(first) < COLOR_EPSILON))
+			{
+				return Some(
+					first
+						.shortest(usize::MAX, arena)
+						.and_then(|css| self.transformer.parse::<Color>(css))
+						.map_or(MixReplacement::Part(0), MixReplacement::Color),
+				);
 			}
 		}
 
