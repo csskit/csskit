@@ -155,7 +155,7 @@ impl<'a> Parse<'a> for QueryCompoundSelector<'a> {
 		let mut leading_combinator: Option<QueryCombinator> = None;
 
 		// Trim leading whitespace
-		p.consume_trivia();
+		p.skip_trivia();
 
 		// Parse components incrementally, building metadata and segments as we go
 		while let Some(component) = Self::parse_compound_selector_part(p)? {
