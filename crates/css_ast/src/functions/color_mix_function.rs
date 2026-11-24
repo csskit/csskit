@@ -248,7 +248,7 @@ impl InterpolationColorSpace {
 #[cfg(feature = "chromashift")]
 impl crate::ToChromashift for ColorMixFunction<'_> {
 	fn to_chromashift(&self) -> Option<chromashift::Color> {
-		use chromashift::{Channel, InterpolationSpace};
+		use chromashift::InterpolationSpace;
 
 		let space = self.interpolation.as_ref().map_or(InterpolationSpace::Oklab, |i| i.color_space.to_chromashift());
 		let channels = |color: &Color| {
@@ -261,40 +261,36 @@ impl crate::ToChromashift for ColorMixFunction<'_> {
 			Some(channels)
 		};
 
-		let parts: std::vec::Vec<(&Color<'_>, Option<f64>)> = (&self.parts)
-			.into_iter()
-			.map(|(p, _)| {
-				let pct = match &p.percentage {
-					None => None,
-					Some(pct) => match pct.reduce()?.as_single()? {
-						(crate::CalcUnit::Dimension(CssAtomSet::Percent), value) => {
-							Some(if value.is_nan() { 0.0 } else { value.clamp(0.0, 100.0) })
+		let default_pct = 100.0 / self.parts.len() as f64;
+		let mut weighted = (&self.parts).into_iter().map(|(p, _)| {
+			let pct = match &p.percentage {
+				None => default_pct,
+				Some(pct) => match pct.reduce()?.as_single()? {
+					(crate::CalcUnit::Dimension(CssAtomSet::Percent), value) => {
+						if value.is_nan() {
+							0.0
+						} else {
+							value.clamp(0.0, 100.0)
 						}
-						_ => return None,
-					},
-				};
-				Some((&p.color, pct))
-			})
-			.collect::<Option<_>>()?;
+					}
+					_ => return None,
+				},
+			};
+			Some((channels(&p.color)?, pct))
+		});
 
-		let default_pct = 100.0 / parts.len() as f64;
-		let mut stack: std::vec::Vec<([Channel; 4], f64)> = std::vec::Vec::with_capacity(parts.len());
-		for (color, pct) in &parts {
-			stack.push((channels(color)?, pct.unwrap_or(default_pct)));
+		let (mut mixed, mut total) = weighted.next()??;
+		for part in weighted {
+			let (next, pct) = part?;
+			let combined = total + pct;
+			mixed = space.mix(mixed, next, pct / combined * 100.0);
+			total = combined;
 		}
 
-		if stack.iter().map(|(_, p)| p).sum::<f64>() == 0.0 {
+		if total == 0.0 {
 			return Some(chromashift::Color::Srgb(chromashift::Srgb::new(0.0, 0.0, 0.0, 0.0)));
 		}
-
-		while stack.len() >= 2 {
-			let (b, pct_b) = stack.remove(1);
-			let (a, pct_a) = stack.remove(0);
-			let combined = pct_a + pct_b;
-			stack.insert(0, (space.mix(a, b, pct_b / combined * 100.0), combined));
-		}
-
-		stack.into_iter().next().map(|(channels, _)| space.color(channels))
+		Some(space.color(mixed))
 	}
 }
 
