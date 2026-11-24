@@ -259,7 +259,7 @@ pub fn minify(source: String) -> Result<String> {
 	if let Some(err) = result.errors.first() {
 		return Err(napi::Error::from_reason(err.meta(&source).message));
 	}
-	let mut output = String::new();
+	let mut output = String::with_capacity(source.len());
 	if let Some(stylesheet) = &mut result.output {
 		let mut transformer = Transformer::new_in(&arena, CssMinifierFeature::all_bits(), &CssAtomSet::ATOMS, &source);
 		transformer.transform(stylesheet);
