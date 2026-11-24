@@ -14,8 +14,6 @@ pub struct CursorCompactWriteSink<'a, T: SourceCursorSink<'a>> {
 
 // Tokens that get buffered as `pending` rather than emitted immediately.
 const PENDING_KINDSET: KindSet = KindSet::new(&[Kind::Semicolon, Kind::Whitespace]);
-// `;` is redundant immediately before/after these.
-const REDUNDANT_SEMI_KINDSET: KindSet = KindSet::new(&[Kind::Semicolon, Kind::RightCurly]);
 // Whitespace immediately before these tokens is never meaningful in any CSS grammar, so it can always be removed -
 // even when the parser marked it significant. `:` is absent because `.a :hover` is not `.a:hover`, and `)`/`]` only
 // appear here as the *closing* token of a block, where `foo( a )` is always `foo(a)`.
@@ -93,10 +91,12 @@ impl<'a, T: SourceCursorSink<'a>> CursorCompactWriteSink<'a, T> {
 				// declaration whose value ends in a `{}` block (`--x:{a};color:red`), so dropping it would merge the
 				// next declaration into that value.
 				Kind::Semicolon => {
-					kind != REDUNDANT_SEMI_KINDSET
-						&& self
-							.last_token
-							.is_some_and(|t| t != Kind::Semicolon && (t != Kind::RightCurly || kind != Kind::Eof))
+					let redundant_after = if kind == Kind::Eof {
+						KindSet::RIGHT_CURLY_OR_SEMICOLON
+					} else {
+						KindSet::new(&[Kind::Semicolon])
+					};
+					kind != KindSet::RIGHT_CURLY_OR_SEMICOLON && self.last_token.is_some_and(|t| t != redundant_after)
 				}
 				_ if suppress_separator || (!enforce_before && kind == NO_WHITESPACE_BEFORE_KINDSET) => false,
 				_ => (significant_pending_whitespace && self.last_token.is_some()) || self.needs_separator(c.token()),

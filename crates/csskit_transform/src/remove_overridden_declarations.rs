@@ -33,7 +33,10 @@ where
 	N: NodeWithMetadata<CssMetadata>,
 {
 	fn can_override<'s>(declaration: &Declaration<'s, StyleValue<'s>, CssMetadata>) -> bool {
-		!declaration.is_unknown() && !declaration.metadata().has_substitution()
+		// A legacy declaration with two important flags can be ignored by modern browsers.
+		!declaration.has_duplicate_important()
+			&& !declaration.is_unknown()
+			&& !declaration.metadata().has_substitution()
 	}
 
 	fn may_contain_overrider(metadata: &CssMetadata) -> bool {
@@ -191,6 +194,16 @@ where
 mod tests {
 	use crate::test_helpers::{assert_no_transform, assert_transform};
 	use css_ast::{CssAtomSet, StyleSheet};
+
+	#[test]
+	fn preserves_fallback_before_duplicate_important() {
+		assert_no_transform!(
+			CssMinifierFeature::RemoveOverriddenDeclarations,
+			CssAtomSet,
+			StyleSheet,
+			"a { margin-top: 1px; margin: 2px !important !important; }"
+		);
+	}
 
 	#[test]
 	fn removes_declarations_overridden_by_later_shorthands() {

@@ -132,11 +132,11 @@ mod tests {
 	}
 
 	#[test]
-	fn keeps_invalid_important_within_its_declaration() {
+	fn keeps_important_suffix_within_its_declaration() {
 		for (input, expected) in [
 			(
 				"a {\n  background: red !important !important;\n  background: tan;\n}",
-				"a{background:red !important !important;background:tan}",
+				"a{background:red!important!important;background:tan}",
 			),
 			("a{color:red !foo;background:tan}", "a{color:red !foo;background:tan}"),
 			// A value that ends in a `{}` block keeps its `;` when another declaration follows.
@@ -148,6 +148,13 @@ mod tests {
 			let (output, _) = minify(input, CssMinifierFeature::all_bits());
 			assert_eq!(output, expected, "input: {}", input);
 		}
+	}
+
+	#[test]
+	fn reduces_values_with_duplicate_important() {
+		let (output, changed) = minify("a{width:0px !important !important}", CssMinifierFeature::all_bits());
+		assert!(changed);
+		assert_eq!(output, "a{width:0!important!important}");
 	}
 
 	#[test]

@@ -16,6 +16,7 @@ use std::marker::PhantomData;
 ///
 /// An ident is parsed first, as the property name, followed by a `:`. After this the given `<V>` will be parsed as the
 /// style value. Parsing may continue to a `!important`, or the optional trailing semi `;`, if either are present.
+/// A second `!important` is preserved for legacy browser compatibility.
 ///
 /// The grammar of `<V>` isn't defined here - it'll be dependant on the property name. Consequently, `<V>` must
 /// implement the [DeclarationValue] trait, which must provide the
@@ -35,10 +36,48 @@ where
 	pub name: token_macros::Ident,
 	pub colon: token_macros::Colon,
 	pub value: V,
-	pub important: Option<Box<'a, BangImportant>>,
+	pub important: Option<Box<'a, DeclarationImportance>>,
 	pub semicolon: Option<token_macros::Semicolon>,
 	#[cfg_attr(feature = "serde", serde(skip))]
 	_phantom: PhantomData<(&'a (), M)>,
+}
+
+/// The `!important` suffix of a declaration, including the legacy form with two flags.
+#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(untagged))]
+pub enum DeclarationImportance {
+	Single(BangImportant),
+	Duplicate([BangImportant; 2]),
+}
+
+impl DeclarationImportance {
+	/// The flags in source order.
+	pub fn flags(&self) -> &[BangImportant] {
+		match self {
+			Self::Single(flag) => std::slice::from_ref(flag),
+			Self::Duplicate(flags) => flags,
+		}
+	}
+}
+
+impl ToCursors for DeclarationImportance {
+	fn to_cursors(&self, s: &mut (impl CursorSink + ?Sized)) {
+		for flag in self.flags() {
+			flag.to_cursors(s);
+		}
+	}
+}
+
+impl ToSpan for DeclarationImportance {
+	fn to_span(&self) -> Span {
+		self.flags().to_span()
+	}
+}
+
+impl SemanticEq for DeclarationImportance {
+	fn semantic_eq(&self, other: &Self, _: &str) -> bool {
+		self.flags().len() == other.flags().len()
+	}
 }
 
 impl<'a, V, M> Declaration<'a, V, M>
@@ -48,6 +87,11 @@ where
 {
 	pub fn is_unknown(&self) -> bool {
 		self.value.is_unknown()
+	}
+
+	/// Whether the declaration uses the legacy two-flag suffix.
+	pub fn has_duplicate_important(&self) -> bool {
+		matches!(self.important.as_deref(), Some(DeclarationImportance::Duplicate(_)))
 	}
 }
 
@@ -130,29 +174,24 @@ where
 		let c: Cursor = name.into();
 		let checkpoint = p.checkpoint();
 		let mut value = <V>::parse_declaration_value(p, c)?;
-		let mut important = p.parse_if_peek::<Box<'a, BangImportant>>()?;
-		// https://drafts.csswg.org/css-syntax-3/#consume-a-declaration
-		// A declaration's value runs until the end of the declaration, and only a trailing `!important` is lifted out
-		// of it. If anything is left after the value and an optional `!important` (for example a second `!important`
-		// or a `!foo`), the value does not match the property's grammar. Re-parse it as unknown, so the leftover
-		// tokens stay in this declaration instead of leaking into the next one.
-		if !at_declaration_end(p) {
+		let mut important = match p.parse_if_peek::<BangImportant>()? {
+			Some(first) => Some(match p.parse_if_peek::<BangImportant>()? {
+				Some(second) => DeclarationImportance::Duplicate([first, second]),
+				None => DeclarationImportance::Single(first),
+			}),
+			None => None,
+		};
+		// After the optional flags, trailing garbage such as `!foo` invalidates the typed value. Re-parse as
+		// unknown to keep those tokens in this declaration. The parser's stop set does not always include EOF.
+		if !(p.next_is_stop() || p.peek_n(1) == KindSet::RIGHT_CURLY_SEMICOLON_OR_RIGHT_PAREN.add(Kind::Eof)) {
 			p.rewind(checkpoint);
 			value = <V>::parse_unknown_declaration_value(p, c)?;
-			important = p.parse_if_peek::<Box<'a, BangImportant>>()?;
+			important = p.parse_if_peek::<BangImportant>()?.map(DeclarationImportance::Single);
 		}
+		let important = important.map(|flags| Box::new_in(p.alloc(), flags));
 		let semicolon = p.parse_if_peek::<T![;]>()?;
 		Ok(Self { name, colon, value, important, semicolon, _phantom: PhantomData })
 	}
-}
-
-/// Whether the parser is at a token that ends a declaration: the end of input, `;`, `}`, `)` (for declarations such
-/// as `@supports (color: red)`), or the parser's current stop token.
-fn at_declaration_end<'a, Iter>(p: &Parser<'a, Iter>) -> bool
-where
-	Iter: Iterator<Item = crate::Cursor> + Clone,
-{
-	p.at_end() || p.peek_n(1) == KindSet::RIGHT_CURLY_SEMICOLON_OR_RIGHT_PAREN || p.next_is_stop()
 }
 
 impl<'a, V, M> ToCursors for Declaration<'a, V, M>
@@ -195,9 +234,8 @@ where
 #[cfg(test)]
 mod tests {
 	use super::*;
-	use crate::EmptyAtomSet;
-	use crate::SemanticEq;
 	use crate::test_helpers::*;
+	use crate::{Arena, EmptyAtomSet, SemanticEq};
 
 	#[derive(Debug)]
 	struct Decl(T![Ident]);
@@ -238,5 +276,41 @@ mod tests {
 	#[test]
 	fn test_writes() {
 		assert_parse!(EmptyAtomSet::ATOMS, Declaration<Decl, ()>, "color:black;");
+	}
+
+	#[test]
+	fn parses_duplicate_important_at_eof() {
+		assert_parse!(
+			EmptyAtomSet::ATOMS,
+			Declaration<Decl, ()>,
+			"color:black !important !important",
+			|node| {
+				assert!(node.has_duplicate_important());
+				assert!(node.semicolon.is_none());
+			}
+		);
+	}
+
+	#[test]
+	fn leaves_the_configured_stop_token_unconsumed() {
+		let source = "color:black!important!important,";
+		let alloc = Arena::new();
+		let lexer = css_lexer::Lexer::new(&EmptyAtomSet::ATOMS, source);
+		let mut parser = Parser::new(&alloc, source, lexer);
+		parser.set_stop(KindSet::new(&[Kind::Comma]));
+
+		let declaration = parser.parse::<Declaration<Decl, ()>>().unwrap();
+		assert!(declaration.has_duplicate_important());
+		assert_eq!(parser.peek_n(1), Kind::Comma);
+	}
+
+	#[test]
+	fn rejects_garbage_after_duplicate_important_without_unknown_fallback() {
+		let source = "color:black!important!important !foo;";
+		let alloc = Arena::new();
+		let lexer = css_lexer::Lexer::new(&EmptyAtomSet::ATOMS, source);
+		let mut parser = Parser::new(&alloc, source, lexer);
+
+		assert!(parser.parse::<Declaration<Decl, ()>>().is_err());
 	}
 }
