@@ -133,6 +133,7 @@ pub enum CsskitAtomSet {{
 	Shapes,
 	SizeAdjust,
 	Sizing,
+	Spatial,
 	Speech,
 	Table,
 	Tables,
