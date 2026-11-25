@@ -181,8 +181,6 @@ where
 			}),
 			None => None,
 		};
-		// After the optional flags, trailing garbage such as `!foo` invalidates the typed value. Re-parse as
-		// unknown to keep those tokens in this declaration. The parser's stop set does not always include EOF.
 		if !(p.next_is_stop() || p.peek_n(1) == KindSet::RIGHT_CURLY_SEMICOLON_OR_RIGHT_PAREN.add(Kind::Eof)) {
 			p.rewind(checkpoint);
 			value = <V>::parse_unknown_declaration_value(p, c)?;

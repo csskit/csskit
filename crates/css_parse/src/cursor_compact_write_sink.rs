@@ -87,9 +87,6 @@ impl<'a, T: SourceCursorSink<'a>> CursorCompactWriteSink<'a, T> {
 		let significant_pending_whitespace = self.pending.is_some_and(|p| p.token().whitespace_is_significant());
 		if let Some(prev) = self.pending.take() {
 			let keep = match prev.token().kind() {
-				// After a `}` the `;` is only redundant at the end of a block or of the input. Elsewhere it can end a
-				// declaration whose value ends in a `{}` block (`--x:{a};color:red`), so dropping it would merge the
-				// next declaration into that value.
 				Kind::Semicolon => {
 					let redundant_after = if kind == Kind::Eof {
 						KindSet::RIGHT_CURLY_OR_SEMICOLON

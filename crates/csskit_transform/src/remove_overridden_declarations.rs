@@ -33,10 +33,11 @@ where
 	N: NodeWithMetadata<CssMetadata>,
 {
 	fn can_override<'s>(declaration: &Declaration<'s, StyleValue<'s>, CssMetadata>) -> bool {
-		// A legacy declaration with two important flags can be ignored by modern browsers.
-		!declaration.has_duplicate_important()
-			&& !declaration.is_unknown()
-			&& !declaration.metadata().has_substitution()
+		if declaration.is_unknown() {
+			return false;
+		}
+		let metadata = declaration.metadata();
+		!metadata.has_declarations_invalid_in_modern_browsers() && !metadata.has_substitution()
 	}
 
 	fn may_contain_overrider(metadata: &CssMetadata) -> bool {
