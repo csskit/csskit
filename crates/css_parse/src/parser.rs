@@ -359,7 +359,11 @@ where
 				}
 			}
 		}
+		self.peek_n_from_iter(remaining, skip)
+	}
 
+	#[inline(never)]
+	fn peek_n_from_iter(&self, mut remaining: u8, skip: KindSet) -> Cursor {
 		let mut iter = self.cursor_iter.clone();
 		loop {
 			let Some(cursor) = iter.next() else {
@@ -660,4 +664,35 @@ fn new_at_eof_after_buffer_refill() {
 	let eof = p.next();
 	assert_eq!(eof.token(), Kind::Eof);
 	assert_eq!(eof.offset(), end);
+}
+
+#[test]
+fn peek_n_matches_token_sequence() {
+	let str = "a /**/ 1 /**//**//**//**//**//**//**//**//**//**//**//**//**/ b  , /**/ c 2 3 4 5 6 7 8 9 10 11 12 13 d";
+	let tokens: std::vec::Vec<Cursor> = css_lexer::Lexer::new(&css_lexer::EmptyAtomSet::ATOMS, str).collect();
+	for skip in [KindSet::NONE, KindSet::COMMENTS, KindSet::WHITESPACE, KindSet::TRIVIA] {
+		let alloc = crate::Arena::default();
+		let lexer = css_lexer::Lexer::new(&css_lexer::EmptyAtomSet::ATOMS, str);
+		let mut p = Parser::new(&alloc, str, lexer);
+		p.set_skip(skip);
+		let expected: std::vec::Vec<Cursor> = tokens.iter().copied().filter(|cursor| *cursor != skip).collect();
+		for position in 0..expected.len() {
+			for n in 1..=16u8 {
+				let got = p.peek_n(n);
+				match expected.get(position + n as usize - 1) {
+					Some(want) => assert_eq!(
+						(got.offset(), got.token()),
+						(want.offset(), want.token()),
+						"skip {skip:?} position {position} n {n}"
+					),
+					None => assert_eq!(
+						(got.offset().0 as usize, got.token().kind()),
+						(str.len(), Kind::Eof),
+						"skip {skip:?} position {position} n {n}"
+					),
+				}
+			}
+			p.next();
+		}
+	}
 }
