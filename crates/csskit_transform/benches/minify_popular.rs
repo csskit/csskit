@@ -39,7 +39,7 @@ fn popular(c: &mut Criterion) {
 					let lexer = Lexer::new(&CssAtomSet::ATOMS, source_text);
 					let mut result =
 						Parser::new(&alloc, source_text.as_str(), lexer).parse_entirely::<StyleSheet>().with_trivia();
-					let mut string = css_parse::String::new_in(&alloc);
+					let mut string = css_parse::String::with_capacity_in(source_text.len(), &alloc);
 					if let Some(stylesheet) = result.output.as_mut() {
 						transformer.transform(stylesheet);
 						result.to_cursors(&mut CursorCompactWriteSink::new(&transformer.text(), &mut string));

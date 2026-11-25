@@ -42,7 +42,7 @@ impl Min {
 					Transformer::new_in(&alloc, CssMinifierFeature::all_bits(), &CssAtomSet::ATOMS, source_text);
 				transformer.transform(stylesheet);
 
-				let mut str = css_parse::String::new_in(&alloc);
+				let mut str = css_parse::String::with_capacity_in(source_text.len(), &alloc);
 				let text = transformer.text();
 				if color {
 					let mut highlighter = TokenHighlighter::new();
