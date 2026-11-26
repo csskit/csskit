@@ -95,7 +95,6 @@ impl Length {
 	pub fn to_px(&self) -> Option<f32> {
 		match self {
 			Self::Zero(_) => Some(0.0),
-			Self::Px(_) => None,
 			_ => {
 				let token = Token::from(*self);
 				Self::px_per(CssAtomSet::from_bits(token.atom_bits())).map(|factor| token.value() * factor)
@@ -300,5 +299,13 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, Length, "-1px");
 		// Percent
 		assert_parse!(CssAtomSet::ATOMS, LengthPercentage, "1%");
+	}
+
+	#[test]
+	fn test_to_px() {
+		assert_parse!(CssAtomSet::ATOMS, Length, "12px", |length| assert_eq!(length.to_px(), Some(12.0)));
+		assert_parse!(CssAtomSet::ATOMS, Length, "1in", |length| assert_eq!(length.to_px(), Some(96.0)));
+		assert_parse!(CssAtomSet::ATOMS, Length, "0", |length| assert_eq!(length.to_px(), Some(0.0)));
+		assert_parse!(CssAtomSet::ATOMS, Length, "1em", |length| assert_eq!(length.to_px(), None));
 	}
 }
