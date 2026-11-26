@@ -663,6 +663,38 @@ impl<'a, T: Clone, A: Allocator> Vec<'a, T, A> {
 	}
 }
 
+impl<'a, A: Allocator> Vec<'a, u8, A> {
+	/// Append a copy of `bytes`. Slices of up to 16 bytes are copied as two overlapping fixed-size chunks instead of
+	/// through `memcpy`.
+	#[inline]
+	pub fn extend_from_bytes(&mut self, bytes: &[u8]) {
+		let n = bytes.len();
+		self.reserve(n);
+		let spare = &mut self.spare_capacity_mut()[..n];
+		match n {
+			0 => {}
+			1..=3 => {
+				spare[0].write(bytes[0]);
+				spare[n / 2].write(bytes[n / 2]);
+				spare[n - 1].write(bytes[n - 1]);
+			}
+			4..=7 => {
+				spare[..4].write_copy_of_slice(&bytes[..4]);
+				spare[n - 4..].write_copy_of_slice(&bytes[n - 4..]);
+			}
+			8..=16 => {
+				spare[..8].write_copy_of_slice(&bytes[..8]);
+				spare[n - 8..].write_copy_of_slice(&bytes[n - 8..]);
+			}
+			_ => {
+				spare.write_copy_of_slice(bytes);
+			}
+		}
+		// SAFETY: the reserve guarantees `n` spare slots, and every arm initialised all of them.
+		unsafe { self.set_len(self.len() + n) };
+	}
+}
+
 impl<'a, T, A: Allocator> Extend<T> for Vec<'a, T, A> {
 	fn extend<I: IntoIterator<Item = T>>(&mut self, iter: I) {
 		let mut iterator = iter.into_iter();
@@ -1068,6 +1100,23 @@ mod test {
 		v.push(1);
 		v.extend_from_slice(&[2, 3, 4]);
 		assert_eq!(&*v, &[1, 2, 3, 4]);
+	}
+
+	#[test]
+	fn extend_from_bytes_matches_extend_from_slice() {
+		let alloc = Arena::new();
+		let source: std::vec::Vec<u8> = (1..=40).collect();
+		for prefix in 0..3 {
+			for n in 0..=source.len() {
+				let mut fast: Vec<u8> = Vec::new_in(&alloc);
+				let mut slow: Vec<u8> = Vec::new_in(&alloc);
+				fast.extend_from_slice(&source[..prefix]);
+				slow.extend_from_slice(&source[..prefix]);
+				fast.extend_from_bytes(&source[..n]);
+				slow.extend_from_slice(&source[..n]);
+				assert_eq!(&*fast, &*slow, "prefix {prefix}, len {n}");
+			}
+		}
 	}
 
 	#[test]
