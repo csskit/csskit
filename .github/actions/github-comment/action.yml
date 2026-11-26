@@ -1,25 +1,23 @@
 name: "GitHub Comment"
-description: "Post a comment on a PR or issue, with ${VAR} substitution from env"
+description: "Queue a PR comment, with ${VAR} substitution from env. Uploads it as the pr-comment artifact, which the PR Comment workflow posts."
 inputs:
   body:
     description: "Comment body. Use ${ENV_VAR} for substitution from environment."
     required: true
-  issue-number:
-    description: "PR or issue number to comment on"
-    required: true
-  token:
-    description: "GitHub token or PAT. Defaults to the built-in github.token."
-    required: false
-    default: ${{ github.token }}
 runs:
   using: "composite"
   steps:
-    - name: Post comment
+    - name: Render comment
       shell: bash
       env:
-        GITHUB_TOKEN: ${{ inputs.token }}
         COMMENT_BODY: ${{ inputs.body }}
-        ISSUE_NUMBER: ${{ inputs.issue-number }}
       run: |
-        printf '%s' "$COMMENT_BODY" | envsubst > /tmp/comment-body.md
-        gh issue comment "$ISSUE_NUMBER" --body-file /tmp/comment-body.md
+        mkdir -p "$RUNNER_TEMP/pr-comment"
+        printf '%s' "$COMMENT_BODY" | envsubst > "$RUNNER_TEMP/pr-comment/comment.md"
+
+    - name: Upload comment
+      uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+      with:
+        name: pr-comment
+        path: ${{ runner.temp }}/pr-comment/comment.md
+        overwrite: true
