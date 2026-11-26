@@ -1,0 +1,50 @@
+name: PR Comment
+
+on:
+  workflow_run:
+    workflows: [Test Automation, PR Benchmarking]
+    types: [completed]
+
+permissions:
+  actions: read
+  pull-requests: write
+
+jobs:
+  comment:
+    if: github.event.workflow_run.event == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Post or update PR comment
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RUN_ID: ${{ github.event.workflow_run.id }}
+          WORKFLOW: ${{ github.event.workflow_run.name }}
+          HEAD_OWNER: ${{ github.event.workflow_run.head_repository.owner.login }}
+          HEAD_BRANCH: ${{ github.event.workflow_run.head_branch }}
+          HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+        run: |
+          artifact=$(gh api -X GET "repos/$GH_REPO/actions/runs/$RUN_ID/artifacts" -f name=pr-comment --jq '.artifacts[0].id // empty')
+          if [[ -z "$artifact" ]]; then
+            echo "No pr-comment artifact in run $RUN_ID"
+            exit 0
+          fi
+          gh run download "$RUN_ID" --name pr-comment --dir pr-comment
+
+          number=$(gh api -X GET "repos/$GH_REPO/pulls" -f state=open -f head="$HEAD_OWNER:$HEAD_BRANCH" \
+            --jq "map(select(.head.sha == \"$HEAD_SHA\")) | .[0].number // empty")
+          if [[ -z "$number" ]]; then
+            echo "No open PR for $HEAD_OWNER:$HEAD_BRANCH at $HEAD_SHA (closed or superseded by a newer push)"
+            exit 0
+          fi
+
+          marker="<!-- pr-comment: $WORKFLOW -->"
+          printf '%s\n\n%s\n' "$(cat pr-comment/comment.md)" "$marker" > body.md
+
+          existing=$(gh api --paginate "repos/$GH_REPO/issues/$number/comments" \
+            --jq ".[] | select(.user.login == \"github-actions[bot]\" and (.body | contains(\"$marker\"))) | .id" | tail -n1)
+          if [[ -n "$existing" ]]; then
+            gh api -X PATCH "repos/$GH_REPO/issues/comments/$existing" -F body=@body.md > /dev/null
+          else
+            gh api "repos/$GH_REPO/issues/$number/comments" -F body=@body.md > /dev/null
+          fi
