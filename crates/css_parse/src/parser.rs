@@ -472,7 +472,33 @@ where
 	}
 
 	#[allow(clippy::should_implement_trait)]
+	#[inline]
 	pub fn next(&mut self) -> Cursor {
+		let index = self.buffer_index;
+		if index + 1 < BUFFER_REFILL_INDEX {
+			let cursor = self.buffer[index];
+			if cursor != Kind::Eof && cursor != self.skip {
+				self.buffer_index = index + 1;
+				self.track_last_cursor(cursor);
+				return cursor;
+			}
+		}
+		self.next_with_trivia()
+	}
+
+	#[inline(always)]
+	fn track_last_cursor(&mut self, _cursor: Cursor) {
+		#[cfg(debug_assertions)]
+		{
+			if let Some(last_cursor) = self.last_cursor {
+				debug_assert!(last_cursor != _cursor, "Detected a next loop, {_cursor:?} was fetched twice");
+			}
+			self.last_cursor = Some(_cursor);
+		}
+	}
+
+	#[inline(never)]
+	fn next_with_trivia(&mut self) -> Cursor {
 		// Collect trivia that should be associated with the next content token
 		let mut pending_trivia = Vec::new_in(self.alloc);
 
@@ -505,13 +531,7 @@ where
 					if !pending_trivia.is_empty() {
 						self.push_trivia(pending_trivia, c);
 					}
-					#[cfg(debug_assertions)]
-					{
-						if let Some(last_cursor) = self.last_cursor {
-							debug_assert!(last_cursor != c, "Detected a next loop, {c:?} was fetched twice");
-						}
-						self.last_cursor = Some(c);
-					}
+					self.track_last_cursor(c);
 					return c;
 				}
 			}
@@ -693,6 +713,30 @@ fn peek_n_matches_token_sequence() {
 				}
 			}
 			p.next();
+		}
+	}
+}
+
+#[test]
+fn next_matches_next_with_trivia() {
+	let str =
+		"a /**/ 1 /**//**//**//**//**//**//**//**//**//**//**//**//**/ b  , /**/ c 2 3 4 5 6 7 8 9 10 11 12 13 d 'x";
+	for skip in [KindSet::NONE, KindSet::COMMENTS, KindSet::WHITESPACE, KindSet::TRIVIA] {
+		let alloc = crate::Arena::default();
+		let mut fast = Parser::new(&alloc, str, css_lexer::Lexer::new(&css_lexer::EmptyAtomSet::ATOMS, str));
+		let mut slow = Parser::new(&alloc, str, css_lexer::Lexer::new(&css_lexer::EmptyAtomSet::ATOMS, str));
+		fast.set_skip(skip);
+		slow.set_skip(skip);
+		for step in 0..64 {
+			let got = fast.next();
+			let want = slow.next_with_trivia();
+			assert_eq!((got.offset(), got.token()), (want.offset(), want.token()), "skip {skip:?} step {step}");
+			assert_eq!(fast.buffer_index, slow.buffer_index, "skip {skip:?} step {step}");
+			assert_eq!(fast.trivia.len(), slow.trivia.len(), "skip {skip:?} step {step}");
+			for (fast_trivia, slow_trivia) in fast.trivia.iter().zip(slow.trivia.iter()) {
+				assert_eq!(fast_trivia.0.as_slice(), slow_trivia.0.as_slice(), "skip {skip:?} step {step}");
+				assert_eq!(fast_trivia.1, slow_trivia.1, "skip {skip:?} step {step}");
+			}
 		}
 	}
 }
