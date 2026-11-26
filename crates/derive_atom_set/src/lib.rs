@@ -18,6 +18,22 @@ mod atom_set;
 ///
 /// - `#[atom_set(case_sensitive)]`: `from_str` matches bytes exactly instead of ASCII case-insensitively
 ///
+/// Atoms that are equal (ignoring ASCII case, unless `case_sensitive`) are a compile error:
+///
+/// ```compile_fail
+/// use derive_atom_set::AtomSet as DeriveAtomSet;
+///
+/// #[derive(Debug, Default, Copy, Clone, PartialEq, DeriveAtomSet)]
+/// pub enum Duplicated {
+///     #[default]
+///     Unknown,
+///     #[atom("rotateX")]
+///     RotateX,
+///     #[atom("rotatex")]
+///     LowerRotateX,
+/// }
+/// ```
+///
 /// ## Naming Convention
 ///
 /// If `#[atom("")]` is not provided a string is derived from the variant name:
