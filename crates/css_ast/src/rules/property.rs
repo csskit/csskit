@@ -106,12 +106,15 @@ impl<'a, M: NodeMetadata> DeclarationValue<'a, M> for PropertyRuleStyleValue<'a>
 	where
 		I: Iterator<Item = Cursor> + Clone,
 	{
-		Ok(match p.to_atom::<CssAtomSet>(c) {
-			CssAtomSet::InitialValue => Self::InitialValue(p.parse::<ComponentValues<'a>>()?),
-			CssAtomSet::Inherits => Self::Inherits(p.parse::<InheritsValue>()?),
-			CssAtomSet::Syntax => Self::Syntax(p.parse::<SyntaxValue>()?),
-			_ => Self::Unknown(p.parse::<ComponentValues<'a>>()?),
-		})
+		let stop = p.set_stop(KindSet::RIGHT_CURLY_OR_SEMICOLON);
+		let value = match p.to_atom::<CssAtomSet>(c) {
+			CssAtomSet::InitialValue => p.parse::<ComponentValues<'a>>().map(Self::InitialValue),
+			CssAtomSet::Inherits => p.parse::<InheritsValue>().map(Self::Inherits),
+			CssAtomSet::Syntax => p.parse::<SyntaxValue>().map(Self::Syntax),
+			_ => p.parse::<ComponentValues<'a>>().map(Self::Unknown),
+		};
+		p.set_stop(stop);
+		value
 	}
 }
 
@@ -134,5 +137,18 @@ mod tests {
 			PropertyRule,
 			r#"@property --foo{initial-value:0;inherits:false;syntax:"<length>"}"#
 		);
+	}
+
+	#[test]
+	fn test_initial_value_ends_at_semicolon() {
+		let source = "@property --foo{initial-value: #000 ;inherits:false}";
+		let arena = css_parse::Arena::default();
+		let lexer = css_lexer::Lexer::new(&CssAtomSet::ATOMS, source);
+		let mut parser = Parser::new(&arena, source, lexer);
+		let rule = parser.parse_entirely::<PropertyRule>().output.unwrap();
+		let declarations = &rule.block.0.declarations;
+		assert_eq!(declarations.len(), 2);
+		assert!(matches!(declarations[0].value, PropertyRuleStyleValue::InitialValue(_)));
+		assert!(matches!(declarations[1].value, PropertyRuleStyleValue::Inherits(_)));
 	}
 }
