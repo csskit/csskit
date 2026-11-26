@@ -82,6 +82,7 @@ pub enum PropertyGroup {
 	WritingModes,
 }
 
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub enum Inherits {
 	False,
 	True,
