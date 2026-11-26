@@ -1,7 +1,62 @@
+## [0.0.42] - 2026-11-26
+
+### Other Changes
+- Release: Replace `@release` markers with cargo set-version (#1718) ([#1718](https://github.com/csskit/csskit/pull/1718))
+
+
+### Css_ast
+- css_parse/css_ast/csskit_derives: Add VisitFlow to VisitMut (#1715) ([#1715](https://github.com/csskit/csskit/pull/1715))
+- css_parse/csskit_ast: Cut trivia allocations while parsing (#1738) ([#1738](https://github.com/csskit/csskit/pull/1738))
+- Regenerate css_ast/src/values from csswg drafts (#1732) ([#1732](https://github.com/csskit/csskit/pull/1732))
+- css_ast: Fold color-mix() parts in a single pass (#1739) ([#1739](https://github.com/csskit/csskit/pull/1739))
+- css_ast: Convert px lengths in Length::to_px (#1745) ([#1745](https://github.com/csskit/csskit/pull/1745))
+- css_ast: Derive Clone, Copy, Debug, Eq, PartialEq on Inherits (#1746) ([#1746](https://github.com/csskit/csskit/pull/1746))
+- css_ast: Make the Id selector's hash token public (#1747) ([#1747](https://github.com/csskit/csskit/pull/1747))
+- css_parse: Keep a repeated !important within its declaration (#1737) ([#1737](https://github.com/csskit/csskit/pull/1737))
+
+
+### Css_parse
+- css_parse: Move peek_n iterator fallback out-of-line (#1742) ([#1742](https://github.com/csskit/csskit/pull/1742))
+
+
+### Csskit
+- csskit_transform/csskit: Rewrite minifier transforms as in-place tree edits (#1731) ([#1731](https://github.com/csskit/csskit/pull/1731))
+- fix(deps): update dependencies (patch) (#1733) ([#1733](https://github.com/csskit/csskit/pull/1733))
+- csskit/csskit_napi/csskit_wasm/csskit_transform: Presize minify output (#1741) ([#1741](https://github.com/csskit/csskit/pull/1741))
+
+
+### Csskit_arena
+- csskit_arena: Copy short byte appends without memcpy (#1743) ([#1743](https://github.com/csskit/csskit/pull/1743))
+
+
+### Csskit_derives
+- csskit_derives: Remove unused itertools dependency (#1726) ([#1726](https://github.com/csskit/csskit/pull/1726))
+
+
+### Csskit_transform
+- csskit_transform: Skip subtrees via consider_node, drop Cell (#1728) ([#1728](https://github.com/csskit/csskit/pull/1728))
+- csskit_transform: Keep transform scratch buffers in the arena (#1740) ([#1740](https://github.com/csskit/csskit/pull/1740))
+
+
+### Csskit_vscode
+- chore(deps): update dependency oxlint to v1.87.0 (#1736) ([#1736](https://github.com/csskit/csskit/pull/1736))
+
+
+### Csskit_wasm
+- csskit_wasm: Preserve comments when minifying (#1720) ([#1720](https://github.com/csskit/csskit/pull/1720))
+
+
+### Derive_atom_set
+- derive_atom_set: Look up atoms through perfect hash tables (#1748) ([#1748](https://github.com/csskit/csskit/pull/1748))
+
 ## [0.0.41] - 2026-11-17
 
 ### Bytescan
 - bytescan: add lints workspace=true (#1712) ([#1712](https://github.com/csskit/csskit/pull/1712))
+
+
+### Csskit
+- Release v0.0.41 (#1713) ([#1713](https://github.com/csskit/csskit/pull/1713))
 
 ## [0.0.40] - 2026-11-17
 
