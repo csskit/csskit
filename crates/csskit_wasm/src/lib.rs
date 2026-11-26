@@ -68,7 +68,7 @@ pub fn minify(source_text: String) -> Result<String, serde_wasm_bindgen::Error> 
 	if !result.errors.is_empty() {
 		return Err(serde_wasm_bindgen::Error::new("Parse error"));
 	}
-	let mut output_string = String::new();
+	let mut output_string = String::with_capacity(source_text.len());
 	if let Some(ref mut stylesheet) = result.output {
 		let mut transformer =
 			Transformer::new_in(&allocator, CssMinifierFeature::all_bits(), &CssAtomSet::ATOMS, &source_text);

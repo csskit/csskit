@@ -66,6 +66,7 @@ pub enum PropertyGroup {
 	SvgPainting,
 	SizeAdjust,
 	Sizing,
+	Spatial,
 	Speech,
 	Tables,
 	Text,
@@ -81,6 +82,7 @@ pub enum PropertyGroup {
 	WritingModes,
 }
 
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub enum Inherits {
 	False,
 	True,

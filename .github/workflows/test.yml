@@ -340,10 +340,6 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       outcome: ${{ steps.check.outputs.outcome }}
-    permissions:
-      pull-requests: write
-    env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -410,9 +406,8 @@ jobs:
           # Fail the job if there were failures
           [[ -z "$FAILED_JOBS" ]]
 
-      - name: Comment on PR
-        if: github.event_name == 'pull_request'
+      - name: Queue PR comment
+        if: ${{ !cancelled() && github.event_name == 'pull_request' }}
         uses: ./.github/actions/github-comment
         with:
-          issue-number: ${{ github.event.number }}
           body: ${RESULTS_BODY}

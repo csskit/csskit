@@ -61,5 +61,5 @@ fn allocation_test() {
 	// XXX: If these fail because the numbers go down, great! If they go up, investigate why.
 	assert_eq!(simple_alloc.used_bytes(), 224);
 	assert_eq!(escaped_alloc.used_bytes(), 320);
-	assert_eq!(big_alloc.used_bytes(), 26_949_128);
+	assert_eq!(big_alloc.used_bytes(), 26_943_568);
 }

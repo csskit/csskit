@@ -96,6 +96,7 @@ impl CsskitAtomSet {
 			Self::Shape | Self::Shapes => Some(PropertyGroup::Shapes),
 			Self::SizeAdjust => Some(PropertyGroup::SizeAdjust),
 			Self::Sizing => Some(PropertyGroup::Sizing),
+			Self::Spatial => Some(PropertyGroup::Spatial),
 			Self::Speech => Some(PropertyGroup::Speech),
 			Self::Table | Self::Tables => Some(PropertyGroup::Tables),
 			Self::Text => Some(PropertyGroup::Text),

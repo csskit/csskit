@@ -88,7 +88,7 @@ impl<'a, A: Allocator> String<'a, A> {
 	/// Append a string slice.
 	#[inline]
 	pub fn push_str(&mut self, str: &str) {
-		self.bytes.extend_from_slice(str.as_bytes());
+		self.bytes.extend_from_bytes(str.as_bytes());
 	}
 
 	/// Append a single character, encoded as UTF-8.

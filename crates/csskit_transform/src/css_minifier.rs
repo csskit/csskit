@@ -49,7 +49,7 @@ mod tests {
 		let lexer = Lexer::new(&CssAtomSet::ATOMS, source_text);
 		let mut parser = Parser::new(&alloc, source_text, lexer);
 		let mut result = parser.parse_entirely::<StyleSheet>().with_trivia();
-		let mut output = String::new();
+		let mut output = String::with_capacity(source_text.len());
 		if let Some(ref mut node) = result.output {
 			transformer.transform(node);
 			let changed = transformer.has_changed();

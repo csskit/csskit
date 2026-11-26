@@ -359,7 +359,11 @@ where
 				}
 			}
 		}
+		self.peek_n_from_iter(remaining, skip)
+	}
 
+	#[inline(never)]
+	fn peek_n_from_iter(&self, mut remaining: u8, skip: KindSet) -> Cursor {
 		let mut iter = self.cursor_iter.clone();
 		loop {
 			let Some(cursor) = iter.next() else {
@@ -394,17 +398,27 @@ where
 
 	pub fn consume_trivia(&mut self) -> Vec<'a, Cursor> {
 		let mut trivia = Vec::new_in(self.alloc);
+		self.advance_past_trivia(|c| trivia.push(c));
+		trivia
+	}
+
+	/// Advances past trivia without collecting it.
+	pub fn skip_trivia(&mut self) {
+		self.advance_past_trivia(|_| {});
+	}
+
+	fn advance_past_trivia(&mut self, mut on_trivia: impl FnMut(Cursor)) {
 		for i in self.buffer_index..BUFFER_LEN {
 			let c = self.buffer[i];
 			if c == Kind::Eof {
 				self.buffer_index = i;
-				return trivia;
+				return;
 			} else if c == self.skip {
-				trivia.push(c)
+				on_trivia(c)
 			} else {
 				self.buffer_index = i;
 				self.fill_buffer(i);
-				return trivia;
+				return;
 			}
 		}
 
@@ -413,21 +427,21 @@ where
 			let Some(c) = self.cursor_iter.next() else {
 				self.buffer = [eof; BUFFER_LEN];
 				self.buffer_index = 0;
-				return trivia;
+				return;
 			};
 			if c == Kind::Eof {
 				self.buffer = [eof; BUFFER_LEN];
 				self.buffer_index = 0;
-				return trivia;
+				return;
 			} else if c == self.skip {
-				trivia.push(c)
+				on_trivia(c)
 			} else {
 				self.buffer[0] = c;
 				for i in 1..BUFFER_LEN {
 					self.buffer[i] = self.cursor_iter.next().unwrap_or(eof);
 				}
 				self.buffer_index = 0;
-				return trivia;
+				return;
 			}
 		}
 	}
@@ -440,8 +454,21 @@ where
 		if !trivia.is_empty() {
 			// Peek the next content token to attach trivia to it
 			let next = self.peek_n(1);
-			self.trivia.push((trivia, next));
+			self.push_trivia(trivia, next);
 		}
+	}
+
+	fn push_trivia(&mut self, trivia: Vec<'a, Cursor>, next: Cursor) {
+		let len = self.trivia.len();
+		if len == self.trivia.capacity() {
+			let source_len = self.source_text.len() as u64;
+			let consumed = u64::from(next.offset().0).max(1);
+			let projected = len as u64 * source_len / consumed;
+			let target =
+				(projected + projected / 8).clamp(2 * len as u64, 8 * len as u64).min(source_len).max(len as u64 + 1);
+			self.trivia.reserve(usize::try_from(target).unwrap_or(usize::MAX) - len);
+		}
+		self.trivia.push((trivia, next));
 	}
 
 	#[allow(clippy::should_implement_trait)]
@@ -460,7 +487,7 @@ where
 					self.buffer_index = i;
 					// Associate pending trivia with EOF if any
 					if !pending_trivia.is_empty() {
-						self.trivia.push((pending_trivia.clone(), c));
+						self.push_trivia(pending_trivia, c);
 					}
 					#[cfg(debug_assertions)]
 					{
@@ -476,7 +503,7 @@ where
 					}
 					// Associate all pending trivia with this content token
 					if !pending_trivia.is_empty() {
-						self.trivia.push((pending_trivia.clone(), c));
+						self.push_trivia(pending_trivia, c);
 					}
 					#[cfg(debug_assertions)]
 					{
@@ -637,4 +664,35 @@ fn new_at_eof_after_buffer_refill() {
 	let eof = p.next();
 	assert_eq!(eof.token(), Kind::Eof);
 	assert_eq!(eof.offset(), end);
+}
+
+#[test]
+fn peek_n_matches_token_sequence() {
+	let str = "a /**/ 1 /**//**//**//**//**//**//**//**//**//**//**//**//**/ b  , /**/ c 2 3 4 5 6 7 8 9 10 11 12 13 d";
+	let tokens: std::vec::Vec<Cursor> = css_lexer::Lexer::new(&css_lexer::EmptyAtomSet::ATOMS, str).collect();
+	for skip in [KindSet::NONE, KindSet::COMMENTS, KindSet::WHITESPACE, KindSet::TRIVIA] {
+		let alloc = crate::Arena::default();
+		let lexer = css_lexer::Lexer::new(&css_lexer::EmptyAtomSet::ATOMS, str);
+		let mut p = Parser::new(&alloc, str, lexer);
+		p.set_skip(skip);
+		let expected: std::vec::Vec<Cursor> = tokens.iter().copied().filter(|cursor| *cursor != skip).collect();
+		for position in 0..expected.len() {
+			for n in 1..=16u8 {
+				let got = p.peek_n(n);
+				match expected.get(position + n as usize - 1) {
+					Some(want) => assert_eq!(
+						(got.offset(), got.token()),
+						(want.offset(), want.token()),
+						"skip {skip:?} position {position} n {n}"
+					),
+					None => assert_eq!(
+						(got.offset().0 as usize, got.token().kind()),
+						(str.len(), Kind::Eof),
+						"skip {skip:?} position {position} n {n}"
+					),
+				}
+			}
+			p.next();
+		}
+	}
 }

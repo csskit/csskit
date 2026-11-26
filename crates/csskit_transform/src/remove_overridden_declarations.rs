@@ -11,8 +11,8 @@ use css_parse::{AtomSet, Cursor, Declaration};
 /// greater importance.
 pub struct RemoveOverriddenDeclarations<'a, 'ctx, N: NodeWithMetadata<CssMetadata>> {
 	pub transformer: &'ctx Transformer<'a, CssMetadata, N, CssMinifierFeature>,
-	overriders: Vec<Overrider>,
-	overridden: Vec<usize>,
+	overriders: css_parse::Vec<'a, Overrider>,
+	overridden: css_parse::Vec<'a, usize>,
 }
 
 struct Property {
@@ -130,7 +130,11 @@ where
 	}
 
 	fn new(transformer: &'ctx Transformer<'a, CssMetadata, N, CssMinifierFeature>) -> Self {
-		Self { transformer, overriders: Vec::new(), overridden: Vec::new() }
+		Self {
+			transformer,
+			overriders: css_parse::Vec::new_in(transformer.alloc()),
+			overridden: css_parse::Vec::new_in(transformer.alloc()),
+		}
 	}
 }
 

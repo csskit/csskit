@@ -4,3 +4,8 @@
 
 [variables]
 properties = ["--*"]
+
+[spatial]
+# `[ pan | pan-inline || ... ]` nested in `||` is flattened into ambiguous variants; the first
+# (`orbit || resize || pan`) matches a prefix of `orbit resize pan-x` and stops.
+properties = ["portal-action"]
