@@ -139,6 +139,13 @@ impl<'a, T: SourceCursorSink<'a>> CursorSink for CursorCompactWriteSink<'a, T> {
 	fn append(&mut self, c: Cursor) {
 		self.write(SourceCursor::from(c, c.str_slice(self.source_text)))
 	}
+
+	fn append_trivia(&mut self, c: Cursor) {
+		// Declaration and at-rule terminators are AST cursors. Skipped semicolons are stray.
+		if c != Kind::Semicolon {
+			CursorSink::append(self, c);
+		}
+	}
 }
 
 impl<'a, T: SourceCursorSink<'a>> SourceCursorSink<'a> for CursorCompactWriteSink<'a, T> {

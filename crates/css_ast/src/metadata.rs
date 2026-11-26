@@ -797,7 +797,7 @@ mod tests {
 	use super::*;
 	use crate::{CssAtomSet, StyleSheet};
 	use css_lexer::Lexer;
-	use css_parse::{Arena, NodeMetadata, NodeWithMetadata, Parser};
+	use css_parse::{Arena, NodeMetadata, NodeWithMetadata, Parser, assert_parse};
 
 	#[test]
 	fn test_block_metadata_merge() {
@@ -839,20 +839,18 @@ mod tests {
 
 	#[test]
 	fn test_stylesheet_metadata_with_important() {
-		for (css, invalid_in_modern_browsers) in
-			[("body { color: red !important; }", false), ("body { color: red !important !important; }", true)]
-		{
-			let alloc = Arena::new();
-			let lexer = Lexer::new(&CssAtomSet::ATOMS, css);
-			let mut parser = Parser::new(&alloc, css, lexer);
-			let stylesheet = parser.parse::<StyleSheet>().unwrap();
-
+		assert_parse!(CssAtomSet::ATOMS, StyleSheet, "body { color: red !important; }", |stylesheet| {
 			let metadata = stylesheet.metadata();
-
 			assert!(metadata.has_important());
-			assert_eq!(metadata.has_declarations_invalid_in_modern_browsers(), invalid_in_modern_browsers);
+			assert!(!metadata.has_declarations_invalid_in_modern_browsers());
 			assert!(metadata.property_groups.contains(PropertyGroup::Color));
-		}
+		});
+		assert_parse!(CssAtomSet::ATOMS, StyleSheet, "body { color: red !important !important; }", |stylesheet| {
+			let metadata = stylesheet.metadata();
+			assert!(metadata.has_important());
+			assert!(metadata.has_declarations_invalid_in_modern_browsers());
+			assert!(metadata.property_groups.contains(PropertyGroup::Color));
+		});
 	}
 
 	#[test]

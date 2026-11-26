@@ -6,6 +6,11 @@ use crate::{SourceCursor, Token};
 /// are elided.
 pub trait CursorSink {
 	fn append(&mut self, c: Cursor);
+
+	/// Appends a cursor skipped by the parser and retained for round-trip output.
+	fn append_trivia(&mut self, c: Cursor) {
+		self.append(c);
+	}
 }
 
 pub trait SourceCursorSink<'a> {

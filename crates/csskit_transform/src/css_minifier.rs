@@ -132,6 +132,12 @@ mod tests {
 	}
 
 	#[test]
+	fn drops_stray_semicolons_between_nested_rules() {
+		let (output, _) = minify("a{b{color:red};c{color:blue}}", CssMinifierFeature::all_bits());
+		assert_eq!(output, "a{b{color:red}c{color:blue}}");
+	}
+
+	#[test]
 	fn keeps_important_suffix_within_its_declaration() {
 		for (input, expected) in [
 			(

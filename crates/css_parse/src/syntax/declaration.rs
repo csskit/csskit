@@ -43,6 +43,7 @@ where
 }
 
 /// The `!important` suffix of a declaration, including the legacy form with two flags.
+/// Serialization retains the original `BangImportant` object for one flag and uses an array for two.
 #[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(untagged))]
 pub enum DeclarationImportance {

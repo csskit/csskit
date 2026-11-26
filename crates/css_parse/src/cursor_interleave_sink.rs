@@ -47,7 +47,7 @@ impl<'a, S: CursorSink + ?Sized> CursorSink for CursorInterleaveSink<'a, S> {
 			let (trivia, associated_cursor) = &self.interleave[self.current_index];
 			if associated_cursor.offset() == c.offset() && associated_cursor.token().kind() == c.token().kind() {
 				for cursor in trivia {
-					self.sink.append(*cursor);
+					self.sink.append_trivia(*cursor);
 				}
 				self.current_index += 1;
 				break;
@@ -63,7 +63,7 @@ impl<'a, S: CursorSink + ?Sized> CursorSink for CursorInterleaveSink<'a, S> {
 			while self.current_index < self.interleave.len() {
 				let (trivia, _) = &self.interleave[self.current_index];
 				for cursor in trivia {
-					self.sink.append(*cursor);
+					self.sink.append_trivia(*cursor);
 				}
 				self.current_index += 1;
 			}
