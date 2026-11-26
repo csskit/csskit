@@ -230,6 +230,7 @@ mod tests {
 	fn test_writes() {
 		assert_parse!(CssAtomSet::ATOMS, StyleSheet, "body{}");
 		assert_parse!(CssAtomSet::ATOMS, StyleSheet, "body{color:red;}");
+		assert_parse!(CssAtomSet::ATOMS, StyleSheet, "a{b{color:red};c{color:blue}}");
 		assert_parse!(CssAtomSet::ATOMS, StyleSheet, "body,tr:nth-child(n-1){}");
 		assert_parse!(CssAtomSet::ATOMS, StyleSheet, "body{width:1px;}");
 		assert_parse!(CssAtomSet::ATOMS, StyleSheet, "body{width:1px;}.a{width:2px;}");

@@ -132,6 +132,8 @@ pub enum DeclarationKind {
 	Shorthands,
 	/// If a declaration is longhand
 	Longhands,
+	/// If a declaration uses syntax rejected by modern browsers, such as a duplicate `!important`.
+	InvalidInModernBrowsers,
 }
 
 /// Categories of nodes present in metadata, used for selector filtering.
@@ -339,6 +341,12 @@ impl CssMetadata {
 	#[inline]
 	pub fn has_important(&self) -> bool {
 		self.declaration_kinds.contains(DeclarationKind::Important)
+	}
+
+	/// Returns true if this node or its subtree contains a declaration marked as invalid in modern browsers.
+	#[inline]
+	pub fn has_declarations_invalid_in_modern_browsers(&self) -> bool {
+		self.declaration_kinds.contains(DeclarationKind::InvalidInModernBrowsers)
 	}
 
 	/// Returns true if metadata contains custom properties.
@@ -789,7 +797,7 @@ mod tests {
 	use super::*;
 	use crate::{CssAtomSet, StyleSheet};
 	use css_lexer::Lexer;
-	use css_parse::{Arena, NodeMetadata, NodeWithMetadata, Parser};
+	use css_parse::{Arena, NodeMetadata, NodeWithMetadata, Parser, assert_parse};
 
 	#[test]
 	fn test_block_metadata_merge() {
@@ -831,16 +839,18 @@ mod tests {
 
 	#[test]
 	fn test_stylesheet_metadata_with_important() {
-		let css = "body { color: red !important; }";
-		let alloc = Arena::new();
-		let lexer = Lexer::new(&CssAtomSet::ATOMS, css);
-		let mut parser = Parser::new(&alloc, css, lexer);
-		let stylesheet = parser.parse::<StyleSheet>().unwrap();
-
-		let metadata = stylesheet.metadata();
-
-		assert!(metadata.has_important());
-		assert!(metadata.property_groups.contains(PropertyGroup::Color));
+		assert_parse!(CssAtomSet::ATOMS, StyleSheet, "body { color: red !important; }", |stylesheet| {
+			let metadata = stylesheet.metadata();
+			assert!(metadata.has_important());
+			assert!(!metadata.has_declarations_invalid_in_modern_browsers());
+			assert!(metadata.property_groups.contains(PropertyGroup::Color));
+		});
+		assert_parse!(CssAtomSet::ATOMS, StyleSheet, "body { color: red !important !important; }", |stylesheet| {
+			let metadata = stylesheet.metadata();
+			assert!(metadata.has_important());
+			assert!(metadata.has_declarations_invalid_in_modern_browsers());
+			assert!(metadata.property_groups.contains(PropertyGroup::Color));
+		});
 	}
 
 	#[test]

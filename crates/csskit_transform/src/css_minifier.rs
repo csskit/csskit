@@ -132,6 +132,38 @@ mod tests {
 	}
 
 	#[test]
+	fn drops_stray_semicolons_between_nested_rules() {
+		let (output, _) = minify("a{b{color:red};c{color:blue}}", CssMinifierFeature::all_bits());
+		assert_eq!(output, "a{b{color:red}c{color:blue}}");
+	}
+
+	#[test]
+	fn keeps_important_suffix_within_its_declaration() {
+		for (input, expected) in [
+			(
+				"a {\n  background: red !important !important;\n  background: tan;\n}",
+				"a{background:red!important!important;background:tan}",
+			),
+			("a{color:red !foo;background:tan}", "a{color:red !foo;background:tan}"),
+			// A value that ends in a `{}` block keeps its `;` when another declaration follows.
+			("a{color:red !important {x};background:tan}", "a{color:red !important{x};background:tan}"),
+			("a{color:red !foo {x};background:tan}", "a{color:red !foo{x};background:tan}"),
+			("a{--x:{x};background:tan}", "a{--x:{x};background:tan}"),
+			("a{--x:{x};}", "a{--x:{x}}"),
+		] {
+			let (output, _) = minify(input, CssMinifierFeature::all_bits());
+			assert_eq!(output, expected, "input: {}", input);
+		}
+	}
+
+	#[test]
+	fn reduces_values_with_duplicate_important() {
+		let (output, changed) = minify("a{width:0px !important !important}", CssMinifierFeature::all_bits());
+		assert!(changed);
+		assert_eq!(output, "a{width:0!important!important}");
+	}
+
+	#[test]
 	fn test_color_mix_with_math_percentage_commits() {
 		for (input, expected) in [
 			("a{color:color-mix(in srgb, red calc(50%), blue)}", "a{color:purple}"),

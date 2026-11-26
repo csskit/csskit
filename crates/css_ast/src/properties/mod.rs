@@ -367,6 +367,9 @@ fn with_declaration_flags<'a>(decl: &Declaration<'a, StyleValue<'a>, CssMetadata
 	if decl.important.is_some() {
 		meta.declaration_kinds |= DeclarationKind::Important;
 	}
+	if decl.has_duplicate_important() {
+		meta.declaration_kinds |= DeclarationKind::InvalidInModernBrowsers;
+	}
 	if decl.name.is_dashed_ident() {
 		meta.node_kinds |= NodeKinds::Custom;
 	}
@@ -453,6 +456,36 @@ mod tests {
 		);
 
 		assert_parse!(CssAtomSet::ATOMS, Property, "float:none!important");
+		assert_parse!(CssAtomSet::ATOMS, Property, "background:red !important /* legacy */ !IMPORTANT", |node| {
+			assert!(matches!(node.value, StyleValue::Background(_)));
+			assert!(node.has_duplicate_important());
+			assert!(node.self_metadata().has_declarations_invalid_in_modern_browsers());
+		});
+		assert_parse!(CssAtomSet::ATOMS, Property, "color:var(--a) !important !important;", |node| {
+			assert!(matches!(node.value, StyleValue::Color(_)));
+			assert!(node.has_duplicate_important());
+			assert!(node.metadata().has_declarations_invalid_in_modern_browsers());
+			assert!(node.semicolon.is_some());
+		});
+		// A different flag, or more than two flags, leaves the declaration unknown.
+		assert_parse!(
+			CssAtomSet::ATOMS,
+			Property,
+			"color:red !foo",
+			Property { value: StyleValue::Unknown(_), important: None, .. }
+		);
+		assert_parse!(
+			CssAtomSet::ATOMS,
+			Property,
+			"color:red !important !important !foo;",
+			Property { value: StyleValue::Unknown(_), important: None, semicolon: Some(_), .. }
+		);
+		assert_parse!(
+			CssAtomSet::ATOMS,
+			Property,
+			"color:red !important !important !important;",
+			Property { value: StyleValue::Unknown(_), important: None, semicolon: Some(_), .. }
+		);
 		assert_parse!(CssAtomSet::ATOMS, Property, "width:1px");
 		assert_parse!(CssAtomSet::ATOMS, Property, "width:min(1px, 2px)");
 		assert_parse!(CssAtomSet::ATOMS, Property, "border:1px solid var(--red)");
