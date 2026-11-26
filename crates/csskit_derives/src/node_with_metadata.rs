@@ -243,8 +243,10 @@ pub fn derive(input: DeriveInput) -> Result<TokenStream> {
 			}
 		})
 		.collect();
+	let inline = block.is_some().then(|| quote! { #[inline] });
 	let merge_metadata = if merge_self.is_some() || merges_fields {
 		quote! {
+			#inline
 			fn merge_metadata(&self, meta: &mut crate::CssMetadata) {
 				#merge_self
 				match self { #(#arms)* }
