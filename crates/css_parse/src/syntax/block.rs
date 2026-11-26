@@ -221,8 +221,8 @@ where
 						}
 					}
 				}
-			} else if let Ok(Some(decl)) =
-				p.parse_if_peek::<Declaration<'a, D, M>>().inspect_err(|_| p.rewind(checkpoint.clone()))
+			} else if <Declaration<'a, D, M>>::peek(p, c)
+				&& let Ok(decl) = p.parse::<Declaration<'a, D, M>>().inspect_err(|_| p.rewind(checkpoint.clone()))
 			{
 				// https://drafts.csswg.org/css-syntax-3/#consume-a-blocks-contents
 				// Parsing a declaration can result in an error, at which point the parser must be rewound and a Rule parse
