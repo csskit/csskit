@@ -13,7 +13,7 @@ case insensitive string intern map, but this can often add additional overhead
 making the intern map take even longer to match. For performance critical
 implementations, this overhead can be undesirable.
 
-[unicase]: https://en.wikipedia.org/wiki/String_interning
+[unicase]: https://crates.io/crates/unicase
 
 `derive_atom_set` expects you to enumerate all keywords upfront, in an enum,
 rather than a map. Knowing every keyword ahead of time lets it make some
@@ -26,7 +26,7 @@ names) add `#[atom_set(case_sensitive)]` to the enum to match bytes exactly.
 ## Usage
 
 The macro implements the `AtomSet` trait from the [`atom_set`] crate,
-generating implementations bespoke to your enums discriminants:
+generating implementations bespoke to your enum's discriminants:
 
 ```rust
 use atom_set::AtomSet;
@@ -75,6 +75,7 @@ Without an `atom` attribute, variant names are converted to kebab-case:
 | `WebkitTransform` | `"webkit-transform"` |
 
 The macro supports fieldless enums. All atoms must be known at compile time.
+Atoms that are equal are a compile error.
 
 `as_bits()` values are enum discriminants. Do not treat them as a stable
 serialization format unless the enum assigns and maintains explicit
@@ -82,33 +83,24 @@ discriminants.
 
 ## How matching works
 
-`derive_atom_set` uses compile time checks to use a bunch of gnarly tricks to
-efficiently string match, aiming for sub-20ns lookup matching against 1000s of
-atoms. It does so with a few interesting techniques:
+`derive_atom_set` builds its lookup tables at compile time, aiming for a few
+nanoseconds per lookup against 1000s of atoms, whether or not the string is an
+atom:
 
-- All atoms are bucketed by their length, which means an atom set can cheaply
-  check character length and only match against atoms in that length bucket,
-  significantly reducing the number of potential branches. If you have 100 atoms
-  and only 5 of them are 10 characters or less, `derive_atom_set` intrinsically
-  will not match against the remaining 95 atoms. Likewise, this means matching
-  against unknown strings happens really quickly, as a string with an
-  un-bucketed length is immediately discarded.
-- It routes strings to different character matching algorithms based on the
-  length:
-  - Single letter keywords use a lookup table for the lowest number of
-    operations (an index lookup in a static array).
-  - Small strings get packed into a u64 binary value, with a compiled match
-    table. This makes for extremely fast lookup on 64-bit hardware.
-  - Medium strings are packed into a u128, which processes well on SIMD capable
-    hardware (most modern CPUs).
-  - Large (16 chars or more) strings are packed into u128 chunks, the slowest,
-    but also likely the most infrequent keywords in your corpus (unless you're
-    parsing Java).
-- Atoms (grouped by length) are also assessed for ASCII compatibility. If the
-  group is ASCII alphanumeric compatible, extremely cheap case folding is done,
-  otherwise a slightly slower (but still very vast) ASCII case folding is done,
-  otherwise it resorts to unicode case folding. The detection is done at compile
-  time meaning
+- All atoms are bucketed by their length, so a lookup only considers atoms of
+  the input's length, and a string with an un-bucketed length is discarded
+  straight away.
+- Single letter keywords use a lookup table (an index into a static array).
+- Longer strings are packed into integers: a u64 up to 8 bytes, and 16 byte
+  u128 chunks beyond that. Unless `case_sensitive`, packed keys are ASCII case
+  folded. If every atom in a length bucket is simple enough (`is_fold_safe`)
+  then a cheap fold is used, otherwise the bucket uses a more complex folding
+  technique.
+- Each length bucket gets a perfect hash table, found at compile time by "hash
+  and displace": a multiply hashes the packed key, the top bits of the hash
+  select a displacement, and XORing the displacement into the low bits selects
+  the only slot the key can occupy. A lookup is one hash, one displacement load
+  and one key comparison, with no branching on the key itself.
 
 The csskit workspace uses the macro for its full CSS atom set. See
 [`CssAtomSet`] for a large real-world example

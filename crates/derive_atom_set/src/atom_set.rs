@@ -52,20 +52,75 @@ fn generate_ascii_table_1char_fn(
 		}
 	}
 }
+const SEED_ATTEMPTS: usize = 10_000;
 
-fn string_to_multi_u128_keys(s: &str, case_sensitive: bool) -> Vec<u128> {
-	let bytes = s.as_bytes();
-	let mut keys = Vec::new();
-	for chunk_start in (0..bytes.len()).step_by(16) {
-		let chunk_end = (chunk_start + 16).min(bytes.len());
-		let mut buf = [0u8; 16];
-		for (i, &byte) in bytes[chunk_start..chunk_end].iter().enumerate() {
-			buf[i] = if case_sensitive { byte } else { byte.to_ascii_lowercase() };
+fn pack(bytes: &[u8], case_sensitive: bool) -> u128 {
+	bytes.iter().enumerate().fold(0, |acc, (i, &byte)| {
+		acc | ((if case_sensitive { byte } else { byte.to_ascii_lowercase() } as u128) << (i * 8))
+	})
+}
+
+fn fold_multiply(a: u64, b: u64) -> u64 {
+	let product = (a as u128) * (b as u128);
+	(product as u64) ^ ((product >> 64) as u64)
+}
+
+fn hash_words(words: &[(u64, u64)], (seed, multiplier_seed): (u64, u64)) -> u64 {
+	words.iter().fold(seed, |hash, &(low, high)| fold_multiply(low ^ hash, high ^ multiplier_seed))
+}
+
+fn splitmix64(state: &mut u64) -> u64 {
+	*state = state.wrapping_add(0x9e37_79b9_7f4a_7c15);
+	let mut mixed = *state;
+	mixed = (mixed ^ (mixed >> 30)).wrapping_mul(0xbf58_476d_1ce4_e5b9);
+	mixed = (mixed ^ (mixed >> 27)).wrapping_mul(0x94d0_49bb_1331_11eb);
+	mixed ^ (mixed >> 31)
+}
+
+struct PerfectHash {
+	seeds: (u64, u64),
+	bucket_bits: u32,
+	displacements: Vec<u16>,
+	slots: Vec<Option<usize>>,
+}
+
+fn build_perfect_hash(keys: &[Vec<(u64, u64)>]) -> PerfectHash {
+	let slot_count = (keys.len() + keys.len() / 4 + 1).next_power_of_two();
+	let slot_mask = slot_count as u64 - 1;
+	let bucket_bits = (keys.len() / 2).next_power_of_two().max(2).trailing_zeros();
+	let mut state = 0;
+	for _ in 0..SEED_ATTEMPTS {
+		let seeds = (splitmix64(&mut state), splitmix64(&mut state));
+		let hashes: Vec<u64> = keys.iter().map(|words| hash_words(words, seeds)).collect();
+		let mut buckets = vec![Vec::new(); 1 << bucket_bits];
+		for (index, hash) in hashes.iter().enumerate() {
+			buckets[(hash >> (64 - bucket_bits)) as usize].push(index);
 		}
-		keys.push(u128::from_le_bytes(buf));
+		let mut slots = vec![None; slot_count];
+		let mut displacements = vec![0; buckets.len()];
+		let placed =
+			(0..buckets.len()).sorted_by_key(|&bucket| std::cmp::Reverse(buckets[bucket].len())).all(|bucket| {
+				(0..slot_count as u64).any(|displacement| {
+					let targets: Vec<usize> = buckets[bucket]
+						.iter()
+						.map(|&index| ((hashes[index] ^ displacement) & slot_mask) as usize)
+						.collect();
+					let free = targets.iter().all_unique() && targets.iter().all(|&slot| slots[slot].is_none());
+					if free {
+						for (&slot, &index) in targets.iter().zip(&buckets[bucket]) {
+							slots[slot] = Some(index);
+						}
+						displacements[bucket] =
+							u16::try_from(displacement).expect("AtomSet: perfect hash displacement exceeds u16");
+					}
+					free
+				})
+			});
+		if placed {
+			return PerfectHash { seeds, bucket_bits, displacements, slots };
+		}
 	}
-
-	keys
+	panic!("AtomSet: found no perfect hash for {} atoms", keys.len());
 }
 
 // The u64/u128 lookups case fold with `b |= (b & 0x40) >> 1`, which also folds the punctuation
@@ -80,7 +135,7 @@ fn is_fold_safe(s: &str) -> bool {
 // A byte is safe for the `& 0x40` fold if the set of inputs that fold to it is exactly the set of
 // its ASCII case variants. Groups holding any other byte fold with a wider sequence that touches
 // only A-Z, and that cannot carry between lanes.
-fn generate_fold(fold_safe: bool, case_sensitive: bool, width: usize) -> TokenStream2 {
+fn generate_fold(fold_safe: bool, case_sensitive: bool, width: usize, var: &proc_macro2::Ident) -> TokenStream2 {
 	if case_sensitive {
 		return quote! {};
 	}
@@ -88,170 +143,121 @@ fn generate_fold(fold_safe: bool, case_sensitive: bool, width: usize) -> TokenSt
 		|byte: u8| Literal::u128_unsuffixed((0..width).fold(0u128, |acc, i| acc | ((byte as u128) << (i * 8))));
 	if fold_safe {
 		let ones = repeat(0x40);
-		quote! { key |= (key & #ones) >> 1; }
+		quote! { #var |= (#var & #ones) >> 1; }
 	} else {
 		let low_bits = repeat(0x7f);
 		let ge_a = repeat(0x3f);
 		let gt_z = repeat(0x25);
 		let high_bits = repeat(0x80);
 		quote! {
-			let low = key & #low_bits;
-			key |= ((low + #ge_a) & !(low + #gt_z) & !key & #high_bits) >> 2;
+			let low = #var & #low_bits;
+			#var |= ((low + #ge_a) & !(low + #gt_z) & !#var & #high_bits) >> 2;
 		}
 	}
 }
 
-fn generate_u64_lookup_fn(
+fn generate_lookup_fn(
 	fn_name: &proc_macro2::Ident,
 	group: &[(&proc_macro2::Ident, String)],
 	len: usize,
 	default_variant: &proc_macro2::Ident,
+	type_name: &proc_macro2::Ident,
 	fold_safe: bool,
 	case_sensitive: bool,
 ) -> TokenStream2 {
-	let keys: Vec<u64> = group
+	let chunk_count = len.div_ceil(16);
+	let chunks: Vec<Vec<u128>> = group
 		.iter()
-		.map(|(_, s)| {
-			s.bytes().take(8).enumerate().fold(0, |acc, (i, b)| {
-				acc | ((if case_sensitive { b } else { b.to_ascii_lowercase() } as u64) << (i * 8))
-			})
-		})
+		.map(|(_, string)| string.as_bytes().chunks(16).map(|chunk| pack(chunk, case_sensitive)).collect())
 		.collect();
-	let variants: Vec<_> = group.iter().map(|(ident, _)| ident).collect();
-
-	// For lengths less than 8, we need padding
-	let key_computation = if len == 8 {
-		quote! {
-			let mut key = u64::from_le_bytes(b[..8].try_into().unwrap());
-		}
-	} else {
-		quote! {
-			let mut bytes = [0u8; 8];
-			bytes[..#len].copy_from_slice(&b[..#len]);
-			let mut key = u64::from_le_bytes(bytes);
-		}
-	};
-	let fold = generate_fold(fold_safe, case_sensitive, 8);
-
-	quote! {
-		fn #fn_name(b: &[u8]) -> Self {
-			#key_computation
-			#fold
-			match key {
-				#( #keys => Self::#variants, )*
-				_ => Self::#default_variant,
-			}
-		}
-	}
-}
-
-fn generate_u128_lookup_fn(
-	fn_name: &proc_macro2::Ident,
-	group: &[(&proc_macro2::Ident, String)],
-	len: usize,
-	default_variant: &proc_macro2::Ident,
-	fold_safe: bool,
-	case_sensitive: bool,
-) -> TokenStream2 {
-	let keys: Vec<u128> = group
+	let words: Vec<Vec<(u64, u64)>> = chunks
 		.iter()
-		.map(|(_, s)| {
-			s.bytes().take(16).enumerate().fold(0, |acc, (i, b)| {
-				acc | ((if case_sensitive { b } else { b.to_ascii_lowercase() } as u128) << (i * 8))
-			})
-		})
+		.map(|chunks| chunks.iter().map(|&chunk| (chunk as u64, (chunk >> 64) as u64)).collect())
 		.collect();
-	let variants: Vec<_> = group.iter().map(|(ident, _)| ident).collect();
+	let PerfectHash { seeds: (seed, multiplier_seed), bucket_bits, displacements, slots } = build_perfect_hash(&words);
 
-	// For lengths less than 16, we need padding
-	let key_computation = if len == 16 {
-		quote! {
-			let mut key = u128::from_le_bytes(b[..16].try_into().unwrap());
-		}
-	} else {
-		quote! {
-			let mut bytes = [0u8; 16];
-			bytes[..#len].copy_from_slice(&b[..#len]);
-			let mut key = u128::from_le_bytes(bytes);
-		}
-	};
-	let fold = generate_fold(fold_safe, case_sensitive, 16);
+	let bucket_count = displacements.len();
+	let bucket_shift = 64 - bucket_bits;
+	let slot_count = slots.len();
+	let slot_mask = slot_count as u64 - 1;
+	let atoms = slots.iter().map(|slot| {
+		let variant = slot.map_or(default_variant, |index| group[index].0);
+		quote! { #type_name::#variant }
+	});
 
-	quote! {
-		fn #fn_name(b: &[u8]) -> Self {
-			#key_computation
-			#fold
-			match key {
-				#( #keys => Self::#variants, )*
-				_ => Self::#default_variant,
-			}
-		}
-	}
-}
-
-fn generate_multi_u128_lookup_fn(
-	fn_name: &proc_macro2::Ident,
-	group: &[(&proc_macro2::Ident, String)],
-	len: usize,
-	default_variant: &proc_macro2::Ident,
-	case_sensitive: bool,
-) -> TokenStream2 {
-	let num_chunks = len.div_ceil(16);
-
-	// Generate individual match arms for each string
-	let lookup_entries: Vec<_> = group
-		.iter()
-		.map(|(ident, string)| {
-			let keys = string_to_multi_u128_keys(string, case_sensitive);
-			let mut padded_keys = keys;
-			while padded_keys.len() < num_chunks {
-				padded_keys.push(0);
-			}
-			let key_checks = padded_keys.iter().enumerate().map(|(chunk_idx, &key)| {
-				let chunk_var = quote::format_ident!("chunk_{}", chunk_idx);
-				quote! { #chunk_var == #key }
-			});
+	let key = format_ident!("key");
+	let chunk = format_ident!("chunk");
+	let (key_type, keys, key_computation, hash_inputs): (_, Vec<_>, _, Vec<_>) = if len <= 8 {
+		let keys = slots.iter().map(|slot| Literal::u64_suffixed(slot.map_or(0, |index| chunks[index][0] as u64)));
+		let load = if len == 8 {
+			quote! { let mut key = u64::from_le_bytes(b[..8].try_into().unwrap()); }
+		} else {
 			quote! {
-				if #(#key_checks)&&* {
-					return Self::#ident;
-				}
+				let mut bytes = [0u8; 8];
+				bytes[..#len].copy_from_slice(&b[..#len]);
+				let mut key = u64::from_le_bytes(bytes);
 			}
-		})
-		.collect();
-
-	let chunk_computations: Vec<_> = (0..num_chunks)
-		.map(|chunk_idx| {
-			let chunk_start = chunk_idx * 16;
-			let chunk_end = std::cmp::min(chunk_start + 16, len);
-			let bytes_in_chunk = chunk_end - chunk_start;
-			let chunk_var = quote::format_ident!("chunk_{}", chunk_idx);
-
-			if bytes_in_chunk == 0 {
-				quote! { let #chunk_var = 0u128; }
-			} else if case_sensitive {
-				quote! {
-					let mut buf = [0u8; 16];
-					buf[..#bytes_in_chunk].copy_from_slice(&b[#chunk_start..#chunk_end]);
-					let #chunk_var = u128::from_le_bytes(buf);
-				}
+		};
+		let fold = generate_fold(fold_safe, case_sensitive, 8, &key);
+		(
+			quote! { u64 },
+			keys.map(|key| quote! { #key }).collect(),
+			quote! { #load #fold },
+			vec![(quote! { key }, quote! { 0u64 })],
+		)
+	} else {
+		let keys = slots.iter().map(|slot| {
+			let chunks = slot.map_or(vec![0; chunk_count], |index| chunks[index].clone());
+			let chunks = chunks.into_iter().map(Literal::u128_suffixed);
+			quote! { [#(#chunks),*] }
+		});
+		let loads = (0..chunk_count).map(|index| {
+			let start = index * 16;
+			let end = (start + 16).min(len);
+			let load = if end - start == 16 {
+				quote! { let mut chunk = u128::from_le_bytes(b[#start..#end].try_into().unwrap()); }
 			} else {
-				// Need to normalize to lowercase
+				let width = end - start;
 				quote! {
-					let mut buf = [0u8; 16];
-					for i in 0..#bytes_in_chunk {
-						buf[i] = b[#chunk_start + i].to_ascii_lowercase();
-					}
-					let #chunk_var = u128::from_le_bytes(buf);
+					let mut bytes = [0u8; 16];
+					bytes[..#width].copy_from_slice(&b[#start..#end]);
+					let mut chunk = u128::from_le_bytes(bytes);
 				}
-			}
-		})
-		.collect();
+			};
+			let fold = generate_fold(fold_safe, case_sensitive, 16, &chunk);
+			quote! {{ #load #fold chunk }}
+		});
+		let hash_inputs =
+			(0..chunk_count).map(|index| (quote! { key[#index] as u64 }, quote! { (key[#index] >> 64) as u64 }));
+		(quote! { [u128; #chunk_count] }, keys.collect(), quote! { let key = [#(#loads),*]; }, hash_inputs.collect())
+	};
+	let hash_steps = hash_inputs.iter().map(|(low, high)| {
+		quote! {
+			let product = ((#low ^ hash) as u128) * ((#high ^ #multiplier_seed) as u128);
+			let hash = (product as u64) ^ ((product >> 64) as u64);
+		}
+	});
+	let key_matches = if len <= 8 {
+		quote! { KEYS[slot] == key }
+	} else {
+		let differences = (0..chunk_count).map(|index| quote! { (expected[#index] ^ key[#index]) });
+		quote! {{
+			let expected = &KEYS[slot];
+			(#(#differences)|*) == 0
+		}}
+	};
 
 	quote! {
+		#[inline]
 		fn #fn_name(b: &[u8]) -> Self {
-			#(#chunk_computations)*
-			#(#lookup_entries)*
-			Self::#default_variant
+			static DISPLACEMENTS: [u16; #bucket_count] = [#(#displacements),*];
+			static KEYS: [#key_type; #slot_count] = [#(#keys),*];
+			static ATOMS: [#type_name; #slot_count] = [#(#atoms),*];
+			#key_computation
+			let hash: u64 = #seed;
+			#(#hash_steps)*
+			let slot = ((hash ^ DISPLACEMENTS[(hash >> #bucket_shift) as usize] as u64) & #slot_mask) as usize;
+			if #key_matches { ATOMS[slot] } else { Self::#default_variant }
 		}
 	}
 }
@@ -294,6 +300,15 @@ pub fn generate(_args: TokenStream2, mut input: DeriveInput) -> TokenStream2 {
 		)
 	});
 
+	let mut seen = std::collections::HashMap::new();
+	for (ident, string) in variants_and_strings.clone() {
+		let key = if case_sensitive { string.clone() } else { string.to_ascii_lowercase() };
+		if let Some(previous) = seen.insert(key, ident) {
+			let message = format!("atom {string:?} of {ident} duplicates {previous}");
+			return syn::Error::new_spanned(ident, message).to_compile_error();
+		}
+	}
+
 	let to_str_match_arms = variants_and_strings.clone().map(|(ident, string)| quote! { Self::#ident => #string });
 
 	let from_bits_match_arms = variants.iter().filter_map(|Variant { ident, .. }| {
@@ -323,19 +338,10 @@ pub fn generate(_args: TokenStream2, mut input: DeriveInput) -> TokenStream2 {
 			let fn_name = format_ident!("match_str_of_len_{}", len_usize);
 			let fold_safe = group.iter().all(|(_, string)| is_fold_safe(string));
 
-			// Choose the appropriate strategy based on string length
 			let fn_match = if len_usize == 1 {
-				// Use ASCII table lookup for 1-char strings
 				generate_ascii_table_1char_fn(&fn_name, &group, default_variant, ident, case_sensitive)
-			} else if len_usize <= 8 {
-				// Use u64 lookup table for strings 4-8 chars
-				generate_u64_lookup_fn(&fn_name, &group, len_usize, default_variant, fold_safe, case_sensitive)
-			} else if len_usize <= 16 {
-				// Use u128 lookup table for strings 9-16 chars
-				generate_u128_lookup_fn(&fn_name, &group, len_usize, default_variant, fold_safe, case_sensitive)
 			} else {
-				// Use multiple u128 chunks for very long strings (>16)
-				generate_multi_u128_lookup_fn(&fn_name, &group, len_usize, default_variant, case_sensitive)
+				generate_lookup_fn(&fn_name, &group, len_usize, default_variant, ident, fold_safe, case_sensitive)
 			};
 
 			let idents: Vec<_> = group.iter().map(|(ident, _)| ident).collect();

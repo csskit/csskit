@@ -15,6 +15,8 @@ enum CaseSensitiveAtomSet {
 	PreserveAspectRatio,
 	#[atom("externalResourcesRequired")]
 	ExternalResourcesRequired,
+	#[atom("thirtyTwoByteAtomForCaseTesting1")]
+	ThirtyTwoBytes,
 }
 
 #[test]
@@ -29,6 +31,24 @@ fn case_sensitive_matches_exact_bytes_only() {
 	assert_eq!(CaseSensitiveAtomSet::from_str("A"), _None);
 	assert_eq!(CaseSensitiveAtomSet::from_str("preserveaspectratio"), _None);
 	assert_eq!(CaseSensitiveAtomSet::from_str("externalResourcesrequired"), _None);
+}
+
+#[test]
+fn matches_atoms_ending_on_a_full_chunk() {
+	assert_eq!(TestAtomSet::from_str("thirty-two-byte-atom-for-testing"), TestAtomSet::ThirtyTwoBytes);
+	assert_eq!(TestAtomSet::from_str("THIRTY-TWO-BYTE-ATOM-FOR-TESTING"), TestAtomSet::ThirtyTwoBytes);
+	assert_eq!(TestAtomSet::from_str("thirty-two-byte-atom-for-testinG"), TestAtomSet::ThirtyTwoBytes);
+	assert_eq!(TestAtomSet::from_str("thirty-two-byte-atom-for-testinh"), TestAtomSet::_None);
+	assert_eq!(TestAtomSet::from_str("thirty-two-byte_atom-for-testing"), TestAtomSet::_None);
+	assert_eq!(
+		CaseSensitiveAtomSet::from_str("thirtyTwoByteAtomForCaseTesting1"),
+		CaseSensitiveAtomSet::ThirtyTwoBytes
+	);
+	assert_eq!(CaseSensitiveAtomSet::from_str("thirtyTwoByteAtomForCaseTestinG1"), CaseSensitiveAtomSet::_None);
+	assert_eq!(CaseSensitiveAtomSet::from_str("thirtytwobyteatomforcasetesting1"), CaseSensitiveAtomSet::_None);
+	assert_eq!(PunctuationAtomSet::from_str("thirty_two_byte_under_score_atom"), PunctuationAtomSet::ThirtyTwoBytes);
+	assert_eq!(PunctuationAtomSet::from_str("THIRTY_TWO_BYTE_UNDER_SCORE_ATOM"), PunctuationAtomSet::ThirtyTwoBytes);
+	assert_eq!(PunctuationAtomSet::from_str("thirty_two_byte_under\u{7f}score_atom"), PunctuationAtomSet::_None);
 }
 
 #[derive(DeriveAtomSet, Debug, Default, Clone, Copy, PartialEq, Eq)]
@@ -59,6 +79,8 @@ enum TestAtomSet {
 	VeryLongAtomStr,               // 18 chars
 	ExtremelyLongAtomString,       // 27 chars
 	SuperLongAtomStringForTesting, // 33 chars
+	#[atom("thirty-two-byte-atom-for-testing")]
+	ThirtyTwoBytes,
 
 	// Custom atoms
 	#[atom("%")]
@@ -131,6 +153,10 @@ enum PunctuationAtomSet {
 	AsciiSibling,
 	#[atom("ünder_score_ünder_score")]
 	LongNonAscii,
+	#[atom("thirty_two_byte_under_score_atom")]
+	ThirtyTwoBytes,
+	#[atom("z@`")]
+	FoldRangeEdges,
 }
 
 #[test]
@@ -167,4 +193,37 @@ fn matches_atoms_with_unicode() {
 		PunctuationAtomSet::from_str("very\u{7f}long\u{7f}under\u{7f}score\u{7f}atom"),
 		PunctuationAtomSet::_None
 	);
+}
+
+fn assert_single_byte_mutations_match_oracle<T: AtomSet + Copy + PartialEq>(case_sensitive: bool) {
+	let atoms: Vec<T> = (1..=u8::MAX as u32).map(T::from_bits).filter(|&atom| atom != T::default()).collect();
+	let expected = |input: &str| {
+		atoms
+			.iter()
+			.copied()
+			.find(
+				|atom| if case_sensitive { atom.to_str() == input } else { atom.to_str().eq_ignore_ascii_case(input) },
+			)
+			.unwrap_or_default()
+	};
+	for atom in &atoms {
+		let name = atom.to_str().as_bytes();
+		let mut bytes = name.to_vec();
+		for i in 0..bytes.len() {
+			for byte in 0..=u8::MAX {
+				bytes[i] = byte;
+				if let Ok(input) = std::str::from_utf8(&bytes) {
+					assert_eq!(T::from_str(input), expected(input), "{input:?}");
+				}
+			}
+			bytes[i] = name[i];
+		}
+	}
+}
+
+#[test]
+fn single_byte_mutations_match_only_equal_atoms() {
+	assert_single_byte_mutations_match_oracle::<TestAtomSet>(false);
+	assert_single_byte_mutations_match_oracle::<PunctuationAtomSet>(false);
+	assert_single_byte_mutations_match_oracle::<CaseSensitiveAtomSet>(true);
 }
