@@ -310,6 +310,9 @@ pub(crate) trait QueryableNode: ToSpan + NodeWithMetadata<CssMetadata> {
 	/// Unique identifier for this node type.
 	const NODE_ID: NodeId;
 
+	/// [`NodeId::holds_rule_metadata`] of [`Self::NODE_ID`].
+	const RULE_ROOT: bool = Self::NODE_ID.holds_rule_metadata();
+
 	/// Returns a cursor for the given property kind, if the node has that property.
 	/// Used by attribute selectors to extract values from nodes.
 	///
@@ -327,7 +330,7 @@ pub(crate) trait QueryableNode: ToSpan + NodeWithMetadata<CssMetadata> {
 	where
 		Self: Sized,
 	{
-		VisitNode::new(Self::NODE_ID, self)
+		VisitNode::new(Self::NODE_ID, Self::RULE_ROOT, self)
 	}
 }
 
@@ -707,7 +710,7 @@ where
 
 	fn visit_node(&self) -> VisitNode<'_> {
 		// Use T::NODE_ID so each declaration type has its own identity.
-		VisitNode::new(T::NODE_ID, self)
+		VisitNode::new(T::NODE_ID, T::RULE_ROOT, self)
 	}
 }
 
