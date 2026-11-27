@@ -1,21 +1,48 @@
 #!/usr/bin/env bash
-#MISE description="Build a PGO-optimised release csskit, trained on coverage/popular"
+#MISE description="Build PGO-optimised release artifacts (binary, addon; default both), each trained on coverage/popular"
 set -euo pipefail
 
 target="$(rustc --print host-tuple)"
-exe=""
-[[ "$target" == *windows* ]] && exe=".exe"
-bin="target/$target/release/csskit$exe"
-packages=(-p csskit -p csskit_napi --features csskit_napi/napi)
+release="target/$target/release"
+case "$target" in
+*windows*) bin="$release/csskit.exe" addon="$release/csskit_napi.dll" ;;
+*apple*) bin="$release/csskit" addon="$release/libcsskit_napi.dylib" ;;
+*) bin="$release/csskit" addon="$release/libcsskit_napi.so" ;;
+esac
+
+artifact_args() {
+	case "$1" in
+	binary) args=(-p csskit) ;;
+	addon) args=(-p csskit_napi --features csskit_napi/napi) ;;
+	*)
+		echo "unknown artifact '$1', expected binary or addon" >&2
+		exit 2
+		;;
+	esac
+}
+
+train() {
+	case "$1" in
+	binary) for cmd in min fmt; do "$bin" "$cmd" coverage/popular/*.css >/dev/null; done ;;
+	addon) node .mise-tasks/.pgo-train-addon.js "$addon" coverage/popular/*.css ;;
+	esac
+}
+
+(($#)) || set -- binary addon
+for artifact in "$@"; do artifact_args "$artifact"; done
 
 # https://github.com/rust-lang/rust/issues/156675
 if [[ "$target" == aarch64-pc-windows-msvc ]]; then
-	cargo build --release --target "$target" "${packages[@]}"
+	for artifact in "$@"; do
+		artifact_args "$artifact"
+		cargo build --release --target "$target" "${args[@]}"
+	done
 	exit 0
 fi
 
-cargo pgo instrument build -- "${packages[@]}"
-
-for cmd in min fmt; do "$bin" "$cmd" coverage/popular/*.css >/dev/null; done
-
-cargo pgo optimize build -- "${packages[@]}"
+for artifact in "$@"; do
+	artifact_args "$artifact"
+	cargo pgo instrument build -- "${args[@]}"
+	train "$artifact"
+	cargo pgo optimize build -- "${args[@]}"
+done
