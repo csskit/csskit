@@ -48,6 +48,49 @@ where
 	const PEEK_KINDSET: KindSet = KindSet::new(&[Kind::LeftCurly]);
 }
 
+/// The contents of a [Block] without its braces, such as the value of an HTML `style` attribute. It is an
+/// implementation of ["parse a block's contents"][1], and runs to the end of the input.
+///
+/// [1]: https://drafts.csswg.org/css-syntax-3/#parse-block-contents
+#[node]
+#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize))]
+#[cfg_attr(feature = "serde", serde(bound(serialize = "D: serde::Serialize, R: serde::Serialize")))]
+pub struct BlockContents<'a, D, R, M>
+where
+	D: DeclarationValue<'a, M>,
+	M: NodeMetadata,
+{
+	pub declarations: Vec<'a, Declaration<'a, D, M>>,
+	pub rules: Vec<'a, R>,
+	#[cfg_attr(feature = "serde", serde(skip))]
+	pub meta: M,
+}
+
+impl<'a, D, R, M> NodeWithMetadata<M> for BlockContents<'a, D, R, M>
+where
+	D: DeclarationValue<'a, M>,
+	M: NodeMetadata,
+{
+	fn metadata(&self) -> M {
+		self.meta
+	}
+}
+
+impl<'a, D, R, M> Parse<'a> for BlockContents<'a, D, R, M>
+where
+	D: DeclarationValue<'a, M>,
+	R: Parse<'a> + NodeWithMetadata<M> + RuleVariants<'a, DeclarationValue = D, Metadata = M>,
+	M: NodeMetadata,
+{
+	fn parse<Iter>(p: &mut Parser<'a, Iter>) -> Result<Self>
+	where
+		Iter: Iterator<Item = crate::Cursor> + Clone,
+	{
+		Self::parse_contents(p, false)
+	}
+}
+
 impl<'a, D, R, M> Parse<'a> for Block<'a, D, R, M>
 where
 	D: DeclarationValue<'a, M>,
@@ -58,8 +101,24 @@ where
 	where
 		Iter: Iterator<Item = crate::Cursor> + Clone,
 	{
-		let nested = p.is(State::Nested);
 		let open_curly = p.parse::<T!['{']>()?;
+		let BlockContents { declarations, rules, meta } = BlockContents::parse_contents(p, true)?;
+		let close_curly = p.parse_if_peek::<T!['}']>()?;
+		Ok(Self { open_curly, declarations, rules, close_curly, meta })
+	}
+}
+
+impl<'a, D, R, M> BlockContents<'a, D, R, M>
+where
+	D: DeclarationValue<'a, M>,
+	R: Parse<'a> + NodeWithMetadata<M> + RuleVariants<'a, DeclarationValue = D, Metadata = M>,
+	M: NodeMetadata,
+{
+	fn parse_contents<Iter>(p: &mut Parser<'a, Iter>, in_braces: bool) -> Result<Self>
+	where
+		Iter: Iterator<Item = crate::Cursor> + Clone,
+	{
+		let nested = p.is(State::Nested);
 		let mut declarations = Vec::new_in(p.alloc());
 		let mut rules = Vec::new_in(p.alloc());
 		let mut meta = if nested { M::default().with_nested() } else { M::default() };
@@ -100,9 +159,10 @@ where
 				Kind::BadString,
 				Kind::BadUrl,
 			]);
+			let error_kinds = if in_braces { ERROR_KINDS } else { ERROR_KINDS.add(Kind::RightCurly) };
 			let c = p.peek_n(1);
-			if c == ERROR_KINDS {
-				let old_skip = p.set_skip(ERROR_KINDS);
+			if c == error_kinds {
+				let old_skip = p.set_skip(error_kinds);
 				p.consume_trivia_as_leading();
 				p.set_skip(old_skip);
 				continue;
@@ -197,8 +257,7 @@ where
 
 		// Flush any remaining declarations to rules
 		flush_decls!();
-		let close_curly = p.parse_if_peek::<T!['}']>()?;
-		Ok(Self { open_curly, declarations, rules, close_curly, meta })
+		Ok(Self { declarations, rules, meta })
 	}
 }
 
@@ -242,6 +301,41 @@ where
 		self.open_curly.semantic_eq(&other.open_curly, source_text)
 			&& self.close_curly.semantic_eq(&other.close_curly, source_text)
 			&& self.declarations.semantic_eq(&other.declarations, source_text)
+			&& self.rules.semantic_eq(&other.rules, source_text)
+	}
+}
+
+impl<'a, D, R, M> ToCursors for BlockContents<'a, D, R, M>
+where
+	D: DeclarationValue<'a, M> + ToCursors,
+	R: ToCursors,
+	M: NodeMetadata,
+{
+	fn to_cursors(&self, s: &mut (impl CursorSink + ?Sized)) {
+		ToCursors::to_cursors(&self.declarations, s);
+		ToCursors::to_cursors(&self.rules, s);
+	}
+}
+
+impl<'a, D, R, M> ToSpan for BlockContents<'a, D, R, M>
+where
+	D: DeclarationValue<'a, M> + ToSpan,
+	R: ToSpan,
+	M: NodeMetadata,
+{
+	fn to_span(&self) -> Span {
+		self.declarations.to_span() + self.rules.to_span()
+	}
+}
+
+impl<'a, D, R, M> SemanticEq for BlockContents<'a, D, R, M>
+where
+	D: DeclarationValue<'a, M>,
+	R: SemanticEq,
+	M: NodeMetadata,
+{
+	fn semantic_eq(&self, other: &Self, source_text: &str) -> bool {
+		self.declarations.semantic_eq(&other.declarations, source_text)
 			&& self.rules.semantic_eq(&other.rules, source_text)
 	}
 }
@@ -349,6 +443,17 @@ mod tests {
 			let lexer = css_lexer::Lexer::new(&EmptyAtomSet::ATOMS, src);
 			let mut parser = crate::Parser::new(&alloc, src, lexer);
 			let _ = parser.parse::<Block<Decl, Rule, ()>>();
+		}
+	}
+
+	#[test]
+	fn test_contents_parse_without_braces() {
+		let alloc = crate::Arena::new();
+		for (src, count) in [("color:black", 1), ("color:black;width:auto", 2), ("a:b;}c:d", 2), ("", 0)] {
+			let lexer = css_lexer::Lexer::new(&EmptyAtomSet::ATOMS, src);
+			let mut parser = crate::Parser::new(&alloc, src, lexer);
+			let contents = parser.parse_entirely::<BlockContents<Decl, Rule, ()>>().output.unwrap();
+			assert_eq!(contents.declarations.len(), count, "{src:?}");
 		}
 	}
 
