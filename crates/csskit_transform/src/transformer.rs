@@ -26,14 +26,6 @@ impl<'t> SourceCursorSink<'t> for LenCounter {
 	}
 }
 
-fn offset_cursors<'a>(
-	atoms: &'static dyn DynAtomSet,
-	text: &'a str,
-	base: SourceOffset,
-) -> impl Iterator<Item = Cursor> + Clone + 'a {
-	Lexer::new(atoms, text).map(move |cursor| Cursor::new(SourceOffset(cursor.offset().0 + base.0), cursor.token()))
-}
-
 pub trait TransformerFeatures<M, N>: Sized + Default + Copy {
 	fn transforms<'a, 'ctx>(self, transformer: &'ctx Transformer<'a, M, N, Self>, node: &mut N)
 	where
@@ -160,7 +152,7 @@ impl<'a, M: NodeMetadata, N: NodeWithMetadata<M>, F: TransformerFeatures<M, N>> 
 	pub fn parse<T: Parse<'a> + ToCursors>(&self, text: &'a str) -> Option<T> {
 		let base = SourceOffset(self.text().len() as u32);
 		let parsed =
-			Parser::new_at(self.alloc, text, base, offset_cursors(self.atoms, text, base)).parse_entirely::<T>();
+			Parser::new_at(self.alloc, text, base, Lexer::new_at(self.atoms, text, base)).parse_entirely::<T>();
 		let output = parsed.output.filter(|_| parsed.errors.is_empty())?;
 		let mut buffer = self.text.borrow_mut();
 		if buffer.is_empty() {
