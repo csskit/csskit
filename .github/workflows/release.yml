@@ -108,7 +108,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        include:
+        artifact: [binary, addon]
+        platform:
           - os: windows-latest
             target: x86_64-pc-windows-msvc
             code-target: win32-x64
@@ -139,8 +140,8 @@ jobs:
             code-target: darwin-arm64
             addon: libcsskit_napi.dylib
 
-    name: Package ${{ matrix.code-target }}
-    runs-on: ${{ matrix.os }}
+    name: Package ${{ matrix.platform.code-target }} ${{ matrix.artifact }}
+    runs-on: ${{ matrix.platform.os }}
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -150,42 +151,43 @@ jobs:
       - name: Setup
         uses: ./.github/actions/setup
         with:
-          key: release-${{ matrix.target }}
-          tools: rust cargo:cargo-pgo
+          key: release-${{ matrix.platform.target }}-${{ matrix.artifact }}
+          tools: rust cargo:cargo-pgo ${{ matrix.artifact == 'addon' && 'node' || '' }}
           components: ""
 
       - name: Rustup target
-        run: rustup target add ${{ matrix.target }}
+        run: rustup target add ${{ matrix.platform.target }}
 
-      - name: Build PGO-optimised binary and native addon
+      - name: Build PGO-optimised ${{ matrix.artifact }}
         shell: bash
-        run: .mise-tasks/build-release-pgo
+        run: .mise-tasks/build-release-pgo ${{ matrix.artifact }}
 
       - name: Stage native addon
+        if: matrix.artifact == 'addon'
         shell: bash
-        run: cp target/${{ matrix.target }}/release/${{ matrix.addon }} "csskit-${{ matrix.code-target }}.node"
+        run: cp target/${{ matrix.platform.target }}/release/${{ matrix.platform.addon }} "csskit-${{ matrix.platform.code-target }}.node"
 
       - name: Archive Binary
-        if: runner.os == 'Windows'
+        if: matrix.artifact == 'binary' && runner.os == 'Windows'
         shell: bash
         run: |
-          BIN_NAME=csskit-${{ matrix.code-target }}
-          mv target/${{ matrix.target }}/release/csskit.exe $BIN_NAME.exe
+          BIN_NAME=csskit-${{ matrix.platform.code-target }}
+          mv target/${{ matrix.platform.target }}/release/csskit.exe $BIN_NAME.exe
 
       - name: Archive Binary
-        if: runner.os != 'Windows'
+        if: matrix.artifact == 'binary' && runner.os != 'Windows'
         run: |
-          BIN_NAME=csskit-${{ matrix.code-target }}
-          mv target/${{ matrix.target }}/release/csskit $BIN_NAME
+          BIN_NAME=csskit-${{ matrix.platform.code-target }}
+          mv target/${{ matrix.platform.target }}/release/csskit $BIN_NAME
 
       - name: Set executable bit on binaries
         run: chmod +x csskit-*
 
-      - name: Upload Binary
+      - name: Upload ${{ matrix.artifact }}
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           if-no-files-found: error
-          name: binary-${{ matrix.code-target }}
+          name: ${{ matrix.artifact }}-${{ matrix.platform.code-target }}
           path: csskit-*
 
   wasm:
@@ -300,7 +302,7 @@ jobs:
       - name: Download native artifacts
         uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
         with:
-          pattern: binary-*
+          pattern: "{binary,addon}-*"
 
       - name: Download wasm artifact
         uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
@@ -310,8 +312,8 @@ jobs:
 
       - name: Copy binaries to platform packages
         run: |
-          for artifact_dir in binary-*; do
-            platform="${artifact_dir#binary-}"
+          for artifact_dir in binary-* addon-*; do
+            platform="${artifact_dir#*-}"
             package_dir="packages/csskit-${platform}"
             mkdir -p "${package_dir}/bin"
 
@@ -368,7 +370,7 @@ jobs:
       - name: Download native artifacts
         uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
         with:
-          pattern: binary-*
+          pattern: "{binary,addon}-*"
 
       - name: Create release
         if: needs.plan.outputs.publish == 'release'
@@ -380,7 +382,7 @@ jobs:
             if [[ -n "$HEADLINE" ]]; then
               NOTES=(--notes "$(printf '## Headline Changes\n\n%s\n' "$HEADLINE")")
             fi
-            gh release create "v$VERSION" --target "$GITHUB_SHA" --generate-notes "${NOTES[@]}" binary-*/*
+            gh release create "v$VERSION" --target "$GITHUB_SHA" --generate-notes "${NOTES[@]}" binary-*/* addon-*/*
           fi
           RELEASE=$(gh release view "v$VERSION" --json name,url,body)
           BODY=$(jq -r .body <<< "$RELEASE")
@@ -411,7 +413,7 @@ jobs:
         run: |
           git tag -f canary "$GITHUB_SHA"
           git push --force origin refs/tags/canary
-          gh release upload canary binary-*/* --clobber
+          gh release upload canary binary-*/* addon-*/* --clobber
 
       - name: Post release notes to Discord
         if: needs.plan.outputs.publish == 'release'

@@ -1,5 +1,5 @@
 #!/bin/bash
-#MISE depends=["build-release-pgo"]
+#MISE depends=["build-release-pgo binary"]
 #MISE description="Collect benchmark results for historical tracking"
 
 export CSSKIT_BIN="$PWD/target/$(rustc --print host-tuple)/release/csskit"
