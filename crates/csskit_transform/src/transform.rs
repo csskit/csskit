@@ -1,6 +1,11 @@
 use crate::{Transformer, TransformerFeatures};
 use css_parse::{NodeMetadata, NodeWithMetadata};
 
+/// A rewrite of a tree, run with the other enabled transforms in a single walk, in the order their features are listed
+/// in the [`transformer!`](crate::transformer) invocation.
+///
+/// On each node a transform sees what earlier transforms wrote, and below a node it sees what every transform wrote on
+/// entering that node, so a transform that reads the rewritten children of a node must do so in its `exit_*` hook.
 pub trait Transform<'a, 'ctx, M: NodeMetadata, N: NodeWithMetadata<M>, F: TransformerFeatures<M, N>> {
 	/// Returns true when a subtree described by `metadata` cannot contain anything this transform
 	/// rewrites.

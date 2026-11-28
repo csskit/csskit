@@ -200,17 +200,20 @@ fn main() {
 			let (impl_generics, ty_generics, _) = node.generics().split_for_impl();
 			let type_params = node.generics().type_params().map(|param| &param.ident).collect::<Vec<_>>();
 			[
-				quote! { #visit_method_name #impl_generics (#ident #ty_generics) [#(#type_params),*] },
-				quote! { #exit_method_name #impl_generics (#ident #ty_generics) [#(#type_params),*] },
+				quote! { #visit_method_name #impl_generics ($crate::#ident #ty_generics) [#(#type_params),*] },
+				quote! { #exit_method_name #impl_generics ($crate::#ident #ty_generics) [#(#type_params),*] },
 			]
 		});
 		let source = quote! {
+			#[doc(hidden)]
+			#[macro_export]
 			macro_rules! apply_visit_methods {
-				($macro: ident) => {
-					$macro! {
+				([$($callback: tt)*] $($args: tt)*) => {
+					$($callback)*! {
+						$($args)*
 						#(#methods,)*
 					}
-				}
+				};
 			}
 		};
 		write_tokens("css_apply_visit_methods.rs", source).unwrap();

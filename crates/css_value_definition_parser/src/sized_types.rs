@@ -300,6 +300,7 @@ pub(crate) const SIZED_TYPES: &[&str] = &[
 	"RoundingStrategy",
 	"ScanMediaFeature",
 	"ScanMediaFeatureKeyword",
+	"Scope",
 	"ScriptingMediaFeature",
 	"ScriptingMediaFeatureKeyword",
 	"ScrollStateFeature",
