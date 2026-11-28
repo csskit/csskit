@@ -1,5 +1,5 @@
 use super::prelude::*;
-use crate::{Declaration, token_macros};
+use crate::{BadDeclaration, Declaration, DeclarationOrBad, token_macros};
 
 /// A generic struct that can be used for AST nodes representing a rule's block, that is only capable of having child
 /// declarations.
@@ -28,7 +28,7 @@ where
 	M: NodeMetadata,
 {
 	pub open_curly: token_macros::LeftCurly,
-	pub declarations: Vec<'a, Declaration<'a, V, M>>,
+	pub declarations: Vec<'a, DeclarationOrBad<'a, V, M>>,
 	pub close_curly: token_macros::RightCurly,
 	#[cfg_attr(feature = "serde", serde(skip))]
 	meta: M,
@@ -69,7 +69,7 @@ where
 			meta = meta.with_nested();
 		}
 		loop {
-			if p.at_end() {
+			if p.peek_n(1) == Kind::Eof {
 				meta = meta.with_size(declarations.len().min(u16::MAX as usize) as u16);
 				let close_curly = <T!['}']>::missing(p);
 				return Ok(Self { open_curly, declarations, close_curly, meta });
@@ -78,9 +78,34 @@ where
 				meta = meta.with_size(declarations.len().min(u16::MAX as usize) as u16);
 				return Ok(Self { open_curly, declarations, close_curly, meta });
 			}
-			let declaration = p.parse::<Declaration<'a, V, M>>()?;
-			meta = meta.merge(declaration.metadata());
-			declarations.push(declaration);
+			let cursor = p.peek_n(1);
+			if cursor == Kind::Semicolon {
+				let old_skip = p.set_skip(KindSet::TRIVIA.add(Kind::Semicolon));
+				p.consume_trivia_as_leading();
+				p.set_skip(old_skip);
+				continue;
+			}
+			if cursor == super::block::STRAY_KINDS {
+				declarations.push(DeclarationOrBad::Bad(BadDeclaration::parse_stray(p)?));
+				continue;
+			}
+			let checkpoint = p.checkpoint();
+			match p.parse::<Declaration<'a, V, M>>() {
+				Ok(declaration) => {
+					meta = meta.merge(declaration.metadata());
+					declarations.push(DeclarationOrBad::Declaration(declaration));
+				}
+				Err(err) => {
+					p.rewind(checkpoint);
+					let cursor = p.peek_n(1);
+					let old_state = p.set_state(State::Nested);
+					let bad = p.parse::<BadDeclaration>();
+					p.set_state(old_state);
+					let bad = bad.map_err(|_| err)?;
+					p.diagnose(Diagnostic::new(cursor, Diagnostic::unexpected));
+					declarations.push(DeclarationOrBad::Bad(bad));
+				}
+			}
 		}
 	}
 }

@@ -1,5 +1,5 @@
 use super::prelude::*;
-use crate::{RuleVariants, token_macros};
+use crate::{BadDeclaration, RuleVariants, token_macros};
 
 /// A struct representing an AST node block that only accepts child "Rules". This is defined as:
 ///
@@ -65,7 +65,18 @@ where
 				p.set_skip(old_skip);
 				continue;
 			}
-			if p.at_end() {
+			if cursor == super::block::STRAY_KINDS {
+				let checkpoint = p.checkpoint();
+				let value = BadDeclaration::parse_value(p)?;
+				if let Some(rule) = R::bad_declaration(crate::Box::new_in(p.alloc(), BadDeclaration::stray(p, value))) {
+					p.diagnose(Diagnostic::new(cursor, Diagnostic::unexpected));
+					meta = meta.merge(rule.metadata());
+					rules.push(rule);
+					continue;
+				}
+				p.rewind(checkpoint);
+			}
+			if cursor == Kind::Eof {
 				let close_curly = <T!['}']>::missing(p);
 				return Ok(Self { open_curly, rules, close_curly, meta });
 			}

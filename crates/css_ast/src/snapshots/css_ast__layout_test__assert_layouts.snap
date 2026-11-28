@@ -11629,6 +11629,7 @@ SwashFunction: size=56 align=8 {
 Symbol: size=56 align=8
     0: String
     1: Image
+    2: CustomIdent
 SymbolicCounterStyle: size=16 align=4
     0: Disc
     1: Square
@@ -11643,6 +11644,9 @@ SymbolsFunctionParams: size=40 align=8 {
     symbols_type: 0
     symbols: 16
 }
+SymbolsFunctionSymbol: size=56 align=8
+    0: String
+    1: Image
 SymbolsStyleValue: size=24 align=8 {
     0: 0
 }

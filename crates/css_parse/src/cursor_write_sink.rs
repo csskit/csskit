@@ -22,7 +22,7 @@ impl<'a, T: Write> CursorWriteSink<'a, T> {
 		self.err?;
 		let adjacent_in_source = self.last_end == Some((source.as_ptr(), c.offset()));
 		if let Some(last) = self.last_token
-			&& !adjacent_in_source
+			&& (!adjacent_in_source || (last == Kind::BadString && c.token().is_synthetic()))
 			&& (last == Kind::BadString || last.needs_separator_for(c.token()))
 		{
 			self.writer.write_char(if last.char() == Some('\\') || last == Kind::BadString { '\n' } else { ' ' })?;

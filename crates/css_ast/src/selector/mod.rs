@@ -277,6 +277,8 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, SelectorList, ":dir(ltr)");
 		assert_parse!(CssAtomSet::ATOMS, SelectorList, "tr:nth-child(n-1):state(foo)");
 		// assert_parse!(CssAtomSet::ATOMS, SelectorList, " /**/ .foo");
+		assert_parse!(CssAtomSet::ATOMS, SelectorList, "a,/**/b");
+		assert_parse!(CssAtomSet::ATOMS, SelectorList, "a:is(/**/b)");
 		assert_parse!(CssAtomSet::ATOMS, SelectorList, ":lang(en-gb,en-us)");
 		assert_parse!(CssAtomSet::ATOMS, SelectorList, "& .foo");
 		assert_parse!(CssAtomSet::ATOMS, SelectorList, "&:hover");

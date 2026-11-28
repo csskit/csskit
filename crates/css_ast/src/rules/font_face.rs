@@ -379,7 +379,7 @@ pub struct FontFaceSubscriptSizeOverrideDescriptor<'a>;
 #[cfg(test)]
 mod tests {
 	use super::*;
-	use css_parse::assert_parse;
+	use css_parse::{assert_parse, assert_parse_recovers};
 
 	#[test]
 	fn test_writes() {
@@ -417,5 +417,40 @@ mod tests {
 	#[test]
 	fn test_unknown_descriptor() {
 		assert_parse!(CssAtomSet::ATOMS, FontFaceRule, "@font-face{color:red}");
+	}
+
+	#[test]
+	fn test_unicode_range_whitespace() {
+		assert_parse!(CssAtomSet::ATOMS, FontFaceRule, "@font-face{unicode-range:U+0, U+1}");
+		assert_parse!(CssAtomSet::ATOMS, FontFaceRule, "@font-face{unicode-range: U+0}");
+		assert_parse_recovers!(
+			CssAtomSet::ATOMS,
+			FontFaceRule,
+			"@font-face{unicode-range: U+0",
+			"@font-face{unicode-range: U+0}"
+		);
+	}
+
+	#[test]
+	fn test_trailing_whitespace_at_eof() {
+		assert_parse_recovers!(CssAtomSet::ATOMS, FontFaceRule, "@font-face{\n", "@font-face{}\n");
+		assert_parse_recovers!(
+			CssAtomSet::ATOMS,
+			FontFaceRule,
+			"@font-face{unicode-range: U+0000-00FF;\n",
+			"@font-face{unicode-range: U+0000-00FF;}\n"
+		);
+	}
+
+	#[test]
+	fn bad_string_before_inserted_closer() {
+		assert_parse_recovers!(CssAtomSet::ATOMS, crate::StyleSheet, "@font-face{b:\"s\n", "@font-face{b:\"s\n}");
+		assert_parse_recovers!(CssAtomSet::ATOMS, crate::StyleSheet, "@font-face{b:\"s\n}", "@font-face{b:\"s\n}");
+	}
+
+	#[test]
+	fn bad_declaration_kept() {
+		assert_parse_recovers!(CssAtomSet::ATOMS, FontFaceRule, "@font-face{a}", "@font-face{a}");
+		assert_parse_recovers!(CssAtomSet::ATOMS, FontFaceRule, "@font-face{--x:) /**/ }", "@font-face{--x:) /**/ }");
 	}
 }

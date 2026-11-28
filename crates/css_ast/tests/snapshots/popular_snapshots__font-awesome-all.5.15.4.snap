@@ -105553,7 +105553,7 @@ StyleSheet(
           len: 1,
         )),
         declarations: [
-          Declaration(
+          Declaration(Declaration(
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(71957),
@@ -105575,8 +105575,8 @@ StyleSheet(
               offset: SourceOffset(71993),
               len: 1,
             ))),
-          ),
-          Declaration(
+          )),
+          Declaration(Declaration(
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(71997),
@@ -105598,8 +105598,8 @@ StyleSheet(
               offset: SourceOffset(72015),
               len: 1,
             ))),
-          ),
-          Declaration(
+          )),
+          Declaration(Declaration(
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(72019),
@@ -105621,8 +105621,8 @@ StyleSheet(
               offset: SourceOffset(72035),
               len: 1,
             ))),
-          ),
-          Declaration(
+          )),
+          Declaration(Declaration(
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(72039),
@@ -105644,8 +105644,8 @@ StyleSheet(
               offset: SourceOffset(72058),
               len: 1,
             ))),
-          ),
-          Declaration(
+          )),
+          Declaration(Declaration(
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(72062),
@@ -105677,8 +105677,8 @@ StyleSheet(
               offset: SourceOffset(72103),
               len: 1,
             ))),
-          ),
-          Declaration(
+          )),
+          Declaration(Declaration(
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(72107),
@@ -105858,7 +105858,7 @@ StyleSheet(
               offset: SourceOffset(72414),
               len: 1,
             ))),
-          ),
+          )),
         ],
         close_curly: RightCurly(Cursor(
           kind: "RightCurly",
@@ -105963,7 +105963,7 @@ StyleSheet(
           len: 1,
         )),
         declarations: [
-          Declaration(
+          Declaration(Declaration(
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(72503),
@@ -105985,8 +105985,8 @@ StyleSheet(
               offset: SourceOffset(72537),
               len: 1,
             ))),
-          ),
-          Declaration(
+          )),
+          Declaration(Declaration(
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(72541),
@@ -106008,8 +106008,8 @@ StyleSheet(
               offset: SourceOffset(72559),
               len: 1,
             ))),
-          ),
-          Declaration(
+          )),
+          Declaration(Declaration(
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(72563),
@@ -106031,8 +106031,8 @@ StyleSheet(
               offset: SourceOffset(72579),
               len: 1,
             ))),
-          ),
-          Declaration(
+          )),
+          Declaration(Declaration(
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(72583),
@@ -106054,8 +106054,8 @@ StyleSheet(
               offset: SourceOffset(72602),
               len: 1,
             ))),
-          ),
-          Declaration(
+          )),
+          Declaration(Declaration(
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(72606),
@@ -106087,8 +106087,8 @@ StyleSheet(
               offset: SourceOffset(72648),
               len: 1,
             ))),
-          ),
-          Declaration(
+          )),
+          Declaration(Declaration(
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(72652),
@@ -106268,7 +106268,7 @@ StyleSheet(
               offset: SourceOffset(72964),
               len: 1,
             ))),
-          ),
+          )),
         ],
         close_curly: RightCurly(Cursor(
           kind: "RightCurly",
@@ -106373,7 +106373,7 @@ StyleSheet(
           len: 1,
         )),
         declarations: [
-          Declaration(
+          Declaration(Declaration(
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(73051),
@@ -106395,8 +106395,8 @@ StyleSheet(
               offset: SourceOffset(73085),
               len: 1,
             ))),
-          ),
-          Declaration(
+          )),
+          Declaration(Declaration(
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(73089),
@@ -106418,8 +106418,8 @@ StyleSheet(
               offset: SourceOffset(73107),
               len: 1,
             ))),
-          ),
-          Declaration(
+          )),
+          Declaration(Declaration(
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(73111),
@@ -106441,8 +106441,8 @@ StyleSheet(
               offset: SourceOffset(73127),
               len: 1,
             ))),
-          ),
-          Declaration(
+          )),
+          Declaration(Declaration(
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(73131),
@@ -106464,8 +106464,8 @@ StyleSheet(
               offset: SourceOffset(73150),
               len: 1,
             ))),
-          ),
-          Declaration(
+          )),
+          Declaration(Declaration(
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(73154),
@@ -106497,8 +106497,8 @@ StyleSheet(
               offset: SourceOffset(73194),
               len: 1,
             ))),
-          ),
-          Declaration(
+          )),
+          Declaration(Declaration(
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(73198),
@@ -106678,7 +106678,7 @@ StyleSheet(
               offset: SourceOffset(73500),
               len: 1,
             ))),
-          ),
+          )),
         ],
         close_curly: RightCurly(Cursor(
           kind: "RightCurly",

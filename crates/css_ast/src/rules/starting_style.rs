@@ -50,4 +50,9 @@ mod tests {
 			"@starting-style{;)a{b:c}}"
 		);
 	}
+
+	#[test]
+	fn unclosed_block_trailing_whitespace() {
+		assert_parse_recovers!(CssAtomSet::ATOMS, StartingStyleRule, "@starting-style{a{}\n", "@starting-style{a{}}\n");
+	}
 }

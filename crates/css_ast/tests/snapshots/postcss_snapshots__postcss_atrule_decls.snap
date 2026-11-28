@@ -163,7 +163,7 @@ StyleSheet(
           len: 1,
         )),
         declarations: [
-          Declaration(
+          Declaration(Declaration(
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(104),
@@ -194,7 +194,7 @@ StyleSheet(
               offset: SourceOffset(127),
               len: 1,
             ))),
-          ),
+          )),
         ],
         close_curly: RightCurly(Cursor(
           kind: "RightCurly",

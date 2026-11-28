@@ -128,7 +128,7 @@ impl<'a, M: NodeMetadata> NodeWithMetadata<M> for PropertyRuleStyleValue<'a> {
 mod tests {
 	use super::*;
 	use crate::CssAtomSet;
-	use css_parse::assert_parse;
+	use css_parse::{assert_parse, assert_parse_recovers};
 
 	#[test]
 	fn test_writes() {
@@ -148,7 +148,26 @@ mod tests {
 		let rule = parser.parse_entirely::<PropertyRule>().output.unwrap();
 		let declarations = &rule.block.0.declarations;
 		assert_eq!(declarations.len(), 2);
-		assert!(matches!(declarations[0].value, PropertyRuleStyleValue::InitialValue(_)));
-		assert!(matches!(declarations[1].value, PropertyRuleStyleValue::Inherits(_)));
+		assert!(
+			matches!(&declarations[0], css_parse::DeclarationOrBad::Declaration(d) if matches!(d.value, PropertyRuleStyleValue::InitialValue(_)))
+		);
+		assert!(
+			matches!(&declarations[1], css_parse::DeclarationOrBad::Declaration(d) if matches!(d.value, PropertyRuleStyleValue::Inherits(_)))
+		);
+	}
+
+	#[test]
+	fn comment_after_stray_in_property_kept() {
+		assert_parse_recovers!(
+			CssAtomSet::ATOMS,
+			crate::StyleSheet,
+			"@property --foo {\n]  /*text*/\n}",
+			"@property --foo {\n]  /*text*/\n}"
+		);
+	}
+
+	#[test]
+	fn semicolon_after_comment_ignored() {
+		assert_parse!(CssAtomSet::ATOMS, PropertyRule, "@property --foo{/**/;inherits:false}");
 	}
 }

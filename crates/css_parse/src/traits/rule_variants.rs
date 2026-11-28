@@ -122,7 +122,11 @@ pub trait RuleVariants<'a>: Sized + ToCursors + ToSpan {
 					let mut declaration = if p.is(State::Nested) {
 						p.parse::<BadDeclaration>()?
 					} else {
-						BadDeclaration::parse_until(p, end)?
+						let mut declaration = BadDeclaration::parse_until(p, end)?;
+						if !declaration.is_empty() && <T![;]>::peek(p, p.peek_n(1)) {
+							declaration.0.push(ComponentValue::Semicolon(p.parse::<T![;]>()?));
+						}
+						declaration
 					};
 					if declaration.is_empty() {
 						let state = p.set_state(State::Nested);
