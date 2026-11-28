@@ -204,14 +204,24 @@ macro_rules! transformer {
 				where
 					N: ::css_ast::VisitableMut<'a>,
 				{
+					enum Pass<'a, 'ctx, N: ::css_parse::NodeWithMetadata<$metadata>> {
+						$($variant($variant<'a, 'ctx, N>),)+
+					}
+					::css_ast::forward_visit_mut!(
+						[<'a, 'ctx, N: ::css_parse::NodeWithMetadata<$metadata>>] Pass<'a, 'ctx, N> { $($variant),+ }
+					);
+
+					let metadata = ::css_parse::NodeWithMetadata::metadata(node);
+					let mut passes = ::css_parse::Vec::new_in(transformer.alloc());
 					$(
 						if self.contains(Self::$variant)
-							&& !<$variant<'a, 'ctx, N> as $crate::Transform<'a, 'ctx, $metadata, N, Self>>::skips_subtree(
-								&::css_parse::NodeWithMetadata::metadata(node),
-							) {
-							let _ = ::css_ast::VisitableMut::accept_mut(node, &mut $variant::new(transformer));
+							&& !<$variant<'a, 'ctx, N> as $crate::Transform<'a, 'ctx, $metadata, N, Self>>::skips_subtree(&metadata) {
+							passes.push(Pass::$variant($variant::new(transformer)));
 						}
 					)+
+					if !passes.is_empty() {
+						let _ = ::css_ast::VisitableMut::accept_mut(node, &mut ::css_ast::FusedVisitor::new_in(transformer.alloc(), passes));
+					}
 				}
 			}
     };

@@ -132,6 +132,17 @@ mod tests {
 	}
 
 	#[test]
+	fn transforms_reduce_what_other_transforms_write() {
+		for (input, expected) in
+			[("a{width:calc(0px + 0px)}", "a{width:0}"), ("a{margin:calc(1px + 2px) calc(4px - 1px)}", "a{margin:3px}")]
+		{
+			let (output, changed) = minify(input, CssMinifierFeature::all_bits());
+			assert!(changed, "should change {}", input);
+			assert_eq!(output, expected, "input: {}", input);
+		}
+	}
+
+	#[test]
 	fn drops_stray_semicolons_between_nested_rules() {
 		let (output, _) = minify("a{b{color:red};c{color:blue}}", CssMinifierFeature::all_bits());
 		assert_eq!(output, "a{b{color:red}c{color:blue}}");

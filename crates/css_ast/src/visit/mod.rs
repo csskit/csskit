@@ -1,6 +1,113 @@
 include!(concat!(env!("OUT_DIR"), "/css_node_kind.rs"));
 include!(concat!(env!("OUT_DIR"), "/css_apply_visit_methods.rs"));
 
+/// Calls `$callback! { $args @hooks { ... } }` with every [`VisitMut`] hook pair that is not generated from a node type.
+/// Each pair is `kind #[visit attrs] visit, #[exit attrs] exit [generics] (node type) [where predicates];`, where `kind`
+/// is `scoped` for a pair bracketing a part of the walk and `feature` for the feature pair.
+#[doc(hidden)]
+#[macro_export]
+macro_rules! apply_visit_mut_hooks {
+	([$($callback: tt)*] $($args: tt)*) => {
+		$($callback)*! {
+			$($args)*
+			@hooks {
+				scoped
+				/// Called on entry to a declaration. Return [`VisitFlow::SKIP_CHILDREN`] to leave its value unvisited.
+				enter_declaration,
+				exit_declaration
+				[T: $crate::DeclarationValue<'a, $crate::CssMetadata>] ($crate::Declaration<'a, T, $crate::CssMetadata>) [];
+				scoped visit_bad_declaration, exit_bad_declaration [] ($crate::__css_parse::syntax::BadDeclaration<'a>) [];
+				scoped visit_string, exit_string [] ($crate::__css_parse::token_macros::String) [];
+				scoped visit_comparison, exit_comparison [] ($crate::__css_parse::Comparison) [];
+				feature
+				/// Called before entering a node whose type has feature metadata. Return [`VisitFlow::STOP`] to halt the
+				/// traversal; any other flow enters the node.
+				visit_feature,
+				/// Called after leaving a node whose type has feature metadata. Return [`VisitFlow::STOP`] to halt the
+				/// traversal.
+				exit_feature
+				[T: $crate::FeatureMetadata] (T) [];
+				scoped
+				/// Offers a value slot which may hold a math function for replacement, before its children are visited.
+				/// Return [`VisitFlow::SKIP_CHILDREN`] to leave its children unvisited.
+				visit_value_slot,
+				/// Called after leaving a value slot offered to [`VisitMut::visit_value_slot`], even when that skipped its
+				/// children.
+				exit_value_slot
+				[S: $crate::ValueSlot<'a>] (S) [S::Literal: $crate::Visitable + $crate::__css_parse::ToSpan];
+			}
+		}
+	};
+}
+
+/// Implements [`VisitMut`] for an enum whose every variant holds a visitor, forwarding each call to the visitor in the
+/// active variant. The walk is then compiled once for the enum, rather than once per visitor. The impl's generics must
+/// name the arena lifetime `'a`. Usable from other crates only.
+///
+/// ```ignore
+/// enum Pass<'a, N> { A(A<'a, N>), B(B<'a, N>) }
+/// css_ast::forward_visit_mut!([<'a, N: Bound>] Pass<'a, N> { A, B });
+/// ```
+#[macro_export]
+macro_rules! forward_visit_mut {
+	(@match $self:ident { $($variant:ident),+ $(,)? } $method:ident($arg:ident)) => {
+		match $self { $(Self::$variant(v) => v.$method($arg),)+ }
+	};
+	(
+		@impl [$($generics:tt)*] $ty:ty, $variants:tt
+		{ $( $kind:ident $visit:ident $exit:ident [$($hgen:tt)*] ($hobj:ty) [$($hwhere:tt)*]; )+ }
+		$( $name:ident$(<$lt:lifetime $(, $gen:ident)*>)?($obj:ty) [$($tp:ident),*], )+
+	) => {
+		impl $($generics)* $crate::VisitMut<'a> for $ty {
+			fn consider_node(&self, node: $crate::VisitNode) -> $crate::VisitFlow {
+				$crate::forward_visit_mut!(@match self $variants consider_node(node))
+			}
+			fn enter_node(&mut self, node: $crate::VisitNode) -> $crate::VisitFlow {
+				$crate::forward_visit_mut!(@match self $variants enter_node(node))
+			}
+			fn exit_node(&mut self, node: $crate::VisitNode) -> $crate::VisitFlow {
+				$crate::forward_visit_mut!(@match self $variants exit_node(node))
+			}
+			fn retain(&mut self, node: $crate::VisitNode) -> bool {
+				$crate::forward_visit_mut!(@match self $variants retain(node))
+			}
+			$(
+				fn $visit<$($hgen)*>(&mut self, node: &mut $hobj) -> $crate::VisitFlow where $($hwhere)* {
+					$crate::forward_visit_mut!(@match self $variants $visit(node))
+				}
+				fn $exit<$($hgen)*>(&mut self, node: &mut $hobj) -> $crate::VisitFlow where $($hwhere)* {
+					$crate::forward_visit_mut!(@match self $variants $exit(node))
+				}
+			)+
+			$(
+				fn $name$(<$($gen),*>)?(&mut self, node: &mut $obj) -> $crate::VisitFlow
+				where $($tp: $crate::Visitable + $crate::VisitableMut<'a> + $crate::__css_parse::ToSpan,)*
+				{
+					$crate::forward_visit_mut!(@match self $variants $name(node))
+				}
+			)+
+		}
+	};
+	(
+		@start [$($generics:tt)*] $ty:ty, $variants:tt
+		@hooks { $(
+			$kind:ident $(#[$visit_attr:meta])* $visit:ident, $(#[$exit_attr:meta])* $exit:ident
+			[$($hgen:tt)*] ($hobj:ty) [$($hwhere:tt)*];
+		)+ }
+	) => {
+		$crate::apply_visit_methods!(
+			[$crate::forward_visit_mut] @impl [$($generics)*] $ty, $variants
+			{ $( $kind $visit $exit [$($hgen)*] ($hobj) [$($hwhere)*]; )+ }
+		);
+	};
+	([$($generics:tt)*] $ty:ty { $($variant:ident),+ $(,)? }) => {
+		$crate::apply_visit_mut_hooks!([$crate::forward_visit_mut] @start [$($generics)*] $ty, { $($variant),+ });
+	};
+}
+
+#[doc(hidden)]
+pub use css_parse as __css_parse;
+
 use css_parse::Vec;
 use css_parse::{
 	AttributeOperator, Block, Box, CommaSeparated, Comparison, ComponentValue, ComponentValues, Cursor, Declaration,
@@ -16,8 +123,10 @@ use visit_flow::try_visit;
 pub use csskit_derives::visitor;
 pub use visit_flow::{VisitAction, VisitBreak, VisitFlow, VisitFlowExt};
 
+mod fused;
 mod root;
 mod visit_node;
+pub use fused::FusedVisitor;
 pub use root::{ErasedNode, ParsedRoot, parse_root};
 pub(crate) use visit_node::QueryNodeData;
 pub use visit_node::{NodeKey, VisitNode};
@@ -25,9 +134,23 @@ pub use visit_node::{NodeKey, VisitNode};
 use crate::*;
 
 macro_rules! visit_mut_trait {
-	( $(
-		$name: ident$(<$lt: lifetime $(, $gen: ident)*>)?($obj: ty) [$($tp: ident),*],
-	)+ ) => {
+	(
+		@hooks { $(
+			$kind:ident $(#[$visit_attr:meta])* $visit:ident, $(#[$exit_attr:meta])* $exit:ident
+			[$($hgen:tt)*] ($hobj:ty) [$($hwhere:tt)*];
+		)+ }
+	) => {
+		apply_visit_methods!([visit_mut_trait] @methods { $(
+			$(#[$visit_attr])* $visit, $(#[$exit_attr])* $exit [$($hgen)*] ($hobj) [$($hwhere)*];
+		)+ });
+	};
+	(
+		@methods { $(
+			$(#[$visit_attr:meta])* $visit:ident, $(#[$exit_attr:meta])* $exit:ident
+			[$($hgen:tt)*] ($hobj:ty) [$($hwhere:tt)*];
+		)+ }
+		$( $name: ident$(<$lt: lifetime $(, $gen: ident)*>)?($obj: ty) [$($tp: ident),*], )+
+	) => {
 		/// A visitor which may rewrite the nodes of a tree whose arena lifetime is `'a`.
 		pub trait VisitMut<'a>: Sized {
 			/// Called before entering a queryable node. Return [`VisitFlow::SKIP_CHILDREN`] to leave the node and its
@@ -50,51 +173,16 @@ macro_rules! visit_mut_trait {
 			fn retain(&mut self, _node: VisitNode) -> bool {
 				true
 			}
-			/// Called on entry to a declaration. Return [`VisitFlow::SKIP_CHILDREN`] to leave its value unvisited.
-			fn enter_declaration<T: DeclarationValue<'a, CssMetadata>>(&mut self, _rule: &mut Declaration<'a, T, CssMetadata>) -> VisitFlow {
-				VisitFlow::DESCEND
-			}
-			fn exit_declaration<T: DeclarationValue<'a, CssMetadata>>(&mut self, _rule: &mut Declaration<'a, T, CssMetadata>) -> VisitFlow {
-				VisitFlow::DESCEND
-			}
-			fn visit_bad_declaration(&mut self, _rule: &mut BadDeclaration<'a>) -> VisitFlow {
-				VisitFlow::DESCEND
-			}
-			fn exit_bad_declaration(&mut self, _rule: &mut BadDeclaration<'a>) -> VisitFlow {
-				VisitFlow::DESCEND
-			}
-			fn visit_string(&mut self, _str: &mut token_macros::String) -> VisitFlow {
-				VisitFlow::DESCEND
-			}
-			fn exit_string(&mut self, _str: &mut token_macros::String) -> VisitFlow {
-				VisitFlow::DESCEND
-			}
-			fn visit_comparison(&mut self, _comparison: &mut Comparison) -> VisitFlow {
-				VisitFlow::DESCEND
-			}
-			fn exit_comparison(&mut self, _comparison: &mut Comparison) -> VisitFlow {
-				VisitFlow::DESCEND
-			}
-
-			/// Called before entering a node whose type has feature metadata. Return [`VisitFlow::STOP`] to halt the
-			/// traversal; any other flow enters the node.
-			fn visit_feature<T: FeatureMetadata>(&mut self, _node: &mut T) -> VisitFlow {
-				VisitFlow::DESCEND
-			}
-			/// Called after leaving a node whose type has feature metadata. Return [`VisitFlow::STOP`] to halt the
-			/// traversal.
-			fn exit_feature<T: FeatureMetadata>(&mut self, _node: &mut T) -> VisitFlow {
-				VisitFlow::DESCEND
-			}
-
-			/// Offers a value slot which may hold a math function for replacement, before its children are visited.
-			/// Return [`VisitFlow::SKIP_CHILDREN`] to leave its children unvisited.
-			fn visit_value_slot<S: ValueSlot<'a>>(&mut self, _slot: &mut S) -> VisitFlow
-			where
-				S::Literal: Visitable + ToSpan,
-			{
-				VisitFlow::DESCEND
-			}
+			$(
+				$(#[$visit_attr])*
+				fn $visit<$($hgen)*>(&mut self, _node: &mut $hobj) -> VisitFlow where $($hwhere)* {
+					VisitFlow::DESCEND
+				}
+				$(#[$exit_attr])*
+				fn $exit<$($hgen)*>(&mut self, _node: &mut $hobj) -> VisitFlow where $($hwhere)* {
+					VisitFlow::DESCEND
+				}
+			)+
 			$(
 				fn $name$(<$($gen),*>)?(&mut self, _rule: &mut $obj) -> VisitFlow
 				where $($tp: Visitable + VisitableMut<'a> + ToSpan,)*
@@ -105,7 +193,7 @@ macro_rules! visit_mut_trait {
 		}
 	}
 }
-apply_visit_methods!(visit_mut_trait);
+apply_visit_mut_hooks!([visit_mut_trait]);
 
 /// The object-safe core of [`Visit`].
 ///
@@ -196,7 +284,7 @@ macro_rules! visit_trait {
 		}
 	}
 }
-apply_visit_methods!(visit_trait);
+apply_visit_methods!([visit_trait]);
 
 pub trait VisitableMut<'a> {
 	fn accept_mut<V: VisitMut<'a>>(&mut self, v: &mut V) -> VisitFlow;

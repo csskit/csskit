@@ -1,9 +1,5 @@
 use crate::prelude::*;
-use css_ast::{
-	BorderColorStyleValue, BorderRadiusStyleValue, BorderStyleStyleValue, BorderWidthStyleValue, ColumnGapStyleValue,
-	DeclarationValue, GapStyleValue, InsetStyleValue, MarginStyleValue, OverflowStyleValue, PaddingStyleValue,
-	RowGapStyleValue, VisitMut, VisitNode,
-};
+use css_ast::{ColumnGapStyleValue, DeclarationValue, RowGapStyleValue, StyleValue, VisitMut, VisitNode};
 use css_parse::{Declaration, SemanticEq};
 
 /// Removes redundant parts from values of CSS shorthand declarations, for example `margin: 1px 1px 1px 1px` becomes
@@ -89,47 +85,57 @@ where
 		if declaration.metadata().has_substitution() { VisitFlow::SKIP_CHILDREN } else { VisitFlow::DESCEND }
 	}
 
-	fn visit_margin_style_value(&mut self, value: &mut MarginStyleValue<'a>) {
-		self.reduce_four(&value.0, &mut value.1, &mut value.2, &mut value.3);
+	fn visit_style_value(&mut self, _value: &mut StyleValue<'a>) -> VisitFlow {
+		VisitFlow::SKIP_CHILDREN
 	}
 
-	fn visit_padding_style_value(&mut self, value: &mut PaddingStyleValue<'a>) {
-		self.reduce_four(&value.0, &mut value.1, &mut value.2, &mut value.3);
-	}
-
-	fn visit_inset_style_value(&mut self, value: &mut InsetStyleValue<'a>) {
-		self.reduce_four(&value.0, &mut value.1, &mut value.2, &mut value.3);
-	}
-
-	fn visit_border_color_style_value(&mut self, value: &mut BorderColorStyleValue<'a>) {
-		self.reduce_four(&value.0, &mut value.1, &mut value.2, &mut value.3);
-	}
-
-	fn visit_border_style_style_value(&mut self, value: &mut BorderStyleStyleValue<'a>) {
-		self.reduce_four(&value.0, &mut value.1, &mut value.2, &mut value.3);
-	}
-
-	fn visit_border_width_style_value(&mut self, value: &mut BorderWidthStyleValue<'a>) {
-		self.reduce_four(&value.0, &mut value.1, &mut value.2, &mut value.3);
-	}
-
-	fn visit_border_radius_style_value(&mut self, value: &mut BorderRadiusStyleValue<'a>) {
-		self.reduce_four(&value.0, &mut value.1, &mut value.2, &mut value.3);
-		if let Some((_, first, second, third, fourth)) = &mut value.4 {
-			self.reduce_four(first, second, third, fourth);
+	fn exit_style_value(&mut self, value: &mut StyleValue<'a>) {
+		match value {
+			StyleValue::Margin(value) => {
+				let value = &mut **value;
+				self.reduce_four(&value.0, &mut value.1, &mut value.2, &mut value.3);
+			}
+			StyleValue::Padding(value) => {
+				let value = &mut **value;
+				self.reduce_four(&value.0, &mut value.1, &mut value.2, &mut value.3);
+			}
+			StyleValue::Inset(value) => {
+				let value = &mut **value;
+				self.reduce_four(&value.0, &mut value.1, &mut value.2, &mut value.3);
+			}
+			StyleValue::BorderColor(value) => {
+				let value = &mut **value;
+				self.reduce_four(&value.0, &mut value.1, &mut value.2, &mut value.3);
+			}
+			StyleValue::BorderStyle(value) => {
+				let value = &mut **value;
+				self.reduce_four(&value.0, &mut value.1, &mut value.2, &mut value.3);
+			}
+			StyleValue::BorderWidth(value) => {
+				let value = &mut **value;
+				self.reduce_four(&value.0, &mut value.1, &mut value.2, &mut value.3);
+			}
+			StyleValue::BorderRadius(value) => {
+				let value = &mut **value;
+				self.reduce_four(&value.0, &mut value.1, &mut value.2, &mut value.3);
+				if let Some((_, first, second, third, fourth)) = &mut value.4 {
+					self.reduce_four(first, second, third, fourth);
+				}
+			}
+			StyleValue::Gap(value) => {
+				let value = &mut **value;
+				if let Some(second) = &value.1
+					&& gap_values_equal(&value.0, second, &self.transformer.text())
+				{
+					self.delete(&mut value.1);
+				}
+			}
+			StyleValue::Overflow(value) => {
+				let value = &mut **value;
+				self.reduce_two(&value.0, &mut value.1);
+			}
+			_ => {}
 		}
-	}
-
-	fn visit_gap_style_value(&mut self, value: &mut GapStyleValue<'a>) {
-		if let Some(second) = &value.1
-			&& gap_values_equal(&value.0, second, &self.transformer.text())
-		{
-			self.delete(&mut value.1);
-		}
-	}
-
-	fn visit_overflow_style_value(&mut self, value: &mut OverflowStyleValue<'a>) {
-		self.reduce_two(&value.0, &mut value.1);
 	}
 }
 

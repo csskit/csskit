@@ -222,6 +222,7 @@ pub fn derive(input: DeriveInput) -> Result<TokenStream> {
 				if let visit_flow::VisitAction::Descend = visit_flow::try_visit!(v.visit_value_slot(self)) {
 					visit_flow::try_visit!(#children_mut);
 				}
+				visit_flow::try_visit!(v.exit_value_slot(self));
 				<visit_flow::VisitFlow as visit_flow::VisitFlowExt>::DESCEND
 			},
 			children,

@@ -1,9 +1,10 @@
 use super::prelude::*;
 use css_ast::VisitNode;
-use css_ast::visit::{NodeVisitor, Visit, Visitable, visitor};
+use css_ast::visit::{ErasedNode, NodeVisitor};
 use css_ast::{PROPERTY_KIND_VARIANTS, PropertyKind};
 use css_parse::{Cursor, ToSpan};
 use csskit_ast::{QueryFunctionalPseudoClass, QueryPseudoClass};
+use visit_flow::{VisitFlow, VisitFlowExt};
 
 /// Display CSS AST as a tree structure
 ///
@@ -108,17 +109,22 @@ impl<'a> CollectionVisitor<'a> {
 	}
 }
 
-#[visitor]
-impl<'a> Visit for CollectionVisitor<'a> {
-	fn enter_node(&mut self, query: VisitNode) {
+impl<'a> NodeVisitor for CollectionVisitor<'a> {
+	fn consider_node(&self, _query: VisitNode) -> VisitFlow {
+		VisitFlow::DESCEND
+	}
+
+	fn enter_node(&mut self, query: VisitNode) -> VisitFlow {
 		let display = self.build_display(&query);
 		let node_info = NodeInfo { display, depth: self.depth, child_start_idx: self.nodes.len() + 1 };
 		self.nodes.push(node_info);
 		self.depth += 1;
+		VisitFlow::DESCEND
 	}
 
-	fn exit_node(&mut self, _query: VisitNode) {
+	fn exit_node(&mut self, _query: VisitNode) -> VisitFlow {
 		self.depth -= 1;
+		VisitFlow::DESCEND
 	}
 }
 
@@ -142,7 +148,7 @@ impl Tree {
 
 			// Collect all nodes
 			let mut visitor = CollectionVisitor::new(src);
-			let _ = stylesheet.accept(&mut visitor);
+			let _ = stylesheet.accept_dyn(&mut visitor);
 
 			// Print root
 			if let Some(root) = visitor.nodes.first() {

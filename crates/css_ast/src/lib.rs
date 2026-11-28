@@ -13,15 +13,16 @@ mod selector;
 pub mod specificity;
 mod stylerule;
 mod stylesheet;
-#[cfg(test)]
-mod test_helpers;
 mod traits;
 mod types;
 mod units;
 mod unresolved;
 mod values;
 #[cfg(feature = "visitable")]
+#[macro_use]
 pub mod visit;
+#[cfg(test)]
+mod test_helpers;
 
 pub use constraints::*;
 pub use css_atom_set::*;

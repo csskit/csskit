@@ -46,11 +46,11 @@ impl TestVisitor {
 #[cfg(feature = "visitable")]
 macro_rules! visit_mut_trait {
 	( $(
-		$name: ident$(<$lt: lifetime $(, $gen: ident)*>)?($obj: ident$(<$($ogen:tt),+>)?) [$($tp: ident),*],
+		$name: ident$(<$lt: lifetime $(, $gen: ident)*>)?($krate: tt :: $obj: ident$(<$($ogen:tt),+>)?) [$($tp: ident),*],
 	)+ ) => {
 		impl<'a> $crate::VisitMut<'a> for TestVisitor {
 			$(
-				fn $name$(<$($gen),*>)?(&mut self, _rule: &mut $crate::$obj$(<$($ogen),+>)?) -> visit_flow::VisitFlow {
+				fn $name$(<$($gen),*>)?(&mut self, _rule: &mut $krate::$obj$(<$($ogen),+>)?) -> visit_flow::VisitFlow {
 					let name = stringify!($name);
 					if name.starts_with("visit_") {
 						self.handle_visit(stringify!($obj));
@@ -64,9 +64,7 @@ macro_rules! visit_mut_trait {
 	}
 }
 #[cfg(feature = "visitable")]
-include!(concat!(env!("OUT_DIR"), "/css_apply_visit_methods.rs"));
-#[cfg(feature = "visitable")]
-apply_visit_methods!(visit_mut_trait);
+apply_visit_methods!([visit_mut_trait]);
 
 #[macro_export]
 #[cfg(feature = "visitable")]
