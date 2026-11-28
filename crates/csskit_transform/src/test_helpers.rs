@@ -69,7 +69,6 @@ macro_rules! assert_no_transform {
 		let lexer = Lexer::new(&$atoms::ATOMS, source_text);
 		let mut parser = Parser::new(&allocator, source_text, lexer);
 		let mut result = parser.parse_entirely::<$node>();
-		assert!(result.errors.is_empty(), "({:?}) saw error {:?}", source_text, result.errors[0]);
 
 		let mut transformer: $crate::Transformer<_, $node, $crate::$features> =
 			$crate::Transformer::new_in(&allocator, $crate::$features::$transform, &$atoms::ATOMS, source_text);

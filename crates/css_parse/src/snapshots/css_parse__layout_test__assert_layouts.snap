@@ -31,6 +31,9 @@ ComponentValue: size=24 align=8
     11: Colon
     12: Semicolon
     13: Comma
+    14: StrayCloser
+    15: BadString
+    16: BadUrl
 ComponentValues: size=24 align=8 {
     values: 0
 }

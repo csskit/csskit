@@ -174,7 +174,10 @@ where
 		let colon = p.parse::<T![:]>()?;
 		let c: Cursor = name.into();
 		let checkpoint = p.checkpoint();
-		let mut value = <V>::parse_declaration_value(p, c)?;
+		let stop = p.set_stop(KindSet::RIGHT_CURLY_SEMICOLON_OR_RIGHT_PAREN);
+		let value = <V>::parse_declaration_value(p, c);
+		p.set_stop(stop);
+		let mut value = value?;
 		let mut important = match p.parse_if_peek::<BangImportant>()? {
 			Some(first) => Some(match p.parse_if_peek::<BangImportant>()? {
 				Some(second) => DeclarationImportance::Duplicate([first, second]),

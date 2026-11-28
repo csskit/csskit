@@ -1,0 +1,14 @@
+---
+source: crates/css_ast/tests/popular_snapshots.rs
+expression: "render_diagnostics!(result.errors, source_text)"
+---
+[
+    "422878..422879 Unexpected: Unexpected `Kind::Comma`",
+    "424233..424234 Unexpected: Unexpected `Kind::Comma`",
+    "424404..424405 Unexpected: Unexpected `Kind::Comma`",
+    "449894..449895 Unexpected: Unexpected `Kind::Comma`",
+    "663544..663545 Unexpected: Unexpected `Kind::Comma`",
+    "679972..679973 Unexpected: Unexpected `Kind::Comma`",
+    "732911..732913 Unexpected: Unexpected `Kind::Number`",
+    "733605..733607 Unexpected: Unexpected `Kind::Number`",
+]

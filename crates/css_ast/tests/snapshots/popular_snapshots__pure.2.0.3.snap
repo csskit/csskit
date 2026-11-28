@@ -8438,296 +8438,307 @@ StyleSheet(
                 offset: SourceOffset(12772),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(12773),
-                    len: 1,
-                  )),
-                  FunctionBlock(
-                    name: Function(Cursor(
-                      kind: "Function",
-                      offset: SourceOffset(12774),
-                      len: 17,
-                    )),
-                    params: ComponentValues(
-                      values: [
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(12791),
-                          len: 6,
+              value: BackgroundImageStyleValue([
+                (Bad(Unresolved(
+                  tokens: ComponentValues(
+                    values: [
+                      Whitespace(Cursor(
+                        kind: "Whitespace",
+                        offset: SourceOffset(12773),
+                        len: 1,
+                      )),
+                      FunctionBlock(
+                        name: Function(Cursor(
+                          kind: "Function",
+                          offset: SourceOffset(12774),
+                          len: 17,
                         )),
-                        Comma(Cursor(
-                          kind: "Comma",
-                          offset: SourceOffset(12797),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(12798),
-                          len: 1,
-                        )),
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(12799),
-                          len: 4,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(12803),
-                          len: 1,
-                        )),
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(12804),
-                          len: 3,
-                        )),
-                        Comma(Cursor(
-                          kind: "Comma",
-                          offset: SourceOffset(12807),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(12808),
-                          len: 1,
-                        )),
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(12809),
-                          len: 4,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(12813),
-                          len: 1,
-                        )),
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(12814),
-                          len: 6,
-                        )),
-                        Comma(Cursor(
-                          kind: "Comma",
-                          offset: SourceOffset(12820),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(12821),
-                          len: 1,
-                        )),
-                        FunctionBlock(
-                          name: Function(Cursor(
-                            kind: "Function",
-                            offset: SourceOffset(12822),
-                            len: 5,
-                          )),
-                          params: ComponentValues(
-                            values: [
-                              Ident(Cursor(
-                                kind: "Ident",
-                                offset: SourceOffset(12827),
+                        params: ComponentValues(
+                          values: [
+                            Ident(Cursor(
+                              kind: "Ident",
+                              offset: SourceOffset(12791),
+                              len: 6,
+                            )),
+                            Comma(Cursor(
+                              kind: "Comma",
+                              offset: SourceOffset(12797),
+                              len: 1,
+                            )),
+                            Whitespace(Cursor(
+                              kind: "Whitespace",
+                              offset: SourceOffset(12798),
+                              len: 1,
+                            )),
+                            Ident(Cursor(
+                              kind: "Ident",
+                              offset: SourceOffset(12799),
+                              len: 4,
+                            )),
+                            Whitespace(Cursor(
+                              kind: "Whitespace",
+                              offset: SourceOffset(12803),
+                              len: 1,
+                            )),
+                            Ident(Cursor(
+                              kind: "Ident",
+                              offset: SourceOffset(12804),
+                              len: 3,
+                            )),
+                            Comma(Cursor(
+                              kind: "Comma",
+                              offset: SourceOffset(12807),
+                              len: 1,
+                            )),
+                            Whitespace(Cursor(
+                              kind: "Whitespace",
+                              offset: SourceOffset(12808),
+                              len: 1,
+                            )),
+                            Ident(Cursor(
+                              kind: "Ident",
+                              offset: SourceOffset(12809),
+                              len: 4,
+                            )),
+                            Whitespace(Cursor(
+                              kind: "Whitespace",
+                              offset: SourceOffset(12813),
+                              len: 1,
+                            )),
+                            Ident(Cursor(
+                              kind: "Ident",
+                              offset: SourceOffset(12814),
+                              len: 6,
+                            )),
+                            Comma(Cursor(
+                              kind: "Comma",
+                              offset: SourceOffset(12820),
+                              len: 1,
+                            )),
+                            Whitespace(Cursor(
+                              kind: "Whitespace",
+                              offset: SourceOffset(12821),
+                              len: 1,
+                            )),
+                            FunctionBlock(
+                              name: Function(Cursor(
+                                kind: "Function",
+                                offset: SourceOffset(12822),
+                                len: 5,
+                              )),
+                              params: ComponentValues(
+                                values: [
+                                  Ident(Cursor(
+                                    kind: "Ident",
+                                    offset: SourceOffset(12827),
+                                    len: 11,
+                                  )),
+                                ],
+                              ),
+                              close: RightParen(Cursor(
+                                kind: "RightParen",
+                                offset: SourceOffset(12838),
+                                len: 1,
+                              )),
+                            ),
+                            Comma(Cursor(
+                              kind: "Comma",
+                              offset: SourceOffset(12839),
+                              len: 1,
+                            )),
+                            Whitespace(Cursor(
+                              kind: "Whitespace",
+                              offset: SourceOffset(12840),
+                              len: 1,
+                            )),
+                            FunctionBlock(
+                              name: Function(Cursor(
+                                kind: "Function",
+                                offset: SourceOffset(12841),
                                 len: 11,
                               )),
-                            ],
-                          ),
-                          close: RightParen(Cursor(
-                            kind: "RightParen",
-                            offset: SourceOffset(12838),
-                            len: 1,
-                          )),
-                        ),
-                        Comma(Cursor(
-                          kind: "Comma",
-                          offset: SourceOffset(12839),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(12840),
-                          len: 1,
-                        )),
-                        FunctionBlock(
-                          name: Function(Cursor(
-                            kind: "Function",
-                            offset: SourceOffset(12841),
-                            len: 11,
-                          )),
-                          params: ComponentValues(
-                            values: [
-                              Dimension(Cursor(
-                                kind: "Dimension",
-                                offset: SourceOffset(12852),
+                              params: ComponentValues(
+                                values: [
+                                  Dimension(Cursor(
+                                    kind: "Dimension",
+                                    offset: SourceOffset(12852),
+                                    len: 3,
+                                  )),
+                                  Comma(Cursor(
+                                    kind: "Comma",
+                                    offset: SourceOffset(12855),
+                                    len: 1,
+                                  )),
+                                  Whitespace(Cursor(
+                                    kind: "Whitespace",
+                                    offset: SourceOffset(12856),
+                                    len: 1,
+                                  )),
+                                  FunctionBlock(
+                                    name: Function(Cursor(
+                                      kind: "Function",
+                                      offset: SourceOffset(12857),
+                                      len: 5,
+                                    )),
+                                    params: ComponentValues(
+                                      values: [
+                                        Number(Cursor(
+                                          kind: "Number",
+                                          offset: SourceOffset(12862),
+                                          len: 1,
+                                        )),
+                                        Comma(Cursor(
+                                          kind: "Comma",
+                                          offset: SourceOffset(12863),
+                                          len: 1,
+                                        )),
+                                        Number(Cursor(
+                                          kind: "Number",
+                                          offset: SourceOffset(12864),
+                                          len: 1,
+                                        )),
+                                        Comma(Cursor(
+                                          kind: "Comma",
+                                          offset: SourceOffset(12865),
+                                          len: 1,
+                                        )),
+                                        Number(Cursor(
+                                          kind: "Number",
+                                          offset: SourceOffset(12866),
+                                          len: 1,
+                                        )),
+                                        Comma(Cursor(
+                                          kind: "Comma",
+                                          offset: SourceOffset(12867),
+                                          len: 1,
+                                        )),
+                                        Whitespace(Cursor(
+                                          kind: "Whitespace",
+                                          offset: SourceOffset(12868),
+                                          len: 1,
+                                        )),
+                                        Number(Cursor(
+                                          kind: "Number",
+                                          offset: SourceOffset(12869),
+                                          len: 4,
+                                        )),
+                                      ],
+                                    ),
+                                    close: RightParen(Cursor(
+                                      kind: "RightParen",
+                                      offset: SourceOffset(12873),
+                                      len: 1,
+                                    )),
+                                  ),
+                                ],
+                              ),
+                              close: RightParen(Cursor(
+                                kind: "RightParen",
+                                offset: SourceOffset(12874),
+                                len: 1,
+                              )),
+                            ),
+                            Comma(Cursor(
+                              kind: "Comma",
+                              offset: SourceOffset(12875),
+                              len: 1,
+                            )),
+                            Whitespace(Cursor(
+                              kind: "Whitespace",
+                              offset: SourceOffset(12876),
+                              len: 1,
+                            )),
+                            FunctionBlock(
+                              name: Function(Cursor(
+                                kind: "Function",
+                                offset: SourceOffset(12877),
                                 len: 3,
                               )),
-                              Comma(Cursor(
-                                kind: "Comma",
-                                offset: SourceOffset(12855),
+                              params: ComponentValues(
+                                values: [
+                                  FunctionBlock(
+                                    name: Function(Cursor(
+                                      kind: "Function",
+                                      offset: SourceOffset(12880),
+                                      len: 5,
+                                    )),
+                                    params: ComponentValues(
+                                      values: [
+                                        Number(Cursor(
+                                          kind: "Number",
+                                          offset: SourceOffset(12885),
+                                          len: 1,
+                                        )),
+                                        Comma(Cursor(
+                                          kind: "Comma",
+                                          offset: SourceOffset(12886),
+                                          len: 1,
+                                        )),
+                                        Number(Cursor(
+                                          kind: "Number",
+                                          offset: SourceOffset(12887),
+                                          len: 1,
+                                        )),
+                                        Comma(Cursor(
+                                          kind: "Comma",
+                                          offset: SourceOffset(12888),
+                                          len: 1,
+                                        )),
+                                        Number(Cursor(
+                                          kind: "Number",
+                                          offset: SourceOffset(12889),
+                                          len: 1,
+                                        )),
+                                        Comma(Cursor(
+                                          kind: "Comma",
+                                          offset: SourceOffset(12890),
+                                          len: 1,
+                                        )),
+                                        Whitespace(Cursor(
+                                          kind: "Whitespace",
+                                          offset: SourceOffset(12891),
+                                          len: 1,
+                                        )),
+                                        Number(Cursor(
+                                          kind: "Number",
+                                          offset: SourceOffset(12892),
+                                          len: 4,
+                                        )),
+                                      ],
+                                    ),
+                                    close: RightParen(Cursor(
+                                      kind: "RightParen",
+                                      offset: SourceOffset(12896),
+                                      len: 1,
+                                    )),
+                                  ),
+                                ],
+                              ),
+                              close: RightParen(Cursor(
+                                kind: "RightParen",
+                                offset: SourceOffset(12897),
                                 len: 1,
                               )),
-                              Whitespace(Cursor(
-                                kind: "Whitespace",
-                                offset: SourceOffset(12856),
-                                len: 1,
-                              )),
-                              FunctionBlock(
-                                name: Function(Cursor(
-                                  kind: "Function",
-                                  offset: SourceOffset(12857),
-                                  len: 5,
-                                )),
-                                params: ComponentValues(
-                                  values: [
-                                    Number(Cursor(
-                                      kind: "Number",
-                                      offset: SourceOffset(12862),
-                                      len: 1,
-                                    )),
-                                    Comma(Cursor(
-                                      kind: "Comma",
-                                      offset: SourceOffset(12863),
-                                      len: 1,
-                                    )),
-                                    Number(Cursor(
-                                      kind: "Number",
-                                      offset: SourceOffset(12864),
-                                      len: 1,
-                                    )),
-                                    Comma(Cursor(
-                                      kind: "Comma",
-                                      offset: SourceOffset(12865),
-                                      len: 1,
-                                    )),
-                                    Number(Cursor(
-                                      kind: "Number",
-                                      offset: SourceOffset(12866),
-                                      len: 1,
-                                    )),
-                                    Comma(Cursor(
-                                      kind: "Comma",
-                                      offset: SourceOffset(12867),
-                                      len: 1,
-                                    )),
-                                    Whitespace(Cursor(
-                                      kind: "Whitespace",
-                                      offset: SourceOffset(12868),
-                                      len: 1,
-                                    )),
-                                    Number(Cursor(
-                                      kind: "Number",
-                                      offset: SourceOffset(12869),
-                                      len: 4,
-                                    )),
-                                  ],
-                                ),
-                                close: RightParen(Cursor(
-                                  kind: "RightParen",
-                                  offset: SourceOffset(12873),
-                                  len: 1,
-                                )),
-                              ),
-                            ],
-                          ),
-                          close: RightParen(Cursor(
-                            kind: "RightParen",
-                            offset: SourceOffset(12874),
-                            len: 1,
-                          )),
+                            ),
+                          ],
                         ),
-                        Comma(Cursor(
-                          kind: "Comma",
-                          offset: SourceOffset(12875),
+                        close: RightParen(Cursor(
+                          kind: "RightParen",
+                          offset: SourceOffset(12898),
                           len: 1,
                         )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(12876),
-                          len: 1,
-                        )),
-                        FunctionBlock(
-                          name: Function(Cursor(
-                            kind: "Function",
-                            offset: SourceOffset(12877),
-                            len: 3,
-                          )),
-                          params: ComponentValues(
-                            values: [
-                              FunctionBlock(
-                                name: Function(Cursor(
-                                  kind: "Function",
-                                  offset: SourceOffset(12880),
-                                  len: 5,
-                                )),
-                                params: ComponentValues(
-                                  values: [
-                                    Number(Cursor(
-                                      kind: "Number",
-                                      offset: SourceOffset(12885),
-                                      len: 1,
-                                    )),
-                                    Comma(Cursor(
-                                      kind: "Comma",
-                                      offset: SourceOffset(12886),
-                                      len: 1,
-                                    )),
-                                    Number(Cursor(
-                                      kind: "Number",
-                                      offset: SourceOffset(12887),
-                                      len: 1,
-                                    )),
-                                    Comma(Cursor(
-                                      kind: "Comma",
-                                      offset: SourceOffset(12888),
-                                      len: 1,
-                                    )),
-                                    Number(Cursor(
-                                      kind: "Number",
-                                      offset: SourceOffset(12889),
-                                      len: 1,
-                                    )),
-                                    Comma(Cursor(
-                                      kind: "Comma",
-                                      offset: SourceOffset(12890),
-                                      len: 1,
-                                    )),
-                                    Whitespace(Cursor(
-                                      kind: "Whitespace",
-                                      offset: SourceOffset(12891),
-                                      len: 1,
-                                    )),
-                                    Number(Cursor(
-                                      kind: "Number",
-                                      offset: SourceOffset(12892),
-                                      len: 4,
-                                    )),
-                                  ],
-                                ),
-                                close: RightParen(Cursor(
-                                  kind: "RightParen",
-                                  offset: SourceOffset(12896),
-                                  len: 1,
-                                )),
-                              ),
-                            ],
-                          ),
-                          close: RightParen(Cursor(
-                            kind: "RightParen",
-                            offset: SourceOffset(12897),
-                            len: 1,
-                          )),
-                        ),
-                      ],
-                    ),
-                    close: RightParen(Cursor(
-                      kind: "RightParen",
-                      offset: SourceOffset(12898),
-                      len: 1,
-                    )),
+                      ),
+                    ],
                   ),
-                ],
-              )),
+                  expected: CssTypes(
+                    bits: 4294967295,
+                  ),
+                  substitutions: SubstitutionKinds(
+                    bits: 0,
+                  ),
+                  start: SourceOffset(12774),
+                )), None),
+              ]),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",

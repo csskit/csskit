@@ -2,7 +2,7 @@ use crate::{CssAtomSet, CssMetadata, StyleValue, rules, stylerule::StyleRule};
 use css_lexer::KindSet;
 use css_parse::Vec;
 use css_parse::{
-	Box, ComponentValues, Cursor, Diagnostic, NodeWithMetadata, Parse, Parser, Peek, QualifiedRule,
+	BadDeclaration, Box, ComponentValues, Cursor, Diagnostic, NodeWithMetadata, Parse, Parser, Peek, QualifiedRule,
 	Result as ParserResult, RuleVariants, SimpleBlock, StyleSheet as StyleSheetTrait, T, UnknownRuleBlock,
 };
 use csskit_derives::*;
@@ -155,7 +155,8 @@ macro_rules! rule {
 
 			UnknownAt(Box<'a, UnknownAtRule<'a>>),
 			Style(Box<'a, StyleRule<'a>>),
-			Unknown(Box<'a, UnknownQualifiedRule<'a>>)
+			Unknown(Box<'a, UnknownQualifiedRule<'a>>),
+			BadDeclaration(Box<'a, BadDeclaration<'a>>)
 		}
 	}
 }
@@ -204,6 +205,10 @@ impl<'a> RuleVariants<'a> for Rule<'a> {
 		I: Iterator<Item = Cursor> + Clone,
 	{
 		p.parse::<Box<UnknownQualifiedRule>>().map(Self::Unknown)
+	}
+
+	fn bad_declaration(declaration: Box<'a, BadDeclaration<'a>>) -> Option<Self> {
+		Some(Self::BadDeclaration(declaration))
 	}
 }
 
@@ -254,6 +259,50 @@ mod tests {
 	}
 
 	#[test]
+	fn bad_top_level_rule_keeps_tokens() {
+		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "+10", "+10");
+		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "url(foo)", "url(foo)");
+		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "a{color:red}+10", "a{color:red}+10");
+	}
+
+	#[test]
+	fn stray_top_level_closer_keeps_tokens() {
+		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "}", "}");
+		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, ")", ")");
+		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "]", "]");
+		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "a{}}b{}", "a{}}b{}");
+		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "P0A}808G", "P0A}808G");
+		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "a b 1%);c:d;}e{}", "a b 1%);c:d;}e{}");
+		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "a{b:url(/x}c{d:e}", "a{b:url(/x}c{d:e}}");
+	}
+
+	#[test]
+	fn top_level_bad_tokens_keep_tokens() {
+		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "url(e %);", "url(e %);");
+		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "\"a\nb{}", "\"a\nb{}");
+	}
+
+	#[test]
+	fn top_level_stray_semicolon_keeps_tokens() {
+		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, ";", ";");
+		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "a{};b{}", "a{};b{}");
+	}
+
+	#[test]
+	fn stray_tokens_in_block_keep_tokens() {
+		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "a{color:red;)}", "a{color:red;)}");
+		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "a{);color:red}", "a{);color:red}");
+		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "a{]color:red}", "a{]color:red}");
+		assert_parse!(CssAtomSet::ATOMS, StyleSheet, "a{;;color:red}");
+	}
+
+	#[test]
+	fn stray_tokens_in_unknown_rule_block_keep_tokens() {
+		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "(){;\n", "(){;\n}");
+		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "(){);a:b}", "(){);a:b}");
+	}
+
+	#[test]
 	fn missing_close_curly_recovers() {
 		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "a{color:red", "a{color:red}");
 		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "a{color:red;", "a{color:red;}");
@@ -265,6 +314,41 @@ mod tests {
 			"@media screen{a{color:red}}"
 		);
 		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "a{color:rgb(1 2 3", "a{color:rgb(1 2 3)}");
+	}
+
+	#[test]
+	fn missing_value_keeps_declaration() {
+		use crate::{Rule, StyleValue, Value};
+		use css_lexer::Lexer;
+		use css_parse::{Arena, Parser, ToSpan};
+		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "a{color:", "a{color:}");
+		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "a{color:fnord}", "a{color:fnord}");
+		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "a{color:fnord;width:1px}", "a{color:fnord;width:1px}");
+
+		let input = "a{color:";
+		let alloc = Arena::new();
+		let lexer = Lexer::new(&CssAtomSet::ATOMS, input);
+		let mut p = Parser::new(&alloc, input, lexer);
+		let sheet = p.parse_entirely::<StyleSheet>().output.expect("sheet");
+		let Rule::Style(rule) = &sheet.rules[0] else { panic!("expected style rule") };
+		let decl = &rule.rule.block.declarations[0];
+		let StyleValue::Color(color) = &decl.value else { panic!("expected color, got {:?}", decl.value) };
+		assert!(matches!(color.0, Value::Bad(_)));
+		assert_eq!(color.0.to_span(), css_lexer::Span::new(css_lexer::SourceOffset(8), css_lexer::SourceOffset(8)));
+	}
+
+	#[test]
+	fn bad_value_stops_at_semicolon() {
+		use crate::Rule;
+		use css_lexer::Lexer;
+		use css_parse::{Arena, Parser};
+		let input = "a{color:fnord;width:1px}";
+		let alloc = Arena::new();
+		let lexer = Lexer::new(&CssAtomSet::ATOMS, input);
+		let mut p = Parser::new(&alloc, input, lexer);
+		let sheet = p.parse_entirely::<StyleSheet>().output.expect("sheet");
+		let Rule::Style(rule) = &sheet.rules[0] else { panic!("expected style rule") };
+		assert_eq!(rule.rule.block.declarations.len(), 2);
 	}
 
 	#[test]

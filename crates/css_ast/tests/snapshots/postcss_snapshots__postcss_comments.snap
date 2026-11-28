@@ -174,41 +174,50 @@ StyleSheet(
                 offset: SourceOffset(207),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(208),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(209),
-                    len: 3,
-                  )),
-                  SimpleBlock(
-                    open: PairWiseStart(Cursor(
-                      kind: "LeftParen",
-                      offset: SourceOffset(216),
+              value: ColorStyleValue(Bad(Unresolved(
+                tokens: ComponentValues(
+                  values: [
+                    Whitespace(Cursor(
+                      kind: "Whitespace",
+                      offset: SourceOffset(208),
                       len: 1,
                     )),
-                    values: ComponentValues(
-                      values: [
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(217),
-                          len: 8,
-                        )),
-                      ],
+                    Ident(Cursor(
+                      kind: "Ident",
+                      offset: SourceOffset(209),
+                      len: 3,
+                    )),
+                    SimpleBlock(
+                      open: PairWiseStart(Cursor(
+                        kind: "LeftParen",
+                        offset: SourceOffset(216),
+                        len: 1,
+                      )),
+                      values: ComponentValues(
+                        values: [
+                          Ident(Cursor(
+                            kind: "Ident",
+                            offset: SourceOffset(217),
+                            len: 8,
+                          )),
+                        ],
+                      ),
+                      close: PairWiseEnd(Cursor(
+                        kind: "RightParen",
+                        offset: SourceOffset(225),
+                        len: 1,
+                      )),
                     ),
-                    close: PairWiseEnd(Cursor(
-                      kind: "RightParen",
-                      offset: SourceOffset(225),
-                      len: 1,
-                    )),
-                  ),
-                ],
-              )),
+                  ],
+                ),
+                expected: CssTypes(
+                  bits: 4294967295,
+                ),
+                substitutions: SubstitutionKinds(
+                  bits: 0,
+                ),
+                start: SourceOffset(209),
+              ))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",

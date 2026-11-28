@@ -409,7 +409,7 @@ mod tests {
 	use super::*;
 	use crate::{CssAtomSet, CssMetadata, ShorthandReset, Writes};
 	use css_lexer::Lexer;
-	use css_parse::{Arena, AtomSet, Declaration, Parser, assert_parse};
+	use css_parse::{Arena, AtomSet, Declaration, Parser, assert_parse, assert_parse_recovers};
 
 	type Property<'a> = Declaration<'a, StyleValue<'a>, CssMetadata>;
 
@@ -497,7 +497,7 @@ mod tests {
 		);
 		// Should still parse unknown properties
 		assert_parse!(CssAtomSet::ATOMS, Property, "dunno:like whatever");
-		assert_parse!(CssAtomSet::ATOMS, Property, "rotate:1.21gw");
+		assert_parse_recovers!(CssAtomSet::ATOMS, Property, "rotate:1.21gw", "rotate:1.21gw");
 		assert_parse!(CssAtomSet::ATOMS, Property, "_background:black");
 		assert_parse!(CssAtomSet::ATOMS, Property, "--custom:{foo:{bar};baz:(bing);}");
 		assert_parse!(

@@ -1,5 +1,8 @@
 use crate::{CssAtomSet, CssMetadata, CssTypes, DeclarationKind, SubstitutionKinds};
-use css_parse::{AtomSet, ComponentValue, ComponentValues, Cursor, NodeWithMetadata, Parse, Parser, Result};
+use css_lexer::{SourceOffset, Span, ToSpan};
+use css_parse::{
+	AtomSet, ComponentValue, ComponentValues, Cursor, CursorSink, NodeWithMetadata, ParseInfallible, Parser, ToCursors,
+};
 use csskit_derives::*;
 use csskit_proc_macro::node;
 
@@ -12,8 +15,10 @@ use csskit_proc_macro::node;
 /// `tokens` preserves the original source tokens verbatim.
 /// `expected` records the set of CSS value types the position accepts, enabling
 /// downstream inference and diagnostics.
+/// `start` is where parsing began, so an `Unresolved` with no tokens (a slot with nothing in it)
+/// still has a position.
 #[node]
-#[derive(Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Peek, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct Unresolved<'a> {
 	pub tokens: ComponentValues<'a>,
@@ -23,6 +28,9 @@ pub struct Unresolved<'a> {
 	#[peek(skip)]
 	#[semantic_eq(skip)]
 	pub substitutions: SubstitutionKinds,
+	#[peek(skip)]
+	#[semantic_eq(skip)]
+	pub start: SourceOffset,
 }
 
 fn substitutions_in(values: &ComponentValues) -> SubstitutionKinds {
@@ -38,14 +46,27 @@ fn substitutions_in(values: &ComponentValues) -> SubstitutionKinds {
 	})
 }
 
-impl<'a> Parse<'a> for Unresolved<'a> {
-	fn parse<I>(p: &mut Parser<'a, I>) -> Result<Self>
+impl<'a> ParseInfallible<'a> for Unresolved<'a> {
+	fn parse_infallible<I>(p: &mut Parser<'a, I>) -> Self
 	where
 		I: Iterator<Item = Cursor> + Clone,
 	{
-		let tokens = p.parse::<ComponentValues>()?;
+		let start = p.peek_n(1).offset();
+		let tokens = p.parse_infallible::<ComponentValues>();
 		let substitutions = substitutions_in(&tokens);
-		Ok(Self { tokens, expected: CssTypes::ANY, substitutions })
+		Self { tokens, expected: CssTypes::ANY, substitutions, start }
+	}
+}
+
+impl ToCursors for Unresolved<'_> {
+	fn to_cursors(&self, s: &mut (impl CursorSink + ?Sized)) {
+		self.tokens.to_cursors(s);
+	}
+}
+
+impl ToSpan for Unresolved<'_> {
+	fn to_span(&self) -> Span {
+		if self.tokens.values.is_empty() { Span::new(self.start, self.start) } else { self.tokens.to_span() }
 	}
 }
 

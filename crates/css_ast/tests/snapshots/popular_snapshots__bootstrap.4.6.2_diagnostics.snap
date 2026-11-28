@@ -1,0 +1,8 @@
+---
+source: crates/css_ast/tests/popular_snapshots.rs
+expression: "render_diagnostics!(result.errors, source_text)"
+---
+[
+    "38271..38276 Unexpected: Unexpected `Kind::Ident`",
+    "42713..42718 Unexpected: Unexpected `Kind::Ident`",
+]

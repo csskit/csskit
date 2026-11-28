@@ -4,7 +4,41 @@ use crate::{Result, syntax::ComponentValue};
 #[node]
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct BadDeclaration<'a>(Vec<'a, ComponentValue<'a>>);
+pub struct BadDeclaration<'a>(pub(crate) Vec<'a, ComponentValue<'a>>);
+
+impl<'a> BadDeclaration<'a> {
+	/// Returns `true` when no tokens were consumed.
+	pub fn is_empty(&self) -> bool {
+		self.0.is_empty()
+	}
+
+	pub(crate) fn stray<I>(p: &Parser<'a, I>, value: ComponentValue<'a>) -> Self
+	where
+		I: Iterator<Item = crate::Cursor> + Clone,
+	{
+		let mut values = Vec::with_capacity_in(1, p.alloc());
+		values.push(value);
+		Self(values)
+	}
+
+	/// Consumes one component value, keeping tokens a component value cannot hold (stray closers, bad strings and
+	/// urls) as error variants.
+	pub(crate) fn parse_value<Iter>(p: &mut Parser<'a, Iter>) -> Result<ComponentValue<'a>>
+	where
+		Iter: Iterator<Item = crate::Cursor> + Clone,
+	{
+		if let Some(closer) = p.parse_if_peek::<T![PairWiseEnd]>()? {
+			return Ok(ComponentValue::StrayCloser(closer));
+		}
+		if let Some(bad) = p.parse_if_peek::<T![BadString]>()? {
+			return Ok(ComponentValue::BadString(bad));
+		}
+		if let Some(bad) = p.parse_if_peek::<T![BadUrl]>()? {
+			return Ok(ComponentValue::BadUrl(bad));
+		}
+		p.parse::<ComponentValue>()
+	}
+}
 
 // https://drafts.csswg.org/css-syntax-3/#consume-the-remnants-of-a-bad-declaration
 impl<'a> Parse<'a> for BadDeclaration<'a> {
@@ -33,19 +67,10 @@ impl<'a> Parse<'a> for BadDeclaration<'a> {
 			// <}-token>
 			//
 			//     If nested is true, return nothing. Otherwise, discard a token.
-			if <T!['}']>::peek(p, c) {
-				if p.is(State::Nested) {
-					return Ok(Self(values));
-				} else {
-					p.parse::<T!['}']>()?;
-				}
+			if <T!['}']>::peek(p, c) && p.is(State::Nested) {
+				return Ok(Self(values));
 			}
-
-			// anything else
-			//
-			//     Consume a component value from input, and do nothing.
-			//
-			values.push(p.parse::<ComponentValue>()?);
+			values.push(Self::parse_value(p)?);
 		}
 	}
 }

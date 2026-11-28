@@ -140,20 +140,31 @@ StyleSheet(
                 offset: SourceOffset(101),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(102),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(103),
-                    len: 3,
-                  )),
-                ],
-              )),
+              value: BackgroundStyleValue([
+                (Bad(Unresolved(
+                  tokens: ComponentValues(
+                    values: [
+                      Whitespace(Cursor(
+                        kind: "Whitespace",
+                        offset: SourceOffset(102),
+                        len: 1,
+                      )),
+                      Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(103),
+                        len: 3,
+                      )),
+                    ],
+                  ),
+                  expected: CssTypes(
+                    bits: 4294967295,
+                  ),
+                  substitutions: SubstitutionKinds(
+                    bits: 0,
+                  ),
+                  start: SourceOffset(103),
+                )), None),
+              ]),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -664,20 +675,29 @@ StyleSheet(
                 offset: SourceOffset(286),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(287),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(288),
-                    len: 2,
-                  )),
-                ],
-              )),
+              value: ColorStyleValue(Bad(Unresolved(
+                tokens: ComponentValues(
+                  values: [
+                    Whitespace(Cursor(
+                      kind: "Whitespace",
+                      offset: SourceOffset(287),
+                      len: 1,
+                    )),
+                    Ident(Cursor(
+                      kind: "Ident",
+                      offset: SourceOffset(288),
+                      len: 2,
+                    )),
+                  ],
+                ),
+                expected: CssTypes(
+                  bits: 4294967295,
+                ),
+                substitutions: SubstitutionKinds(
+                  bits: 0,
+                ),
+                start: SourceOffset(288),
+              ))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",

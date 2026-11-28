@@ -138,7 +138,7 @@ mod tests {
 
 	#[test]
 	fn keeps_rule_with_unknown_declaration() {
-		assert_no_transform!(CssMinifierFeature::RemoveInertNodes, CssAtomSet, StyleSheet, "a { color: fnord }");
+		assert_no_transform!(CssMinifierFeature::RemoveInertNodes, CssAtomSet, StyleSheet, "a { fnord: red }");
 	}
 
 	#[test]

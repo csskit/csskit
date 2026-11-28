@@ -16215,46 +16215,6 @@ StyleSheet(
                       offset: SourceOffset(14728),
                       len: 9,
                     )),
-                    Semicolon(Cursor(
-                      kind: "Semicolon",
-                      offset: SourceOffset(14737),
-                      len: 1,
-                    )),
-                    Whitespace(Cursor(
-                      kind: "Whitespace",
-                      offset: SourceOffset(14738),
-                      len: 3,
-                    )),
-                    Ident(Cursor(
-                      kind: "Ident",
-                      offset: SourceOffset(14741),
-                      len: 13,
-                    )),
-                    Colon(Cursor(
-                      kind: "Colon",
-                      offset: SourceOffset(14754),
-                      len: 1,
-                    )),
-                    Whitespace(Cursor(
-                      kind: "Whitespace",
-                      offset: SourceOffset(14755),
-                      len: 1,
-                    )),
-                    Dimension(Cursor(
-                      kind: "Dimension",
-                      offset: SourceOffset(14756),
-                      len: 4,
-                    )),
-                    Semicolon(Cursor(
-                      kind: "Semicolon",
-                      offset: SourceOffset(14760),
-                      len: 1,
-                    )),
-                    Whitespace(Cursor(
-                      kind: "Whitespace",
-                      offset: SourceOffset(14761),
-                      len: 1,
-                    )),
                   ],
                 ),
                 expected: CssTypes(
@@ -16263,9 +16223,37 @@ StyleSheet(
                 substitutions: SubstitutionKinds(
                   bits: 1,
                 ),
+                start: SourceOffset(14661),
               ),
               important: None,
-              semicolon: None,
+              semicolon: Some(Semicolon(Cursor(
+                kind: "Semicolon",
+                offset: SourceOffset(14737),
+                len: 1,
+              ))),
+            ),
+            Declaration(
+              name: Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(14741),
+                len: 13,
+              )),
+              colon: Colon(Cursor(
+                kind: "Colon",
+                offset: SourceOffset(14754),
+                len: 1,
+              )),
+              value: PaddingRightStyleValue(Literal(Length(Px(Dimension(Cursor(
+                kind: "Dimension",
+                offset: SourceOffset(14756),
+                len: 4,
+              )))))),
+              important: None,
+              semicolon: Some(Semicolon(Cursor(
+                kind: "Semicolon",
+                offset: SourceOffset(14760),
+                len: 1,
+              ))),
             ),
           ],
           rules: [],
@@ -16588,16 +16576,6 @@ StyleSheet(
                             offset: SourceOffset(15431),
                             len: 9,
                           )),
-                          Semicolon(Cursor(
-                            kind: "Semicolon",
-                            offset: SourceOffset(15440),
-                            len: 1,
-                          )),
-                          Whitespace(Cursor(
-                            kind: "Whitespace",
-                            offset: SourceOffset(15441),
-                            len: 3,
-                          )),
                         ],
                       ),
                       expected: CssTypes(
@@ -16606,9 +16584,14 @@ StyleSheet(
                       substitutions: SubstitutionKinds(
                         bits: 1,
                       ),
+                      start: SourceOffset(15364),
                     ),
                     important: None,
-                    semicolon: None,
+                    semicolon: Some(Semicolon(Cursor(
+                      kind: "Semicolon",
+                      offset: SourceOffset(15440),
+                      len: 1,
+                    ))),
                   ),
                 ],
                 rules: [],
@@ -16939,16 +16922,6 @@ StyleSheet(
                             offset: SourceOffset(16115),
                             len: 9,
                           )),
-                          Semicolon(Cursor(
-                            kind: "Semicolon",
-                            offset: SourceOffset(16124),
-                            len: 1,
-                          )),
-                          Whitespace(Cursor(
-                            kind: "Whitespace",
-                            offset: SourceOffset(16125),
-                            len: 3,
-                          )),
                         ],
                       ),
                       expected: CssTypes(
@@ -16957,9 +16930,14 @@ StyleSheet(
                       substitutions: SubstitutionKinds(
                         bits: 1,
                       ),
+                      start: SourceOffset(16048),
                     ),
                     important: None,
-                    semicolon: None,
+                    semicolon: Some(Semicolon(Cursor(
+                      kind: "Semicolon",
+                      offset: SourceOffset(16124),
+                      len: 1,
+                    ))),
                   ),
                 ],
                 rules: [],
@@ -17290,16 +17268,6 @@ StyleSheet(
                             offset: SourceOffset(16799),
                             len: 9,
                           )),
-                          Semicolon(Cursor(
-                            kind: "Semicolon",
-                            offset: SourceOffset(16808),
-                            len: 1,
-                          )),
-                          Whitespace(Cursor(
-                            kind: "Whitespace",
-                            offset: SourceOffset(16809),
-                            len: 3,
-                          )),
                         ],
                       ),
                       expected: CssTypes(
@@ -17308,9 +17276,14 @@ StyleSheet(
                       substitutions: SubstitutionKinds(
                         bits: 1,
                       ),
+                      start: SourceOffset(16732),
                     ),
                     important: None,
-                    semicolon: None,
+                    semicolon: Some(Semicolon(Cursor(
+                      kind: "Semicolon",
+                      offset: SourceOffset(16808),
+                      len: 1,
+                    ))),
                   ),
                 ],
                 rules: [],
@@ -17641,16 +17614,6 @@ StyleSheet(
                             offset: SourceOffset(17483),
                             len: 9,
                           )),
-                          Semicolon(Cursor(
-                            kind: "Semicolon",
-                            offset: SourceOffset(17492),
-                            len: 1,
-                          )),
-                          Whitespace(Cursor(
-                            kind: "Whitespace",
-                            offset: SourceOffset(17493),
-                            len: 3,
-                          )),
                         ],
                       ),
                       expected: CssTypes(
@@ -17659,9 +17622,14 @@ StyleSheet(
                       substitutions: SubstitutionKinds(
                         bits: 1,
                       ),
+                      start: SourceOffset(17416),
                     ),
                     important: None,
-                    semicolon: None,
+                    semicolon: Some(Semicolon(Cursor(
+                      kind: "Semicolon",
+                      offset: SourceOffset(17492),
+                      len: 1,
+                    ))),
                   ),
                 ],
                 rules: [],

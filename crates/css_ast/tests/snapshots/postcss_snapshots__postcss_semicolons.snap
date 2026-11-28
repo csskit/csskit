@@ -161,6 +161,13 @@ StyleSheet(
         ),
       ),
     ),
+    BadDeclaration([
+      Semicolon(Cursor(
+        kind: "Semicolon",
+        offset: SourceOffset(52),
+        len: 1,
+      )),
+    ]),
     StyleRule(
       rule: QualifiedRule(
         prelude: SelectorList([
@@ -212,6 +219,13 @@ StyleSheet(
         ),
       ),
     ),
+    BadDeclaration([
+      Semicolon(Cursor(
+        kind: "Semicolon",
+        offset: SourceOffset(61),
+        len: 1,
+      )),
+    ]),
     UnknownAtRule(
       name: AtKeyword(Cursor(
         kind: "AtKeyword",

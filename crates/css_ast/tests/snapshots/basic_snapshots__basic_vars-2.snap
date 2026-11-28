@@ -1,0 +1,7 @@
+---
+source: crates/css_ast/tests/basic_snapshots.rs
+expression: "$crate :: render_diagnostics! (result.errors, source_text)"
+---
+[
+    "78..81 Unexpected: Unexpected `Kind::Dimension`",
+]

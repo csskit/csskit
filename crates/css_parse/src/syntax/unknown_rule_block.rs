@@ -63,4 +63,11 @@ where
 		// It should be treated as unknown so it doesn't override actual declarations.
 		true
 	}
+
+	fn bad_declaration(declaration: crate::Box<'a, crate::BadDeclaration<'a>>) -> Option<Self> {
+		let tokens = &mut declaration.leak().0;
+		let alloc = *tokens.allocator();
+		let values = ComponentValues { values: std::mem::replace(tokens, Vec::new_in(alloc)) };
+		Some(Self { values, _phantom: std::marker::PhantomData })
+	}
 }
