@@ -106,7 +106,7 @@ impl<'a> Parse<'a> for CharsetRule {
 		// delims (e.g. `(`) or unambinguous tokens like strings.
 		let space = p.parse::<T![' ']>()?;
 		let string = p.parse::<T![String]>()?;
-		let semicolon = p.parse::<T![;]>().ok();
+		let semicolon = p.parse_if_peek::<T![;]>()?;
 		Ok(Self { at_keyword, space, string, semicolon })
 	}
 }

@@ -117,11 +117,19 @@ pub trait RuleVariants<'a>: Sized + ToCursors + ToSpan {
 					Self::parse_unknown_qualified_rule(p, c)
 				})
 				.or_else(|err| {
+					let end = p.peek_n(1).offset();
 					p.rewind(checkpoint);
-					let state = p.set_state(State::Nested);
-					let declaration = p.parse::<BadDeclaration>();
-					p.set_state(state);
-					let mut declaration = declaration?;
+					let mut declaration = if p.is(State::Nested) {
+						p.parse::<BadDeclaration>()?
+					} else {
+						BadDeclaration::parse_until(p, end)?
+					};
+					if declaration.is_empty() {
+						let state = p.set_state(State::Nested);
+						let stray = p.parse::<BadDeclaration>();
+						p.set_state(state);
+						declaration = stray?;
+					}
 					if declaration.is_empty()
 						&& !p.is(State::Nested)
 						&& let Some(closer) = p.parse_if_peek::<T![PairWiseEnd]>()?

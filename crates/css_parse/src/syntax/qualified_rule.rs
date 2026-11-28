@@ -100,7 +100,12 @@ where
 		}
 
 		// Set the StopOn Curly to signify to prelude parsers that they shouldn't consume beyond the curly
-		let old_stop = p.set_stop(KindSet::new(&[Kind::LeftCurly]));
+		let stop = if p.is(State::Nested) {
+			KindSet::new(&[Kind::LeftCurly, Kind::Semicolon])
+		} else {
+			KindSet::new(&[Kind::LeftCurly])
+		};
+		let old_stop = p.set_stop(stop);
 		let prelude = p.parse::<P>();
 		p.set_stop(old_stop);
 		let prelude = prelude?;

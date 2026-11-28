@@ -34,6 +34,7 @@ ComponentValue: size=24 align=8
     14: StrayCloser
     15: BadString
     16: BadUrl
+    17: CdcOrCdo
 ComponentValues: size=24 align=8 {
     values: 0
 }

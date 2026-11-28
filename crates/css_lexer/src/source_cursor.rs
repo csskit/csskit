@@ -157,6 +157,7 @@ impl<'a> SourceCursor<'a> {
 			| Kind::RightParen
 			| Kind::LeftCurly
 			| Kind::RightCurly => f.write_char(token.char().unwrap()),
+			kind if let Some(char) = kind.char() => f.write_char(char),
 			_ if self.should_compact => self.fmt_compacted(f),
 			#[cfg(feature = "egg")]
 			_ if self.should_expand => self.fmt_expanded(f),

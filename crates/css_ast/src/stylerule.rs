@@ -128,7 +128,7 @@ impl<'a> Parse<'a> for NestedGroupRule<'a> {
 mod tests {
 	use super::*;
 	use crate::CssAtomSet;
-	use css_parse::{assert_parse, assert_parse_span};
+	use css_parse::{assert_parse, assert_parse_recovers, assert_parse_span};
 
 	#[cfg(feature = "visitable")]
 	use crate::assert_visits;
@@ -146,9 +146,9 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, StyleRule, ".foo{--bar:1}");
 		assert_parse!(CssAtomSet::ATOMS, StyleRule, ":root{--custom:{width:0;height:0;};}");
 		// Semicolons are "allowed" in geneirc preludes
-		assert_parse!(CssAtomSet::ATOMS, StyleRule, ":root{a;b{}}");
+		assert_parse_recovers!(CssAtomSet::ATOMS, StyleRule, ":root{a;b{}}", ":root{a;b{}}");
 		// Bad Declarations should be parsable.
-		assert_parse!(CssAtomSet::ATOMS, StyleRule, ":root{$(var)-size: 100%;}");
+		assert_parse_recovers!(CssAtomSet::ATOMS, StyleRule, ":root{$(var)-size: 100%;}", ":root{$(var)-size: 100%;}");
 		assert_parse!(CssAtomSet::ATOMS, StyleRule, ".md{--:ra( ;86)}");
 		assert_parse!(CssAtomSet::ATOMS, StyleRule, "a{@supports (color:red){color:red;}}");
 		assert_parse!(CssAtomSet::ATOMS, StyleRule, "a{@supports selector(a){color:red;b{color:blue;}}}");

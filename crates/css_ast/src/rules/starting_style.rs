@@ -31,12 +31,23 @@ pub struct StartingStyleRuleBlock<'a>(pub RuleList<'a, Rule<'a>, CssMetadata>);
 mod tests {
 	use super::*;
 	use crate::CssAtomSet;
-	use css_parse::assert_parse;
+	use css_parse::{assert_parse, assert_parse_recovers};
 
 	#[test]
 	fn test_writes() {
 		assert_parse!(CssAtomSet::ATOMS, StartingStyleRule, "@starting-style{}");
 		assert_parse!(CssAtomSet::ATOMS, StartingStyleRule, "@starting-style{body{color:black}}");
 		assert_parse!(CssAtomSet::ATOMS, StartingStyleRule, "@starting-style{h1{background-color:transparent}}");
+	}
+
+	#[test]
+	fn stray_semicolon_kept() {
+		assert_parse!(CssAtomSet::ATOMS, StartingStyleRule, "@starting-style{;a{b:c}}");
+		assert_parse_recovers!(
+			CssAtomSet::ATOMS,
+			StartingStyleRule,
+			"@starting-style{;)a{b:c}}",
+			"@starting-style{;)a{b:c}}"
+		);
 	}
 }

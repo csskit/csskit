@@ -1,5 +1,5 @@
 use super::prelude::*;
-use crate::token_macros;
+use crate::{RuleVariants, token_macros};
 
 /// A struct representing an AST node block that only accepts child "Rules". This is defined as:
 ///
@@ -46,7 +46,7 @@ where
 
 impl<'a, R, M> Parse<'a> for RuleList<'a, R, M>
 where
-	R: Parse<'a> + NodeWithMetadata<M>,
+	R: Parse<'a> + NodeWithMetadata<M> + RuleVariants<'a>,
 	M: NodeMetadata,
 {
 	fn parse<Iter>(p: &mut Parser<'a, Iter>) -> Result<Self>
@@ -58,7 +58,13 @@ where
 		let mut rules = Vec::new_in(p.alloc());
 		let mut meta = if nested { M::default().with_nested() } else { M::default() };
 		loop {
-			p.parse_if_peek::<T![;]>().ok();
+			let cursor = p.peek_n(1);
+			if <T![;]>::peek(p, cursor) {
+				let old_skip = p.set_skip(KindSet::TRIVIA.add(Kind::Semicolon));
+				p.consume_trivia_as_leading();
+				p.set_skip(old_skip);
+				continue;
+			}
 			if p.at_end() {
 				let close_curly = <T!['}']>::missing(p);
 				return Ok(Self { open_curly, rules, close_curly, meta });

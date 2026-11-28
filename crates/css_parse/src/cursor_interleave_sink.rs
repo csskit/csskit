@@ -10,7 +10,7 @@ pub struct CursorInterleaveSink<'a, S: ?Sized> {
 	sink: &'a mut S,
 	interleave: &'a [(Vec<'a, Cursor>, Cursor)],
 	end: SourceOffset,
-	current_index: usize,
+	passed: usize,
 	#[cfg(debug_assertions)]
 	seen_eof: bool,
 }
@@ -21,7 +21,7 @@ impl<'a, S: CursorSink + ?Sized> CursorInterleaveSink<'a, S> {
 			sink,
 			interleave,
 			end,
-			current_index: 0,
+			passed: 0,
 			#[cfg(debug_assertions)]
 			seen_eof: false,
 		}
@@ -42,30 +42,35 @@ impl<'a, S: CursorSink + ?Sized> CursorSink for CursorInterleaveSink<'a, S> {
 			self.sink.append(c);
 			return;
 		}
-		// Check if this content cursor has associated trivia
-		while self.current_index < self.interleave.len() {
-			let (trivia, associated_cursor) = &self.interleave[self.current_index];
-			if associated_cursor.offset() == c.offset() && associated_cursor.token().kind() == c.token().kind() {
-				for cursor in trivia {
-					self.sink.append_trivia(*cursor);
-				}
-				self.current_index += 1;
-				break;
-			}
-			if associated_cursor.offset() >= c.offset() {
-				break;
-			}
-			self.current_index += 1;
-		}
-
-		// If this is EOF, flush any remaining trivia before emitting EOF
 		if c == Kind::Eof {
-			while self.current_index < self.interleave.len() {
-				let (trivia, _) = &self.interleave[self.current_index];
+			for (trivia, _) in &self.interleave[self.passed..] {
 				for cursor in trivia {
 					self.sink.append_trivia(*cursor);
 				}
-				self.current_index += 1;
+			}
+			self.passed = self.interleave.len();
+		} else {
+			let offset = c.offset();
+			let before = |(_, associated): &(Vec<'a, Cursor>, Cursor)| associated.offset() < offset;
+			let passed = self.passed;
+			let start = if passed > 0 && !before(&self.interleave[passed - 1]) {
+				self.interleave.partition_point(before)
+			} else if self.interleave.get(passed).is_none_or(|entry| !before(entry)) {
+				passed
+			} else {
+				passed + self.interleave[passed..].partition_point(before)
+			};
+			let matched = self.interleave[start..]
+				.iter()
+				.take_while(|(_, associated)| associated.offset() == c.offset())
+				.position(|(_, associated)| associated.token().kind() == c.token().kind());
+			if let Some(index) = matched {
+				for cursor in &self.interleave[start + index].0 {
+					self.sink.append_trivia(*cursor);
+				}
+				self.passed = self.passed.max(start + index + 1);
+			} else {
+				self.passed = self.passed.max(start);
 			}
 		}
 

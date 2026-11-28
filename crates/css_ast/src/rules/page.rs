@@ -1,6 +1,6 @@
 use super::prelude::*;
 use crate::specificity::{Specificity, ToSpecificity};
-use css_parse::RuleVariants;
+use css_parse::{BadDeclaration, Box, RuleVariants};
 
 /// <https://drafts.csswg.org/cssom-1/#csspagerule>
 ///
@@ -133,17 +133,20 @@ pub enum MarginRule<'a> {
 	LeftMiddle(#[cfg_attr(feature = "visitable", visit(skip))] T![AtKeyword], MarginRuleBlock<'a>),
 	#[atom(CssAtomSet::LeftTop)]
 	LeftTop(#[cfg_attr(feature = "visitable", visit(skip))] T![AtKeyword], MarginRuleBlock<'a>),
+	#[parse(skip)]
+	#[peek(skip)]
+	BadDeclaration(Box<'a, BadDeclaration<'a>>),
 }
 
 impl<'a> NodeWithMetadata<CssMetadata> for MarginRule<'a> {
 	fn metadata(&self) -> CssMetadata {
-		self.block().0.metadata()
+		self.block().map_or_else(CssMetadata::default, |block| block.0.metadata())
 	}
 }
 
 impl<'a> MarginRule<'a> {
-	pub fn name(&self) -> &T![AtKeyword] {
-		match self {
+	pub fn name(&self) -> Option<&T![AtKeyword]> {
+		Some(match self {
 			Self::TopLeftCorner(a, _) => a,
 			Self::TopLeft(a, _) => a,
 			Self::TopCenter(a, _) => a,
@@ -160,11 +163,12 @@ impl<'a> MarginRule<'a> {
 			Self::LeftBottom(a, _) => a,
 			Self::LeftMiddle(a, _) => a,
 			Self::LeftTop(a, _) => a,
-		}
+			Self::BadDeclaration(_) => return None,
+		})
 	}
 
-	pub fn block(&self) -> &MarginRuleBlock<'a> {
-		match self {
+	pub fn block(&self) -> Option<&MarginRuleBlock<'a>> {
+		Some(match self {
 			Self::TopLeftCorner(_, b) => b,
 			Self::TopLeft(_, b) => b,
 			Self::TopCenter(_, b) => b,
@@ -181,13 +185,18 @@ impl<'a> MarginRule<'a> {
 			Self::LeftBottom(_, b) => b,
 			Self::LeftMiddle(_, b) => b,
 			Self::LeftTop(_, b) => b,
-		}
+			Self::BadDeclaration(_) => return None,
+		})
 	}
 }
 
 impl<'a> RuleVariants<'a> for MarginRule<'a> {
 	type DeclarationValue = StyleValue<'a>;
 	type Metadata = CssMetadata;
+
+	fn bad_declaration(declaration: Box<'a, BadDeclaration<'a>>) -> Option<Self> {
+		Some(Self::BadDeclaration(declaration))
+	}
 }
 
 #[node]
@@ -200,7 +209,7 @@ pub struct MarginRuleBlock<'a>(pub DeclarationList<'a, StyleValue<'a>, CssMetada
 mod tests {
 	use super::*;
 	use crate::CssAtomSet;
-	use css_parse::assert_parse;
+	use css_parse::{assert_parse, assert_parse_recovers};
 
 	#[test]
 	fn test_writes() {
@@ -209,5 +218,11 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, PageRule, "@page wide:left{}");
 		assert_parse!(CssAtomSet::ATOMS, MarginRule, "@top-right{}");
 		assert_parse!(CssAtomSet::ATOMS, PageRule, "@page wide:left{@top-right{}}");
+	}
+
+	#[test]
+	fn stray_tokens_in_page_block_kept() {
+		assert_parse!(CssAtomSet::ATOMS, PageRule, "@page{;margin:0}");
+		assert_parse_recovers!(CssAtomSet::ATOMS, PageRule, "@page{margin:0;)}", "@page{margin:0;)}");
 	}
 }

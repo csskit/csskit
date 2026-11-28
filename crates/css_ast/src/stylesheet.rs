@@ -246,7 +246,7 @@ mod tests {
 
 	#[test]
 	fn cdc_in_unknown_rule_block() {
-		assert_parse!(CssAtomSet::ATOMS, StyleSheet, "={-->}");
+		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "={-->}", "={-->}");
 		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "={-->", "={-->}");
 	}
 
@@ -256,6 +256,11 @@ mod tests {
 		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "t% {90)", "t% {90)}");
 		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "{--ty-2% {90)", "{--ty-2% {90)}}");
 		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "%{]", "%{]}");
+	}
+
+	#[test]
+	fn bad_declaration_in_style_rule_is_diagnosed() {
+		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "a{c d;}", "a{c d;}");
 	}
 
 	#[test]
@@ -273,7 +278,7 @@ mod tests {
 		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "a{}}b{}", "a{}}b{}");
 		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "P0A}808G", "P0A}808G");
 		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "a b 1%);c:d;}e{}", "a b 1%);c:d;}e{}");
-		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "a{b:url(/x}c{d:e}", "a{b:url(/x}c{d:e}}");
+		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "a{b:url(/x}c{d:e}", "a{b:url(/x}c{d:e})}");
 	}
 
 	#[test]
@@ -286,6 +291,26 @@ mod tests {
 	fn top_level_stray_semicolon_keeps_tokens() {
 		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, ";", ";");
 		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "a{};b{}", "a{};b{}");
+	}
+
+	#[test]
+	fn unknown_declaration_value_stops_at_block() {
+		assert_parse!(CssAtomSet::ATOMS, StyleSheet, "@media x{b:{}b:{}}");
+		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "a{foo:{x} y}", "a{foo:{x} y}");
+		assert_parse!(CssAtomSet::ATOMS, StyleSheet, "a{foo:bar baz;color:red}");
+	}
+
+	#[test]
+	fn comment_splitting_bad_declaration_name_is_kept() {
+		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "a{-/**/x:1;b:2}", "a{-/**/x:1;b:2}");
+		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "a{--\\66/**/o:1;c:2}", "a{--\\66/**/o:1;c:2}");
+	}
+
+	#[test]
+	fn cdo_cdc_keep_tokens() {
+		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "-->", "-->");
+		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "<!--a{}-->", "<!--a{}-->");
+		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "a{<!--color:red}", "a{<!--color:red}");
 	}
 
 	#[test]
@@ -303,6 +328,23 @@ mod tests {
 	}
 
 	#[test]
+	fn trailing_comment_after_bad_rule_keeps_tokens() {
+		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "]*/*", "]*/*");
+	}
+
+	#[test]
+	fn charset_without_semicolon_keeps_next_token() {
+		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "@charset \"UTF-8\"a\u{7};", "@charset \"UTF-8\"a\u{7};");
+		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "@charset \"UTF-8\"\0;", "@charset \"UTF-8\"\0;");
+		assert_parse_recovers!(
+			CssAtomSet::ATOMS,
+			StyleSheet,
+			"@charset \"UTF-8\"\0\u{7};",
+			"@charset \"UTF-8\"\0\u{7};"
+		);
+	}
+
+	#[test]
 	fn missing_close_curly_recovers() {
 		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "a{color:red", "a{color:red}");
 		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "a{color:red;", "a{color:red;}");
@@ -314,6 +356,19 @@ mod tests {
 			"@media screen{a{color:red}}"
 		);
 		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "a{color:rgb(1 2 3", "a{color:rgb(1 2 3)}");
+	}
+
+	#[test]
+	fn inserted_closers_follow_unclosed_tokens() {
+		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "a{b:\"c", "a{b:\"c\"}");
+		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "a{b:f('c", "a{b:f('c')}");
+		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "a{b:url(c", "a{b:url(c)}");
+		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "a{b:c/*d", "a{b:c/*d*/}");
+		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "a{b:c\\", "a{b:c\\\u{FFFD}}");
+		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "a{b:\"c\\", "a{b:\"c\\\n\"}");
+		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "a{b:url(/(t", "a{b:url(/(t)}");
+		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, ":not(.a,b\\", ":not(.a,b\\\u{FFFD})");
+		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "a{b:url(/(c\\", "a{b:url(/(c\\\u{FFFD})}");
 	}
 
 	#[test]

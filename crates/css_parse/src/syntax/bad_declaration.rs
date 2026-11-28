@@ -21,6 +21,17 @@ impl<'a> BadDeclaration<'a> {
 		Self(values)
 	}
 
+	pub(crate) fn parse_until<I>(p: &mut Parser<'a, I>, end: css_lexer::SourceOffset) -> Result<Self>
+	where
+		I: Iterator<Item = crate::Cursor> + Clone,
+	{
+		let mut values = Vec::new_in(p.alloc());
+		while !p.at_end() && p.peek_n(1).offset() < end {
+			values.push(Self::parse_value(p)?);
+		}
+		Ok(Self(values))
+	}
+
 	/// Consumes one component value, keeping tokens a component value cannot hold (stray closers, bad strings and
 	/// urls) as error variants.
 	pub(crate) fn parse_value<Iter>(p: &mut Parser<'a, Iter>) -> Result<ComponentValue<'a>>
@@ -35,6 +46,9 @@ impl<'a> BadDeclaration<'a> {
 		}
 		if let Some(bad) = p.parse_if_peek::<T![BadUrl]>()? {
 			return Ok(ComponentValue::BadUrl(bad));
+		}
+		if let Some(cdc_or_cdo) = p.parse_if_peek::<T![CdcOrCdo]>()? {
+			return Ok(ComponentValue::CdcOrCdo(cdc_or_cdo));
 		}
 		p.parse::<ComponentValue>()
 	}
@@ -55,10 +69,10 @@ impl<'a> Parse<'a> for BadDeclaration<'a> {
 			// <semicolon-token>
 			//
 			//     Discard a token from input, and return nothing.
-			if p.at_end() {
+			let c = p.peek_n(1);
+			if c == Kind::Eof {
 				return Ok(Self(values));
 			}
-			let c = p.peek_n(1);
 			if <T![;]>::peek(p, c) {
 				values.push(p.parse::<ComponentValue>()?);
 				return Ok(Self(values));

@@ -28,6 +28,8 @@ struct ParseArg {
 	pub all_must_occur: bool,
 	#[darling(default)]
 	pub one_must_occur: bool,
+	#[darling(default)]
+	pub skip: bool,
 }
 
 impl ParseArg {
@@ -508,21 +510,22 @@ pub fn derive(input: DeriveInput) -> Result<TokenStream> {
 			variant.body(&post, &mut wc)
 		}
 		Data::Enum(data) => {
-			let variants = data
-				.variants
-				.iter()
-				.map(|variant| {
-					if variant.fields.is_empty() {
-						return Err(Error::new(variant.ident.span(), "enum variant must have at least one field"));
-					}
-					let ident = &variant.ident;
-					Ok(Variant {
-						path: quote! { Self::#ident },
-						mode: ParseArg::from_attributes(&variant.attrs)?.parse_mode(),
-						fields: Field::all(&variant.fields, extract_atom(&variant.attrs)?)?,
-					})
-				})
-				.collect::<Result<Vec<_>>>()?;
+			let mut variants = vec![];
+			for variant in &data.variants {
+				let arg = ParseArg::from_attributes(&variant.attrs)?;
+				if arg.skip {
+					continue;
+				}
+				if variant.fields.is_empty() {
+					return Err(Error::new(variant.ident.span(), "enum variant must have at least one field"));
+				}
+				let ident = &variant.ident;
+				variants.push(Variant {
+					path: quote! { Self::#ident },
+					mode: arg.parse_mode(),
+					fields: Field::all(&variant.fields, extract_atom(&variant.attrs)?)?,
+				});
+			}
 			enum_body(&variants, &post, &mut wc)
 		}
 	};

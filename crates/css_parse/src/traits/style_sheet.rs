@@ -1,5 +1,5 @@
 use super::prelude::*;
-use crate::{BadDeclaration, Box, ComponentValue, Kind, NodeMetadata, NodeWithMetadata, RuleVariants};
+use crate::{BadDeclaration, Box, Kind, KindSet, NodeMetadata, NodeWithMetadata, RuleVariants};
 
 /// This trait provides an implementation for parsing a [StyleSheet][1].
 ///
@@ -33,13 +33,15 @@ pub trait StyleSheet<'a, M: NodeMetadata>: Sized + Parse<'a> {
 			// While by default the parser will skip whitespace, the Rule type may be a whitespace sensitive
 			// node, for example `ComponentValues`. As such whitespace needs to be consumed here, before Declarations and
 			// Rules are parsed.
-			if p.parse_if_peek::<T![' ']>()?.is_some() || p.parse_if_peek::<T![CdcOrCdo]>()?.is_some() {
+			if p.parse_if_peek::<T![' ']>()?.is_some() {
 				continue;
 			}
-			if let Some(semicolon) = p.parse_if_peek::<T![;]>()? {
-				let declaration = BadDeclaration::stray(p, ComponentValue::Semicolon(semicolon));
+			let cursor = p.peek_n(1);
+			if cursor == KindSet::new(&[Kind::Semicolon, Kind::CdcOrCdo]) {
+				let value = BadDeclaration::parse_value(p)?;
+				let declaration = BadDeclaration::stray(p, value);
 				if let Some(rule) = Self::Rule::bad_declaration(Box::new_in(p.alloc(), declaration)) {
-					p.diagnose(Diagnostic::new(semicolon.into(), Diagnostic::unexpected));
+					p.diagnose(Diagnostic::new(cursor, Diagnostic::unexpected));
 					rules.push(rule);
 				}
 				continue;
