@@ -62,7 +62,7 @@ pub enum AtRuleId {
 impl NodeId {
 	/// Converts a NodeId to an AtRuleId if the node is an at-rule type.
 	/// Returns `None` for non-at-rule nodes like StyleRule, Declaration, etc.
-	pub fn to_at_rule_id(self) -> Option<AtRuleId> {
+	pub const fn to_at_rule_id(self) -> Option<AtRuleId> {
 		match self {
 			Self::CharsetRule => Some(AtRuleId::Charset),
 			Self::ColorProfileRule => Some(AtRuleId::ColorProfile),
@@ -86,6 +86,11 @@ impl NodeId {
 			Self::WebkitKeyframesRule => Some(AtRuleId::WebkitKeyframes),
 			_ => None,
 		}
+	}
+
+	/// Whether nodes of this kind hold their block's metadata from parse: a stylesheet, style rule or at-rule.
+	pub const fn holds_rule_metadata(self) -> bool {
+		matches!(self, Self::StyleSheet | Self::StyleRule) || self.to_at_rule_id().is_some()
 	}
 }
 

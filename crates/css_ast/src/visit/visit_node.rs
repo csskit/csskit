@@ -37,20 +37,21 @@ impl NodeKey {
 pub struct VisitNode<'n> {
 	span: Span,
 	pub node_id: Option<NodeId>,
+	rule_root: bool,
 	source: Option<&'n dyn QueryNodeData>,
 }
 
 impl<'n> VisitNode<'n> {
 	/// Construct for a queryable node. For Nodes without `NodeId` or meta see [VisitNode::new_transparent].
 	#[inline]
-	pub(crate) fn new(node_id: NodeId, source: &'n dyn QueryNodeData) -> Self {
-		Self { span: Span::DUMMY, node_id: Some(node_id), source: Some(source) }
+	pub(crate) fn new(node_id: NodeId, rule_root: bool, source: &'n dyn QueryNodeData) -> Self {
+		Self { span: Span::DUMMY, node_id: Some(node_id), rule_root, source: Some(source) }
 	}
 
 	/// Construct for a "transparent node" (no `NodeId`, no meta).
 	#[inline]
 	pub fn new_transparent(span: Span) -> Self {
-		Self { span, node_id: None, source: None }
+		Self { span, node_id: None, rule_root: false, source: None }
 	}
 
 	/// The source span this node covers.
@@ -84,12 +85,7 @@ impl<'n> VisitNode<'n> {
 	/// that prune by metadata should prune with this.
 	#[inline]
 	pub fn rule_subtree_metadata(&self) -> Option<CssMetadata> {
-		let node_id = self.node_id?;
-		if matches!(node_id, NodeId::StyleSheet | NodeId::StyleRule) || node_id.to_at_rule_id().is_some() {
-			Some(self.subtree_metadata())
-		} else {
-			None
-		}
+		if self.rule_root { Some(self.subtree_metadata()) } else { None }
 	}
 
 	/// Retrieve a named property from this node, if present.
