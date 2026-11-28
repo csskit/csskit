@@ -1249,24 +1249,24 @@ impl core::fmt::Debug for Token {
 				&mut d
 			}
 			Kind::String => d
-				.field("quote_style", &if self.first_flag() { "Double" } else { "Single" })
-				.field("has_close_quote", &self.second_flag())
-				.field("contains_escape_chars", &self.third_flag())
+				.field("quote_style", &self.quote_style())
+				.field("has_close_quote", &self.has_close_quote())
+				.field("contains_escape_chars", &self.contains_escape_chars())
 				.field("len", &self.len()),
 			Kind::Ident | Kind::Function | Kind::AtKeyword => d
-				.field("is_lower_case", &self.first_flag())
-				.field("is_dashed_ident", &self.second_flag())
-				.field("contains_escape_chars", &self.third_flag())
+				.field("is_lower_case", &self.is_lower_case())
+				.field("is_dashed_ident", &self.is_dashed_ident())
+				.field("contains_escape_chars", &self.contains_escape_chars())
 				.field("len", &self.len()),
 			Kind::Hash => d
-				.field("is_lower_case", &self.first_flag())
-				.field("hash_is_id_like", &self.second_flag())
-				.field("contains_escape_chars", &self.third_flag())
+				.field("is_lower_case", &self.is_lower_case())
+				.field("hash_is_id_like", &self.hash_is_id_like())
+				.field("contains_escape_chars", &self.contains_escape_chars())
 				.field("len", &self.len()),
 			Kind::Url => d
-				.field("url_has_closing_paren", &self.first_flag())
-				.field("url_has_leading_space", &self.second_flag())
-				.field("contains_escape_chars", &self.third_flag())
+				.field("url_has_closing_paren", &self.url_has_closing_paren())
+				.field("url_has_leading_space", &self.url_has_leading_space())
+				.field("contains_escape_chars", &self.contains_escape_chars())
 				.field("len", &self.len()),
 			Kind::UnicodeRange => d
 				.field("start", &format_args!("U+{:X}", self.unicode_range_start()))
@@ -1456,6 +1456,26 @@ fn test_new_hash() {
 	assert_eq!(Token::new_hash(true, false, false, 4, 0).len(), 4);
 	assert_eq!(Token::new_hash(true, false, false, 4, 0).hex_value(), 0);
 	assert_eq!(Token::new_hash(true, false, false, 4, 18).hex_value(), 18);
+}
+
+#[test]
+fn test_debug_reports_flags() {
+	assert_eq!(
+		format!("{:?}", Token::new_hash(false, true, true, 7, 0)),
+		"Token::Hash { is_lower_case: true, hash_is_id_like: true, contains_escape_chars: true, len: 7 }"
+	);
+	assert_eq!(
+		format!("{:?}", Token::new_ident(true, false, false, 0, 3)),
+		"Token::Ident { is_lower_case: false, is_dashed_ident: false, contains_escape_chars: false, len: 3 }"
+	);
+	assert_eq!(
+		format!("{:?}", Token::new_string(QuoteStyle::Single, true, true, 5)),
+		"Token::String { quote_style: Single, has_close_quote: true, contains_escape_chars: true, len: 5 }"
+	);
+	assert_eq!(
+		format!("{:?}", Token::new_url(true, false, false, 4, 1, 9)),
+		"Token::Url { url_has_closing_paren: true, url_has_leading_space: false, contains_escape_chars: false, len: 9 }"
+	);
 }
 
 #[test]
