@@ -387,15 +387,29 @@ impl<'a> SourceCursor<'a> {
 	}
 
 	fn fmt_compacted_ident<W: Write + ?Sized>(&self, f: &mut W, escape_exponent: bool) -> Result {
-		let token = self.token();
-		let starts_with_dash = self.parsed_chars().next().is_some_and(|(ch, _)| ch == '-');
-
-		match token.kind() {
+		let kind = self.token().kind();
+		match kind {
 			Kind::AtKeyword => f.write_str("@")?,
 			Kind::Hash => f.write_str("#")?,
 			_ => {}
 		}
 
+		let content = self.content_slice();
+		if !escape_exponent && escapes_are_verbatim(content.as_bytes()) {
+			f.write_str(content)?;
+		} else {
+			self.fmt_escaped_ident_chars(f, escape_exponent)?;
+		}
+
+		if kind == Kind::Function {
+			f.write_str("(")?;
+		}
+
+		Ok(())
+	}
+
+	fn fmt_escaped_ident_chars<W: Write + ?Sized>(&self, f: &mut W, escape_exponent: bool) -> Result {
+		let starts_with_dash = self.parsed_chars().next().is_some_and(|(ch, _)| ch == '-');
 		let mut chars = self.parsed_chars();
 		let mut char_i = 0;
 		while let Some((ch, escaped)) = chars.next() {
@@ -431,11 +445,6 @@ impl<'a> SourceCursor<'a> {
 			}
 			char_i += 1;
 		}
-
-		if token.kind() == Kind::Function {
-			f.write_str("(")?;
-		}
-
 		Ok(())
 	}
 
@@ -715,6 +724,21 @@ impl<'a> SourceCursor<'a> {
 	}
 }
 
+fn escapes_are_verbatim(bytes: &[u8]) -> bool {
+	let mut i = 0;
+	while i < bytes.len() {
+		match bytes[i] {
+			0 => return false,
+			b'\\' => match bytes.get(i + 1) {
+				Some(&b) if b.is_ascii_punctuation() && b != b'-' && b != b'_' => i += 2,
+				_ => return false,
+			},
+			_ => i += 1,
+		}
+	}
+	true
+}
+
 impl PartialEq<Kind> for SourceCursor<'_> {
 	fn eq(&self, other: &Kind) -> bool {
 		self.token() == *other
@@ -806,6 +830,7 @@ impl CompactNumber<'_> {
 
 #[cfg(test)]
 mod test {
+	use super::escapes_are_verbatim;
 	use crate::{Cursor, QuoteStyle, SourceCursor, SourceOffset, Token, Whitespace};
 	use std::alloc::Global;
 	use std::fmt::Write;
@@ -1295,6 +1320,29 @@ mod test {
 		assert_eq!(compact(r"1e\+3"), r"1e\+3");
 		assert_eq!(compact("1e1em"), "10em");
 		assert_eq!(compact("1e1e-x"), "10e-x");
+	}
+
+	#[test]
+	fn test_compact_ident_verbatim_escapes_match_decoded_path() {
+		for byte in 1u8..0x80 {
+			let ch = byte as char;
+			for template in ["\\$a", "a\\$", "-\\$a", "@a\\$b", "#\\$a", "a\\$b(", "1px\\$", "a\\$\\\\b"] {
+				let source = template.replace('$', &ch.to_string());
+				let mut lexer = crate::Lexer::new(&crate::EmptyAtomSet::ATOMS, &source);
+				let token = lexer.advance();
+				if !token.contains_escape_chars() {
+					continue;
+				}
+				let cursor = SourceCursor::from(Cursor::new(SourceOffset(0), token), &source[..token.len() as usize]);
+				let content = cursor.content_slice();
+				if !escapes_are_verbatim(content.as_bytes()) {
+					continue;
+				}
+				let mut decoded = String::new();
+				cursor.fmt_escaped_ident_chars(&mut decoded, false).unwrap();
+				assert_eq!(decoded, content, "{source:?}");
+			}
+		}
 	}
 
 	#[test]
