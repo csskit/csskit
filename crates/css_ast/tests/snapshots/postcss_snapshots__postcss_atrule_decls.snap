@@ -1,6 +1,6 @@
 ---
 source: crates/css_ast/tests/postcss_snapshots.rs
-expression: result.output.unwrap()
+expression: output
 ---
 StyleSheet(
   rules: [
@@ -64,11 +64,11 @@ StyleSheet(
           ),
         ],
         rules: [],
-        close_curly: Some(RightCurly(Cursor(
+        close_curly: RightCurly(Cursor(
           kind: "RightCurly",
           offset: SourceOffset(36),
           len: 1,
-        ))),
+        )),
       )),
     ),
     MediaRule(
@@ -143,11 +143,11 @@ StyleSheet(
           ),
         ],
         rules: [],
-        close_curly: Some(RightCurly(Cursor(
+        close_curly: RightCurly(Cursor(
           kind: "RightCurly",
           offset: SourceOffset(84),
           len: 1,
-        ))),
+        )),
       )),
     ),
     FontFaceRule(
@@ -196,11 +196,11 @@ StyleSheet(
             ))),
           ),
         ],
-        close_curly: Some(RightCurly(Cursor(
+        close_curly: RightCurly(Cursor(
           kind: "RightCurly",
           offset: SourceOffset(129),
           len: 1,
-        ))),
+        )),
       )),
     ),
     UnknownAtRule(
@@ -252,11 +252,11 @@ StyleSheet(
             )),
           ],
         ),
-        close: Some(PairWiseEnd(Cursor(
+        close: PairWiseEnd(Cursor(
           kind: "RightCurly",
           offset: SourceOffset(162),
           len: 1,
-        ))),
+        )),
       )),
       semicolon: None,
     ),
@@ -309,11 +309,11 @@ StyleSheet(
             )),
           ],
         ),
-        close: Some(PairWiseEnd(Cursor(
+        close: PairWiseEnd(Cursor(
           kind: "RightCurly",
           offset: SourceOffset(199),
           len: 1,
-        ))),
+        )),
       )),
       semicolon: None,
     ),

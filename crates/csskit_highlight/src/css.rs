@@ -3,7 +3,7 @@ use css_ast::{
 	ToChromashift, Visit, VisitNode, visitor,
 };
 use css_lexer::ToSpan;
-use css_parse::NodeWithMetadata;
+use css_parse::{Cursor, NodeWithMetadata};
 
 use crate::{SemanticDecoration, SemanticKind, SemanticModifier, TokenHighlighter};
 
@@ -119,7 +119,8 @@ impl Visit for TokenHighlighter {
 	// Visit style rules to specifically mark the curlies as Punctuation
 	fn visit_style_rule<'a>(&mut self, rule: &StyleRule<'a>) {
 		self.insert(rule.rule.block.open_curly.to_span(), SemanticKind::Punctuation, SemanticModifier::none());
-		if let Some(close) = rule.rule.block.close_curly {
+		let close = rule.rule.block.close_curly;
+		if !Cursor::from(close).token().is_synthetic() {
 			self.insert(close.to_span(), SemanticKind::Punctuation, SemanticModifier::none());
 		}
 	}

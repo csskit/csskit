@@ -24,6 +24,12 @@ impl<'a, T: Write> CursorWriteSink<'a, T> {
 			self.writer.write_char(' ')?;
 		}
 		self.last_token = Some(c.token());
+		if c.token().is_synthetic() {
+			if let Some(char) = c.token().char() {
+				self.writer.write_char(char)?;
+			}
+			return Ok(());
+		}
 		self.writer.write_str(c.str_slice(source))?;
 		Ok(())
 	}

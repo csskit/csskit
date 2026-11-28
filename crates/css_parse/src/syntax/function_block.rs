@@ -21,8 +21,10 @@ impl<'a> Parse<'a> for FunctionBlock<'a> {
 		Iter: Iterator<Item = crate::Cursor> + Clone,
 	{
 		let name = p.parse::<T![Function]>()?;
-		let params = p.parse::<ComponentValues>()?;
-		let close = p.parse::<T![')']>()?;
+		let stop = p.set_stop(KindSet::new(&[Kind::RightParen]));
+		let params = p.parse_infallible::<ComponentValues>();
+		p.set_stop(stop);
+		let close = p.parse_if_peek::<T![')']>()?.unwrap_or_else(|| <T![')']>::missing(p));
 		Ok(Self { name, params, close })
 	}
 }
@@ -59,5 +61,11 @@ mod tests {
 	fn test_writes() {
 		assert_parse!(EmptyAtomSet::ATOMS, FunctionBlock, "foo(bar)");
 		assert_parse!(EmptyAtomSet::ATOMS, FunctionBlock, "foo(bar{})");
+	}
+
+	#[test]
+	fn test_missing_close_recovers() {
+		assert_parse_recovers!(EmptyAtomSet::ATOMS, FunctionBlock, "foo(bar", "foo(bar)");
+		assert_parse_recovers!(EmptyAtomSet::ATOMS, FunctionBlock, "foo(bar(baz", "foo(bar(baz))");
 	}
 }

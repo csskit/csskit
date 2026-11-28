@@ -25,7 +25,7 @@ where
 	pub open_curly: token_macros::LeftCurly,
 	pub declarations: Vec<'a, Declaration<'a, D, M>>,
 	pub rules: Vec<'a, R>,
-	pub close_curly: Option<token_macros::RightCurly>,
+	pub close_curly: token_macros::RightCurly,
 	#[cfg_attr(feature = "serde", serde(skip))]
 	pub meta: M,
 }
@@ -103,7 +103,7 @@ where
 	{
 		let open_curly = p.parse::<T!['{']>()?;
 		let BlockContents { declarations, rules, meta } = BlockContents::parse_contents(p, true)?;
-		let close_curly = p.parse_if_peek::<T!['}']>()?;
+		let close_curly = p.parse_if_peek::<T!['}']>()?.unwrap_or_else(|| <T!['}']>::missing(p));
 		Ok(Self { open_curly, declarations, rules, close_curly, meta })
 	}
 }
@@ -282,12 +282,7 @@ where
 	M: NodeMetadata,
 {
 	fn to_span(&self) -> Span {
-		self.open_curly.to_span()
-			+ if self.close_curly.is_some() {
-				self.close_curly.to_span()
-			} else {
-				self.declarations.to_span() + self.rules.to_span() + self.close_curly.to_span()
-			}
+		self.open_curly.to_span() + self.close_curly.to_span()
 	}
 }
 
@@ -422,6 +417,12 @@ mod tests {
 	#[test]
 	fn test_writes() {
 		assert_parse!(EmptyAtomSet::ATOMS, Block<Decl, Rule, ()>, "{color:black}");
+	}
+
+	#[test]
+	fn test_missing_close_curly_recovers() {
+		assert_parse_recovers!(EmptyAtomSet::ATOMS, Block<Decl, Rule, ()>, "{color:black", "{color:black}");
+		assert_parse_recovers!(EmptyAtomSet::ATOMS, Block<Decl, Rule, ()>, "{color:black;", "{color:black;}");
 	}
 
 	#[test]

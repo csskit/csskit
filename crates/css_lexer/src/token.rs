@@ -302,6 +302,8 @@ const LENGTH_MASK: u32 = (1 << 24) - 1;
 const HALF_LENGTH_MASK: u32 = !((1 << 12) - 1);
 const NUMERIC_TYPE_REQUIRED: u32 = 1 << 23;
 const NUMERIC_LENGTH_MASK: u32 = NUMERIC_TYPE_REQUIRED - 1;
+/// Set on a delim-like [Token] which the parser inserted to recover; such a token has no source text.
+const SYNTHETIC_FLAG: u32 = 1 << 8;
 
 /// The bit position used to distinguish between static and dynamic atoms.
 /// - Static atoms have this bit = 0 (values 0 to 8,388,607)
@@ -430,22 +432,23 @@ impl Token {
 	/// Represents a replacement character [Kind::Delim] token.
 	pub const REPLACEMENT_CHARACTER: Token = Token::new_delim(REPLACEMENT_CHARACTER);
 
-	/// Creates a "Dummy" token with no additional data, just the [Kind].
+	/// Creates a "Dummy" token with no additional data, just the [Kind]. A dummy of a single-character kind (`:`,
+	/// `;`, `,`, brackets) keeps its character so it can be written, but has a length of zero because it does not
+	/// occupy any source text.
 	#[inline]
 	pub const fn dummy(kind: Kind) -> Self {
-		let char = match kind {
-			Kind::Colon => ':',
-			Kind::Semicolon => ';',
-			Kind::Comma => ',',
-			Kind::LeftSquare => '[',
-			Kind::RightSquare => ']',
-			Kind::LeftParen => '(',
-			Kind::RightParen => ')',
-			Kind::LeftCurly => '{',
-			Kind::RightCurly => '}',
-			_ => return Self((kind as u32) << 24, 0).with_bad_flag(),
-		};
-		Self::new_delim(char).with_bad_flag()
+		if let Some(char) = kind.char() {
+			Self(Self::new_delim(char).0 | SYNTHETIC_FLAG, char as u32).with_bad_flag()
+		} else {
+			Self((kind as u32) << 24, 0).with_bad_flag()
+		}
+	}
+
+	/// Checks if the [Token] was inserted by the parser to recover from a missing token. Only single-character
+	/// kinds are synthesized this way.
+	#[inline]
+	pub const fn is_synthetic(&self) -> bool {
+		self.is_delim_like() && self.0 & SYNTHETIC_FLAG == SYNTHETIC_FLAG
 	}
 
 	/// Creates a "Dummy" token with no additional data, just [Kind::Ident].
@@ -711,16 +714,16 @@ impl Token {
 		self.kind_bits() & 0b1111 == Kind::Delim as u8
 	}
 
-	/// The only token with an empty length is EOF, but this method is available for symmetry with `len()`.
+	/// Checks if the [Token] occupies no source text: EOF, or a token the parser inserted to recover.
 	#[inline]
 	pub const fn is_empty(&self) -> bool {
-		self.kind_bits() == Kind::Eof as u8
+		self.kind_bits() == Kind::Eof as u8 || self.is_synthetic()
 	}
 
 	/// Returns the amount of characters (utf-8 code points) this Token represents in the underlying source text.
 	#[inline]
 	pub const fn len(&self) -> u32 {
-		if self.kind_bits() == Kind::Eof as u8 {
+		if self.is_empty() {
 			0
 		} else if self.is_delim_like() {
 			debug_assert!(matches!(
@@ -1557,6 +1560,19 @@ fn number_needs_separator_for_signed_numbers() {
 	assert!(pair("1 -0"));
 	assert!(pair("1 .3"));
 	assert!(pair("1px -2"));
+}
+
+#[test]
+fn dummy_single_char_token_keeps_char_with_zero_len() {
+	let token = Token::dummy(Kind::RightCurly);
+	assert_eq!(token.kind(), Kind::BadRightCurly);
+	assert_eq!(token.char(), Some('}'));
+	assert_eq!(token.len(), 0);
+	assert!(token.is_synthetic());
+	assert!(token.is_bad());
+	assert!(!Token::new_delim('}').is_synthetic());
+	assert_eq!(Token::dummy(Kind::Ident).len(), 0);
+	assert!(!Token::dummy(Kind::Ident).is_synthetic());
 }
 
 #[test]

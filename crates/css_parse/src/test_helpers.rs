@@ -113,6 +113,47 @@ macro_rules! assert_parse {
 #[cfg(test)]
 pub(crate) use assert_parse;
 
+/// (Requires feature "testing") Given a Node, a malformed string and the string it should be repaired to, this will
+/// expand to code that sets up a parser, parses the malformed string against the given node, and asserts that the
+/// parse recorded at least one diagnostic but still produced a node, and that writing the node back out (with the
+/// tokens the parser inserted to recover) gives the repaired string. Otherwise this macro will [panic] with a readable
+/// failure.
+///
+/// ```
+/// use css_parse::*;
+/// assert_parse_recovers!(EmptyAtomSet::ATOMS, FunctionBlock, "foo(bar", "foo(bar)");
+/// ```
+#[macro_export]
+macro_rules! assert_parse_recovers {
+	($atomset: path, $ty: ty, $str: literal, $expected: literal) => {
+		{
+			let source_text = $str;
+			let alloc = $crate::Arena::default();
+			let lexer = css_lexer::Lexer::new(&$atomset, &source_text);
+			let mut parser = $crate::Parser::new(&alloc, &source_text, lexer);
+			let result = parser.parse_entirely::<$ty>().with_trivia();
+			if result.errors.is_empty() {
+				panic!("\n\nExpected the parse to recover from an error but it parsed cleanly, please use `assert_parse` instead: {:?}", source_text);
+			}
+			if result.output.is_none() {
+				panic!("\n\nParse failed to recover. ({:?}) saw error {:?}", source_text, result.errors[0]);
+			}
+			let mut actual = $crate::String::new_in(&alloc);
+			{
+				let mut write_sink = $crate::CursorWriteSink::new(&source_text, &mut actual);
+				let mut ordered_sink = $crate::CursorOrderedSink::new(&alloc, &mut write_sink);
+				use $crate::ToCursors;
+				result.to_cursors(&mut ordered_sink);
+			}
+			if $expected.trim() != actual.trim() {
+				panic!("\n\nParse recovered but did not match expected output:\n\n   parser input: {:?}\n  parser output: {:?}\n       expected: {:?}\n", source_text, actual, $expected);
+			}
+		}
+	};
+}
+#[cfg(test)]
+pub(crate) use assert_parse_recovers;
+
 /// (Requires feature "testing") Given a Node, and a string, this will expand to code that sets up a parser, and parses the given string against the
 /// given node. If the parse succeeded this macro will [panic] with a readable failure.
 ///
@@ -134,8 +175,9 @@ macro_rules! assert_parse_error {
 		if !parser.peek::<$ty>() {
 			panic!("\n\n.\n\nPeek returned false, please don't use `assert_parse_error` - use `assert_peek_false` instead: {:?}", source_text);
 		}
+		let checkpoint = parser.checkpoint();
 		let result = parser.parse::<$ty>();
-		if parser.at_end() {
+		if parser.at_end() && parser.diagnostic_since(&checkpoint).is_none() {
 			if let Ok(result) = result {
 				let mut actual = $crate::String::new_in(&alloc);
 				{
@@ -171,8 +213,9 @@ macro_rules! assert_peek_false {
 		if parser.peek::<$ty>() {
 			panic!("\n\n.\n\nPeek returned true! You might want `assert_parse_error` instead: {:?}", source_text);
 		}
+		let checkpoint = parser.checkpoint();
 		let result = parser.parse::<$ty>();
-		if parser.at_end() {
+		if parser.at_end() && parser.diagnostic_since(&checkpoint).is_none() {
 			if let Ok(result) = result {
 				let mut actual = $crate::String::new_in(&alloc);
 				{

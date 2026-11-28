@@ -224,7 +224,7 @@ impl<'a> Parse<'a> for Rule<'a> {
 mod tests {
 	use super::*;
 	use crate::CssAtomSet;
-	use css_parse::assert_parse;
+	use css_parse::{assert_parse, assert_parse_recovers};
 
 	#[test]
 	fn test_writes() {
@@ -242,15 +242,29 @@ mod tests {
 	#[test]
 	fn cdc_in_unknown_rule_block() {
 		assert_parse!(CssAtomSet::ATOMS, StyleSheet, "={-->}");
-		assert_parse!(CssAtomSet::ATOMS, StyleSheet, "={-->");
+		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "={-->", "={-->}");
 	}
 
 	#[test]
 	fn stray_close_bracket_in_block() {
-		assert_parse!(CssAtomSet::ATOMS, StyleSheet, "%{)");
-		assert_parse!(CssAtomSet::ATOMS, StyleSheet, "t% {90)");
-		assert_parse!(CssAtomSet::ATOMS, StyleSheet, "{--ty-2% {90)");
-		assert_parse!(CssAtomSet::ATOMS, StyleSheet, "%{]");
+		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "%{)", "%{)}");
+		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "t% {90)", "t% {90)}");
+		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "{--ty-2% {90)", "{--ty-2% {90)}}");
+		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "%{]", "%{]}");
+	}
+
+	#[test]
+	fn missing_close_curly_recovers() {
+		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "a{color:red", "a{color:red}");
+		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "a{color:red;", "a{color:red;}");
+		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "a{b{color:red", "a{b{color:red}}");
+		assert_parse_recovers!(
+			CssAtomSet::ATOMS,
+			StyleSheet,
+			"@media screen{a{color:red",
+			"@media screen{a{color:red}}"
+		);
+		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "a{color:rgb(1 2 3", "a{color:rgb(1 2 3)}");
 	}
 
 	#[test]

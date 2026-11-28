@@ -31,7 +31,7 @@ where
 {
 	pub open_curly: token_macros::LeftCurly,
 	pub rules: Vec<'a, R>,
-	pub close_curly: Option<token_macros::RightCurly>,
+	pub close_curly: token_macros::RightCurly,
 	#[cfg_attr(feature = "serde", serde(skip))]
 	pub meta: M,
 }
@@ -60,10 +60,10 @@ where
 		loop {
 			p.parse_if_peek::<T![;]>().ok();
 			if p.at_end() {
-				return Ok(Self { open_curly, rules, close_curly: None, meta });
+				let close_curly = <T!['}']>::missing(p);
+				return Ok(Self { open_curly, rules, close_curly, meta });
 			}
-			let close_curly = p.parse_if_peek::<T!['}']>()?;
-			if close_curly.is_some() {
+			if let Some(close_curly) = p.parse_if_peek::<T!['}']>()? {
 				return Ok(Self { open_curly, rules, close_curly, meta });
 			}
 			let rule = p.parse::<R>()?;
@@ -91,8 +91,7 @@ where
 	M: NodeMetadata,
 {
 	fn to_span(&self) -> css_lexer::Span {
-		self.open_curly.to_span()
-			+ if let Some(close) = self.close_curly { close.to_span() } else { self.rules.to_span() }
+		self.open_curly.to_span() + self.close_curly.to_span()
 	}
 }
 

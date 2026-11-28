@@ -1,7 +1,7 @@
 use crate::{
 	Arena, Cursor, Diagnostic, Feature, Kind, KindSet, ParserCheckpoint, ParserReturn, Result, SourceOffset, ToCursors,
-	Vec,
-	traits::{Parse, Peek},
+	Token, Vec,
+	traits::{Parse, ParseInfallible, Peek},
 };
 use atom_set::{AtomSet, DynAtomSet};
 use bitmask_enum::bitmask;
@@ -224,6 +224,10 @@ where
 		T::parse(self)
 	}
 
+	pub fn parse_infallible<T: ParseInfallible<'a>>(&mut self) -> T {
+		T::parse_infallible(self)
+	}
+
 	pub fn peek<T: Peek<'a>>(&self) -> bool {
 		T::peek(self, self.peek_n(1))
 	}
@@ -238,6 +242,30 @@ where
 
 	pub fn try_parse_if_peek<T: Peek<'a> + Parse<'a>>(&mut self) -> Result<Option<T>> {
 		if T::peek(self, self.peek_n(1)) { T::try_parse(self).map(Some) } else { Ok(None) }
+	}
+
+	/// Records a diagnostic without ending the parse. Use this when a node recovers from an error and keeps the
+	/// tokens it could not parse.
+	#[inline]
+	pub fn diagnose(&mut self, diagnostic: Diagnostic) {
+		self.errors.push(diagnostic);
+	}
+
+	/// Returns the first diagnostic recorded after `checkpoint`, if any. A parse that recorded a diagnostic recovered
+	/// from an error, so its result is not clean.
+	#[inline]
+	pub fn diagnostic_since(&self, checkpoint: &ParserCheckpoint<I>) -> Option<Diagnostic> {
+		self.errors.get(checkpoint.errors_pos as usize).copied()
+	}
+
+	/// Records that a token of `kind` is missing before the next token and returns a zero-length cursor which stands
+	/// in for it. The cursor sits at the next token's offset so it keeps its place when cursors are written in
+	/// source order.
+	pub fn missing(&mut self, kind: Kind) -> Cursor {
+		let next = self.peek_n_with_skip(1, KindSet::NONE);
+		let cursor = Cursor::new(next.offset(), Token::dummy(kind));
+		self.diagnose(Diagnostic::new(next, Diagnostic::missing).with_desired_cursor(cursor));
+		cursor
 	}
 
 	pub fn equals_atom(&self, c: Cursor, atom: &'static dyn DynAtomSet) -> bool {
@@ -314,7 +342,7 @@ where
 	pub fn checkpoint(&self) -> ParserCheckpoint<I> {
 		ParserCheckpoint {
 			cursor: self.buffer[self.buffer_index],
-			errors_pos: self.errors.len() as u8,
+			errors_pos: self.errors.len() as u32,
 			trivia_pos: self.trivia.len() as u32,
 			iter: self.cursor_iter.clone(),
 			buffer: self.buffer,

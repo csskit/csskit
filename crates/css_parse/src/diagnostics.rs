@@ -200,6 +200,20 @@ impl Diagnostic {
 		}
 	}
 
+	pub fn missing(diagnostic: &Diagnostic, _source: &str) -> DiagnosticMeta {
+		let expected = diagnostic.desired_cursor.and_then(|c| c.token().char());
+		let message = match expected {
+			Some(char) => format!("Expected `{char}` but found `{:?}`", Kind::from(diagnostic.start_cursor)),
+			None => format!("Expected more content but found `{:?}`", Kind::from(diagnostic.start_cursor)),
+		};
+		DiagnosticMeta {
+			code: "Missing",
+			message,
+			help: "The missing token was inserted so parsing could continue.".into(),
+			labels: vec![],
+		}
+	}
+
 	pub fn bad_declaration(_diagnostic: &Diagnostic, _source: &str) -> DiagnosticMeta {
 		DiagnosticMeta {
 			code: "BadDeclaration",

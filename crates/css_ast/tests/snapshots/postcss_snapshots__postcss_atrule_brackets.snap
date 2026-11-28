@@ -1,6 +1,6 @@
 ---
 source: crates/css_ast/tests/postcss_snapshots.rs
-expression: result.output.unwrap()
+expression: output
 ---
 StyleSheet(
   rules: [
@@ -83,11 +83,11 @@ StyleSheet(
                             )),
                           ],
                         ),
-                        close: Some(PairWiseEnd(Cursor(
+                        close: PairWiseEnd(Cursor(
                           kind: "RightCurly",
                           offset: SourceOffset(52),
                           len: 1,
-                        ))),
+                        )),
                       ),
                     ],
                   ),
@@ -99,11 +99,11 @@ StyleSheet(
                 ),
               ],
             ),
-            close: Some(PairWiseEnd(Cursor(
+            close: PairWiseEnd(Cursor(
               kind: "RightParen",
               offset: SourceOffset(54),
               len: 1,
-            ))),
+            )),
           ),
         ],
       )),
@@ -135,11 +135,11 @@ StyleSheet(
                   )),
                 ],
               ),
-              close: Some(PairWiseEnd(Cursor(
+              close: PairWiseEnd(Cursor(
                 kind: "RightSquare",
                 offset: SourceOffset(67),
                 len: 1,
-              ))),
+              )),
             ),
             Whitespace(Cursor(
               kind: "Whitespace",
@@ -186,19 +186,19 @@ StyleSheet(
                   )),
                 ],
               ),
-              close: Some(PairWiseEnd(Cursor(
+              close: PairWiseEnd(Cursor(
                 kind: "RightCurly",
                 offset: SourceOffset(102),
                 len: 1,
-              ))),
+              )),
             ),
           ],
         ),
-        close: Some(PairWiseEnd(Cursor(
+        close: PairWiseEnd(Cursor(
           kind: "RightCurly",
           offset: SourceOffset(104),
           len: 1,
-        ))),
+        )),
       )),
       semicolon: None,
     ),
@@ -253,19 +253,19 @@ StyleSheet(
                       )),
                     ],
                   ),
-                  close: Some(PairWiseEnd(Cursor(
+                  close: PairWiseEnd(Cursor(
                     kind: "RightCurly",
                     offset: SourceOffset(131),
                     len: 1,
-                  ))),
+                  )),
                 ),
               ],
             ),
-            close: Some(PairWiseEnd(Cursor(
+            close: PairWiseEnd(Cursor(
               kind: "RightParen",
               offset: SourceOffset(132),
               len: 1,
-            ))),
+            )),
           ),
         ],
       )),
@@ -332,19 +332,19 @@ StyleSheet(
                   )),
                 ],
               ),
-              close: Some(PairWiseEnd(Cursor(
+              close: PairWiseEnd(Cursor(
                 kind: "RightCurly",
                 offset: SourceOffset(159),
                 len: 1,
-              ))),
+              )),
             ),
           ],
         ),
-        close: Some(PairWiseEnd(Cursor(
+        close: PairWiseEnd(Cursor(
           kind: "RightCurly",
           offset: SourceOffset(161),
           len: 1,
-        ))),
+        )),
       )),
       semicolon: None,
     ),
@@ -399,19 +399,19 @@ StyleSheet(
                       )),
                     ],
                   ),
-                  close: Some(PairWiseEnd(Cursor(
+                  close: PairWiseEnd(Cursor(
                     kind: "RightParen",
                     offset: SourceOffset(188),
                     len: 1,
-                  ))),
+                  )),
                 ),
               ],
             ),
-            close: Some(PairWiseEnd(Cursor(
+            close: PairWiseEnd(Cursor(
               kind: "RightParen",
               offset: SourceOffset(189),
               len: 1,
-            ))),
+            )),
           ),
         ],
       )),
@@ -478,19 +478,19 @@ StyleSheet(
                   )),
                 ],
               ),
-              close: Some(PairWiseEnd(Cursor(
+              close: PairWiseEnd(Cursor(
                 kind: "RightCurly",
                 offset: SourceOffset(216),
                 len: 1,
-              ))),
+              )),
             ),
           ],
         ),
-        close: Some(PairWiseEnd(Cursor(
+        close: PairWiseEnd(Cursor(
           kind: "RightCurly",
           offset: SourceOffset(218),
           len: 1,
-        ))),
+        )),
       )),
       semicolon: None,
     ),
@@ -553,11 +553,11 @@ StyleSheet(
                 ),
               ],
             ),
-            close: Some(PairWiseEnd(Cursor(
+            close: PairWiseEnd(Cursor(
               kind: "RightParen",
               offset: SourceOffset(250),
               len: 1,
-            ))),
+            )),
           ),
         ],
       )),
@@ -624,19 +624,19 @@ StyleSheet(
                   )),
                 ],
               ),
-              close: Some(PairWiseEnd(Cursor(
+              close: PairWiseEnd(Cursor(
                 kind: "RightCurly",
                 offset: SourceOffset(277),
                 len: 1,
-              ))),
+              )),
             ),
           ],
         ),
-        close: Some(PairWiseEnd(Cursor(
+        close: PairWiseEnd(Cursor(
           kind: "RightCurly",
           offset: SourceOffset(279),
           len: 1,
-        ))),
+        )),
       )),
       semicolon: None,
     ),
@@ -668,11 +668,11 @@ StyleSheet(
                 )),
               ],
             ),
-            close: Some(PairWiseEnd(Cursor(
+            close: PairWiseEnd(Cursor(
               kind: "RightParen",
               offset: SourceOffset(298),
               len: 1,
-            ))),
+            )),
           ),
         ],
       )),
@@ -739,19 +739,19 @@ StyleSheet(
                   )),
                 ],
               ),
-              close: Some(PairWiseEnd(Cursor(
+              close: PairWiseEnd(Cursor(
                 kind: "RightCurly",
                 offset: SourceOffset(325),
                 len: 1,
-              ))),
+              )),
             ),
           ],
         ),
-        close: Some(PairWiseEnd(Cursor(
+        close: PairWiseEnd(Cursor(
           kind: "RightCurly",
           offset: SourceOffset(327),
           len: 1,
-        ))),
+        )),
       )),
       semicolon: None,
     ),
@@ -785,19 +785,19 @@ StyleSheet(
                   values: ComponentValues(
                     values: [],
                   ),
-                  close: Some(PairWiseEnd(Cursor(
+                  close: PairWiseEnd(Cursor(
                     kind: "RightSquare",
                     offset: SourceOffset(342),
                     len: 1,
-                  ))),
+                  )),
                 ),
               ],
             ),
-            close: Some(PairWiseEnd(Cursor(
+            close: PairWiseEnd(Cursor(
               kind: "RightParen",
               offset: SourceOffset(343),
               len: 1,
-            ))),
+            )),
           ),
         ],
       )),
@@ -864,19 +864,19 @@ StyleSheet(
                   )),
                 ],
               ),
-              close: Some(PairWiseEnd(Cursor(
+              close: PairWiseEnd(Cursor(
                 kind: "RightCurly",
                 offset: SourceOffset(370),
                 len: 1,
-              ))),
+              )),
             ),
           ],
         ),
-        close: Some(PairWiseEnd(Cursor(
+        close: PairWiseEnd(Cursor(
           kind: "RightCurly",
           offset: SourceOffset(372),
           len: 1,
-        ))),
+        )),
       )),
       semicolon: None,
     ),
@@ -931,19 +931,19 @@ StyleSheet(
                       )),
                     ],
                   ),
-                  close: Some(PairWiseEnd(Cursor(
+                  close: PairWiseEnd(Cursor(
                     kind: "RightSquare",
                     offset: SourceOffset(397),
                     len: 1,
-                  ))),
+                  )),
                 ),
               ],
             ),
-            close: Some(PairWiseEnd(Cursor(
+            close: PairWiseEnd(Cursor(
               kind: "RightParen",
               offset: SourceOffset(398),
               len: 1,
-            ))),
+            )),
           ),
         ],
       )),
@@ -1010,19 +1010,19 @@ StyleSheet(
                   )),
                 ],
               ),
-              close: Some(PairWiseEnd(Cursor(
+              close: PairWiseEnd(Cursor(
                 kind: "RightCurly",
                 offset: SourceOffset(425),
                 len: 1,
-              ))),
+              )),
             ),
           ],
         ),
-        close: Some(PairWiseEnd(Cursor(
+        close: PairWiseEnd(Cursor(
           kind: "RightCurly",
           offset: SourceOffset(427),
           len: 1,
-        ))),
+        )),
       )),
       semicolon: None,
     ),
@@ -1143,11 +1143,11 @@ StyleSheet(
                                                                 )),
                                                               ],
                                                             ),
-                                                            close: Some(PairWiseEnd(Cursor(
+                                                            close: PairWiseEnd(Cursor(
                                                               kind: "RightCurly",
                                                               offset: SourceOffset(468),
                                                               len: 1,
-                                                            ))),
+                                                            )),
                                                           ),
                                                         ],
                                                       ),
@@ -1159,59 +1159,59 @@ StyleSheet(
                                                     ),
                                                   ],
                                                 ),
-                                                close: Some(PairWiseEnd(Cursor(
+                                                close: PairWiseEnd(Cursor(
                                                   kind: "RightCurly",
                                                   offset: SourceOffset(471),
                                                   len: 1,
-                                                ))),
+                                                )),
                                               ),
                                             ],
                                           ),
-                                          close: Some(PairWiseEnd(Cursor(
+                                          close: PairWiseEnd(Cursor(
                                             kind: "RightSquare",
                                             offset: SourceOffset(472),
                                             len: 1,
-                                          ))),
+                                          )),
                                         ),
                                       ],
                                     ),
-                                    close: Some(PairWiseEnd(Cursor(
+                                    close: PairWiseEnd(Cursor(
                                       kind: "RightSquare",
                                       offset: SourceOffset(473),
                                       len: 1,
-                                    ))),
+                                    )),
                                   ),
                                 ],
                               ),
-                              close: Some(PairWiseEnd(Cursor(
+                              close: PairWiseEnd(Cursor(
                                 kind: "RightSquare",
                                 offset: SourceOffset(474),
                                 len: 1,
-                              ))),
+                              )),
                             ),
                           ],
                         ),
-                        close: Some(PairWiseEnd(Cursor(
+                        close: PairWiseEnd(Cursor(
                           kind: "RightSquare",
                           offset: SourceOffset(475),
                           len: 1,
-                        ))),
+                        )),
                       ),
                     ],
                   ),
-                  close: Some(PairWiseEnd(Cursor(
+                  close: PairWiseEnd(Cursor(
                     kind: "RightSquare",
                     offset: SourceOffset(476),
                     len: 1,
-                  ))),
+                  )),
                 ),
               ],
             ),
-            close: Some(PairWiseEnd(Cursor(
+            close: PairWiseEnd(Cursor(
               kind: "RightParen",
               offset: SourceOffset(477),
               len: 1,
-            ))),
+            )),
           ),
         ],
       )),
@@ -1278,19 +1278,19 @@ StyleSheet(
                   )),
                 ],
               ),
-              close: Some(PairWiseEnd(Cursor(
+              close: PairWiseEnd(Cursor(
                 kind: "RightCurly",
                 offset: SourceOffset(504),
                 len: 1,
-              ))),
+              )),
             ),
           ],
         ),
-        close: Some(PairWiseEnd(Cursor(
+        close: PairWiseEnd(Cursor(
           kind: "RightCurly",
           offset: SourceOffset(506),
           len: 1,
-        ))),
+        )),
       )),
       semicolon: None,
     ),

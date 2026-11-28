@@ -29,7 +29,7 @@ where
 {
 	pub open_curly: token_macros::LeftCurly,
 	pub declarations: Vec<'a, Declaration<'a, V, M>>,
-	pub close_curly: Option<token_macros::RightCurly>,
+	pub close_curly: token_macros::RightCurly,
 	#[cfg_attr(feature = "serde", serde(skip))]
 	meta: M,
 }
@@ -71,10 +71,10 @@ where
 		loop {
 			if p.at_end() {
 				meta = meta.with_size(declarations.len().min(u16::MAX as usize) as u16);
-				return Ok(Self { open_curly, declarations, close_curly: None, meta });
+				let close_curly = <T!['}']>::missing(p);
+				return Ok(Self { open_curly, declarations, close_curly, meta });
 			}
-			let close_curly = p.parse_if_peek::<T!['}']>()?;
-			if close_curly.is_some() {
+			if let Some(close_curly) = p.parse_if_peek::<T!['}']>()? {
 				meta = meta.with_size(declarations.len().min(u16::MAX as usize) as u16);
 				return Ok(Self { open_curly, declarations, close_curly, meta });
 			}
@@ -103,8 +103,7 @@ where
 	M: NodeMetadata,
 {
 	fn to_span(&self) -> Span {
-		self.open_curly.to_span()
-			+ if let Some(close) = self.close_curly { close.to_span() } else { self.declarations.to_span() }
+		self.open_curly.to_span() + self.close_curly.to_span()
 	}
 }
 

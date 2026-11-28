@@ -10,7 +10,7 @@ impl<'a> ::css_parse::Parse<'a> for VerticalAlign {
     {
         use css_parse::{Parse, Peek};
         let checkpoint = p.checkpoint();
-        if let Ok(v) = (|| -> ::css_parse::Result<Self> {
+        let attempt = (|| -> ::css_parse::Result<Self> {
             let mut v0: Option<Ident> = None;
             let mut v1: Option<AlignmentBaseline> = None;
             let mut v2: Option<BaselineShift> = None;
@@ -43,7 +43,8 @@ impl<'a> ::css_parse::Parse<'a> for VerticalAlign {
                 alignment_baseline: v1,
                 baseline_shift: v2,
             });
-        })() {
+        })();
+        if let Ok(v) = attempt && p.diagnostic_since(&checkpoint).is_none() {
             return Ok(v);
         }
         p.rewind(checkpoint);

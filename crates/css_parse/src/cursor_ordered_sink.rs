@@ -68,7 +68,13 @@ impl<'a, S: CursorSink + ?Sized> CursorSink for CursorOrderedSink<'a, S> {
 			}
 		}
 		let cursor_start = cursor.span().start();
-		if self.buffer.is_empty() || cursor_start.0 >= self.buffer.last().unwrap().span().start().0 {
+		// A zero-length cursor (a token the parser inserted to recover) sorts before any real cursor at the same
+		// offset, and stays in append order among its equals.
+		let sorts_before = |other: &Cursor| {
+			let other_start = other.span().start();
+			other_start < cursor_start || (other_start == cursor_start && (other.is_empty() || !cursor.is_empty()))
+		};
+		if self.buffer.is_empty() || sorts_before(self.buffer.last().unwrap()) {
 			self.buffer.push(cursor);
 		} else if cursor_start == self.committed_position {
 			// This cursor is the next in order
@@ -78,8 +84,7 @@ impl<'a, S: CursorSink + ?Sized> CursorSink for CursorOrderedSink<'a, S> {
 			// The cursor needs to be buffered.
 			// TODO: binary_search_by_key is giving BTreeMap which would be O(log n) instead of O(n), but
 			// for small enough numbers that's fine? Investigate more.
-			let insert_pos =
-				self.buffer.binary_search_by_key(&cursor_start, |c| c.span().start()).unwrap_or_else(|pos| pos);
+			let insert_pos = self.buffer.partition_point(sorts_before);
 			self.buffer.insert(insert_pos, cursor);
 		}
 

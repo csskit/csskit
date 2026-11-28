@@ -1,6 +1,6 @@
 ---
 source: crates/css_ast/tests/popular_snapshots.rs
-expression: result.output.unwrap()
+expression: output
 ---
 StyleSheet(
   rules: [
@@ -70,11 +70,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(614),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -121,11 +121,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(778),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -172,11 +172,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(864),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -250,11 +250,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(1047),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -370,11 +370,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(1379),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -459,11 +459,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(1596),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -510,11 +510,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(1807),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -693,11 +693,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(2123),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -755,11 +755,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(2230),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -866,11 +866,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(2459),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -917,11 +917,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(2543),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -1052,11 +1052,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(2739),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -1103,11 +1103,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(2767),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -1154,11 +1154,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(2791),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -1205,11 +1205,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(2987),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -1369,11 +1369,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(3336),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -1431,11 +1431,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(3454),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -1493,11 +1493,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(3644),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -1649,11 +1649,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(3814),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -1880,11 +1880,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(4044),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -2084,11 +2084,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(4265),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -2143,11 +2143,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(4357),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -2332,11 +2332,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(4822),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -2387,11 +2387,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(4942),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -2438,11 +2438,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(5035),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -2594,11 +2594,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(5259),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -2730,11 +2730,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(5450),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -2828,11 +2828,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(5651),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -2916,11 +2916,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(5795),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -2998,11 +2998,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(6026),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -3049,11 +3049,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(6219),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -3104,11 +3104,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(6306),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -3155,11 +3155,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(6474),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -3222,11 +3222,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(6551),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -3277,11 +3277,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(6862),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -3373,11 +3373,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(6991),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -3477,11 +3477,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(7186),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -3865,11 +3865,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(8554),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -4013,20 +4013,20 @@ StyleSheet(
                   ),
                 ],
                 rules: [],
-                close_curly: Some(RightCurly(Cursor(
+                close_curly: RightCurly(Cursor(
                   kind: "RightCurly",
                   offset: SourceOffset(8797),
                   len: 1,
-                ))),
+                )),
               ),
             ),
           ),
         ],
-        close_curly: Some(RightCurly(Cursor(
+        close_curly: RightCurly(Cursor(
           kind: "RightCurly",
           offset: SourceOffset(8799),
           len: 1,
-        ))),
+        )),
       )),
     ),
     StyleRule(
@@ -4111,11 +4111,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(9024),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -4265,11 +4265,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(9169),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -4365,11 +4365,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(9375),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -5329,11 +5329,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(10151),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -5387,11 +5387,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(10189),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -5463,11 +5463,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(10241),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -5539,11 +5539,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(10293),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -5615,11 +5615,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(10345),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -5673,11 +5673,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(10378),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -5731,11 +5731,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(10417),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -5807,11 +5807,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(10464),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -5865,11 +5865,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(10503),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -5941,11 +5941,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(10555),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -6017,11 +6017,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(10607),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -6075,11 +6075,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(10640),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -6151,11 +6151,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(10694),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -6209,11 +6209,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(10734),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -6285,11 +6285,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(10782),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -6343,11 +6343,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(10822),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -6419,11 +6419,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(10876),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -6477,11 +6477,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(10909),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -6553,11 +6553,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(10962),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -6629,11 +6629,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(11015),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -6687,11 +6687,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(11055),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -6763,11 +6763,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(11103),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -6821,11 +6821,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(11143),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -6879,11 +6879,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(11176),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -6955,11 +6955,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(11229),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -7031,11 +7031,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(11282),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -7107,11 +7107,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(11337),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -7165,11 +7165,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(11377),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -7277,11 +7277,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(11450),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -7615,11 +7615,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(11862),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -7713,11 +7713,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(11978),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -7794,11 +7794,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(12199),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -7884,11 +7884,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(12276),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -8032,11 +8032,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(12418),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -8340,11 +8340,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(12688),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -8874,11 +8874,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(12995),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -8945,11 +8945,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(13034),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -9338,11 +9338,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(13287),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -9676,11 +9676,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(13602),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -9734,11 +9734,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(13646),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -9907,11 +9907,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(13799),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -10076,11 +10076,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(13942),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -10183,11 +10183,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(14060),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -10317,11 +10317,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(14202),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -11463,11 +11463,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(15311),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -11798,11 +11798,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(15759),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -11899,11 +11899,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(16000),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -12964,11 +12964,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(16641),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -13110,11 +13110,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(16869),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -13395,11 +13395,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(17053),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -13532,11 +13532,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(17148),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -14808,11 +14808,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(17885),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -14985,11 +14985,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(18150),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -15218,11 +15218,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(18358),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -15419,11 +15419,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(18509),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -15711,11 +15711,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(18698),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -15837,11 +15837,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(18857),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -15926,11 +15926,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(18907),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -16002,11 +16002,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(18955),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -16128,11 +16128,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(19039),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -16327,11 +16327,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(19201),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -17333,11 +17333,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(19937),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -17470,11 +17470,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(20166),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -17639,11 +17639,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(20333),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -17711,11 +17711,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(20390),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -17786,11 +17786,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(20480),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -17979,11 +17979,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(20647),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -18066,11 +18066,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(20713),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -18208,11 +18208,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(20855),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -18293,11 +18293,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(20938),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -18546,11 +18546,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(21126),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -18694,11 +18694,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(21220),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -18900,11 +18900,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(21371),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -19112,11 +19112,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(21536),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -19318,11 +19318,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(21686),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -19407,11 +19407,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(21742),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -19482,11 +19482,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(21789),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -19557,11 +19557,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(21836),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -19632,11 +19632,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(21883),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -19707,11 +19707,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(21930),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -19782,11 +19782,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(21977),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -19857,11 +19857,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(22024),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -20011,11 +20011,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(22204),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -20115,11 +20115,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(22316),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -20274,11 +20274,11 @@ StyleSheet(
                   ),
                 ],
                 rules: [],
-                close_curly: Some(RightCurly(Cursor(
+                close_curly: RightCurly(Cursor(
                   kind: "RightCurly",
                   offset: SourceOffset(22434),
                   len: 1,
-                ))),
+                )),
               ),
             ),
           ),
@@ -21233,11 +21233,11 @@ StyleSheet(
                   ),
                 ],
                 rules: [],
-                close_curly: Some(RightCurly(Cursor(
+                close_curly: RightCurly(Cursor(
                   kind: "RightCurly",
                   offset: SourceOffset(23065),
                   len: 1,
-                ))),
+                )),
               ),
             ),
           ),
@@ -22141,11 +22141,11 @@ StyleSheet(
                   ),
                 ],
                 rules: [],
-                close_curly: Some(RightCurly(Cursor(
+                close_curly: RightCurly(Cursor(
                   kind: "RightCurly",
                   offset: SourceOffset(23661),
                   len: 1,
-                ))),
+                )),
               ),
             ),
           ),
@@ -22295,11 +22295,11 @@ StyleSheet(
                   ),
                 ],
                 rules: [],
-                close_curly: Some(RightCurly(Cursor(
+                close_curly: RightCurly(Cursor(
                   kind: "RightCurly",
                   offset: SourceOffset(23820),
                   len: 1,
-                ))),
+                )),
               ),
             ),
           ),
@@ -22382,11 +22382,11 @@ StyleSheet(
                   ),
                 ],
                 rules: [],
-                close_curly: Some(RightCurly(Cursor(
+                close_curly: RightCurly(Cursor(
                   kind: "RightCurly",
                   offset: SourceOffset(23896),
                   len: 1,
-                ))),
+                )),
               ),
             ),
           ),
@@ -22512,20 +22512,20 @@ StyleSheet(
                   ),
                 ],
                 rules: [],
-                close_curly: Some(RightCurly(Cursor(
+                close_curly: RightCurly(Cursor(
                   kind: "RightCurly",
                   offset: SourceOffset(24130),
                   len: 1,
-                ))),
+                )),
               ),
             ),
           ),
         ],
-        close_curly: Some(RightCurly(Cursor(
+        close_curly: RightCurly(Cursor(
           kind: "RightCurly",
           offset: SourceOffset(24132),
           len: 1,
-        ))),
+        )),
       )),
     ),
     StyleRule(
@@ -22601,11 +22601,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(24274),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -22728,11 +22728,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(24358),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -22804,11 +22804,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(24420),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -22912,11 +22912,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(24494),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -23016,11 +23016,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(24564),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -23143,11 +23143,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(24677),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -23224,11 +23224,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(24768),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -23299,11 +23299,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(24838),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -23471,11 +23471,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(25093),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -23546,11 +23546,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(25197),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -23742,11 +23742,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(25340),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -23863,11 +23863,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(25435),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -24005,11 +24005,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(25576),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -24137,11 +24137,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(25745),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -24240,11 +24240,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(25891),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -24321,11 +24321,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(25989),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -24396,11 +24396,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(26052),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -24483,11 +24483,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(26143),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -24626,11 +24626,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(26355),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -24786,11 +24786,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(26538),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -24911,11 +24911,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(26642),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -25026,11 +25026,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(26807),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -25111,11 +25111,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(26882),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -25169,11 +25169,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(26920),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -25227,11 +25227,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(26973),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -25325,11 +25325,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(27058),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -25383,11 +25383,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(27100),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -25467,11 +25467,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(27182),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -25596,11 +25596,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(27297),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -25715,11 +25715,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(27404),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -25854,11 +25854,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(27595),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -26028,11 +26028,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(27723),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -26267,11 +26267,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(28007),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -26408,11 +26408,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(28128),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -26476,11 +26476,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(28253),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -26544,11 +26544,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(28307),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -26644,11 +26644,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(28430),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -26724,11 +26724,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(28519),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -26821,11 +26821,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(28599),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -26964,11 +26964,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(28759),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -27061,11 +27061,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(28841),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
