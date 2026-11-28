@@ -1,0 +1,10 @@
+@supports (not (-webkit-backdrop-filter: none)) and (not ((-webkit-backdrop-filter: none) or (backdrop-filter: none))) {
+  .blurring.dimmable > :not(.dimmer) {
+    filter: initial;
+    transition: 800ms filter ease;
+  }
+
+  .blurring.dimmed.dimmable > :not(.dimmer):not(.popup) {
+    filter: blur(5px) grayscale(0.7);
+  }
+}

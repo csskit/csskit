@@ -1,0 +1,3 @@
+input::-webkit-date-and-time-value {
+  text-align: start;
+}

@@ -1,0 +1,5 @@
+.cds--text-area--fluid .cds--label:not(.cds--text-area__label-counter) {
+  inline-size: auto;
+  inset-inline-end: auto;
+  inset-inline-start: 1rem;
+}

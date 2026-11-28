@@ -1,0 +1,5 @@
+.pf-v6-c-toolbar__group.pf-m-align-end,
+.pf-v6-c-toolbar__item.pf-m-align-end {
+  margin-block-start: var(--pf-v6-c-toolbar--child--m-align-end--MarginBlockStart, 0);
+  margin-inline-start: var(--pf-v6-c-toolbar--child--m-align-end--MarginInlineStart, auto);
+}

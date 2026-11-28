@@ -1,0 +1,3 @@
+.cds--loading--small circle {
+  stroke-width: 16;
+}

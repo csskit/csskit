@@ -1,0 +1,3 @@
+.cds--tag-label-tooltip {
+  max-inline-size: -webkit-fill-available;
+}

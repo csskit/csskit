@@ -1,0 +1,3 @@
+.ui.overlay.flyout {
+  z-index: 102;
+}

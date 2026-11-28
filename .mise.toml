@@ -119,7 +119,7 @@ run = [
 [tasks.fuzz]
 description = "Run the fuzzer (Ctrl-C to stop)"
 dir = "{{config_root}}/fuzz"
-run = "cargo +nightly fuzz run parse_stylesheet corpus/parse_stylesheet --target x86_64-unknown-linux-gnu -- -max_len=4096 -artifact_prefix=artifacts/parse_stylesheet/"
+run = "cargo +nightly fuzz run parse_stylesheet corpus/parse_stylesheet --target x86_64-unknown-linux-gnu -- -max_len=4096 -timeout=10 -artifact_prefix=artifacts/parse_stylesheet/"
 
 [tasks.profile]
 depends = ["build -p csskit --profile release-debug"]

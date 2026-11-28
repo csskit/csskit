@@ -1,0 +1,3 @@
+.cds--dropdown--disabled {
+  border-block-end-color: transparent;
+}

@@ -1,0 +1,3 @@
+[column~="top"] {
+  -ms-flex-item-align: start;
+      align-self: flex-start; }

@@ -1,0 +1,11 @@
+.pf-v6-c-form__field-group.pf-m-expandable > .pf-v6-c-form__field-group-body {
+  max-height: 0;
+  padding-block-start: 0;
+  padding-block-end: 0;
+  visibility: hidden;
+  opacity: 0;
+  transition-delay: 0s, 0s, var(--pf-v6-c-form__field-group-body--TransitionDuration--collapse--fade), var(--pf-v6-c-form__field-group-body--TransitionDuration--collapse--fade), var(--pf-v6-c-form__field-group-body--TransitionDuration--collapse--fade), var(--pf-v6-c-form__field-group-body--TransitionDuration--collapse--fade);
+  transition-duration: var(--pf-v6-c-form__field-group-body--TransitionDuration--collapse--fade), var(--pf-v6-c-form__field-group-body--TransitionDuration--collapse--slide), 0s, 0s, 0s, 0s;
+  transition-property: opacity, translate, visibility, max-height, padding-block-start, padding-block-end;
+  translate: 0 var(--pf-v6-c-form__field-group-body--TranslateY);
+}

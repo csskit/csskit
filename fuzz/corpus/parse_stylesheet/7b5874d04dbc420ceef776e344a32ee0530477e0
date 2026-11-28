@@ -1,0 +1,4 @@
+.ui.read-only.dropdown {
+  cursor: default;
+  pointer-events: none;
+}

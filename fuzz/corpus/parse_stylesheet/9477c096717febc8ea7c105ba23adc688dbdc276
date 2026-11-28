@@ -1,0 +1,27 @@
+body {
+  color: #ffffff;
+}
+
+.named {
+  color: rgb(210, 180, 140);
+}
+
+.noop {
+  color: red;
+}
+
+.short {
+  color: #000000;
+}
+
+.alpha {
+  color: rgba(0, 0, 0, 0);
+}
+
+.other-props {
+  background-color: black;
+  outline-color: black;
+  caret-color: black;
+  accent-color: black;
+  border-block-start-color: black;
+}

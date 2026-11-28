@@ -1,0 +1,5 @@
+.mermaid .grid .tick {
+  stroke: var(--text-muted) !important;
+  opacity: 1 !important;
+  shape-rendering: crispEdges !important;
+}

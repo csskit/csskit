@@ -1,0 +1,3 @@
+.cds--date-picker--fluid.cds--date-picker--fluid--readonly:not(.cds--date-picker--fluid--invalid):not(.cds--date-picker--fluid--warn) .cds--date-picker--range > .cds--date-picker-container:last-child .cds--date-picker__input {
+  border-inline-start-color: var(--cds-border-subtle);
+}

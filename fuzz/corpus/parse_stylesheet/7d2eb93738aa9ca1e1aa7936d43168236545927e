@@ -1,0 +1,16 @@
+html {
+  font-family: var(--main-font);
+  line-height: var(--rhythm, 1.4rem);
+  background: var(--bg);
+  color: var(--fg);
+  scroll-padding-block-start: calc(4 * var(--gap));
+  scrollbar-color: var(--accent) transparent;
+  scrollbar-width: auto;
+  & * {
+    @supports (accent-color: #000) {
+      accent-color: var(--accent);
+    }
+    scrollbar-color: var(--accent) transparent;
+    scrollbar-width: thin;
+  }
+}

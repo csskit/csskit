@@ -1,0 +1,4 @@
+.flex--bottom, .grid--bottom {
+  -ms-flex-align: end;
+      align-items: flex-end;
+}

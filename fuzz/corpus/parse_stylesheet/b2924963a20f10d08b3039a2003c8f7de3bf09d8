@@ -1,0 +1,6 @@
+@container oslice not style(--o-ellipse-y: 1) {
+  /* Shown if ratio equals 1*/
+  o-arc, o-progress {
+    display: none;
+  }
+}

@@ -1,0 +1,5 @@
+.cds--progress--vertical .cds--progress-optional {
+  position: static;
+  margin: 0 0 auto;
+  inline-size: 100%;
+}

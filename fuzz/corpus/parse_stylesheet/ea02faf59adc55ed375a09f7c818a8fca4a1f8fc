@@ -1,0 +1,3 @@
+@-moz-document domain("gist.github.com"){.pending-cards-status {
+    background-image: linear-gradient(/*[[base-color]]*/, /*[[base-color]]*/);
+  }}

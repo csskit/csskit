@@ -1,0 +1,3 @@
+.ji-stretch {
+  justify-items: stretch !important;
+}

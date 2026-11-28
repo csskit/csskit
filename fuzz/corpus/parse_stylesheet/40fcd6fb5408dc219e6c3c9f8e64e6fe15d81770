@@ -1,0 +1,7 @@
+.ui.menu .header.item,
+.ui.vertical.menu .header.item {
+  margin: 0;
+  background: "";
+  text-transform: normal;
+  font-weight: bold;
+}

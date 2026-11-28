@@ -1,0 +1,3 @@
+dialog hr {
+  margin-block: 1rem;
+}

@@ -1,0 +1,4 @@
+.os-scrollbar {
+  cursor: pointer;
+  display: var(--scrollbars);
+}

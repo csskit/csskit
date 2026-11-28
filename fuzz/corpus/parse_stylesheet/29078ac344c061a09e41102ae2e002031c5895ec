@@ -1,0 +1,3 @@
+.shadow-xs {
+  box-shadow: var(--shadow-xs);
+}

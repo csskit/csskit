@@ -1,0 +1,7 @@
+body:not(.tag-pill-outlined) .tag[href^="#完成"]:not(.token) {
+  background-color: var(--stag3-bg) !important;
+  font-family: Origin, 'Microsoft YaHei';
+  font-weight: 600;
+  color: var(--white);
+  border: none;
+}

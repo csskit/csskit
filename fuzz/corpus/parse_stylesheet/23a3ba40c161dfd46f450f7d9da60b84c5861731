@@ -1,0 +1,5 @@
+div.workspace-leaf-content[data-type="style-settings"] div.setting-item,
+div.workspace-leaf-content[data-type="style-settings"] div.style-settings-heading {
+  border-bottom: unset;
+  border-top: 1px inset #ffffff24;
+}

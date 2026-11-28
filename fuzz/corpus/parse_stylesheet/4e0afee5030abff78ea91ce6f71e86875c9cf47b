@@ -1,0 +1,3 @@
+.cds--list-box.cds--list-box--inline.cds--list-box--expanded {
+  border-block-end-width: 0;
+}

@@ -1,0 +1,8 @@
+:lang(zh) .yue em,
+:lang(zh-hant) .yue em,
+:lang(zh-hans) .yue em,
+:lang(ja) .yue em {
+  font-style: normal;
+  text-emphasis: filled dot var(--yue-c-light);
+  text-emphasis-position: under;
+}

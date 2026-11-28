@@ -1,0 +1,3 @@
+progress.circle::-webkit-progress-value {
+  background: none;
+}

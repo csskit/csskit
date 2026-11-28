@@ -1,0 +1,6 @@
+.carousel {
+  margin-bottom: 1rem;
+  overflow: hidden;
+  position: relative;
+  -webkit-backface-visibility: hidden;
+  -webkit-perspective: 1000; }

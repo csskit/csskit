@@ -1,0 +1,4 @@
+@-moz-document regexp("^https?://((education|graphql|guides|raw|resources|status|support|vscode-auth)\\.)?github\\.com((?!(/(sponsors|readme)$)).)*$"), domain("githubusercontent.com"), domain("www.githubstatus.com"){.section-nav .active a, .js-current .standalone a, .sidebar-module .disable>a {
+    border-radius: 0 !important;
+    border-left: 2px solid #eee !important;
+  }}

@@ -1,0 +1,10 @@
+.pf-v6-c-label__content {
+  gap: var(--pf-v6-c-label__content--Gap);
+  max-width: var(--pf-v6-c-label__content--MaxWidth);
+  padding: 0;
+  overflow: hidden;
+  color: var(--pf-v6-c-label--Color);
+  cursor: var(--pf-v6-c-label__content--Cursor, revert);
+  background: transparent;
+  border-width: 0;
+}

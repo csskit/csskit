@@ -1,0 +1,10 @@
+.pf-v6-c-tree-view__list-item .pf-v6-c-tree-view__list {
+  max-height: 0;
+  visibility: hidden;
+  opacity: var(--pf-v6-c-tree-view__list--Opacity);
+  transition-delay: 0s, 0s, var(--pf-v6-c-tree-view__list--TransitionDuration--fade), var(--pf-v6-c-tree-view__list--TransitionDuration--fade);
+  transition-timing-function: var(--pf-v6-c-tree-view__list--TransitionTimingFunction);
+  transition-duration: var(--pf-v6-c-tree-view__list--TransitionDuration--fade), var(--pf-v6-c-tree-view__list--TransitionDuration--slide), 0s, 0s;
+  transition-property: opacity, translate, visibility, max-height;
+  translate: 0 var(--pf-v6-c-tree-view__list--TranslateY);
+}

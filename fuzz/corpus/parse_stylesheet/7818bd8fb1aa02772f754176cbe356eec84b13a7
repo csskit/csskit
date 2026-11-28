@@ -1,0 +1,4 @@
+.gap-x-0 {
+  -moz-column-gap: 0px;
+       column-gap: 0px;
+}

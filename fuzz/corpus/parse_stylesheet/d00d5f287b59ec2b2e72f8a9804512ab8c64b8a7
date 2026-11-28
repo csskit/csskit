@@ -1,0 +1,5 @@
+.addon-field {
+  -webkit-flex: 1;
+  flex: 1;
+  margin-bottom: 0;
+}

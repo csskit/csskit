@@ -1,0 +1,8 @@
+.message-body {
+  background-color: hsl(var(--bulma-message-h), var(--bulma-message-s), var(--bulma-message-background-l));
+  border-inline-start-color: hsl(var(--bulma-message-h), var(--bulma-message-s), var(--bulma-message-border-l));
+  border-inline-start-style: var(--bulma-message-border-style);
+  border-inline-start-width: var(--bulma-message-border-width);
+  border-radius: var(--bulma-message-body-radius);
+  padding: var(--bulma-message-body-padding);
+}

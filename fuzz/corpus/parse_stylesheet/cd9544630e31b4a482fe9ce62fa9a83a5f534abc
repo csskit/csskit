@@ -1,0 +1,5 @@
+a {
+  mask-position: 10px;
+  mask-image: url(mask.svg);
+  mask-repeat: repeat-x;
+}

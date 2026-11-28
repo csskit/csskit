@@ -1,0 +1,13 @@
+[role=menuitem] {
+  padding-block: 0;
+  padding-inline: calc(var(--gap) / 2);
+  display: block;
+  text-decoration: none;
+  border-radius: 0;
+  color: var(--fg);
+  &:focus,
+  &:active {
+    background: var(--accent);
+    color: var(--bg);
+  }
+}

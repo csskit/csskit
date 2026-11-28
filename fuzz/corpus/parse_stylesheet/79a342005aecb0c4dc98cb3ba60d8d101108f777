@@ -1,0 +1,6 @@
+::-webkit-scrollbar-thumb {
+  background-color: #cccccc;
+  border-width: 2px;
+  border-style: groove ridge ridge groove;
+  border-color: #fff8ff #000000 #000000 #fff8ff;
+}

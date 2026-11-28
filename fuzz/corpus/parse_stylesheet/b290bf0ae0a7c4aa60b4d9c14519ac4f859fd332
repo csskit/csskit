@@ -1,0 +1,6 @@
+.animations-2 {
+  animation-composition: auto;
+  animation-timeline: auto;
+  display: replace;
+  display: accumulate;
+}

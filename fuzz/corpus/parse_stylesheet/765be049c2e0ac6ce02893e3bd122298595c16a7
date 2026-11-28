@@ -1,0 +1,3 @@
+a {
+  rotate: calc(0.25turn + 10deg);
+}

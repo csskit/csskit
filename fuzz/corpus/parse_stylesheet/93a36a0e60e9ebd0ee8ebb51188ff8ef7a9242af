@@ -1,0 +1,7 @@
+::placeholder {
+  color: gray;
+}
+
+.image {
+  width: stretch;
+}

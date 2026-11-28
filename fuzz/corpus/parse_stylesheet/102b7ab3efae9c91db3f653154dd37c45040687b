@@ -1,0 +1,3 @@
+.card--slide {
+  transform-origin: center right;
+}

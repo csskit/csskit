@@ -1,0 +1,3 @@
+.product .text {
+  padding: 10px;
+}

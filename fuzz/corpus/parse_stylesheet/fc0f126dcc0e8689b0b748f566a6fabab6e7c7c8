@@ -1,0 +1,1 @@
+.w3-table-all tr:nth-child(even){background-color:#f1f1f1}

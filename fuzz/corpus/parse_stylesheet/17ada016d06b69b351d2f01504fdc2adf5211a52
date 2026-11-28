@@ -1,0 +1,3 @@
+nav.max > header > * {
+  transition: all var(--speed1);
+}

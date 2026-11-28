@@ -1,0 +1,3 @@
+.accordion-heading {
+  border-bottom: 0;
+}

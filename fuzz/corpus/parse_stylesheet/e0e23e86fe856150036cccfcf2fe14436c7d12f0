@@ -1,0 +1,4 @@
+p + p {
+  /* Restore the spacing between the paragraphs */
+  margin-top: 0.5cm;
+}

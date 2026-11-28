@@ -1,0 +1,7 @@
+div.cell.text_cell a.anchor-link:link {
+ font-size: inherit;
+ text-decoration: none;
+ padding: 0px 20px;
+ visibility: none;
+ color: rgba(0,0,0,.32);
+}

@@ -1,0 +1,4 @@
+.cds--file__selected-file--sm {
+  gap: 0.25rem 0;
+  min-block-size: 2rem;
+}

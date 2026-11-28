@@ -1,0 +1,3 @@
+.transparent > .shape > i {
+  filter: invert(1);
+}

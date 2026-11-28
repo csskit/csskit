@@ -1,0 +1,4 @@
+select[multiple],
+select[size] {
+  height: auto;
+}

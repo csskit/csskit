@@ -1,0 +1,3 @@
+i.icon.bezier.curve::before {
+  content: "\f55b";
+}

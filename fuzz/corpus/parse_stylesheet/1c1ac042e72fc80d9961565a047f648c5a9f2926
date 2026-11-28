@@ -1,0 +1,3 @@
+.progress-tracker--dashed .progress-step:not(:last-child)::after, .progress-tracker--dashed-even .progress-step:not(:last-child)::after {
+      background: repeating-linear-gradient(to var(--path-direction), var(--bg) 0px var(--path-dash-calc), transparent var(--path-dash-calc) calc(var(--path-dash-calc)*2));
+    }

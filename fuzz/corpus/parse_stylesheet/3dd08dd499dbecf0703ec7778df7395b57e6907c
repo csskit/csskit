@@ -1,0 +1,3 @@
+[grid~="wrap-reverse"] {
+  -ms-flex-wrap: wrap-reverse;
+      flex-wrap: wrap-reverse; }

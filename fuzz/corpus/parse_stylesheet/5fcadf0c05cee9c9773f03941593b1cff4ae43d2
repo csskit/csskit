@@ -1,0 +1,9 @@
+.app-container :is(.markdown-preview-view, .markdown-rendered) pre.language-hibox code.language-hibox {
+  position: relative;
+  height: auto;
+  overflow: hidden;
+  background: radial-gradient(circle at 0px 0px, var(--theme-color-translucent-1) 0, var(--theme-color-translucent-1) var(--hibox), transparent var(--hibox), transparent 0);
+  transition: --hibox 0.4s linear;
+  color: var(--background-code);
+  color: transparent;
+}

@@ -1,0 +1,3 @@
+#tag-list {
+  background: transparent url(/assets/img/pixel-alt.png) repeat-y 15px 0;
+}

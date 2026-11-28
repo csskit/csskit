@@ -1,0 +1,3 @@
+::-webkit-scrollbar:horizontal {
+  height: 17px;
+}

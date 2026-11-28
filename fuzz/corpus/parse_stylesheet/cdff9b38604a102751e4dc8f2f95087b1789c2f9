@@ -1,0 +1,3 @@
+i.icon.street.view:before {
+  content: "\f21d";
+}

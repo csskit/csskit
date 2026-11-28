@@ -1,0 +1,3 @@
+.bg-none {
+  background-image: none;
+}

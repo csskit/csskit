@@ -1,0 +1,3 @@
+.uk-column-span {
+  column-span: all;
+}

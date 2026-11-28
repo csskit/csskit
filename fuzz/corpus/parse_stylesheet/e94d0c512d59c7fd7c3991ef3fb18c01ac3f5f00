@@ -1,0 +1,3 @@
+.blend-overlay {
+  mix-blend-mode: overlay;
+}

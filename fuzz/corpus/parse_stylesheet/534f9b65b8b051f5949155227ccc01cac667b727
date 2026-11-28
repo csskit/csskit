@@ -1,0 +1,3 @@
+.inset-block {
+  inset-block: 0;
+}

@@ -1,0 +1,7 @@
+.background-clip\:text {
+  background-size: cover;
+  @supports (background-clip: text) {
+    background-clip: text;
+  }
+  color: transparent;
+}

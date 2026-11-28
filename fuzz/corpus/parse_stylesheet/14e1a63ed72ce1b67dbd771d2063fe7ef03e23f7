@@ -1,0 +1,3 @@
+.marker {
+  fill: var(--text-muted) !important;
+}

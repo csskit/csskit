@@ -1,0 +1,3 @@
+.hyphens-none {
+  hyphens: none !important;
+}

@@ -1,0 +1,23 @@
+.animated {
+  /* Addresses a small issue in webkit: http://bit.ly/NEdoDq */
+  backface-visibility: hidden;
+  -o-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+
+  animation-fill-mode: both;
+  transform: translate3d(0, 0, 0);
+  perspective: 1000;
+
+  -o-animation-fill-mode: both;
+  -o-transform: translate3d(0, 0, 0);
+  -o-perspective: 1000;
+
+  -moz-animation-fill-mode: both;
+  -moz-transform: translate3d(0, 0, 0);
+  -moz-perspective: 1000;
+
+  -webkit-animation-fill-mode: both;
+  -webkit-transform: translate3d(0, 0, 0);
+  -webkit-perspective: 1000;
+}

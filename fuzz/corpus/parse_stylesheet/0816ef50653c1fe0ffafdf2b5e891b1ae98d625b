@@ -1,0 +1,5 @@
+@media not -moz-pref("widget.windows.mica.popups") {
+  .autoscroller::after {
+    translate: -10px -32px !important;
+  }
+}

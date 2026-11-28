@@ -1,0 +1,1 @@
+.whirly-loader:not(:required){-moz-animation: whirly-loader 1.25s infinite linear;}

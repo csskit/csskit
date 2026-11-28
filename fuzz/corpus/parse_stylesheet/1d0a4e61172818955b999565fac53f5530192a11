@@ -1,0 +1,4 @@
+.btn.btn-animated, button.btn-animated, [type=submit].btn-animated, [type=reset].btn-animated, [type=button].btn-animated,
+a.btn.btn-animated {
+  transition: calc(var(--animation-duration) / 2) ease;
+}

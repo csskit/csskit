@@ -1,0 +1,11 @@
+html {
+  background-color: var(--bulma-body-background-color);
+  font-size: var(--bulma-body-size);
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  min-width: var(--bulma-body-min-width);
+  overflow-x: var(--bulma-body-overflow-x);
+  overflow-y: var(--bulma-body-overflow-y);
+  text-rendering: var(--bulma-body-rendering);
+  text-size-adjust: 100%;
+}

@@ -1,0 +1,13 @@
+.content-3 {
+  string-set: auto;
+  bookmark-level: auto;
+  bookmark-label: auto;
+  bookmark-state: auto;
+  display: open;
+  display: closed;
+  display: leader('.');
+  display: string(heading, first);
+  display: target-counter(attr(href url), page);
+  display: target-counters(lack-of-example);
+  display: target-text(attr(href url));
+}

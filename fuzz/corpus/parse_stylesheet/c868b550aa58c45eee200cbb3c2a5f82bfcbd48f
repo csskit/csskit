@@ -1,0 +1,3 @@
+.u-cursor-all-scroll {
+  cursor: all-scroll;
+}

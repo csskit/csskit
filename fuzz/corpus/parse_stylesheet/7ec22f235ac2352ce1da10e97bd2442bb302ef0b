@@ -1,0 +1,8 @@
+progress.circle {
+  --_value: attr(value type(<number>), 50);
+  inline-size: 2.5rem;
+  block-size: 2.5rem;
+  background: conic-gradient(currentColor calc(var(--_value, 0) * 1%), var(--active) 0%);
+  border-radius: 50%;
+  mask-image: radial-gradient(circle at center, transparent 57%, currentColor 60%);
+}

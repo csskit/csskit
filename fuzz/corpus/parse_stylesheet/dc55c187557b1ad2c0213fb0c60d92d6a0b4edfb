@@ -1,0 +1,5 @@
+a.has-text-dark:active,
+button.has-text-dark:active,
+has-text-dark.is-hoverable:active {
+  color: hsl(var(--bulma-dark-h), var(--bulma-dark-s), calc(var(--bulma-dark-l) + var(--bulma-active-color-l-delta))) !important;
+}

@@ -1,0 +1,8 @@
+.main-nowPlayingBar-container {
+    background-color: unset;
+    background: radial-gradient(ellipse at right 50% bottom -80px, rgba(var(--spice-rgb-sidebar), 0.55), var(--spice-main) 60%) !important;
+    border-radius: 0 0 var(--corner-radius) var(--corner-radius) !important;
+    border-top: 0;
+    padding: 8px;
+    min-width: 518px;
+}

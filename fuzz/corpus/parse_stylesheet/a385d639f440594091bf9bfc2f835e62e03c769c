@@ -1,0 +1,3 @@
+.Root__nav-bar {
+    grid-area: left-sidebar !important;
+}

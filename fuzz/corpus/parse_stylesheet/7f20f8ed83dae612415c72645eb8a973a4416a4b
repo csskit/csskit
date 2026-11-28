@@ -1,0 +1,3 @@
+.border-2{
+  border:1rem solid;
+}

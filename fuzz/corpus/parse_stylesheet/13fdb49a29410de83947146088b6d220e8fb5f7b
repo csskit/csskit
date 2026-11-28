@@ -1,0 +1,5 @@
+.nav-tabs > li > a:hover:before {
+ visibility: visible;
+ -webkit-transform: perspective(1)scaleX(1);
+ transform: perspective(1)scaleX(1);
+}

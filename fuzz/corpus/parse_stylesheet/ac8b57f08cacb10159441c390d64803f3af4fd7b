@@ -1,0 +1,3 @@
+.place-items-auto {
+  place-items: auto;
+}

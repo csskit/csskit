@@ -1,0 +1,3 @@
+.pf-v6-c-table__column-help-action .pf-v6-c-button {
+  line-height: 1lh;
+}

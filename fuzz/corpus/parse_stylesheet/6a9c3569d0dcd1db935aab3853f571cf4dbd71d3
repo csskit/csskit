@@ -1,0 +1,3 @@
+.recordingFields {
+  pointer-events: all;
+}

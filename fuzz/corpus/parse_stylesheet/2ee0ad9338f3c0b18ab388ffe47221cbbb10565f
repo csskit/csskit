@@ -1,0 +1,13 @@
+.uk-light .uk-column-divider,
+.uk-section-primary:not(.uk-preserve-color) .uk-column-divider,
+.uk-section-secondary:not(.uk-preserve-color) .uk-column-divider,
+.uk-tile-primary:not(.uk-preserve-color) .uk-column-divider,
+.uk-tile-secondary:not(.uk-preserve-color) .uk-column-divider,
+.uk-card-primary.uk-card-body .uk-column-divider,
+.uk-card-primary > :not([class*="uk-card-media"]) .uk-column-divider,
+.uk-card-secondary.uk-card-body .uk-column-divider,
+.uk-card-secondary > :not([class*="uk-card-media"]) .uk-column-divider,
+.uk-overlay-primary .uk-column-divider,
+.uk-offcanvas-bar .uk-column-divider {
+  column-rule-color: rgba(255, 255, 255, 0.2);
+}

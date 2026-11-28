@@ -1,0 +1,10 @@
+.pf-v6-c-menu-toggle__button {
+  gap: var(--pf-v6-c-menu-toggle__button--Gap);
+  align-self: var(--pf-v6-c-menu-toggle__button--AlignSelf);
+  min-width: var(--pf-v6-c-menu-toggle__button--MinWidth);
+  padding-inline-start: var(--pf-v6-c-menu-toggle__button--PaddingInlineStart);
+  padding-inline-end: var(--pf-v6-c-menu-toggle__button--PaddingInlineEnd);
+  color: inherit;
+  background-color: var(--pf-v6-c-menu-toggle__button--BackgroundColor);
+  border: 0;
+}

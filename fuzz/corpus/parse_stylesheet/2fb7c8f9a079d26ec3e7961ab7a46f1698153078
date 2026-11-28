@@ -1,0 +1,7 @@
+.html5,
+rb,
+rtc,
+slot,
+template {
+  display: auto;
+}

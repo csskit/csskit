@@ -1,0 +1,4 @@
+.hist {
+  -ms-font-feature-settings: "hist";
+  font-variant-alternates: historical-forms;
+}

@@ -1,0 +1,10 @@
+.lb-download::before {
+  position:absolute;
+  content:"";
+  width: 0;
+    height: 0;
+  margin-top:-2px;
+    border-left: 8px inset transparent !important;
+    border-top: 6px solid #3498DB;
+    border-right: 8px inset transparent !important;
+}

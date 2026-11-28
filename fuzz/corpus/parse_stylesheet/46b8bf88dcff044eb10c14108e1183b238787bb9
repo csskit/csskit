@@ -1,0 +1,2 @@
+h1,
+h2 { margin-bottom: var(--ui-typography-margin-heading); }

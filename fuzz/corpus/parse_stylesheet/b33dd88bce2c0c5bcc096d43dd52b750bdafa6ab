@@ -1,0 +1,3 @@
+.sidebar-placesTreechildren::-moz-tree-row(focused) {
+    border-radius: 10px !important;
+}

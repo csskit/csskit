@@ -1,0 +1,6 @@
+:lang(de) {
+  color: red;
+}
+:lang(en fr) {
+  color: red;
+}

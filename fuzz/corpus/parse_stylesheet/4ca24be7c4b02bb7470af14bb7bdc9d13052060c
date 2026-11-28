@@ -1,0 +1,4 @@
+.pf-v6-c-icon__content svg,
+.pf-v6-c-icon__progress svg {
+  vertical-align: var(--pf-v6-c-icon__content--svg--VerticalAlign);
+}

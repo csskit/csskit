@@ -1,0 +1,5 @@
+input[type="radio"] + label::before {
+  border-image: svg-load("./icon/radio-border.svg");
+  width: 20px;
+  height: 20px;
+}

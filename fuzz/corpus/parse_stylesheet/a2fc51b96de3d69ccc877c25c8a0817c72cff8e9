@@ -1,0 +1,3 @@
+.workspace-split::-webkit-scrollbar:vertical {
+  display: none;
+}

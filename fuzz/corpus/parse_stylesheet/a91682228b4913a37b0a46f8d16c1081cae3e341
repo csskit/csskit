@@ -1,0 +1,3 @@
+::-webkit-file-upload-button {
+    font: inherit;
+}

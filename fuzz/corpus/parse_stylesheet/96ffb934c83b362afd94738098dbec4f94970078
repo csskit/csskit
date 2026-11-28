@@ -1,0 +1,3 @@
+.color-bg {
+  color: hsla(var(--color-bg-h), var(--color-bg-s), var(--color-bg-l), var(--color-opacity, 1));
+}

@@ -1,0 +1,7 @@
+html[data-cinema-npv-postenter] .Root__top-container {
+    grid-template-areas:
+      "top-banner top-banner top-banner"
+      "global-nav global-nav global-nav"
+      "left-sidebar main-view right-sidebar"
+      "now-playing-bar now-playing-bar now-playing-bar" !important;
+}

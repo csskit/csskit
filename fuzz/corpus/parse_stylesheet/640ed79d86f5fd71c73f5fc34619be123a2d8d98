@@ -1,0 +1,5 @@
+.gap-xs {
+  --row-gap: var(--space-xs);
+  --column-gap: var(--space-xs);
+  gap: var(--row-gap) var(--column-gap);
+}

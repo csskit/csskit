@@ -1,0 +1,3 @@
+.place-self-start {
+  place-self: start;
+}

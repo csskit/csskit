@@ -1,0 +1,9 @@
+.numInputWrapper .arrowUp::after,
+.numInputWrapper .arrowDown::after {
+  position: absolute;
+  display: block;
+  border-inline-end: 0.25rem solid transparent;
+  border-inline-start: 0.25rem solid transparent;
+  content: "";
+  inset-block-start: 33%;
+}

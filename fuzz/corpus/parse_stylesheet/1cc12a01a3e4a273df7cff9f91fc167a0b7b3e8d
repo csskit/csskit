@@ -1,0 +1,5 @@
+.images-4 {
+  image-resolution: auto;
+  display: image("sprite.svg#xywh=40,0,20,20");
+  display: element(#test);
+}

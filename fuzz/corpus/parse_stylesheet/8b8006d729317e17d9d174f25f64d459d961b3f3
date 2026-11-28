@@ -1,0 +1,3 @@
+.lnum.zero {
+  -ms-font-feature-settings: "lnum", "zero";
+}

@@ -1,0 +1,3 @@
+.navigation.inline li.divider {
+  display: none;
+}

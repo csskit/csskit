@@ -1,0 +1,3 @@
+.text-left, .nav-left {
+  text-align: left;
+}

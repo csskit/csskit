@@ -1,0 +1,3 @@
+.tooltip.show {
+  opacity: var(--bs-tooltip-opacity);
+}

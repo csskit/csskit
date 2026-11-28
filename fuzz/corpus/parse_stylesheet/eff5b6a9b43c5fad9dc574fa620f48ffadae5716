@@ -1,0 +1,3 @@
+.diagonal-fractions {
+  --tw-numeric-fraction: diagonal-fractions;
+}

@@ -1,0 +1,5 @@
+.ui.cards > .card .dimmer,
+.ui.card .dimmer {
+  background: "";
+  z-index: 10;
+}

@@ -1,0 +1,6 @@
+progress.wavy::-moz-progress-bar {
+  mask-image: url(wavy.svg);
+  mask-position: 0 50%;
+  mask-repeat: repeat-x;
+  mask-size: auto 100%;
+}

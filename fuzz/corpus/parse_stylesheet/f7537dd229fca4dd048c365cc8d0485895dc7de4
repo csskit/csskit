@@ -1,0 +1,1 @@
+.spinner-dot-pulse{--spinner-size:40px;--spinner-speed:1.2s;--spinner-color:var(--primary);align-items:center;display:flex;height:calc(var(--spinner-size*0.27));justify-content:space-between;position:relative;width:var(--spinner-size)}

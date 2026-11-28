@@ -1,0 +1,3 @@
+i.icon.low.vision:before {
+  content: "\f2a8";
+}

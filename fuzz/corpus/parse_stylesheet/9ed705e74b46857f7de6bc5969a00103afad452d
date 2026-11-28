@@ -1,0 +1,4 @@
+.effeckt-off-screen-nav-top-rotate.effeckt-show {
+    -webkit-transform: none;
+        -ms-transform: none;
+            transform: none; }

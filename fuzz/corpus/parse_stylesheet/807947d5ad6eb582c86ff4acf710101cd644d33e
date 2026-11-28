@@ -1,0 +1,5 @@
+@container (max-width: 500px) {
+  a {
+    color: red;
+  }
+}

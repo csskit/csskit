@@ -1,0 +1,3 @@
+.cds--dropdown__wrapper--inline:has(.cds--label.cds--visually-hidden) {
+  grid-template: auto/auto;
+}

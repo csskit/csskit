@@ -1,0 +1,5 @@
+@media (min-width: 992px) {
+  .custom-range::-ms-track {
+    transition-duration: 0.2s;
+  }
+}

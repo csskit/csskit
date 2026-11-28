@@ -1,0 +1,6 @@
+input.stack,
+textarea.stack,
+select.stack {
+  transition: border-bottom 0 ease 0;
+  border-bottom-width: 0;
+}

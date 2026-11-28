@@ -1,0 +1,6 @@
+@font-face {
+  font-family: "Segoe UI Adjusted";
+  src: local(Segoe UI Bold);
+  ascent-override: 90%;
+  font-weight: 700;
+}

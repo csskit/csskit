@@ -1,0 +1,3 @@
+::-webkit-scrollbar-button:vertical:decrement {
+  background-image: url("/assets/img/up.png");
+}

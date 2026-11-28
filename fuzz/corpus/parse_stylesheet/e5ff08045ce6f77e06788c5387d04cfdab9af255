@@ -1,0 +1,3 @@
+i.icon.door.closed::before {
+  content: "\f52a";
+}

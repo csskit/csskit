@@ -1,0 +1,5 @@
+.modal-effect-4.modal-modal {
+  -moz-perspective: 1300px;
+  -webkit-perspective: 1300px;
+  perspective: 1300px;
+}

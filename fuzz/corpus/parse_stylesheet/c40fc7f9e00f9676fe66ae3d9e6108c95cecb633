@@ -1,0 +1,3 @@
+.flatpickr-calendar .hasWeeks .dayContainer {
+  border-inline-start: 0;
+}

@@ -1,0 +1,3 @@
+.lyrics-lyricsContent-text {
+  transform-origin: var(--lyrics-text-direction);
+}

@@ -1,0 +1,3 @@
+.btlr-sm {
+  border-top-left-radius: var(--br-sm) !important;
+}

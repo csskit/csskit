@@ -1,0 +1,4 @@
+.break-4 {
+  margin-break: auto;
+  display: keep;
+}

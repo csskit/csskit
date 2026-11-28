@@ -1,0 +1,15 @@
+.nav-tabs > li > a:before {
+ content: "";
+ position: absolute;
+ width: 100%;
+ height: 2px;
+ bottom: -2px;
+ left: 0;
+ background-color: #fe8019;
+ visibility: hidden;
+ -webkit-transform: perspective(0)scaleX(0);
+ transform: perspective(0)scaleX(0);
+ -webkit-transition: ease 220ms;
+ transition: ease 220ms;
+ -webkit-font-smoothing: antialiased !important;
+}

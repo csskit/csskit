@@ -1,0 +1,3 @@
+.cds--autoalign .cds--list-box__menu {
+  inset-inline: auto;
+}

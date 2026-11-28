@@ -1,0 +1,7 @@
+.grid {
+    --columns: auto-fit;
+
+    display: grid;
+    column-gap: var(--rhythm);
+    grid-template-columns: repeat(var(--columns), minmax(0, 1fr));
+}

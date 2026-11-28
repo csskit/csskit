@@ -1,0 +1,252 @@
+@import "https://unpkg.com/openswatch";
+
+:root {
+  font-size: 16px;
+  --bg: var(--neutral-1);
+  --fg: var(--neutral-12);
+  --fg-muted: var(--neutral-8);
+  --border: var(--neutral-4);
+  --thead-bg: var(--neutral-2);
+  --pass-bg: var(--blue-2);
+  --pass-fg: var(--blue-9);
+  --fail-bg: var(--orange-2);
+  --fail-fg: var(--orange-9);
+  --partial-bg: var(--amber-2);
+  --partial-fg: var(--amber-9);
+  --error-bg: var(--orange-2);
+  --error-fg: var(--orange-9);
+  --na-bg: var(--neutral-2);
+  --na-fg: var(--neutral-7);
+  --link: var(--blue-8);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: var(--neutral-3);
+    --fg-muted: var(--neutral-11);
+    --thead-bg: var(--neutral-4);
+    --pass-bg: var(--blue-12);
+    --pass-fg: var(--blue-3);
+    --fail-bg: var(--orange-12);
+    --fail-fg: var(--orange-3);
+    --partial-bg: var(--amber-12);
+    --partial-fg: var(--amber-3);
+    --error-bg: var(--orange-12);
+    --error-fg: var(--orange-3);
+    --na-bg: var(--neutral-3);
+    --na-fg: var(--neutral-11);
+    --link: var(--blue-5);
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-padding-top: 40px;
+}
+
+body {
+  margin: 0 auto;
+  max-width: 68.75rem;
+  padding: 1rem;
+  width: 100%;
+  font-family: system-ui;
+  background: var(--bg);
+  color: var(--fg);
+}
+
+a {
+  color: var(--link);
+}
+
+button {
+  padding: 0.375rem 0.75rem;
+  font-size: 0.875rem;
+  cursor: pointer;
+  background: var(--neutral-2);
+  color: var(--fg);
+  border: 1px solid var(--border);
+  border-radius: 0.25rem;
+  margin: 1rem 0;
+}
+
+table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+thead {
+  position: sticky;
+  top: 0px;
+}
+
+h2 {
+  margin-top: 3rem;
+}
+
+td,
+th {
+  padding: 0.625rem 1rem;
+  text-align: center;
+}
+
+td:first-child,
+th:first-child {
+  text-align: left;
+}
+
+td + td,
+th + th {
+  border-left: 1px solid var(--border);
+}
+
+thead tr,
+tr:not(:last-child) {
+  border-bottom: 1px solid var(--border);
+}
+
+thead,
+tfoot {
+  background: var(--thead-bg);
+}
+
+.version-row td {
+  font-weight: normal;
+  font-size: 0.75rem;
+  color: var(--fg);
+}
+
+tfoot tr {
+  border-top: 1px solid var(--border);
+}
+
+td.pass {
+  background: var(--pass-bg);
+  color: var(--pass-fg);
+}
+
+td.fail {
+  background: var(--fail-bg);
+  color: var(--fail-fg);
+}
+
+td.partial {
+  background: var(--partial-bg);
+  color: var(--partial-fg);
+}
+
+td.error {
+  background: var(--error-bg);
+  color: var(--error-fg);
+  font-style: italic;
+}
+
+td.na {
+  background: var(--na-bg);
+  color: var(--na-fg);
+  font-style: italic;
+}
+
+tr:has(details) td {
+  padding: 0;
+  border-left: none;
+}
+
+tr:has(details) details {
+  padding: 0.25rem 1rem 0.5rem 1rem;
+}
+
+tr:has(details) summary {
+  cursor: pointer;
+  padding: 0.375rem 0;
+  color: var(--fg-muted);
+  font-size: 0.875rem;
+}
+
+#real-world-table tfoot tr:first-of-type th {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+details > h1 {
+  font-size: 1.2rem;
+}
+
+details > summary + * {
+  margin-top: 0.5rem;
+}
+
+details > p {
+  margin: 0 0 0.75rem;
+  color: var(--fg-muted);
+  font-style: italic;
+}
+
+.details-description code:not(pre code) {
+  background: var(--border);
+  border-radius: 6px;
+  padding: 0px 0.25rem 1px;
+}
+.details-description p > code {
+  background: #1E1E1E;
+  border-radius: 0.25rem;
+  padding: 0rem 0.3rem 0.1rem;
+  color: #D4D4D4;
+  font-size: 0.9rem;
+  font-style: normal;
+}
+
+details > div {
+  margin-bottom: 0.75rem;
+}
+
+details > div:last-child {
+  margin-bottom: 0;
+}
+
+details h4 {
+  margin: 0 0 0.25rem;
+  font-size: 0.8125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--fg-muted);
+}
+
+details pre {
+  height: calc(100% - 1rem);
+  margin: 0;
+  padding: 0.5rem 0.75rem;
+  background: var(--neutral-2);
+  border-radius: 0.25rem;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.detail-error {
+  color: var(--fail-fg);
+}
+
+.pass-icon {
+  color: var(--pass-fg);
+}
+
+.fail-icon {
+  color: var(--fail-fg);
+}
+
+details iframe {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 0.25rem;
+  min-height: 12rem;
+}
+
+.detail-outputs {
+  display: grid;
+  gap: 0.5rem;

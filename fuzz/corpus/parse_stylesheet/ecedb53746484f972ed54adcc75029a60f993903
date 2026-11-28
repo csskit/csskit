@@ -1,0 +1,3 @@
+.intersect.icon.filled:after {
+  background-color: currentColor;
+}

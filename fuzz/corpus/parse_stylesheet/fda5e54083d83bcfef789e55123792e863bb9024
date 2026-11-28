@@ -1,0 +1,3 @@
+.btrr0 {
+  border-top-right-radius: 0 !important;
+}

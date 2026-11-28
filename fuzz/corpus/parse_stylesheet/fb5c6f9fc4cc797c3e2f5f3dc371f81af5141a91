@@ -1,0 +1,9 @@
+.cds--btn .cds--btn__icon {
+  position: absolute;
+  flex-shrink: 0;
+  block-size: 1rem;
+  inline-size: 1rem;
+  inset-block-start: min((var(--cds-layout-size-height-local) - 1rem) / 2 - 0.0625rem, var(--temp-padding-block-max));
+  inset-inline-end: var(--cds-layout-density-padding-inline-local);
+  margin-block-start: 0.0625rem;
+}

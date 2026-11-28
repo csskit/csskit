@@ -1,0 +1,7 @@
+input[type='range'] {
+  border: 1px solid transparent;
+  border: 1px solid #c0c0c0 \9;
+  background-color: transparent;
+  background-color: #fff \9;
+  padding: 0.25rem 0;
+  padding: 0.25rem \9; }

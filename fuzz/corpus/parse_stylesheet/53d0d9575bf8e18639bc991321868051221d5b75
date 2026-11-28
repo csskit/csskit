@@ -1,0 +1,3 @@
+a {
+  hyphenate-limit-chars: auto auto;
+}

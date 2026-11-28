@@ -1,0 +1,4 @@
+.tooltip.right {
+  inset: 50% 0 auto auto;
+  transform: translate(100%, -50%) scale(0.9);
+}

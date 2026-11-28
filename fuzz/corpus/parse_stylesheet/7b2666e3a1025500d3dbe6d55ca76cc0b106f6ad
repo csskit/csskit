@@ -1,0 +1,3 @@
+.cds--btn path[data-icon-path=inner-path] {
+  fill: none;
+}

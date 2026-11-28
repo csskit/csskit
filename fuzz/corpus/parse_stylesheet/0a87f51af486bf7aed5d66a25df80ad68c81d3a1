@@ -1,0 +1,15 @@
+.pf-v6-l-flex {
+  --pf-v6-l-flex--spacer--none: 0;
+  --pf-v6-l-flex--spacer--xs: var(--pf-t--global--spacer--xs);
+  --pf-v6-l-flex--spacer--sm: var(--pf-t--global--spacer--sm);
+  --pf-v6-l-flex--spacer--md: var(--pf-t--global--spacer--md);
+  --pf-v6-l-flex--spacer--lg: var(--pf-t--global--spacer--lg);
+  --pf-v6-l-flex--spacer--xl: var(--pf-t--global--spacer--xl);
+  --pf-v6-l-flex--spacer--2xl: var(--pf-t--global--spacer--2xl);
+  --pf-v6-l-flex--spacer--3xl: var(--pf-t--global--spacer--3xl);
+  --pf-v6-l-flex--spacer--4xl: var(--pf-t--global--spacer--4xl);
+  display: var(--pf-v6-l-flex--Display);
+  flex-wrap: var(--pf-v6-l-flex--FlexWrap);
+  gap: var(--pf-v6-l-flex--RowGap) var(--pf-v6-l-flex--ColumnGap);
+  align-items: var(--pf-v6-l-flex--AlignItems);
+}

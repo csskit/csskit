@@ -1,0 +1,3 @@
+.ts-menu.is-end-indicated .item.is-active {
+    border-right-color: var(--accent-color, var(--ts-gray-800))
+}

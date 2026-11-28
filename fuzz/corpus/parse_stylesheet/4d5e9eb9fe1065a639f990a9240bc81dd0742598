@@ -1,0 +1,3 @@
+:is(main, header, footer, section).responsive.max {
+  max-inline-size: none;
+}

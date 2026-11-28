@@ -1,0 +1,3 @@
+.object-top {
+  object-position: top;
+}

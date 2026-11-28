@@ -1,0 +1,4 @@
+#nav-bar {
+    margin-top:calc(var(--TabsHeight) * -1px - var(--TabsBorder) * 1px)!important;
+    height: calc((var(--TabsHeight) * 1px + var(--TabsBorder) * 1px) + 0px)
+}

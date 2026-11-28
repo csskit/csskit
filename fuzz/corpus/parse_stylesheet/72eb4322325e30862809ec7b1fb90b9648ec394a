@@ -1,0 +1,3 @@
+.delay-75 {
+  transition-delay: 75ms;
+}

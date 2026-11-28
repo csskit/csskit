@@ -1,0 +1,9 @@
+@supports ((-webkit-font-feature-settings: "sinf") or (font-feature-settings: "sinf")) {
+
+  .sinf {
+    font-variant-position: normal;
+    -webkit-font-feature-settings: "sinf", "subs" off, "sups" off;
+    font-feature-settings: "sinf", "subs" off, "sups" off;
+    vertical-align: baseline;
+  }
+}

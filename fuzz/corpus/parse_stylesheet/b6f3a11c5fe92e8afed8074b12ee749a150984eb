@@ -1,0 +1,5 @@
+@-moz-document domain("gist.github.com"){@layer primer-react{@media (hover:hover) and (pointer:fine) {
+      .prc-ActionList-Item-eN6NY:hover {
+        background: var(--item-hover-bg-override, var(--bgColor-muted, #222));
+      }
+    }}}

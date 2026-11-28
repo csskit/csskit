@@ -1,0 +1,1 @@
+.card{transition:opacity .5s,display .5s allow-discrete}@starting-style{.card{opacity:0;display:none}}

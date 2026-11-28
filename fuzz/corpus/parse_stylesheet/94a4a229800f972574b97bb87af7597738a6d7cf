@@ -1,0 +1,3 @@
+.bottom {
+  inset-block-end: 0;
+}

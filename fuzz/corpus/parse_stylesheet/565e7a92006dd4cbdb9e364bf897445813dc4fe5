@@ -1,0 +1,3 @@
+.cds--loading--small .cds--loading__svg {
+  stroke: var(--cds-interactive, #0f62fe);
+}

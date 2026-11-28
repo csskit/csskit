@@ -1,0 +1,4 @@
+@media (min-aspect-ratio: 21/9) and (max-aspect-ratio: 30/9) and (min-width: 3000px) and (max-width: 3440px) {
+  body {
+  }
+}

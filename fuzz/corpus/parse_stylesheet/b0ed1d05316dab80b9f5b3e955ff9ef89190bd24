@@ -1,0 +1,8 @@
+nav:is(.left, .right) {
+  justify-content: flex-start;
+  flex-direction: column;
+  background-color: var(--surface);
+  block-size: 100dvh;
+  min-inline-size: 6rem;
+  padding-block: var(--_top) var(--_bottom);
+}

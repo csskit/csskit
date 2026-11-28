@@ -1,0 +1,3 @@
+.lyrics-lyricsContainer-SyncedLyrics .lyrics-lyricsContainer-LyricsLine {
+  transition-property: transform, color, opacity, text-shadow !important;
+}

@@ -1,0 +1,1 @@
+.switch:after{--tw-content:"";content:var(--tw-content);display:block;left:0;position:absolute;top:0;transition:transform var(--d-t,.15s) var(--d-t-e,ease),opacity var(--d-o,.15s)}

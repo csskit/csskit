@@ -1,0 +1,15 @@
+canvas,
+img,
+svg,
+video {
+  /* 1 */
+  max-width: 100%;
+  /* 2 */
+  box-sizing: border-box;
+  /* 3 */
+  height: auto;
+  /* 4 */
+  aspect-ratio: attr(width type(<number>)) / attr(height type(<number>));
+  /* 5 */
+  object-fit: cover;
+}

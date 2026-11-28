@@ -1,0 +1,3 @@
+.object-fill {
+  object-fit: fill;
+}

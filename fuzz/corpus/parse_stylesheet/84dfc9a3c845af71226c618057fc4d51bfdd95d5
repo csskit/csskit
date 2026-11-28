@@ -1,0 +1,4 @@
+[data-animate] {
+  opacity: 0;
+  filter: alpha(opacity=0);
+}

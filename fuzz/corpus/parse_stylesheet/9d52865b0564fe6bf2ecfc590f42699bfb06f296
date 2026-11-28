@@ -1,0 +1,3 @@
+a {
+  width: calc(100px);
+}

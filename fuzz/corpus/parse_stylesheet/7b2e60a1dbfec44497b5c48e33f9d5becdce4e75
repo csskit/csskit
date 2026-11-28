@@ -1,0 +1,4 @@
+.ui.items > .item .content img {
+  align-self: middle;
+  width: '';
+}

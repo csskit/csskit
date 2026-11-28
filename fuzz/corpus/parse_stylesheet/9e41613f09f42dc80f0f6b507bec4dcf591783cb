@@ -1,0 +1,3 @@
+.satellite.spin-lock {
+  transform: var(--o-transform) rotate(calc(var(--o-angle-composite)));
+}

@@ -1,0 +1,3 @@
+.vertical > * {
+  margin-inline: 0 !important;
+}

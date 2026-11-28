@@ -1,0 +1,3 @@
+.recolor-images img {
+  filter: var(--image-effect);
+}

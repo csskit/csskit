@@ -1,0 +1,5 @@
+[data-effeckt-type="fly"] li {
+    transition: all 500ms ease, opacity 250ms ease;
+    -webkit-transform-origin: 50% 50% -50px;
+        -ms-transform-origin: 50% 50% -50px;
+            transform-origin: 50% 50% -50px; }

@@ -1,0 +1,24 @@
+@media (max-width: 639.99px) {
+
+  body { 
+  font-size: 2.2vw; 
+  padding: 0; 
+  }
+
+  .wrapper {
+    width: 100vw;
+    margin: 0;
+    padding: 1vw;
+    overflow: scroll;
+    border-width: 1vw;
+    border-radius: 5vw; 
+  }
+  
+img.centered {
+    position: relative;
+    margin: 0 2.5vw;
+    max-width: 95vw;
+    left: 0;
+    border-radius: 5vw;
+  } 
+}

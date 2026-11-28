@@ -1,0 +1,30 @@
+.fonts-3 {
+  display: common-ligatures;
+  display: no-common-ligatures;
+  display: discretionary-ligatures;
+  display: no-discretionary-ligatures;
+  display: historical-ligatures;
+  display: no-historical-ligatures;
+  display: contextual;
+  display: no-contextual;
+  display: all-small-caps;
+  display: petite-caps;
+  display: all-petite-caps;
+  display: unicase;
+  display: titling-caps;
+  display: lining-nums;
+  display: oldstyle-nums;
+  display: proportional-nums;
+  display: tabular-nums;
+  display: diagonal-fractions;
+  display: stacked-fractions;
+  display: jis78;
+  display: jis83;
+  display: jis90;
+  display: jis04;
+  display: simplified;
+  display: traditional;
+  display: proportional-width;
+  display: ordinal;
+  display: slashed-zero;
+}

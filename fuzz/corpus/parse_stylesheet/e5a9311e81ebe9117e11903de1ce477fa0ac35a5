@@ -1,0 +1,3 @@
+.searchWrapper input.search:not(:valid) ~ .close.icon {
+  display: none;
+}

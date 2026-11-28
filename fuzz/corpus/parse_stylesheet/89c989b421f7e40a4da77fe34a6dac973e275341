@@ -1,0 +1,11 @@
+.rhythm-1 {
+  block-step-size: auto;
+  block-step-insert: auto;
+  block-step-align: auto;
+  block-step-round: auto;
+  block-step: auto;
+  line-height-step: auto;
+  display: up;
+  display: down;
+  display: nearest;
+}

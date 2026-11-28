@@ -1,0 +1,3 @@
+.carousel.pointer-event {
+  touch-action: pan-y;
+}

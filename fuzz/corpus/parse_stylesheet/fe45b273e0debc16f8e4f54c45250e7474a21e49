@@ -1,0 +1,4 @@
+@keyframes strobe{100% {
+    opacity: 1;
+    transform: 1;
+  }}

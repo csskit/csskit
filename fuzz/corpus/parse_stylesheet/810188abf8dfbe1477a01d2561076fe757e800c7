@@ -1,0 +1,5 @@
+.ui-3 {
+  caret-color: auto;
+  display: grab;
+  display: grabbing;
+}

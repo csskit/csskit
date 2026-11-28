@@ -1,0 +1,3 @@
+@-moz-document domain("github.com"){.markdown-body {
+    font: var(--font-text) !important;
+  }}

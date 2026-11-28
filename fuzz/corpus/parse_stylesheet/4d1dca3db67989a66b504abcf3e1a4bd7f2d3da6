@@ -1,0 +1,3 @@
+.slides-container ol>li {
+  border-left: 3px solid var(--list-ol-block-color);
+}

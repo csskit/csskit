@@ -1,0 +1,4 @@
+.animate-none {
+  -webkit-animation: none;
+          animation: none;
+}

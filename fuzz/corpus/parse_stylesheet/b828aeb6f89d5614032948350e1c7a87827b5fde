@@ -1,0 +1,3 @@
+.overscroll-y-none {
+  overscroll-behavior-y: none;
+}

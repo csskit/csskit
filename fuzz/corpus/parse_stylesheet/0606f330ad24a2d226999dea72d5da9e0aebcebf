@@ -1,0 +1,26 @@
+.inline-3 {
+  dominant-baseline: auto;
+  alignment-baseline: auto;
+  baseline-source: auto;
+  baseline-shift: auto;
+  line-fit-edge: auto;
+  text-box: auto;
+  text-box-edge: auto;
+  text-box-trim: auto;
+  inline-sizing: auto;
+  initial-letter: auto;
+  initial-letter-align: auto;
+  initial-letter-wrap: auto;
+  display: mathematical;
+  display: central;
+  display: ideographic;
+  display: leading;
+  display: cap;
+  display: ex;
+  display: ideographic-ink;
+  display: drop;
+  display: raise;
+  display: trim-start;
+  display: trim-end;
+  display: trim-both;
+}

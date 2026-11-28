@@ -1,0 +1,2 @@
+[hidden][aria-hidden="false"]:focus {
+  clip: auto; }

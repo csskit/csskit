@@ -1,0 +1,4 @@
+::-webkit-scrollbar-track {
+  background-image: url("/assets/img/track.png");
+  background-repeat: repeat-x repeat-y;
+}

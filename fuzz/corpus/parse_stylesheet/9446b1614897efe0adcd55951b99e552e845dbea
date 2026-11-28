@@ -1,0 +1,7 @@
+.ui.form:not(.initial) .field input:invalid {
+  color: #9f3a38;
+  background: #fff6f6;
+  border-color: #e0b4b4;
+  border-radius: "";
+  box-shadow: none;
+}

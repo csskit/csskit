@@ -1,0 +1,4 @@
+.text-info {
+  --bs-text-opacity: 1;
+  color: hsla(var(--bs-info-hsl), var(--bs-text-opacity)) !important;
+}

@@ -1,0 +1,4 @@
+.slider.max.vertical > input {
+  writing-mode: vertical-lr;
+  transform: rotate(-180deg);
+}

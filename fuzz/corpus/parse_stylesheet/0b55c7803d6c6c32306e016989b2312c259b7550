@@ -1,0 +1,4 @@
+.menu[x-placement='top-start']::before {
+  -webkit-transform-origin: 0 calc(100% - 2rem);
+  transform-origin: 0 calc(100% - 2rem);
+}

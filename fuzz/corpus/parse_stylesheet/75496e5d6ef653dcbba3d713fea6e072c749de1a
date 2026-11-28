@@ -1,0 +1,9 @@
+@media (forced-colors: active){
+  .usa-select{
+    -webkit-appearance:listbox;
+       -moz-appearance:listbox;
+            appearance:listbox;
+    background-image:none;
+    padding-right:0;
+  }
+}

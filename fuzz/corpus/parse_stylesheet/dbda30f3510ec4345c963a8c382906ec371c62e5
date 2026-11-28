@@ -1,0 +1,3 @@
+a {
+  width: clamp(10px, 50px, 20px);
+}

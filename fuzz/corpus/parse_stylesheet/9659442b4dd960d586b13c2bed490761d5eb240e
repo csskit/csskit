@@ -1,0 +1,3 @@
+.link.color-bg {
+  background-image: linear-gradient(to right, currentColor 50%, hsla(var(--color-bg-h), var(--color-bg-s), var(--color-bg-l), 0.2) 50%);
+}

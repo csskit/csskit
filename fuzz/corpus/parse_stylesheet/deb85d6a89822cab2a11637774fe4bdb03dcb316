@@ -1,0 +1,3 @@
+i.icon.female:before {
+  content: "\f182";
+}

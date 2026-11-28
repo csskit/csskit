@@ -1,0 +1,9 @@
+.scoping-1:scope-context div,
+.scoping-1:host,
+.scoping-1:host(.foo),
+.scoping-1:host-context,
+.scoping-1::shadow,
+.scoping-1::content,
+.scoping-1 /deep/ span {
+  display: auto;
+}

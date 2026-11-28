@@ -1,0 +1,17 @@
+body.blockquote-style-speech-bubble-two :is(.markdown-preview-view, .markdown-rendered):not(.kanban-plugin__markdown-preview-view) blockquote:after {
+  content: '';
+  position: absolute;
+  z-index: 10;
+  bottom: -35px;
+  left: 49px;
+  width: 20px;
+  height: 29px;
+  border-style: solid;
+  border-width: 0 7px 4px 0;
+  border-color: var(--theme-color);
+  background: transparent;
+  -webkit-border-bottom-right-radius: 40px 50px;
+  -moz-border-radius-bottomright: 40px 50px;
+  border-bottom-right-radius: 40px 50px;
+  display: block;
+}

@@ -1,0 +1,3 @@
+i.icon.star.of.life::before {
+  content: "\f621";
+}

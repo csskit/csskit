@@ -1,0 +1,3 @@
+.btn-facebook.large:before {
+    background-position: 0 -22px;
+}

@@ -1,0 +1,12 @@
+.board.icon:after {
+  width: 1px;
+  height: 17px;
+  background-color: currentColor;
+  left: 6px;
+  top: -4px;
+  z-index: -1;
+  -webkit-transform-origin: left top;
+          transform-origin: left top;
+  -webkit-transform: skew(21deg);
+          transform: skew(21deg);
+}

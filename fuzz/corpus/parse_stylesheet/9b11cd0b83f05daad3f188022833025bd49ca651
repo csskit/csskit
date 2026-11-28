@@ -1,0 +1,3 @@
+.swagger-section .title {
+  font-style: bold;
+}

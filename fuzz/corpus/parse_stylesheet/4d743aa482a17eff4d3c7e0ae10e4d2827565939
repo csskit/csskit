@@ -1,0 +1,3 @@
+.lyricPage {
+    padding: 0 var(--sidePadding);
+}

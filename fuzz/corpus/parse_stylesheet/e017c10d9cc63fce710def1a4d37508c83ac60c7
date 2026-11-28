@@ -1,0 +1,4 @@
+.flex--top, .grid--top {
+  -ms-flex-align: start;
+      align-items: flex-start;
+}

@@ -1,0 +1,3 @@
+.ui-section-footer__layout {
+  column-gap: var(--ui-layout-gutter);
+}

@@ -1,0 +1,4 @@
+a.anchor {
+    scroll-margin-top: var(--spacing-large);
+    display: block;
+}

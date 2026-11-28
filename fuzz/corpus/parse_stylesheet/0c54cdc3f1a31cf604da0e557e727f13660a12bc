@@ -1,0 +1,7 @@
+.pf-v6-c-table__button-content,
+.pf-v6-c-table__column-help {
+  display: inline-grid;
+  grid-template-columns: auto max-content;
+  align-items: last baseline;
+  justify-content: start;
+}

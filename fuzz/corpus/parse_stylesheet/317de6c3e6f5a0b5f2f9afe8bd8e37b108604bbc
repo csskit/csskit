@@ -1,0 +1,11 @@
+.pf-v6-c-nav:where(.pf-m-horizontal) .pf-v6-c-nav__list {
+  padding-block-start: var(--pf-v6-c-nav--m-horizontal__list--PaddingBlockStart);
+  padding-block-end: var(--pf-v6-c-nav--m-horizontal__list--PaddingBlockEnd);
+  padding-inline-start: var(--pf-v6-c-nav--m-horizontal__list--PaddingInlineStart);
+  padding-inline-end: var(--pf-v6-c-nav--m-horizontal__list--PaddingInlineEnd);
+  overflow-x: auto;
+  white-space: nowrap;
+  scroll-snap-type: var(--pf-v6-c-nav__list--ScrollSnapType);
+  scroll-padding-inline-end: var(--pf-v6-c-nav--m-horizontal__list--PaddingInlineEnd);
+  -webkit-overflow-scrolling: touch;
+}

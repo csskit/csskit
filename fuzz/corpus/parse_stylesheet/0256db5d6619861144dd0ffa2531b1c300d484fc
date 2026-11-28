@@ -1,0 +1,3 @@
+.seashore{
+    background-image: linear-gradient(to top, #209cff 0%, #68e0cf 100%);
+}

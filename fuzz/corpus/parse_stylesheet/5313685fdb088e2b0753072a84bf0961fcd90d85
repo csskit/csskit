@@ -1,0 +1,3 @@
+.card-footer-item:not(:last-child) {
+  border-inline-end: var(--bulma-card-footer-border-top);
+}

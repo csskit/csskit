@@ -1,0 +1,5 @@
+#s7 .slinky.full > .segment {
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}

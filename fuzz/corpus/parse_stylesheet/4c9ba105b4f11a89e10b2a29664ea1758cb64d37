@@ -1,0 +1,10 @@
+.color-4 {
+  display: hwb(120deg, 44%, 50%);
+  display: lab(1 2 3);
+  display: lch(4 5 6);
+  display: oklab(1 2 3);
+  display: oklch(4 5 6);
+  display: color(swopc, 0 206 190 77);
+  display: accentcolor;
+  display: accentcolortext;
+}

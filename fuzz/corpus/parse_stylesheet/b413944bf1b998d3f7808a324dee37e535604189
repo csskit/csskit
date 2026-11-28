@@ -1,0 +1,5 @@
+@media (prefers-reduced-motion){
+  .usa-skipnav{
+    transition:none;
+  }
+}

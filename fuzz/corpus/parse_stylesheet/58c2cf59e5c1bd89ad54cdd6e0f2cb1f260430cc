@@ -1,0 +1,6 @@
+.pointerevents {
+  touch-action: auto;
+  display: pan-x;
+  display: pan-y;
+  display: manipulation;
+}

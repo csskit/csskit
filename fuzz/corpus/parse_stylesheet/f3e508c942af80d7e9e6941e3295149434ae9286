@@ -1,0 +1,3 @@
+.scroll-padding-lg {
+  scroll-padding: var(--space-lg);
+}

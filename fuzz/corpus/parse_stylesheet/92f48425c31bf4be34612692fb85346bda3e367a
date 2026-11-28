@@ -1,0 +1,3 @@
+.margin-inline:not([specificity-hack]) {
+  margin-inline: var(--gap);
+}

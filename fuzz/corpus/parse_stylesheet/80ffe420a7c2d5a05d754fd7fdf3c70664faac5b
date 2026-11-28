@@ -1,0 +1,3 @@
+.pico input:not([type=checkbox], [type=radio], [type=range], [type=file])[type=search][aria-invalid=false] {
+  background-image: var(--pico-icon-search), var(--pico-icon-valid);
+}

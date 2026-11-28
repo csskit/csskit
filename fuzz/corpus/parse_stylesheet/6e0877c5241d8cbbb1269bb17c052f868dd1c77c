@@ -1,0 +1,4 @@
+.modal.show .modal-dialog {
+  -webkit-transform: none;
+  transform: none;
+}

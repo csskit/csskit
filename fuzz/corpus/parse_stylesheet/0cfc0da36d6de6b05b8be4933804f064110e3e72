@@ -1,0 +1,8 @@
+.slider .slide-group {
+  position: relative;
+  font-size: 0;
+  white-space: nowrap;
+  -webkit-transition: all 0s linear;
+       -o-transition: all 0s linear;
+          transition: all 0s linear;
+}

@@ -1,0 +1,3 @@
+html.dark-mode iframe#MSearchResults {
+    filter: invert() hue-rotate(180deg);
+}

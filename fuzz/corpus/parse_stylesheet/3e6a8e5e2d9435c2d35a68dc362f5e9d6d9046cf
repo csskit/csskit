@@ -1,0 +1,3 @@
+.disabled.transition {
+  animation-play-state: paused;
+}

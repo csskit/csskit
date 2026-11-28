@@ -1,0 +1,9 @@
+@-moz-document domain("stats.stackexchange.com") {
+  .site-header {
+    background-image: none;
+    background: repeating-linear-gradient(-45deg, #111, #333 2px, #111 4px);
+  }
+  .site-header .site-header--sponsored {
+    color: #ccc;
+  }
+}

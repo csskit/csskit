@@ -1,0 +1,5 @@
+.cbutton--effect-stoja-top::before,
+.cbutton--effect-stoja-top::after {
+  -webkit-clip-path: polygon(10% 0%, 90% 0%, 50% 50%);
+  clip-path: polygon(25% 0%, 75% 0%, 50% 50%);
+}

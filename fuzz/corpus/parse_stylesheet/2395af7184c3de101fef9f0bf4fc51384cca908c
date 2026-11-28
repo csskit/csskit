@@ -1,0 +1,3 @@
+.marker.cross {
+  stroke: var(--text-muted) !important;
+}

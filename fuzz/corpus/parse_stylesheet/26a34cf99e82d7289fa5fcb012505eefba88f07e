@@ -1,0 +1,3 @@
+a {
+  background: red url(bg.png) 0% 0% repeat scroll;
+}

@@ -1,0 +1,5 @@
+.calt {
+  -ms-font-feature-settings: "calt";
+  -webkit-font-variant-ligatures: contextual;
+          font-variant-ligatures: contextual;
+}

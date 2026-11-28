@@ -1,0 +1,5 @@
+[layout*="column"][layout*="-stretch"],
+[layout*="row"][layout*="stretch-"] {
+  -ms-flex-align: stretch;
+      -ms-grid-row-align: stretch;
+      align-items: stretch; }

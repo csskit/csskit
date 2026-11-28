@@ -1,0 +1,3 @@
+.ui.last.stuck.table {
+  border-right: 0;
+}

@@ -1,0 +1,5 @@
+.c2sc {
+  text-transform: uppercase;
+  font-variant-caps: all-small-caps;
+  -ms-font-feature-settings: "smcp" 0, "c2sc";
+}

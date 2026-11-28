@@ -1,0 +1,3 @@
+.u-cursor-grab {
+  cursor: grab;
+}

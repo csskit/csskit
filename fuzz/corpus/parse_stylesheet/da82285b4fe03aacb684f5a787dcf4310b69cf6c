@@ -1,0 +1,3 @@
+.ui.indeterminate.progress .bar {
+  width: 100%;
+}

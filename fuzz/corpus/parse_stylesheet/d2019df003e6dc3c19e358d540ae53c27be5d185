@@ -1,0 +1,4 @@
+.responsive {
+  inline-size: -webkit-fill-available;
+  inline-size: -moz-available;
+}

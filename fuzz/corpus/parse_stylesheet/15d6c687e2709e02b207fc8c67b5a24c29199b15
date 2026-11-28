@@ -1,0 +1,4 @@
+.mermaid .messageLine0 {
+  stroke-dasharray: none !important;
+  stroke: var(--text-muted) !important;
+}

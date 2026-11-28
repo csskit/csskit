@@ -1,0 +1,5 @@
+.pulsate {
+  -webkit-animation-name: pulsate;
+  animation-name: pulsate;
+  -webkit-transform-origin: center;
+  transform-origin: center; }

@@ -1,0 +1,5 @@
+@media (prefers-color-scheme: dark) {
+  .tab-icon-image {
+    content: url('dark.png') !important;
+  }
+}

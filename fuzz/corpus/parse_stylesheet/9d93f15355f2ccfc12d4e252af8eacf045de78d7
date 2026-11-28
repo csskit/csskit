@@ -1,0 +1,3 @@
+article.large {
+  block-size: 32rem;
+}

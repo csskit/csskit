@@ -1,0 +1,3 @@
+.ui.search input[type="search"]::-webkit-search-cancel-button:hover {
+  opacity: 1;
+}

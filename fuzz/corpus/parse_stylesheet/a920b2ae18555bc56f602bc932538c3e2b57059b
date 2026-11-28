@@ -1,0 +1,6 @@
+.main-repeatButton-button[aria-checked="mixed"]::before,
+button[data-testid="control-button-repeat"][aria-checked="mixed"]
+    > span::after {
+    content: "\21BB\2474";
+    text-wrap: nowrap;
+}

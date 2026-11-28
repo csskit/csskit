@@ -1,0 +1,3 @@
+.delay-350 {
+  -webkit-animation-delay: 350ms;
+  animation-delay: 350ms; }

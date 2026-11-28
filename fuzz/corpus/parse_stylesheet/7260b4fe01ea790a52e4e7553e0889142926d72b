@@ -1,0 +1,6 @@
+@media screen and (-ms-high-contrast: active), (forced-colors: active) {
+  .cds--checkbox-group--readonly .cds--checkbox:checked + .cds--checkbox-label::after,
+  .cds--checkbox-wrapper--readonly .cds--checkbox:checked + .cds--checkbox-label::after {
+    fill: SelectedItemText;
+  }
+}

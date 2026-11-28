@@ -1,0 +1,3 @@
+progress.circle::-moz-progress-bar {
+  background: none;
+}

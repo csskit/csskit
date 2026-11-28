@@ -1,0 +1,7 @@
+progress.circle.wavy {
+  background: conic-gradient(currentColor calc(var(--_value, 0) * 1%), var(--active) 0);
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: contain;
+  mask-image: url(wavy-circle.svg);
+}

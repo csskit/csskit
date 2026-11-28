@@ -1,0 +1,4 @@
+.break-3 {
+  display: recto;
+  display: verso;
+}

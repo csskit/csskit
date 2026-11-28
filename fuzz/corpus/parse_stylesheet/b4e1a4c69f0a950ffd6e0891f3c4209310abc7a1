@@ -1,0 +1,7 @@
+a {
+  border-width: 3pt;
+  width: 12pt;
+  height: 15pt;
+  font-size: 75pt;
+  padding: 13pt;
+}

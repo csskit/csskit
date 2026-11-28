@@ -1,0 +1,3 @@
+@function --spacing(--level: 1, --base: 0.25rem) {
+  result: calc(var(--base) * pow(2, var(--level)));
+}

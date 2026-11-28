@@ -1,0 +1,1 @@
+.avatar-ring,.avatar-ring-primary{box-shadow:var(--tw-ring-offset-shadow),var(--tw-ring-shadow),var(--tw-shadow,0 0 #0000)}

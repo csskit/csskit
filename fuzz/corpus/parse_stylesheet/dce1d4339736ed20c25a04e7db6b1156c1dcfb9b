@@ -1,0 +1,3 @@
+.u-basis-min-content {
+  flex-basis: min-content !important;
+}

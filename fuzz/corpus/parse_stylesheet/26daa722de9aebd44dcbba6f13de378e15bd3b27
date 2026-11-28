@@ -1,0 +1,5 @@
+.pico textarea[aria-invalid] {
+  --pico-icon-height: calc(1rem * var(--pico-line-height) + var(--pico-form-element-spacing-vertical) * 2 + var(--pico-border-width) * 2);
+  background-position: top right 0.75rem !important;
+  background-size: 1rem var(--pico-icon-height) !important;
+}

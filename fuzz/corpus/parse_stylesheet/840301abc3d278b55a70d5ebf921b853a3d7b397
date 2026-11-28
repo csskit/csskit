@@ -1,0 +1,3 @@
+.uk-animation-scale-up {
+  animation-name: uk-fade, uk-scale-up;
+}

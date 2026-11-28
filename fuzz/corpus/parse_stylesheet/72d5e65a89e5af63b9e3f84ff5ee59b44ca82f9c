@@ -1,0 +1,9 @@
+@-moz-document regexp("^https?://((education|graphql|guides|raw|resources|status|support|vscode-auth)\\.)?github\\.com((?!(/(sponsors|readme)$)).)*$"), domain("githubusercontent.com"), domain("www.githubstatus.com"){.hx_IssueLabel, [class*="IssueLabel"] {
+    --lightness-threshold: .453 !important;
+    --border-threshold: .96 !important;
+    --border-alpha: max(0, min(calc((var(--perceived-lightness) - var(--border-threshold)) * 100), 1)) !important;
+    background: rgb(var(--label-r), var(--label-g), var(--label-b)) !important;
+    color: hsl(0, 0%, calc(var(--lightness-switch) * 100%)) !important;
+    border-color: hsla(var(--label-h), calc(var(--label-s) * 1%), calc((var(--label-l) - 25) * 1%), var(--border-alpha)) !important;
+    border-radius: 4px !important;
+  }}

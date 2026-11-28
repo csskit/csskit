@@ -1,0 +1,4 @@
+ol li:before {
+    content: counters(item, ".") ". ";
+    counter-increment: item;
+    margin-right: 0.2em; }

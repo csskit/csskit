@@ -1,0 +1,3 @@
+.bg-origin-content {
+  background-origin: content-box;
+}

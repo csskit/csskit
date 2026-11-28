@@ -1,0 +1,3 @@
+.ui.slow.indeterminate.progress .bar::before {
+  animation-duration: 4s;
+}

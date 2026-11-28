@@ -1,0 +1,19 @@
+@supports (interpolate-size: allow-keywords) {
+  details::details-content {
+    /* État de fin de transition */
+    display: none;
+    height: 0;
+    transition: var(--transition-duration, 0.25s) allow-discrete;
+    transition-property: opacity, height, display;
+    interpolate-size: allow-keywords;
+  }
+
+  details[open]::details-content {
+    display: grid;
+    height: auto;
+
+    @starting-style {
+      height: 0;
+    }
+  }
+}

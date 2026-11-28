@@ -1,0 +1,3 @@
+.ui.page.dimmer.modals {
+  -moz-perspective: none;
+}

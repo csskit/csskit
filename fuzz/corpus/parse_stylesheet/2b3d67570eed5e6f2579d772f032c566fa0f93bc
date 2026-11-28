@@ -1,0 +1,11 @@
+.tui-progress-bar .tui-indeterminate {
+  position: absolute;
+  left: 0px;
+  background-color: rgb(0, 255, 255);
+  height: 20px;
+  width: 20px;
+  display: inline-block;
+  animation: indeterminate 1s backwards;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}

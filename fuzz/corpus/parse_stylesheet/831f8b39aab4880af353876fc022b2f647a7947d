@@ -1,0 +1,4 @@
+.modal-is-open dialog {
+  pointer-events: auto;
+  touch-action: auto;
+}

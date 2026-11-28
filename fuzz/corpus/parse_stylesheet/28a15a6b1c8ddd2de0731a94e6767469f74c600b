@@ -1,0 +1,4 @@
+.btn-link:hover {
+  color: var(--bs-btn-hover-color);
+  text-decoration: var(--bs-link-hover-decoration);
+}

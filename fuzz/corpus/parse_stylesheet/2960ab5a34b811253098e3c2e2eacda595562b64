@@ -1,0 +1,3 @@
+.pf-v6-l-flex > .pf-m-align-right {
+  margin-inline-start: auto;
+}

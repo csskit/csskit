@@ -1,0 +1,6 @@
+.pf-v6-c-alert__title.pf-m-truncate {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: var(--pf-v6-c-alert__title--max-lines);
+}

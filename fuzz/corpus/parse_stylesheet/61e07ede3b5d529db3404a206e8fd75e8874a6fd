@@ -1,0 +1,3 @@
+.token.punctuation {
+  color: var(--gray-2) !important;
+}

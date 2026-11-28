@@ -1,0 +1,3 @@
+@utility paused {
+  animation-play-state: paused;
+}

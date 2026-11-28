@@ -1,0 +1,9 @@
+.suraido-container {
+  position: relative;
+  overflow: auto;
+  width: 100%;
+  -moz-backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  min-height: 330px;
+}

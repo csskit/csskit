@@ -1,0 +1,10 @@
+@-moz-document domain("query.wikidata.org"){html,
+  body {
+    background-color: var(--gray-2) !important;
+    background-image: var(--bg-selected) !important;
+    background-clip: border-box !important;
+    background-origin: padding-box !important;
+    background-attachment: var(--bg-attachment) !important;
+    color: var(--gray-9a);
+    /*[[bg-options]]*/
+  }}

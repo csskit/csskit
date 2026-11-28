@@ -1,0 +1,3 @@
+.cube.is-backface-hidden .cube__face {
+  backface-visibility: hidden;
+}

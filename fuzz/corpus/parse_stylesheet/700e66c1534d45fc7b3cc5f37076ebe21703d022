@@ -1,0 +1,3 @@
+.has-select-all {
+    user-select: all !important;
+}

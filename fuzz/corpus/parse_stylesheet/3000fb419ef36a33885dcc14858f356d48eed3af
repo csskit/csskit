@@ -1,0 +1,3 @@
+.u-cursor-row-resize {
+  cursor: row-resize;
+}

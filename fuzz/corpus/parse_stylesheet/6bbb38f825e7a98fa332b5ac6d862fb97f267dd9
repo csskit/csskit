@@ -1,0 +1,11 @@
+.shapes-1 {
+  shape-outside: auto;
+  shape-image-threshold: auto;
+  shape-margin: auto;
+  display: margin-box;
+  display: inset(50% 50% 50% 50%);
+  display: circle(100px 50px 100px);
+  display: ellipse(0 0 250px 100px);
+  display: polygon(0 0, 100% 100%, 0 100%);
+  display: shape(from 0% 0%, hline to 100%, line to 0% 100%, vline to 0%);
+}

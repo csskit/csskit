@@ -1,0 +1,3 @@
+.bigbangt:has(> *:not(.gravity-spot)) > * {
+  filter: grayscale(1) opacity(0.2);
+}

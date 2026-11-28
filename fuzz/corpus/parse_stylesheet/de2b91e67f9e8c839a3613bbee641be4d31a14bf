@@ -1,0 +1,7 @@
+.s-user-card .s-user-card--time {
+  color: var(--_uc-time-fc);
+  white-space: var(--_uc-time-ws);
+  font-size: var(--fs-caption);
+  grid-column: 1 / 3;
+  grid-row: 1 / 2;
+}

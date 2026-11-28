@@ -1,0 +1,4 @@
+.cds--overflow-menu--flip.cds--overflow-menu-options[data-floating-menu-direction=top]::after,
+.cds--overflow-menu--flip.cds--overflow-menu-options[data-floating-menu-direction=bottom]::after {
+  inset-inline: auto 0;
+}

@@ -1,0 +1,3 @@
+i.icon.browser:before {
+  content: "\f022";
+}

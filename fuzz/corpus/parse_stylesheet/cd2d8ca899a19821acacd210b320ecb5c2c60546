@@ -1,0 +1,3 @@
+.momentum-scrolling {
+  -webkit-overflow-scrolling: touch;
+}

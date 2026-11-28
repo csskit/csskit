@@ -1,0 +1,5 @@
+.s-post-summary .s-post-summary--answer {
+  margin: var(--su16) 1em 0 1em;
+  padding: 0.5em 0 0.5em calc(1em + var(--su4));
+  position: relative;
+}

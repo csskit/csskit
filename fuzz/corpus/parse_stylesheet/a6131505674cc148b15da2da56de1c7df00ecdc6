@@ -1,0 +1,3 @@
+.form-actions {
+  border-top: 0;
+}

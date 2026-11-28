@@ -1,0 +1,4 @@
+.image-animation-1:animated-image {
+  image-animation: auto;
+  display: stopped;
+}

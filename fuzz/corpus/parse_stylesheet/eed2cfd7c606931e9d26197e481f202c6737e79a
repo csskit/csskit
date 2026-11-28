@@ -1,0 +1,3 @@
+.viewer .viewerWrapper .buttonCodepen:hover svg path {
+  fill: white;
+}

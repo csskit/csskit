@@ -1,0 +1,212 @@
+.a {
+  grid-gap: 1rem;
+  -ms-grid-rows: 1fr 1rem minmax(100px, 1fr) 1rem 2fr;
+  grid-template-rows: 1fr minmax(100px, 1fr) 2fr;
+  -ms-grid-columns: 1fr 1rem 1fr 1rem 1fr;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-areas:
+      "head head  head"
+      "nav  main  main"
+      "nav  foot  foot";
+}
+
+.b {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 5;
+  grid-area: head;
+}
+
+.f > .b {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 5;
+}
+
+.c {
+  -ms-grid-row: 3;
+  -ms-grid-column: 3;
+  -ms-grid-column-span: 3;
+  grid-area: main;
+}
+
+.f > .c {
+  -ms-grid-row: 3;
+  -ms-grid-column: 3;
+  -ms-grid-column-span: 3;
+}
+
+.d {
+  -ms-grid-row: 3;
+  -ms-grid-row-span: 3;
+  -ms-grid-column: 1;
+  grid-area: nav;
+}
+
+.f > .d {
+  -ms-grid-row: 3;
+  -ms-grid-row-span: 3;
+  -ms-grid-column: 1;
+}
+
+.e {
+  -ms-grid-row: 5;
+  -ms-grid-column: 3;
+  -ms-grid-column-span: 3;
+  grid-area: foot;
+}
+
+.f > .e {
+  -ms-grid-row: 5;
+  -ms-grid-column: 3;
+  -ms-grid-column-span: 3;
+}
+
+.f {
+  gap: 10px 20px;
+  -ms-grid-columns: 1fr 20px 1fr 20px 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
+  -ms-grid-rows: auto 10px auto 10px auto;
+  grid-template-areas:
+      "head head head"
+      "nav main main"
+      "nav foot foot";
+}
+
+.calc {
+  -ms-grid-rows: 1fr -webkit-calc(1% + 5px) 1fr;
+  -ms-grid-rows: 1fr calc(1% + 5px) 1fr;
+  -ms-grid-columns: 1fr -webkit-calc(1% + 5px) 1fr;
+  -ms-grid-columns: 1fr calc(1% + 5px) 1fr;
+  grid-template: 1fr 1fr / 1fr 1fr;
+  gap: -webkit-calc(1% + 5px);
+  gap: calc(1% + 5px);
+}
+
+.a-shortcut {
+  grid-gap: 1rem 2rem;
+  -ms-grid-rows: 1fr 1rem minmax(100px, 1fr) 1rem 2fr;
+  -ms-grid-columns: 1fr 2rem 100px 2rem 1fr;
+  grid-template:
+      "head-shortcut head-shortcut  head-shortcut" 1fr
+      "nav-shortcut  main-shortcut  main-shortcut" minmax(100px, 1fr)
+      "nav-shortcut  foot-shortcut  foot-shortcut" 2fr /
+      1fr 100px 1fr;
+}
+
+.b-shortcut {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 5;
+  grid-area: head-shortcut;
+}
+
+.f-shortcut > .b-shortcut {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 5;
+}
+
+.c-shortcut {
+  -ms-grid-row: 3;
+  -ms-grid-column: 3;
+  -ms-grid-column-span: 3;
+  grid-area: main-shortcut;
+}
+
+.f-shortcut > .c-shortcut {
+  -ms-grid-row: 3;
+  -ms-grid-column: 3;
+  -ms-grid-column-span: 3;
+}
+
+.d-shortcut {
+  -ms-grid-row: 3;
+  -ms-grid-row-span: 3;
+  -ms-grid-column: 1;
+  grid-area: nav-shortcut;
+}
+
+.f-shortcut > .d-shortcut {
+  -ms-grid-row: 3;
+  -ms-grid-row-span: 3;
+  -ms-grid-column: 1;
+}
+
+.e-shortcut {
+  -ms-grid-row: 5;
+  -ms-grid-column: 3;
+  -ms-grid-column-span: 3;
+  grid-area: foot-shortcut;
+}
+
+.f-shortcut > .e-shortcut {
+  -ms-grid-row: 5;
+  -ms-grid-column: 3;
+  -ms-grid-column-span: 3;
+}
+
+.f-shortcut {
+  grid-gap: 10px;
+  -ms-grid-rows: auto 10px auto 10px auto;
+  -ms-grid-columns: 1fr 10px 1fr 10px 1fr;
+  grid-template:
+      "head-shortcut head-shortcut head-shortcut"
+      "nav-shortcut main-shortcut main-shortcut"
+      "nav-shortcut foot-shortcut foot-shortcut"
+      / 1fr 1fr 1fr;
+}
+
+.parent .grid {
+  grid-gap: 30px;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: 100px 30px 100px 30px 100px;
+  -ms-grid-columns: 1fr 30px 1fr;
+  grid-template:
+    "a   b" 100px
+    "c   d" 100px
+    "e   f" 100px /
+    1fr  1fr;
+}
+
+/* must not inherit gap from .parent .grid */
+.grid {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: 100px 100px 100px;
+  -ms-grid-columns: 1fr 1fr;
+  grid-template:
+    "a   b" 100px
+    "c   d" 100px
+    "e   f" 100px /
+    1fr  1fr;
+}
+
+.grid-2 {
+  display: -ms-grid;
+  display: grid;
+  grid-gap: 50px;
+  -ms-grid-rows: 100px 50px 100px 50px 100px;
+  -ms-grid-columns: 1fr 50px 1fr;
+  grid-template:
+    "x   x" 100px
+    "y   y" 100px
+    "z   z" 100px /
+    1fr  1fr;
+}
+
+.grid-2.modifier-b {
+  grid-gap: 22px;
+  grid-template-areas:
+    "x   x"
+    "y   y"
+    "z   z";
+  -ms-grid-columns: 1fr 22px 1fr;
+  grid-template-columns: repeat(2, 1fr);
+  -ms-grid-rows: 100px 22px 100px 22px 100px;
+  grid-template-rows: repeat(3, 100px);
+}
+
+/* must inherit gap from .grid-2.modifier-b */
+.grid-2.modifier-

@@ -1,0 +1,4 @@
+.column-gap-1 {
+  -moz-column-gap: var(--bs-spacer-1) !important;
+  column-gap: var(--bs-spacer-1) !important;
+}

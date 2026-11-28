@@ -1,0 +1,4 @@
+.card-header-tabs .nav-link,
+.card-header-tabs .nav-link:hover {
+  border-bottom: transparent;
+}

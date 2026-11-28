@@ -1,0 +1,7 @@
+.pf-v6-c-masthead__main {
+  display: var(--pf-v6-c-masthead__main--Display);
+  grid-column: var(--pf-v6-c-masthead__main--GridColumn);
+  column-gap: var(--pf-v6-c-masthead__main--ColumnGap);
+  align-items: center;
+  margin-inline-end: var(--pf-v6-c-masthead__main--MarginInlineEnd);
+}

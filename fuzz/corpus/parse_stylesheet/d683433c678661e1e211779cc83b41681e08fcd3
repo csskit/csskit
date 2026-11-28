@@ -1,0 +1,3 @@
+.nowPlayingPageImageContainerNoAlbum .defaultCardBackground {
+    background: repeating-radial-gradient(black, transparent 10em);
+}

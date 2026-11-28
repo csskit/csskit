@@ -1,0 +1,5 @@
+.cds--tabs.cds--tabs--vertical .cds--tab--list {
+  overflow: visible auto;
+  flex-direction: column;
+  inline-size: 100%;
+}

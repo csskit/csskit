@@ -1,0 +1,5 @@
+.pico details summary:focus-visible:not([role]) {
+  outline: var(--pico-outline-width) solid var(--pico-primary-focus);
+  outline-offset: calc(var(--pico-spacing, 1rem) * 0.5);
+  color: var(--pico-primary);
+}

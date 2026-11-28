@@ -1,0 +1,5 @@
+a {
+  marker-start: url(x);
+  marker-mid: url(x);
+  marker-end: url(x);
+}

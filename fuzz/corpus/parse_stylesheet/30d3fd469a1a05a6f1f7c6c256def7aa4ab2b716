@@ -1,0 +1,3 @@
+div.output_area {
+ display: -webkit-box;
+}

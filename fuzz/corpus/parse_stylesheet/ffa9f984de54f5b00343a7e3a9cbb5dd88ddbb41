@@ -1,0 +1,17 @@
+#s6 .sandbox .cube {
+  -webkit-transition: none;
+  -moz-transition: none;
+  -ms-transition: none;
+  -o-transition: none;
+  transition: none;
+  -webkit-transform: translateY(2em);
+  -moz-transform: translateY(2em);
+  -ms-transform: translateY(2em);
+  -o-transform: translateY(2em);
+  transform: translateY(2em);
+  -webkit-transform-origin: 50% 50% -2.5em;
+  -moz-transform-origin: 50% 50% -2.5em;
+  -ms-transform-origin: 50% 50% -2.5em;
+  -o-transform-origin: 50% 50% -2.5em;
+  transform-origin: 50% 50% -2.5em;
+}

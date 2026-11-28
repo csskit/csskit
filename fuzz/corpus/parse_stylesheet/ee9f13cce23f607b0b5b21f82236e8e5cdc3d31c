@@ -1,0 +1,17 @@
+.flex-bottom,
+.flex-center,
+.flex-left,
+.flex-middle,
+.flex-right,
+.flex-top,
+.flex-vertical {
+    -ms-flex-flow: row nowrap;
+    -webkit-box-direction: normal;
+    -webkit-box-orient: horizontal;
+    -webkit-flex-flow: row nowrap;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    flex-flow: row nowrap;
+}

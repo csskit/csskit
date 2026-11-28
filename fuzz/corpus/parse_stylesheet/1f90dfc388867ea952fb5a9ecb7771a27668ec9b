@@ -1,0 +1,3 @@
+.bar-nav ~ .content {
+  padding-top: 44px;
+}

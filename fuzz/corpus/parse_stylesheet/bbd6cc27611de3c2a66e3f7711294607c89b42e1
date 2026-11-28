@@ -1,0 +1,12 @@
+button.webkit-badge {
+  background: -webkit-gradient(linear, 0 0, 0 100%, color-stop(0, #ee432e), color-stop(0.5, #c63929), color-stop(0.5, #b51700), color-stop(1, #891100));
+  color: #fff;
+  font: lighter italic 30px/1 "hoefler text", georgia, serif;
+  height: 88px;
+  padding: 0;
+  text-align: center;
+  text-shadow: 0 -1px 1px #3d0700;
+  width: 150px;
+  -webkit-mask-image: url("../images/badge.png");
+  -webkit-mask-position: left top;
+  -webkit-mask-repeat: no-repeat; }

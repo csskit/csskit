@@ -1,0 +1,3 @@
+.uk-blend-hue {
+  mix-blend-mode: hue;
+}

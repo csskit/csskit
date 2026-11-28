@@ -1,0 +1,4 @@
+.pf-v6-c-tabs.pf-m-box.pf-m-vertical .pf-v6-c-tabs__list::before {
+  inset-inline-start: auto;
+  inset-inline-end: 0;
+}

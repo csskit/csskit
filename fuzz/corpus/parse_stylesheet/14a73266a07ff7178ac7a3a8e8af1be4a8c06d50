@@ -1,0 +1,22 @@
+.a { color: #F00; } /* colors/0073 */
+.b { color: rgba(255, 0, 0, 1); } /* colors/0076 */
+.c { color: red; } /* colors/0023 */
+.d { color: #FF0000; } /* colors/0002 */
+.e { color: #FF0000FF; } /* colors/0074 */
+.f { color: RGBA(255, 0, 0, 1.0); } /* colors/0076 */
+.g { color: rgb(255, 0, 0); } /* `colors/0003` */
+.h { color: RGB(255 0 0); } /* colors/0016 */
+.i { color: rgba(255 0 0 / 1); } /* colors/0016 */
+.j { color: rgb(255 none none); } /* colors/0021 */
+.k { color: hsl(0 100 50); } /* colors/0075 */
+.l { color: HSL(0, 100%, 50%); } /* colors/0008 */
+.m { color: hwb(0 0 0); } /* colors/0077 */
+.n { color: HWB(0 0% 0%); } /* colors/0010 */
+.o { color: light-dark(#F00, red); } /* colors/0067 */
+.p { color: lab(54.291% 64.644% 55.913%); } /* colors/0070 */
+.q { color: lab(54.291 80.805 69.8913); } /* colors/0071 */
+.r { color: color-mix(in srgb, red, red); } /* colors/0028 */
+.s { color: color-mix(in srgb, red 100%, blue); } /* colors/0036 */
+.t { color: color-mix(in srgb, blue 0%, red); } /* colors/0037 */
+.u { color: color-mix(in srgb, red, blue 0%); } /* colors/0041 */
+.v { color: color-mix(in srgb, rgb(none 0 0) 50%, rgb(255 0 0) 50%); } /* colors/0024 */

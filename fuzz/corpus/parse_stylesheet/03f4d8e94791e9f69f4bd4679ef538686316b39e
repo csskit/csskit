@@ -1,0 +1,2 @@
+ol.colored {
+  counter-reset: foo; }

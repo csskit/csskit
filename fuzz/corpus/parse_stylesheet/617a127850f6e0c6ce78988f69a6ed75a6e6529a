@@ -1,0 +1,6 @@
+#zotero-note-window blockquote { margin-top: 0;
+margin-bottom: 0;
+margin-left: 0;
+padding-left: 1.55em;
+border-left: 3px solid darkgrey;
+color: white (255, 248, 248); }

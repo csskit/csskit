@@ -1,0 +1,2 @@
+:root,
+:host{--pico-spacing: 1rem;}

@@ -1,0 +1,5 @@
+p {
+  scrollbar-gutter: auto;
+  scrollbar-gutter: stable;
+  scrollbar-gutter: stable both-edges;
+}

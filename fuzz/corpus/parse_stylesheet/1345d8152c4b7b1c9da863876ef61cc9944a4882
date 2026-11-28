@@ -1,0 +1,4 @@
+.pico pre {
+  -ms-overflow-style: scrollbar;
+  overflow: auto;
+}

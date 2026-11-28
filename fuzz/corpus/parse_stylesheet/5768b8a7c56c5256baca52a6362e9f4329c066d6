@@ -1,0 +1,3 @@
+.cds--search--light .cds--search-input {
+  background: var(--cds-field-02, #ffffff);
+}

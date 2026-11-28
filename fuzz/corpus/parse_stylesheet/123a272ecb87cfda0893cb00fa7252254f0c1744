@@ -1,0 +1,3 @@
+.contrast-0 {
+  --tw-contrast: contrast(0);
+}

@@ -1,0 +1,6 @@
+.menu.icon-top li a, .menu.nested.icon-top li a {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
+}

@@ -1,0 +1,13 @@
+.usa-file-input__preview{
+  align-items:center;
+  background:#d9e8f6;
+  word-wrap:anywhere;
+  display:flex;
+  font-size:0.87rem;
+  margin-top:1px;
+  padding:0.25rem 0.5rem;
+  pointer-events:none;
+  position:relative;
+  text-align:left;
+  z-index:3;
+}

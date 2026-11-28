@@ -1,0 +1,3 @@
+.tui-shadow-4 {
+  box-shadow: 25px 25px black;
+}

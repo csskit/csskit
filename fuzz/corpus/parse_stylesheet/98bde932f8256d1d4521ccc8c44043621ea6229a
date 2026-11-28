@@ -1,0 +1,3 @@
+.ui.negative.message .header {
+  color: #912d2b;
+}

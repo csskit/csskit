@@ -1,0 +1,4 @@
+.writing-modes-4 {
+  display: sideways-rl;
+  display: sideways-lr;
+}

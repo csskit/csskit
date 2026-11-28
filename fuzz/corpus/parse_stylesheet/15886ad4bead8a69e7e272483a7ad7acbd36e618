@@ -1,0 +1,1 @@
+.multi-column-list div > ul,  .multi-column-list-block { column-width: var(--list-min-width); }

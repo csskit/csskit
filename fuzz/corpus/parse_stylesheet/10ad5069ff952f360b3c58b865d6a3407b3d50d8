@@ -1,0 +1,4 @@
+#tablist-wrapper {
+    margin-inline: 0px 0px;
+    padding-inline: 9px 5px;
+}

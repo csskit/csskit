@@ -1,0 +1,34 @@
+.masking-1,
+mask {
+  clip-path: auto;
+  clip-rule: auto;
+  mask-image: auto;
+  mask-mode: auto;
+  mask-repeat: auto;
+  mask-position: auto;
+  mask-clip: auto;
+  mask-origin: auto;
+  mask-size: auto;
+  mask-composite: auto;
+  mask: auto;
+  mask-border-source: auto;
+  display: fill-box;
+  display: stroke-box;
+  display: view-box;
+  display: nonzero;
+  display: evenodd;
+  display: alpha;
+  display: luminance;
+  display: no-clip;
+  display: add;
+  display: subtract;
+  display: intersect;
+  display: exclude;
+  mask-border-mode: auto;
+  mask-border-slice: auto;
+  mask-border-width: auto;
+  mask-border-outset: auto;
+  mask-border-repeat: auto;
+  mask-border: auto;
+  mask-type: auto;
+}

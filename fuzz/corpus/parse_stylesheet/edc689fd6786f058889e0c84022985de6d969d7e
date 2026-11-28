@@ -1,0 +1,4 @@
+.box-4 {
+  margin-trim: auto;
+  display: in-flow;
+}

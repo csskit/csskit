@@ -1,0 +1,4 @@
+::backdrop {
+  backdrop-filter: blur(3rem) saturate(1.3) invert(0.0125) brightness(0.5);
+  background-color: rgba(var(--spice-rgb-main), 0.75);
+}

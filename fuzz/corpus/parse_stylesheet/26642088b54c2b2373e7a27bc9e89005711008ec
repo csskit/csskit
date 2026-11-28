@@ -1,0 +1,19 @@
+.text-decor-3 {
+  text-decoration-color: auto;
+  text-decoration-line: auto;
+  text-decoration-style: auto;
+  text-emphasis: auto;
+  text-emphasis-color: auto;
+  text-emphasis-position: auto;
+  text-emphasis-style: auto;
+  display: filled;
+  display: dot;
+  display: sesame;
+  display: alphabetic;
+  display: ink;
+  display: under;
+  display: wavy;
+  display: under;
+  display: over;
+  display: triangle;
+}

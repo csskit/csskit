@@ -1,0 +1,5 @@
+.uk-column-divider {
+  column-rule: 1px solid #e5e5e5;
+  /* 1 */
+  column-gap: 60px;
+}

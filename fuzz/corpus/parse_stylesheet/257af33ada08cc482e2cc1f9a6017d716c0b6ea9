@@ -1,0 +1,3 @@
+[layout*="column"][layout*="reverse"] {
+  -ms-flex-direction: column-reverse;
+      flex-direction: column-reverse; }

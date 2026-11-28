@@ -1,0 +1,8 @@
+progress.wavy {
+  block-size: calc(var(--_size, 0) * 2);
+  background: none;
+  background-image: var(--image);
+  background-repeat: repeat-x;
+  background-position: 0 50%;
+  background-size: auto calc(var(--_size, 0) / 2);
+}

@@ -1,0 +1,7 @@
+@media screen and (min-width: 36rem) {
+  :is(.pf-v6-c-content--dl, .pf-v6-c-content dl) {
+    grid-template: auto/var(--pf-v6-c-content--dl--GridTemplateColumns--dt) var(--pf-v6-c-content--dl--GridTemplateColumns--dd);
+    grid-row-gap: var(--pf-v6-c-content--dl--RowGap);
+    grid-column-gap: var(--pf-v6-c-content--dl--ColumnGap);
+  }
+}

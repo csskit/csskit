@@ -1,0 +1,5 @@
+.slider.vertical .slider-fill {
+  top: 0;
+  width: 0.5rem;
+  max-height: 100%;
+}

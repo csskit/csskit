@@ -1,0 +1,33 @@
+.shorthand {
+  text-decoration: overline double red;
+}
+
+.shorthand-single-value {
+  text-decoration: underline;
+}
+
+.full {
+  text-decoration-color: green;
+  text-decoration-line: line-through;
+  text-decoration-style: double;
+}
+
+.old {
+  text-decoration: underline;
+}
+
+.global {
+  text-decoration: unset;
+}
+
+.skip {
+  text-decoration-skip: spaces;
+}
+
+.ink {
+  text-decoration-skip-ink: auto;
+}
+
+.old-ink {
+  text-decoration-skip: ink;
+}

@@ -1,0 +1,5 @@
+#messengerBody {
+  opacity: 90%;
+  border-top-left-radius: 12px !important;
+  overflow: hidden !important;
+}

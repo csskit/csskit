@@ -1,0 +1,4 @@
+.itemsContainer {
+  opacity: 0;
+  animation: fadeTitle 0.3s ease-out 0s forwards;
+}

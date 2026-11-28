@@ -1,0 +1,4 @@
+.cm-formatting-link.cm-strong.cm-em {
+  -webkit-text-fill-color: var(--text-faint);
+  opacity: 0.2;
+}

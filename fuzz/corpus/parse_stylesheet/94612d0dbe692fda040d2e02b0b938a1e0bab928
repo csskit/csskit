@@ -1,0 +1,7 @@
+.blurring.dimmable > :not(.dimmer) {
+  -webkit-filter: blur(0px) grayscale(0);
+  filter: blur(0px) grayscale(0);
+  transition: 800ms -webkit-filter ease;
+  transition: 800ms filter ease;
+  transition: 800ms filter ease, 800ms -webkit-filter ease;
+}

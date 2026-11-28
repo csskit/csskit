@@ -1,0 +1,11 @@
+@keyframes anim-effect-stana {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+
+    -webkit-animation-timing: ease-out;
+    animation-timing: ease-out;
+  }
+}

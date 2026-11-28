@@ -1,0 +1,3 @@
+.ui.reversed.vertical.slider .inner .thumb {
+  left: 0.03em;
+}

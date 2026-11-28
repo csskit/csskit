@@ -1,0 +1,3 @@
+i.icon.less:before {
+  content: "\f41d";
+}

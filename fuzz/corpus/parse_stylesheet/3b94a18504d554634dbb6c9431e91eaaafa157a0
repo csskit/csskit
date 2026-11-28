@@ -1,0 +1,1 @@
+.whirly-loader:not(:required){-webkit-transform-origin: 50% 50%;}

@@ -1,0 +1,3 @@
+.cds--copy-btn svg {
+  fill: var(--cds-icon-primary, #161616);
+}

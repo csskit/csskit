@@ -1,0 +1,16 @@
+#pinned-drop-indicator {
+  color: AccentColor !important;
+  outline: none !important;
+  border: none !important;
+  border-radius: var(--uwp-tags-control-radius) !important;
+
+  &[visible] {
+    background-color: AccentColor !important;
+    width: initial !important;
+    margin: 4px !important;
+  }
+
+  & > * {
+    color: AccentColorText !important;
+  }
+}

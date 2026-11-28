@@ -1,0 +1,3 @@
+.place-content-stretch {
+  place-content: stretch;
+}

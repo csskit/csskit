@@ -1,0 +1,4 @@
+.cds--snippet-button .cds--btn--copy__feedback {
+  inset-block-start: 3.175rem;
+  inset-inline: 50% auto;
+}

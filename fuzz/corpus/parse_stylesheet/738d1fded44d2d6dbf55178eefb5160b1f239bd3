@@ -1,0 +1,3 @@
+.sidebar-wrapper {
+  scrollbar-width: thin;
+}

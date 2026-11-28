@@ -1,0 +1,3 @@
+.ui.modal > [class*="top aligned"] {
+  align-self: top;
+}

@@ -1,0 +1,14 @@
+.holmes-debug applet,
+.holmes-debug acronym,
+.holmes-debug center,
+.holmes-debug dir,
+.holmes-debug font,
+.holmes-debug strike,
+.holmes-debug big,
+.holmes-debug tt,
+.holmes-debug marquee, /* i've left this is because its naff bascially */
+.holmes-debug hgroup,
+.holmes-debug plaintext,
+.holmes-debug xmp {
+  outline: 2px solid #a9a9a9;
+}

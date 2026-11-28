@@ -1,0 +1,1 @@
+:root{--pf-t--global--color--status--danger--300: var(--pf-t--color--red-orange--70);}

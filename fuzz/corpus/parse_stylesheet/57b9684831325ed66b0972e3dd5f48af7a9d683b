@@ -1,0 +1,4 @@
+.fullscreen {
+  max-block-size: none;
+  block-size: 100dvb;
+}

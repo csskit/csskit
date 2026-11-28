@@ -1,0 +1,6 @@
+.article {
+  -ms-grid-row: 2;
+  -ms-grid-column: 3;
+  grid-area: article;
+  margin: 40px 10px;
+}

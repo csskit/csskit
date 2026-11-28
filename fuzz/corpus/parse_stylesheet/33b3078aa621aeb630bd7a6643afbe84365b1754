@@ -1,0 +1,3 @@
+.mainDrawer {
+  background-color: rgba(var(--tint), 0.4);
+}

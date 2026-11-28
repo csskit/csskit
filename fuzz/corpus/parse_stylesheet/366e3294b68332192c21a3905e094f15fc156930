@@ -1,0 +1,3 @@
+a {
+  color: hsl(from rebeccapurple calc(h) calc(s * 1) calc(l + 0) / calc(1 / 1));
+}

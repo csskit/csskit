@@ -1,0 +1,4 @@
+.ordn {
+  -ms-font-feature-settings: "ordn";
+  font-variant-numeric: ordinal;
+}

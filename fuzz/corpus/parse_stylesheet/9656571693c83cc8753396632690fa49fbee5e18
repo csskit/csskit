@@ -1,0 +1,7 @@
+@supports not (font-variant-caps: all-small-caps) {
+
+  .c2sc {
+    -webkit-font-feature-settings: "onum", "smcp" 0, "c2sc", "smcp", "c2sc";
+    font-feature-settings: "onum", "smcp" 0, "c2sc", "smcp", "c2sc";
+  }
+}

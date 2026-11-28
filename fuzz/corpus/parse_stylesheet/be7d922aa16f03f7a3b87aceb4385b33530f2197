@@ -1,0 +1,1 @@
+.image.photo { border: 5px solid #fff; -moz-box-shadow: 0 0 1px #555555; -webkit-box-shadow: 0 0 1px #555555; box-shadow: 0 0 1px #555555; }

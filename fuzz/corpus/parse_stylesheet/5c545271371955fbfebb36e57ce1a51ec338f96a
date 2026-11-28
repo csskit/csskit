@@ -1,0 +1,8 @@
+.cds--structured-list {
+  display: table;
+  background-color: var(--cds-layer) transparent;
+  border-collapse: collapse;
+  border-spacing: 0;
+  inline-size: 100%;
+  overflow-x: auto;
+}

@@ -1,0 +1,4 @@
+.s-table tr.is-disabled th:not(.is-enabled),
+.s-table tr.is-disabled td:not(.is-enabled) {
+  opacity: calc(var(--_o-disabled) * 0.6);
+}

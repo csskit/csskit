@@ -1,0 +1,3 @@
+[data-theme=light],
+:root:not([data-theme=dark]),
+:host(:not([data-theme=dark])){color-scheme: light;}

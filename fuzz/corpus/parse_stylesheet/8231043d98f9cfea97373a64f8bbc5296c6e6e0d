@@ -1,0 +1,5 @@
+.s-input:-webkit-autofill:focus,
+.s-textarea:-webkit-autofill:focus {
+  border-color: var(--blue-400);
+  -webkit-box-shadow: 0 0 0 1000px var(--blue-200) inset, 0 0 0 var(--su-static4) var(--focus-ring);
+}

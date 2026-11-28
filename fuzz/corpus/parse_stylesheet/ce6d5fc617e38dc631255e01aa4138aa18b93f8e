@@ -1,0 +1,5 @@
+.tui-statusbar-divider {
+  border-right: 2px black solid;
+  display: inline;
+  margin: 0px 3px;
+}

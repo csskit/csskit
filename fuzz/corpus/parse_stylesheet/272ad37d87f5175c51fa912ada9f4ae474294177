@@ -1,0 +1,3 @@
+:where(figure)>:where(figcaption) {
+    text-wrap: balance;
+}

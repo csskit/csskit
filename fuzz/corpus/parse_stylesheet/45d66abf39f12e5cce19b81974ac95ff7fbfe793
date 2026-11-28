@@ -1,0 +1,7 @@
+.pf-v6-c-toggle-group__button::before {
+  border-width: var(--pf-v6-c-toggle-group__button--before--BorderWidth);
+  border-block-start-color: var(--pf-v6-c-toggle-group__button--before--BorderBlockStartColor, var(--pf-v6-c-toggle-group__button--before--BorderColor));
+  border-block-end-color: var(--pf-v6-c-toggle-group__button--before--BorderBlockEndColor, var(--pf-v6-c-toggle-group__button--before--BorderColor));
+  border-inline-start-color: var(--pf-v6-c-toggle-group__button--before--BorderInlineStartColor, var(--pf-v6-c-toggle-group__button--before--BorderColor));
+  border-inline-end-color: var(--pf-v6-c-toggle-group__button--before--BorderInlineEndColor, var(--pf-v6-c-toggle-group__button--before--BorderColor));
+}

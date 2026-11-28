@@ -1,0 +1,7 @@
+a:active {
+  position: modeAaction;
+  top: 0.03em;
+  color: var(--modeAactive, #8ad);
+  text-decoration: none;
+  font-weight: inherit;
+}

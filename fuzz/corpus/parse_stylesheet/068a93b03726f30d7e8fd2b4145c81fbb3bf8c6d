@@ -1,0 +1,5 @@
+moz-checkbox, .extension-item {
+  &:not(:last-of-type) {
+    border-bottom: 0.5px solid color-mix(in srgb, var(--panel-separator-color) 20%, transparent) !important;
+  }
+}

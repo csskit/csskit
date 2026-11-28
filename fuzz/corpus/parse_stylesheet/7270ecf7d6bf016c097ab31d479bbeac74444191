@@ -1,0 +1,3 @@
+.mix-blend-normal {
+  mix-blend-mode: normal;
+}

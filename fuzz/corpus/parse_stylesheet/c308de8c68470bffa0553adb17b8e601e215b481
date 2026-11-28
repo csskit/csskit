@@ -1,0 +1,8 @@
+.main-entityHeader-container.main-entityHeader-withBackgroundImage {
+    background-image: radial-gradient(
+        circle,
+        rgba(var(--spice-rgb-main), 0.7) 0%,
+        rgba(var(--spice-rgb-main), 0.9) 50%,
+        rgba(var(--spice-rgb-main), 1) 100%
+    );
+}

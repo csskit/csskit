@@ -1,0 +1,4 @@
+.win98 button:disabled {
+  color: #818181;
+  text-shadow: 1px 1px #fff;
+}

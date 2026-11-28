@@ -1,0 +1,5 @@
+.cardIndicators {
+    -webkit-align-items: center;
+    align-items: center;
+    top: 0.5em;
+}

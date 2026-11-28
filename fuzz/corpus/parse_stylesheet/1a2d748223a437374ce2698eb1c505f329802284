@@ -1,0 +1,4 @@
+.select-auto {
+  -webkit-user-select: auto;
+          user-select: auto;
+}

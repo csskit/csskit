@@ -1,0 +1,10 @@
+.line-grid-1 {
+  line-grid: auto;
+  line-snap: auto;
+  box-snap: auto;
+  display: create;
+  display: block-start;
+  display: block-end;
+  display: first-baseline;
+  display: last-baseline;
+}

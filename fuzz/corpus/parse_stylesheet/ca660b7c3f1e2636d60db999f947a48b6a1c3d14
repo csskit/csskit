@@ -1,0 +1,1 @@
+[data-bs-theme=dark]{--bs-dark-foreground-hsl: var(--bs-sable-foreground-hsl);}

@@ -1,0 +1,2 @@
+strong > input:disabled::file-selector-button {
+}

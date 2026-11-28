@@ -1,0 +1,2 @@
+[data-effeckt-type="fade"] li.past, [data-effeckt-type="fade"] li.future {
+    opacity: 0; }

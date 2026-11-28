@@ -1,0 +1,4 @@
+.markdown ol > li:after {
+  content: counter(ol) ".";
+  counter-increment: ol;
+}

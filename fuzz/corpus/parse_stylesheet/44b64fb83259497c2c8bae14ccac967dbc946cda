@@ -1,0 +1,3 @@
+.cds--popover--tab-tip .cds--popover {
+  will-change: filter;
+}

@@ -1,0 +1,7 @@
+.flex-top,
+.flex-vertical.flex-left {
+    -ms-flex-align: start;
+    -webkit-align-items: flex-start;
+    -webkit-box-align: start;
+    align-items: flex-start;
+}

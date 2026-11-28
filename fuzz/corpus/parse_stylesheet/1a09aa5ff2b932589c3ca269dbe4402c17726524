@@ -1,0 +1,3 @@
+.insert.filled:after {
+  background-color: currentColor;
+}

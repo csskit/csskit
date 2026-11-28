@@ -1,0 +1,3 @@
+.zero {
+  font-variant-numeric: slashed-zero;
+}

@@ -1,0 +1,33 @@
+@media print {
+  .annotations\@print\:disabled :is(a:not([href^="#"]), abbr[title])::after {
+    display: none;
+  }
+  .hidden\@print {
+    display: none;
+    & * {
+      display: none;
+    }
+  }
+  .block\@print {
+    display: block;
+    & :is(.f-row, .flex-row, .f-col, .flex-column, .f-switch, .flex-switch, .grid) > * {
+      margin: revert;
+    }
+  }
+  hr.page-break {
+    break-before: page;
+    display: none;
+  }
+  .break-before\:page {
+    break-before: page;
+  }
+  .break-after\:page {
+    break-after: page;
+  }
+  .break-inside\:avoid-page {
+    break-inside: avoid-page;
+    & * {
+      break-inside: avoid-page;
+    }
+  }
+}

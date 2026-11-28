@@ -1,0 +1,3 @@
+.p-auto {
+  padding: auto !important;
+}

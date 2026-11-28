@@ -1,0 +1,7 @@
+@media (prefers-color-scheme: dark) {
+
+  button:hover {
+  background: #040a0f;
+  background: var(--button-hover);
+  }
+}

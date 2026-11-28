@@ -1,0 +1,1 @@
+[data-bs-theme=dark]{--bs-link-color-hsl: var(--bs-primary-text-emphasis-hsl);}

@@ -1,0 +1,3 @@
+g.clickable {
+  cursor: pointer !important;
+}

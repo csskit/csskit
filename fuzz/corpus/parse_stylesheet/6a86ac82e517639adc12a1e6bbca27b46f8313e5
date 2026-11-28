@@ -1,0 +1,4 @@
+.pf-v6-c-table__column-help-action {
+  align-self: last baseline;
+  margin-inline-start: var(--pf-v6-c-table__column-help--MarginInlineStart);
+}

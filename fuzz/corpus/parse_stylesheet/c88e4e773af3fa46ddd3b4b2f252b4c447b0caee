@@ -1,0 +1,7 @@
+.flex-center,
+.flex-vertical.flex-middle {
+    -ms-flex-pack: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+}

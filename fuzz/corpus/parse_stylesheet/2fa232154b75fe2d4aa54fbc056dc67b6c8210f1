@@ -1,0 +1,7 @@
+.lists-3::marker {
+  marker-side: auto;
+  counter-set: auto;
+  display: match-self;
+  display: list-container;
+  display: counters(lack-of-example);
+}

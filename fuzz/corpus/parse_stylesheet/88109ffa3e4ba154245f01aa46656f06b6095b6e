@@ -1,0 +1,4 @@
+@function --elastic-ease(--progress, --amplitude: 1) {
+  --p: calc(var(--progress) * 3.14159);
+  result: calc(var(--amplitude) * sin(var(--p) * 10) * exp(calc(-5 * var(--progress))));
+}

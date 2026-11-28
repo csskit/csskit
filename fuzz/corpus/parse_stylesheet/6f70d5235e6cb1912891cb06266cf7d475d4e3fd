@@ -1,0 +1,3 @@
+a {
+  color: color-mix(in srgb, hsl(0, 100%, 50%), var(--foo));
+}

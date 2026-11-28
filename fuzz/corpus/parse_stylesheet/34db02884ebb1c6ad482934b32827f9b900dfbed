@@ -1,0 +1,3 @@
+.page-item:last-child .page-link {
+  border-right: none;
+}

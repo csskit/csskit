@@ -1,0 +1,5 @@
+.legacy .Root__nav-bar .main-rootlist-wrapper,
+.legacy-gridChange .Root__nav-bar .main-rootlist-wrapper {
+    height: fit-content !important;
+    contain: none !important;
+}

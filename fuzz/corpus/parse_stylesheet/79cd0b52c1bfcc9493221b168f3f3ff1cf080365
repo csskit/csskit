@@ -1,0 +1,8 @@
+@keyframes anim-effect-simo-2 {
+  0%, 5%, 95%, 100% {
+    opacity: 0;
+  }
+  10%, 90% {
+    opacity: 1;
+  }
+}

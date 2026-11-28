@@ -1,0 +1,6 @@
+.ui.dimmer > .content {
+  -webkit-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+  color: #fff;
+}

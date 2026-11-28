@@ -1,0 +1,3 @@
+[grid~="no-collapse"] {
+  -ms-flex-flow: row nowrap;
+      flex-flow: row nowrap; }

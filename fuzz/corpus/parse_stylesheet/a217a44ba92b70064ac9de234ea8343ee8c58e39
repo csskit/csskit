@@ -1,0 +1,3 @@
+.g-af-dense {
+  grid-auto-flow: dense;
+}

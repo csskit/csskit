@@ -1,0 +1,3 @@
+i.medium {
+  --_size: 1.5rem;
+}

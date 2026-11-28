@@ -1,0 +1,5 @@
+@media not (-moz-platform: windows) {
+  #customization-container {
+    background: var(--uwp-background) !important;
+  }
+}

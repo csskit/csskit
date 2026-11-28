@@ -1,0 +1,3 @@
+.cds--contained-list--inset-rulers .cds--contained-list-item:not(:last-of-type)::before {
+  inset-inline: var(--cds-layout-density-padding-inline-local) var(--cds-layout-density-padding-inline-local);
+}

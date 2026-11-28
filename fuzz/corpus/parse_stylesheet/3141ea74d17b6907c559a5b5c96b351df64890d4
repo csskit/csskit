@@ -1,0 +1,10 @@
+a.s-block-linka.s-block-link__left.is-selected:not(:focus-visible):not(.focus-inset),
+a.s-block-link.s-block-link__left.is-selected:not(:focus-visible):not(.focus-inset),
+.s-block-linka.s-block-link__left.is-selected:not(:focus-visible):not(.focus-inset),
+.s-block-link.s-block-link__left.is-selected:not(:focus-visible):not(.focus-inset),
+a.s-block-linka.s-block-link__right.is-selected:not(:focus-visible):not(.focus-inset),
+a.s-block-link.s-block-link__right.is-selected:not(:focus-visible):not(.focus-inset),
+.s-block-linka.s-block-link__right.is-selected:not(:focus-visible):not(.focus-inset),
+.s-block-link.s-block-link__right.is-selected:not(:focus-visible):not(.focus-inset) {
+  box-shadow: inset var(--_li-block-bs-offset-x, 3px) 0 0 var(--_bl-bs-color);
+}

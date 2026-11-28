@@ -1,0 +1,3 @@
+.overscroll-x-contain {
+  overscroll-behavior-x: contain;
+}

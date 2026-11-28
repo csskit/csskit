@@ -1,0 +1,1 @@
+.la-ball-grid-beat>div{width:8px;height:8px;margin:2px;border-radius:100%;-webkit-animation-name:ball-grid-beat;-moz-animation-name:ball-grid-beat;-o-animation-name:ball-grid-beat;animation-name:ball-grid-beat;-webkit-animation-iteration-count:infinite;-moz-animation-iteration-count:infinite;-o-animation-iteration-count:infinite;animation-iteration-count:infinite}

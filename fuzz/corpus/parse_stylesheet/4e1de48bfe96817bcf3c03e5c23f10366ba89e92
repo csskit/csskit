@@ -1,0 +1,3 @@
+i.icon.graduation.cap:before {
+  content: "\f19d";
+}

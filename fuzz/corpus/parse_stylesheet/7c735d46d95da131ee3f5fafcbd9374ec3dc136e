@@ -1,0 +1,3 @@
+.pretty.p-switch .state {
+  position: relative;
+}

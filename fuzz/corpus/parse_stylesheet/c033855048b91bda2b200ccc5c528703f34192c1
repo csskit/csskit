@@ -1,0 +1,3 @@
+#PopupSearchAutoComplete {
+  -moz-window-shadow: none !important;
+}

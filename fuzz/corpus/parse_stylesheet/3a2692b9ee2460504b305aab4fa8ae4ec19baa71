@@ -1,0 +1,1 @@
+.spinner-wave-dot:first-child{animation:jump var(--spinner-speed) ease-in-out calc(var(--spinner-speed)*-.45) infinite}

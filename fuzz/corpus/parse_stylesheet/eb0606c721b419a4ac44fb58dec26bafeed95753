@@ -1,0 +1,4 @@
+.mermaid text.actor>tspan {
+  fill: var(--text-normal) !important;
+  stroke: none !important;
+}

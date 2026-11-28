@@ -1,0 +1,6 @@
+body.background-image-settings-command-palette-same-as-workplace.background-image-settings-command-palette-switch .modal-container .prompt::before {
+  background-image: var(--theme-background);
+  filter: blur(var(--blur-depth)) brightness(var(--brightness-4-bg)) saturate(var(--saturate-4-bg));
+  opacity: 0.25;
+  z-index: -1;
+}

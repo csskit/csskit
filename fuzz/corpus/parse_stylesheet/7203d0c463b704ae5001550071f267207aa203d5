@@ -1,0 +1,3 @@
+.bg-auto {
+  background-size: auto;
+}

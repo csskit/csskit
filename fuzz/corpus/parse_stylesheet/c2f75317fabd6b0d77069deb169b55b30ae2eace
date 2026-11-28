@@ -1,0 +1,31 @@
+@container skinHeader (min-height: 4.9em) {
+    /* this is the alternative faded app bar */
+    .skinHeader-blurred:not(.osdHeader):not(.semiTransparent) {
+        backdrop-filter: none;
+        background-color: transparent;
+        border: none;
+        background: var(--headerBackground);
+        padding: 0;
+    }
+
+    .skinHeader-blurred:not(.osdHeader):not(.semiTransparent)::after {
+        content: var(--headerBlurLayerVisibility);
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        backdrop-filter: var(--blurLargest);
+        -webkit-mask: var(--headerBlurMask);
+        mask: var(--headerBlurMask);
+        z-index: -1;
+    }
+
+    .sectionTabs {
+        padding-bottom: 1.5em;
+    }
+
+    .layout-mobile .sectionTabs {
+        align-content: center;
+    }
+}

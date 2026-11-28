@@ -1,0 +1,1 @@
+a{font-size:calc(var(--x)/4)}

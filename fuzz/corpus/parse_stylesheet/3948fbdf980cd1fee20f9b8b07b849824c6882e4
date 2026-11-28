@@ -1,0 +1,10 @@
+#tableSamples #BGpicker,
+#tableSamples #TXTpicker {
+  position: relative;
+  margin: auto;
+  width: 75px;
+  min-height: 75px;
+  border-width: 2px solid var(--modeBorderColor, #a0a0a0);
+  border-radius: 12px;
+  z-index: 10;
+}

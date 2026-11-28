@@ -1,0 +1,3 @@
+a {
+  transition-duration: calc(1s - 200ms);
+}

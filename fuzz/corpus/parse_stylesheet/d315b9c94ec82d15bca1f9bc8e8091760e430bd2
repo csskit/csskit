@@ -1,0 +1,3 @@
+.is-translucent .status-bar {
+  margin: 0;
+}

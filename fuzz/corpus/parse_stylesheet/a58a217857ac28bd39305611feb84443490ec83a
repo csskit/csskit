@@ -1,0 +1,5 @@
+.s-progress.s-progress__circular .s-progress-bar circle {
+  fill: none;
+  stroke-linecap: round;
+  stroke-width: var(--su-static4);
+}

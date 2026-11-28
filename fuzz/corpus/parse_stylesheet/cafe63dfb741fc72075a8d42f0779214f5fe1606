@@ -1,0 +1,1 @@
+.can-scroll-bottom #tablist { mask: linear-gradient(black calc(100% - 40px), transparent); }

@@ -1,0 +1,1 @@
+@supports not (display:flex){a{display:block}}

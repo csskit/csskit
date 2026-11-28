@@ -1,0 +1,14 @@
+@media (prefers-contrast: high) {
+  .card {
+    border: 2px solid;
+  }
+  .btn {
+    border-width: 2px;
+  }
+  .nav-link {
+    border: 1px solid transparent;
+  }
+  .nav-link:hover, .nav-link:focus {
+    border-color: currentcolor;
+  }
+}

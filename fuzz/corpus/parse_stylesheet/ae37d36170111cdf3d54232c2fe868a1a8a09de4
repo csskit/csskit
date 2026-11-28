@@ -1,0 +1,9 @@
+#s9 .intro.show {
+  -webkit-transform: translateZ(0em) translateY(0em);
+  -moz-transform: translateZ(0em) translateY(0em);
+  -ms-transform: translateZ(0em) translateY(0em);
+  -o-transform: translateZ(0em) translateY(0em);
+  transform: translateZ(0em) translateY(0em);
+  -webkit-filter: blur(0em);
+  opacity: 1;
+}

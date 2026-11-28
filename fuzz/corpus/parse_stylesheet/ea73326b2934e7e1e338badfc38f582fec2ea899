@@ -1,0 +1,4 @@
+.os-viewport.os-viewport-native-scrollbars-invisible[fade="top"] {
+    -webkit-mask-image: linear-gradient(transparent 0%, black 10%);
+    mask-image: linear-gradient(transparent 0%, black 10%);
+}

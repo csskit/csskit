@@ -1,0 +1,7 @@
+.noBorder:before {
+  left: 7px;
+  top: -1px;
+  width: 0;
+  height: 17px;
+  border-left: dotted 1px currentColor;
+}

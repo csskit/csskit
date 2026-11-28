@@ -1,0 +1,45 @@
+:where(input[type="file"]) {
+  padding: var(--spacing-8, 0.5rem) var(--spacing-12, 0.75rem);
+  cursor: pointer;
+
+  &::file-selector-button {
+    margin-right: var(--spacing-12, 0.75rem);
+    padding: var(--spacing-8, 0.5rem) var(--spacing-12, 0.75rem);
+    transition: background-color var(--transition-duration, 0.25s);
+    border: 0;
+    border-radius: var(--input-border-radius);
+    background-color: var(--form-accent-color, AccentColor);
+    color: var(--on-primary, #ffffff);
+    font: inherit;
+    cursor: pointer;
+
+    /* État survol */
+    &:hover,
+    &:focus-visible {
+      background-color: oklch(
+        from var(--form-accent-color, AccentColor) calc(l * 0.9) c h
+      );
+    }
+  }
+
+  /* Support WebKit */
+  &::-webkit-file-upload-button {
+    margin-right: var(--spacing-12, 0.75rem);
+    padding: var(--spacing-8, 0.5rem) var(--spacing-12, 0.75rem);
+    transition: background-color var(--transition-duration, 0.25s);
+    border: 0;
+    border-radius: var(--input-border-radius);
+    background-color: var(--form-accent-color, AccentColor);
+    color: var(--on-primary, #ffffff);
+    font: inherit;
+    cursor: pointer;
+
+    /* État survol */
+    &:hover,
+    &:focus-visible {
+      background-color: oklch(
+        from var(--form-accent-color, AccentColor) calc(l * 0.9) c h
+      );
+    }
+  }
+}

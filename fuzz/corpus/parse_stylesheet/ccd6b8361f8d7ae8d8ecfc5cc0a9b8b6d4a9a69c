@@ -1,0 +1,8 @@
+.column-chart .chart-column,
+.column-chart [data-cp-size],
+.column-chart.stacked > * > * {
+  -webkit-flex-grow: 1;
+  flex-grow: 1;
+  -webkit-align-self: flex-end;
+  align-self: flex-end;
+}

@@ -1,0 +1,8 @@
+.filter-poprocket::before {
+  background: radial-gradient(circle closest-corner, rgba(206, 39, 70, .75) 40%, black 80%);
+  background: -o-radial-gradient(circle closest-corner, rgba(206, 39, 70, .75) 40%, black 80%);
+  background: -moz-radial-gradient(circle closest-corner, rgba(206, 39, 70, .75) 40%, black 80%);
+  background: -webkit-radial-gradient(circle closest-corner, rgba(206, 39, 70, .75) 40%, black 80%);
+  content: "";
+  mix-blend-mode: screen;
+}

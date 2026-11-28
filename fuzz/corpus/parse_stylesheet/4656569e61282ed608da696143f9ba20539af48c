@@ -1,0 +1,3 @@
+.float\:inline-start {
+  float: inline-start;
+}

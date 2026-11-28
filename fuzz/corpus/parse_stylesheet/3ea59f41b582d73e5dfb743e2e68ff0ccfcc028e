@@ -1,0 +1,6 @@
+@media (max-width:800x) {
+  .layout-mobile .itemName.infoText.parentNameLast {
+    max-width: 59vw;
+    width: 59vw;
+  }
+}

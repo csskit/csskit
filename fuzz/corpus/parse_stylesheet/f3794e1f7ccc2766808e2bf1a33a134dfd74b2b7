@@ -1,0 +1,3 @@
+.pf-v6-c-code-editor__header + .pf-v6-c-code-editor__main {
+  border-block-start-width: 0;
+}

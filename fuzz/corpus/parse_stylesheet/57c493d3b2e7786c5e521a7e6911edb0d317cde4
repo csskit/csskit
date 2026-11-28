@@ -1,0 +1,3 @@
+td.pre, div.pre, div.diff {
+  white-space: pre-wrap;
+}

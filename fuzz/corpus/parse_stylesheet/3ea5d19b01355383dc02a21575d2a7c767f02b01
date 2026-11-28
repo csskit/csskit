@@ -1,0 +1,10 @@
+.regions-1:region {
+  flow-into: auto;
+  flow-from: auto;
+  region-fragment: auto;
+  display: element;
+  display: content;
+  display: break;
+  display: region;
+  display: avoid-region;
+}

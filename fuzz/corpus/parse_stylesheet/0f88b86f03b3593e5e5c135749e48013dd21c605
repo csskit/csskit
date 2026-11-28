@@ -1,0 +1,12 @@
+.s-badge.s-badge__moderator:before {
+  height: var(--_ba-before-h);
+  margin-top: var(--_ba-before-mt);
+  width: var(--_ba-before-w);
+  content: "";
+  display: inline-block;
+  background-color: currentColor;
+  -webkit-mask: var(--_ba-before-icon) no-repeat center;
+  mask: var(--_ba-before-icon) no-repeat center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+}

@@ -1,0 +1,7 @@
+:is(.markdown-preview-view, .markdown-rendered) ul.contains-task-list li.task-list-item.is-checked[data-task="!"],
+:is(.markdown-preview-view, .markdown-rendered) ol.contains-task-list li.task-list-item.is-checked[data-task="!"],
+.markdown-source-view.mod-cm6 .HyperMD-task-line[data-task="!"] {
+  text-decoration: underline wavy var(--text-yellow-2);
+  color: var(--text-normal);
+  font-weight: 600;
+}

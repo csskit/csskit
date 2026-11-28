@@ -1,0 +1,3 @@
+.cds--search-input::-ms-clear {
+  display: none;
+}

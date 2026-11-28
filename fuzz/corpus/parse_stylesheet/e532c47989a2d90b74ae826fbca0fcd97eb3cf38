@@ -1,0 +1,4 @@
+.ts-switch input:checked::before {
+    background: var(--accent-foreground-color, white);
+    left: 19px;
+}

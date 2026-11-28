@@ -1,0 +1,20 @@
+.tab-audio-button {
+  margin-inline-end: 0px !important;
+  margin: 0px 2px !important;
+  #tabbrowser-tabs:is([orient="vertical"][expanded], [orient="horizontal"]) &:not([pinned]):not([crashed]) {
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    -moz-context-properties: fill, fill-opacity, stroke !important;
+    fill: var(--button-icon-fill) !important;
+    stroke: var(--button-icon-stroke) !important;
+    &[soundplaying] {
+      background-image: url("chrome://browser/skin/tabbrowser/tab-audio-playing-small.svg") !important;
+    }
+    &[muted] {
+      background-image: url("chrome://browser/skin/tabbrowser/tab-audio-muted-small.svg") !important;
+    }
+    &[activemedia-blocked] {
+      background-image: url("chrome://browser/skin/tabbrowser/tab-audio-blocked-circle-12.svg") !important;
+    }
+  }
+}

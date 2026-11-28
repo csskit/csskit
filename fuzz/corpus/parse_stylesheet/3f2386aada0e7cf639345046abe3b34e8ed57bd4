@@ -1,0 +1,4 @@
+.org-highlight-indent-guides-odd {
+    /* highlight-indent-guides-odd-face */
+    background-color: #f332f332f332;
+}

@@ -1,0 +1,5 @@
+@media (hover: hover) {
+  .cds--btn--ghost:hover {
+    color: var(--cds-link-primary-hover, #0043ce);
+  }
+}

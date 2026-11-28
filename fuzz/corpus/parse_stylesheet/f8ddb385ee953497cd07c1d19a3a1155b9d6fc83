@@ -1,0 +1,3 @@
+.c-zoom-out {
+  cursor: zoom-out;
+}

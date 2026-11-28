@@ -1,0 +1,6 @@
+.extend > :is(.responsive, i) {
+  margin: 0;
+  position: absolute;
+  inset-inline: 1rem;
+  z-index: 1;
+}

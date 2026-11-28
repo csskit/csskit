@@ -1,0 +1,3 @@
+.bg-blend-hue {
+  background-blend-mode: hue;
+}

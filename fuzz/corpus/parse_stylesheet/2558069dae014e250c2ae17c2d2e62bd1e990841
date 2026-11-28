@@ -1,0 +1,3 @@
+.csstransforms3d #s8 div#fallback {
+  display: none;
+}

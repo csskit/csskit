@@ -1,0 +1,5 @@
+@media (forced-colors: active){
+  .usa-date-picker__calendar__date--selected:not([disabled]), .usa-date-picker__calendar__date--range-date:not([disabled]){
+    border:ActiveText 2px solid;
+  }
+}

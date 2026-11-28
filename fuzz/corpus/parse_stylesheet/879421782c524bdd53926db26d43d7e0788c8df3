@@ -1,0 +1,1 @@
+.section-venus-cat section { display: flex; flex-flow: row; margin-left: 250px; padding-top: 12px; padding-bottom: 24px;}

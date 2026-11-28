@@ -1,0 +1,2 @@
+ol.colored > li {
+    counter-increment: foo; }

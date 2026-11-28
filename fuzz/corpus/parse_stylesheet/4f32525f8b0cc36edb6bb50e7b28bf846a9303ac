@@ -1,0 +1,3 @@
+.textActionButton {
+  transition: color 0.3s, font-weight 0.3s;
+}

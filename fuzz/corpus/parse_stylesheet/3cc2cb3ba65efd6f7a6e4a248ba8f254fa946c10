@@ -1,0 +1,3 @@
+.lnum.pnum {
+  -ms-font-feature-settings: "lnum", "onum" 0, "pnum", "tnum" 0;
+}

@@ -1,0 +1,9 @@
+.range-value {
+  position: absolute;
+  left: 0;
+  padding: 4px 8px;
+  border-radius: var(--form-border-radius, 4px);
+  background-color: var(--form-background, ButtonFace);
+  font-size: var(--text-14, 0.875rem);
+  translate: 0 1.4rem;
+}

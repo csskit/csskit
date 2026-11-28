@@ -1,0 +1,4 @@
+dialog:popover-open::backdrop {
+  opacity: 1;
+  visibility: visible;
+}

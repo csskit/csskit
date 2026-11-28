@@ -1,0 +1,9 @@
+.pf-v6-c-progress-stepper__step-main {
+  min-width: 0;
+  margin-block-start: var(--pf-v6-c-progress-stepper__step-main--MarginBlockStart);
+  margin-block-end: var(--pf-v6-c-progress-stepper__step-main--MarginBlockEnd);
+  margin-inline-start: var(--pf-v6-c-progress-stepper__step-main--MarginInlineStart);
+  margin-inline-end: var(--pf-v6-c-progress-stepper__step-main--MarginInlineEnd);
+  text-align: var(--pf-v6-c-progress-stepper--step-main--TextAlign, auto);
+  overflow-wrap: anywhere;
+}

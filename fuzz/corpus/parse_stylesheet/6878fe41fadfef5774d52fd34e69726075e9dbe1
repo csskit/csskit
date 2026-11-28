@@ -1,0 +1,7 @@
+.pf-v6-c-text-input-group__text {
+  position: var(--pf-v6-c-text-input-group__text--Position, revert);
+  display: inline-grid;
+  flex: 1;
+  grid-template-areas: "text-input";
+  grid-template-columns: 1fr;
+}

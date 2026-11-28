@@ -1,0 +1,7 @@
+a.ui.basic.label:hover {
+  text-decoration: none;
+  background: none #FFFFFF;
+  color: #1e70bf;
+  box-shadow: 1px solid rgba(34, 36, 38, 0.15);
+  box-shadow: none;
+}

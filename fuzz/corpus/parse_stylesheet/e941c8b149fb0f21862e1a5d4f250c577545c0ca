@@ -1,0 +1,6 @@
+.cell {
+  grid-column-end: span var(--bulma-grid-cell-column-span);
+  grid-column-start: var(--bulma-grid-cell-column-start);
+  grid-row-end: span var(--bulma-grid-cell-row-span);
+  grid-row-start: var(--bulma-grid-cell-row-start);
+}

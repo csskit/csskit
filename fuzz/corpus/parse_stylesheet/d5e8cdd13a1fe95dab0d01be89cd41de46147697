@@ -1,0 +1,5 @@
+.s-prose .spoiler > * {
+  opacity: var(--_pr-soiler-child-o);
+  transition: opacity 0.1s ease-in-out;
+  visibility: var(--_pr-soiler-child-visibility);
+}

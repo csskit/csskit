@@ -1,0 +1,17 @@
+.ball-loader:not(:required)::after {
+  content: '';
+  position: absolute;
+  top: 4.5px;
+  left: 5.5px;
+  width: 15px;
+  height: 15px;
+  background: #ffb099;
+  border-radius: 100%;
+  -moz-transform: skew(-20deg, 0) translate3d(0, 2.5px, 1px);
+  -ms-transform: skew(-20deg, 0) translate3d(0, 2.5px, 1px);
+  -webkit-transform: skew(-20deg, 0) translate3d(0, 2.5px, 1px);
+  transform: skew(-20deg, 0) translate3d(0, 2.5px, 1px);
+  -moz-animation: ball-loader-highlight 1500ms infinite linear;
+  -webkit-animation: ball-loader-highlight 1500ms infinite linear;
+  animation: ball-loader-highlight 1500ms infinite linear;
+}

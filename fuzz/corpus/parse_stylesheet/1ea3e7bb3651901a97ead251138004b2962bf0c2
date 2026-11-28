@@ -1,0 +1,4 @@
+:where(dialog:modal) {
+    all: revert;
+    box-sizing: border-box;
+}

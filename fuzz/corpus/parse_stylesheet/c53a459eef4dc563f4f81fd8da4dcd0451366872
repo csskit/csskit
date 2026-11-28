@@ -1,0 +1,6 @@
+.cds--list-box__wrapper--inline {
+  display: inline-grid;
+  align-items: center;
+  grid-gap: 0.25rem;
+  grid-template: auto auto/auto auto;
+}

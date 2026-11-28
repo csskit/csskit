@@ -1,0 +1,3 @@
+.duration-8000 {
+  -webkit-animation-duration: 8s;
+  animation-duration: 8s; }

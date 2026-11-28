@@ -1,0 +1,1 @@
+.picker:first-child { margin-left: 0; }

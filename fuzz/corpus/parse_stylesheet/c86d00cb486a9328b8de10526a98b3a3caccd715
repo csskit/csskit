@@ -1,0 +1,10 @@
+.motion-1 {
+  offset-path: auto;
+  offset-distance: auto;
+  offset-position: auto;
+  offset-anchor: auto;
+  offset-rotate: auto;
+  offset: auto;
+  display: ray(45deg closest-side);
+  display: path(M 100 100 L 300 100 L 200 300 z);
+}

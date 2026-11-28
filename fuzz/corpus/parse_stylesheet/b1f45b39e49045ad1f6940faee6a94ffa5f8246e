@@ -1,0 +1,3 @@
+.stacked-fractions {
+  --tw-numeric-fraction: stacked-fractions;
+}

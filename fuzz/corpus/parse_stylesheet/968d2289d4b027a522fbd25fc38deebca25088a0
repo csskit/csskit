@@ -1,0 +1,12 @@
+.pf-v6-c-input-group__item {
+  position: relative;
+  display: flex;
+  align-items: var(--pf-v6-c-input-group__item--AlignItems);
+  min-width: var(--pf-v6-c-input-group__item--MinWidth, revert);
+  max-width: var(--pf-v6-c-input-group__item--MaxWidth, revert);
+  background-color: var(--pf-v6-c-input-group__item--BackgroundColor);
+  border-block-start-color: var(--pf-v6-c-input-group__item--m-box--BorderBlockStartColor);
+  border-block-end-color: var(--pf-v6-c-input-group__item--m-box--BorderBlockEndColor);
+  border-inline-start-color: var(--pf-v6-c-input-group__item--m-box--BorderInlineStartColor);
+  border-inline-end-color: var(--pf-v6-c-input-group__item--m-box--BorderInlineEndColor);
+}

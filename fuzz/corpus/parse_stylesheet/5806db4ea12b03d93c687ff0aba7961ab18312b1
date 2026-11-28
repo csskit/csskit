@@ -1,0 +1,8 @@
+.filter-effects-1 {
+  flood-color: auto;
+  flood-opacity: auto;
+  color-interpolation-filters: auto;
+  lighting-color: auto;
+  display: sRGB;
+  display: linearRGB;
+}

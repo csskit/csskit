@@ -1,0 +1,3 @@
+.show > a {
+  outline: 0;
+}

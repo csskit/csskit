@@ -1,0 +1,5 @@
+.clearfix:before,
+.clearfix:after{
+  content:" "!important;
+  display:table!important
+}

@@ -1,0 +1,3 @@
+progress.max + * {
+  margin-block-start: 0;
+}

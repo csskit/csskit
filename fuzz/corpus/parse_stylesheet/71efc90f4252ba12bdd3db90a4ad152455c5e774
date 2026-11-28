@@ -1,0 +1,1 @@
+@-o-keyframes ball-newton-cradle-left{25%{-o-transform:translateX(-100%);transform:translateX(-100%);-o-animation-timing-function:ease-in;animation-timing-function:ease-in}50%{-o-transform:translateX(0%);transform:translateX(0%)}}

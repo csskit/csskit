@@ -1,0 +1,3 @@
+.markdown-preview-view .callout[data-callout="stickies3"]>.callout-content {
+  font-size: smaller;
+}

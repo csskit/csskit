@@ -1,0 +1,3 @@
+.cds--tag--filter.cds--tag--disabled svg {
+  fill: var(--cds-icon-disabled, rgba(22, 22, 22, 0.25));
+}

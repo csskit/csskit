@@ -1,0 +1,1 @@
+.sk-grid-cube:nth-child(1) { animation-delay: 0.2s; }

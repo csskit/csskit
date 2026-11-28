@@ -1,0 +1,4 @@
+.box-simple.box-white {
+  padding: 20px;
+  border: dotted 1px #999999;
+}

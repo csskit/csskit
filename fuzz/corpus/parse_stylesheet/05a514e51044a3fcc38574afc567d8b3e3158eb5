@@ -1,0 +1,2 @@
+pre > codeÂ  {
+    white-space: pre; }

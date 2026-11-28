@@ -1,0 +1,3 @@
+.ui.table tr:first-child td {
+  border-top: none;
+}

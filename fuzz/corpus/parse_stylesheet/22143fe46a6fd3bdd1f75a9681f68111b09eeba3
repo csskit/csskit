@@ -1,0 +1,11 @@
+@keyframes strobeStart {
+  0% {
+    transform:  skew(0deg,0deg) scaleY(1) ;
+    animation-timing-function: ease-in;
+   }
+  40% {
+    transform:  skew(0deg,0deg) scaleY(.9);
+    animation-timing-function: ease-out;
+  }
+  100% { transform:   skew(4deg,0deg) scaleX(1); }
+}

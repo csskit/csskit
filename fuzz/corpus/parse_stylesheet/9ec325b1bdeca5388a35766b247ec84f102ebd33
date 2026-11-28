@@ -1,0 +1,3 @@
+table.stripes > tbody > tr:nth-child(odd) {
+  background-color: var(--active);
+}

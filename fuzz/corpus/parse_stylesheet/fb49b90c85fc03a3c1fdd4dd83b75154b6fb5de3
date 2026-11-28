@@ -1,0 +1,1 @@
+.divider:not(:empty){gap:1rem}

@@ -1,0 +1,3 @@
+.bs-ring {
+  box-shadow: 0 0 0 var(--su-static4) var(--focus-ring);
+}

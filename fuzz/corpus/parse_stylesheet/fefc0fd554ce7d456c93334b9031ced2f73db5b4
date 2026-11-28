@@ -1,0 +1,3 @@
+.uk-blend-hard-light {
+  mix-blend-mode: hard-light;
+}

@@ -1,0 +1,1 @@
+.breadcrumbs>ul>:not(li:last-child)>a:hover{text-decoration-line:underline}

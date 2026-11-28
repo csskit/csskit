@@ -1,0 +1,6 @@
+.itemsContainer,
+.scrollSlider,
+.emby-scroller,
+.overview {
+  scrollbar-width: none;
+}

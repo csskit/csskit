@@ -1,0 +1,5 @@
+@media (forced-colors: active){
+  .usa-nav__primary button{
+    forced-color-adjust:auto;
+  }
+}

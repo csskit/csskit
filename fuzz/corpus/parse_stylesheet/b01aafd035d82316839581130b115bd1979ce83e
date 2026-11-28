@@ -1,0 +1,3 @@
+.ui.list {
+  font-size: 1em;
+}

@@ -1,0 +1,11 @@
+.pf-v6-m-ai-indicator::before {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  content: "";
+  background: linear-gradient(to right, #f56e6e 0%, #876fd4 65%, #5e40be 100%) border-box;
+  border: var(--pf-t--global--border--width--extra-strong) solid transparent;
+  border-radius: inherit;
+  mask: linear-gradient(#000 0 0) padding-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+}

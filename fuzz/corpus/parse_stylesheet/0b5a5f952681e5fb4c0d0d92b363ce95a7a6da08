@@ -1,0 +1,12 @@
+nav,
+.row,
+a.row {
+  display: flex;
+  align-items: center;
+  align-self: normal;
+  text-align: start;
+  justify-content: flex-start;
+  white-space: nowrap;
+  gap: 1rem;
+  border-radius: 0;
+}

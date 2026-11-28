@@ -1,0 +1,12 @@
+.cbutton--effect-simo.cbutton--click::before {
+  -webkit-animation-name: anim-effect-simo-2, anim-effect-simo-3;
+  animation-name: anim-effect-simo-2, anim-effect-simo-3;
+  -webkit-animation-duration: 5s, 0.4s;
+  animation-duration: 5s, 0.4s;
+  -webkit-animation-iteration-count: 1, infinite;
+  animation-iteration-count: 1, infinite;
+  -webkit-animation-timing-function: ease, linear;
+  animation-timing-function: ease, linear;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+}

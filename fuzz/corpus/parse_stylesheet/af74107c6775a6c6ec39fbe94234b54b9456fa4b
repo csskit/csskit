@@ -1,0 +1,6 @@
+.ts-control {
+    color: inherit;
+    display: grid;
+    grid-template-columns: var(--label-width) 1fr;
+    gap: 2rem;
+}

@@ -1,0 +1,3 @@
+.faq-page .faq-section-info {
+  border-left-color: var(--bs-info);
+}

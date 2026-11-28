@@ -1,0 +1,4 @@
+.cds--modal-scroll-content:has(.cds--autoalign) {
+  -webkit-mask-image: none;
+          mask-image: none;
+}

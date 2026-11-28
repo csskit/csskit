@@ -1,0 +1,6 @@
+.ui.page.dimmer {
+  position: fixed;
+  transform-style: "";
+  perspective: 2000px;
+  transform-origin: center center;
+}

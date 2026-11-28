@@ -1,0 +1,19 @@
+@supports (aspect-ratio: 1){
+  .add-aspect-9x16{
+    height:inherit;
+    padding:inherit;
+    aspect-ratio:0.5625;
+    max-width:100%;
+  }
+  .add-aspect-9x16 > *{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+  }
+  img.add-aspect-9x16, .add-aspect-9x16 > img{
+    -o-object-fit:cover;
+       object-fit:cover;
+  }
+}

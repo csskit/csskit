@@ -1,0 +1,3 @@
+.ui.head.stuck.table {
+  border-top: 0;
+}

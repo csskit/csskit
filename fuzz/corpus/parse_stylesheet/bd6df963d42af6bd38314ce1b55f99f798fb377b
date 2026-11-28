@@ -1,0 +1,3 @@
+.u-basis-content {
+  flex-basis: content !important;
+}

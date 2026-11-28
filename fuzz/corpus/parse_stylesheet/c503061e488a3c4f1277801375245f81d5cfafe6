@@ -1,0 +1,3 @@
+.bg-repeat-space {
+  background-repeat: space;
+}

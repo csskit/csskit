@@ -1,0 +1,3 @@
+i.icon.chart.area:before {
+  content: "\f1fe";
+}

@@ -1,0 +1,6 @@
+.ui.attached.steps {
+  width: calc(100% + (--1px * 2)) !important;
+  margin: 0em -1px 0;
+  max-width: calc(100% + (--1px * 2));
+  border-radius: 0.28571429rem 0.28571429rem 0em 0em;
+}

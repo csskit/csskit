@@ -1,0 +1,3 @@
+.ease-linear {
+  transition-timing-function: linear;
+}

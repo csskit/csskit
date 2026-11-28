@@ -1,0 +1,38 @@
+.iconbutton {
+  border: none;
+  background: none;
+  color: currentcolor;
+  padding: 0;
+  box-shadow: none;
+  line-height: var(--rhythm, 1rlh);
+  font-size: var(--wcag-target-size-aa);
+  inline-size: var(--wcag-target-size-aa);
+  block-size: var(--wcag-target-size-aa);
+  text-align: center;
+  border-radius: 50%;
+  transition: font-weight .2s ease-in-out;
+  &:hover,
+  &:focus-visible {
+    box-shadow: none;
+    outline: var(--interactive-border-width) var(--interactive-border-style) var(--accent);
+    outline-offset: 6px;
+  }
+  &:active {
+    box-shadow: none;
+    outline-offset: 3px;
+    background: none;
+  }
+  &[aria-pressed=true] {
+    box-shadow: none;
+    transform: none;
+  }
+  &:is(.plain, .info, .ok, .warn, .bad) {
+    color: var(--accent);
+  }
+  &:is(.big, .\<big\>) {
+    font-size: var(--wcag-target-size-aaa);
+    inline-size: var(--wcag-target-size-aaa);
+    block-size: var(--wcag-target-size-aaa);
+    padding-inline: 0;
+  }
+}

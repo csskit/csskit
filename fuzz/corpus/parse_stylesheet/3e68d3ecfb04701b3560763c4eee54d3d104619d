@@ -1,0 +1,4 @@
+@property --foo {
+  /* syntax: "*"; */
+  initial-value: red;
+}

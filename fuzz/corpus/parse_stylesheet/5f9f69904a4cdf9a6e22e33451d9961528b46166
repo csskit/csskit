@@ -1,0 +1,5 @@
+.ui.header .ui.label {
+  font-size: "";
+  margin-left: 0.5rem;
+  vertical-align: middle;
+}

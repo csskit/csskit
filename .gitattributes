@@ -1,1 +1,2 @@
 * text=auto eol=lf
+fuzz/corpus/** -text

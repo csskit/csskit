@@ -1,0 +1,4 @@
+.two.tabs > label img {
+  width: 48%;
+  margin: 4% 0 4% 4%;
+}

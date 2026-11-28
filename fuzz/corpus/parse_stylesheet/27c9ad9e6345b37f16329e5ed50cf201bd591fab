@@ -1,0 +1,3 @@
+.ui.inverted.corner.label {
+  border-color: #b5b5b5;
+}

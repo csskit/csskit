@@ -1,0 +1,3 @@
+body.style-options-for-admonition-plugin .admonition {
+  break-inside: avoid;
+}

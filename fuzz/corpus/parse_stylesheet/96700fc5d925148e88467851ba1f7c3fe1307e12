@@ -1,0 +1,3 @@
+.uk-blend-screen {
+  mix-blend-mode: screen;
+}

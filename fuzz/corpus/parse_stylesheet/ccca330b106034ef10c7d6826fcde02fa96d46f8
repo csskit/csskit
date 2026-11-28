@@ -1,0 +1,3 @@
+.bg-scroll {
+  background-attachment: scroll;
+}

@@ -1,0 +1,3 @@
+nav.vertical > :is(ol, ul) {
+  align-items: normal;
+}

@@ -1,0 +1,5 @@
+@-moz-document domain("data.stackexchange.com"){nav.primary .site-selector-popup {
+    background-color: #111;
+    border: 1px solid /*[[base-color]]*/;
+    border-top-color: /*[[base-color]]*/;
+  }}

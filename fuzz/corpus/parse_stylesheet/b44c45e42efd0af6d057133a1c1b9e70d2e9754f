@@ -1,0 +1,2 @@
+.selecta .expanded.xsmall::after {
+  background-size: 5px; }

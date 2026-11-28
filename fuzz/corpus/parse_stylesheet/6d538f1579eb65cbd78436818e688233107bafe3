@@ -1,0 +1,3 @@
+font>strong {
+  font-family: var(--font-family-strong) !important;
+}

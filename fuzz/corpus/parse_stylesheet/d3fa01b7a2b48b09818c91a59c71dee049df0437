@@ -1,0 +1,8 @@
+.pf-v6-c-tree-view__list-item.pf-m-expanded > .pf-v6-c-tree-view__list {
+  max-height: 99999px;
+  visibility: revert;
+  opacity: var(--pf-v6-c-tree-view--m-expanded__list--Opacity);
+  transition-delay: 0s;
+  transition-duration: var(--pf-v6-c-tree-view__list--TransitionDuration--expand--fade), var(--pf-v6-c-tree-view__list--TransitionDuration--expand--slide), 0s, 0s;
+  translate: 0 var(--pf-v6-c-tree-view--m-expanded__list--TranslateY);
+}

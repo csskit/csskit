@@ -1,0 +1,3 @@
+.slider > :focus ~ .tooltip.bottom {
+  inset-block: auto -1rem;
+}

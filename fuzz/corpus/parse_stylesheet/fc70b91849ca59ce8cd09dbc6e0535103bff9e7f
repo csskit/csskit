@@ -1,0 +1,3 @@
+a {
+  width: calc(pi * 100px);
+}

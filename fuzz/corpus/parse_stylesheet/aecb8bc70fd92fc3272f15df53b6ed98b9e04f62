@@ -1,0 +1,3 @@
+.ui.animated.list > .item {
+  transition: 0.25s color ease 0.1s, 0.25s padding-left ease 0.1s, 0.25s background-color ease 0.1s;
+}

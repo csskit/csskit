@@ -1,0 +1,5 @@
+.liga {
+  -ms-font-feature-settings: "liga";
+  -webkit-font-variant-ligatures: common-ligatures;
+          font-variant-ligatures: common-ligatures;
+}

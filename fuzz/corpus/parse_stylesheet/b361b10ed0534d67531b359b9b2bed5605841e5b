@@ -1,0 +1,3 @@
+.legacy.modals.dimmer[class*="top aligned"] {
+  padding-top: 5vh;
+}

@@ -1,0 +1,11 @@
+body:not(.default-loading-page).loading-custom-text.loading-text-typing-style.loading-text-moving-style.loading-text-shinning-style.loading-text-color-changing-style .progress-bar-message::before {
+  animation:
+    typing-style 3s steps(26, end),
+    cursor-blink 0.3s step-end infinite alternate,
+    moving-style 3s ease-in-out infinite alternate,
+    shinning-style 3s infinite,
+    color-changing-style 3s infinite;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  will-change: transform;
+}

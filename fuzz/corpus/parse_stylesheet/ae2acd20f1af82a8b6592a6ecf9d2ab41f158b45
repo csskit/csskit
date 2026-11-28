@@ -1,0 +1,3 @@
+.perspective-xs {
+  perspective: 250px;
+}

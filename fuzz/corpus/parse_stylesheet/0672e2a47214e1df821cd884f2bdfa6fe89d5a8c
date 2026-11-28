@@ -1,0 +1,3 @@
+small {
+  color: var(--color-text-secondary);
+}

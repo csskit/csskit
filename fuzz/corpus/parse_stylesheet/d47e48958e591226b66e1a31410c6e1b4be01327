@@ -1,0 +1,4 @@
+.usa-file-input__preview-image--pdf{
+  background-image:url("../img/file-pdf.svg"), linear-gradient(transparent, transparent);
+  background-repeat:no-repeat;
+}

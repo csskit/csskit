@@ -1,0 +1,12 @@
+@supports not (content: ""/"") {
+  :is(.fas,
+  .far,
+  .fab,
+  .fa-solid,
+  .fa-regular,
+  .fa-brands,
+  .fa-classic,
+  .fa)::before {
+    content: var(--fa);
+  }
+}

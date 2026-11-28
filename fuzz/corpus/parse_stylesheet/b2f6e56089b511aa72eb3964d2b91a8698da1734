@@ -1,0 +1,1 @@
+@property --x{syntax:"<integer>";inherits:false;initial-value:0}a{--x:1e2}

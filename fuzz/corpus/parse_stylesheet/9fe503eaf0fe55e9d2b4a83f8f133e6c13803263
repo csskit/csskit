@@ -1,0 +1,4 @@
+body.style-options-for-buttons-plugin button.blank:hover {
+  animation: swing_image 0.8s linear 0s 1 normal;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, .3);
+}

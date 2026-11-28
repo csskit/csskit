@@ -1,0 +1,3 @@
+i.large {
+  --_size: 1.75rem;
+}

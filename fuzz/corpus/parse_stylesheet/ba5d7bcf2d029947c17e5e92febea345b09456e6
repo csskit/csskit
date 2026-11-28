@@ -1,0 +1,15 @@
+.ctrlTab-preview {
+  border: 2px solid transparent !important;
+  background: transparent !important;
+  border-radius: 16px !important;
+
+  &:focus {
+    border: 2px solid light-dark(white, black) !important;
+    outline: 4px solid light-dark(AccentColor, color-mix(in srgb, AccentColor 60%, white)) !important;
+  }
+  &:is(:hover, :active) {
+    border: 2px solid light-dark(white, black) !important;
+    outline: 4px solid light-dark(AccentColor, color-mix(in srgb, AccentColor 60%, white)) !important;
+    background: transparent !important;
+  }
+}

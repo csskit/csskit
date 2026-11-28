@@ -1,0 +1,7 @@
+@-moz-document regexp("https?:\/\/(([\w\-]{2,}\.)?(wiki(pedia|books|news|quote|source|versity|voyage)|wiktionary)|(www|test)\.(mediawiki|wiki(data|dot))|(meta|wikimania|commons|otrs-wiki|species|wikitech|incubator|outreach|foundation|donate)\.wikimedia)\.org\/.*"),
+               regexp("https?:\/\/wiki\.(archlinux|mozilla|nixos)\.(org|jp)\/.*$"),
+               regexp("https?:\/\/wikiless\.org\/.*$"){table.navbox {
+    -webkit-box-shadow: 3px 3px 6px var(--gray-28);
+       -moz-box-shadow: 3px 3px 6px var(--gray-28);
+            box-shadow: 3px 3px 6px var(--gray-28);
+  }}

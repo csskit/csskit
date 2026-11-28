@@ -1,0 +1,3 @@
+.flatpickr-current-month .cur-month {
+  margin-inline: 0.25rem 0.25rem;
+}

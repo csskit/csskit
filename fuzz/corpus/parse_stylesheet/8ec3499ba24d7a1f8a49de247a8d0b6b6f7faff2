@@ -1,0 +1,3 @@
+.offcanvas-aside-left {
+  transition: margin-left 1ms ease-in-out;
+  will-change: margin-left; }

@@ -1,0 +1,50 @@
+@media (-moz-platform: windows) {
+  /* Titlebar */
+  .titlebar-button {
+    width: 46px !important;
+    height: 32px !important;
+    stroke: var(--uwp-titlebar-stroke) !important;
+    color: var(--uwp-titlebar-stroke) !important;
+    background-color: var(--uwp-titlebar-background) !important;
+
+    &:hover {
+      stroke: var(--uwp-titlebar-stroke-hover) !important;
+      color: var(--uwp-titlebar-stroke-hover) !important;
+      background-color: var(--uwp-titlebar-background-hover) !important;
+    }
+    &:active {
+      stroke: var(--uwp-titlebar-stroke-active) !important;
+      color: var(--uwp-titlebar-stroke-active) !important;
+      background-color: var(--uwp-titlebar-background-active) !important;
+    }
+    &:not(:hover, :active):-moz-window-inactive {
+      stroke: var(--uwp-titlebar-stroke-inactive) !important;
+      color: var(--uwp-titlebar-stroke-inactive) !important;
+    }
+    &.titlebar-close:hover {
+      background-color: #C42B1C !important;
+    }
+    &.titlebar-close:active {
+      background-color: #B3271C !important;
+    }
+  }
+  .titlebar-button > .toolbarbutton-text {
+    display: none !important;
+  }
+  #main-window[sizemode="fullscreen"] .titlebar-restore {
+    list-style-image: url(../img/titlebox-full-restore.png) !important;
+
+    .toolbarbutton-icon {
+      width: auto !important;
+      height: auto !important;
+
+      &:-moz-window-inactive {
+        opacity: 0.5 !important;
+      }
+    }
+  }
+  .titlebar-buttonbox-container, #window-controls {
+    margin-bottom: 0px !important;
+    -moz-box-align: start !important;
+  }
+}

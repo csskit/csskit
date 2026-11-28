@@ -1,0 +1,3 @@
+#myPreferencesMenuPage .verticalSection-extrabottompadding .emby-button .listItemBodyText {
+  text-overflow: visible !important;
+}

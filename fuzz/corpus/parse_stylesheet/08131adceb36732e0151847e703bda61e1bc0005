@@ -1,0 +1,5 @@
+@font-face {
+  font-family: "Segoe UI Adjusted";
+  src: local(Segoe UI);
+  ascent-override: 95%;
+}

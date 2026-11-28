@@ -1,0 +1,4 @@
+:where(textarea) {
+    resize: vertical;
+   field-sizing: content;
+}

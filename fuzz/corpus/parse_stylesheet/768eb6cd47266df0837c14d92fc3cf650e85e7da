@@ -1,0 +1,6 @@
+.pf-v6-c-compass__footer {
+  display: flex;
+  grid-column: 1/-1;
+  justify-content: center;
+  translate: 0 var(--pf-v6-c-compass--section--slide--length--main-footer);
+}

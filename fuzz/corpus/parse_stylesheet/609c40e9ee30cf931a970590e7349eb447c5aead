@@ -1,0 +1,3 @@
+.cube .anim{
+  transform-style:preserve-3d;
+}

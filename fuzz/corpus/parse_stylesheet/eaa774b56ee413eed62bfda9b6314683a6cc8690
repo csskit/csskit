@@ -1,0 +1,3 @@
+body.wireframe #s8 div#floor {
+  background: #f00;
+}

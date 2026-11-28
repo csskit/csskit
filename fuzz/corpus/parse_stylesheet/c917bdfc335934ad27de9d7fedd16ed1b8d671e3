@@ -1,0 +1,5 @@
+menu.group > li {
+  box-shadow: none;
+  padding: 0;
+  min-block-size: auto;
+}

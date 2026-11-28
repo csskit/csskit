@@ -1,0 +1,3 @@
+.list-outside {
+  list-style-position: outside;
+}

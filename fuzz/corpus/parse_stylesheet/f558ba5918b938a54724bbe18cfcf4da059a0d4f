@@ -1,0 +1,3 @@
+.justify-self-stretch {
+  justify-self: stretch;
+}

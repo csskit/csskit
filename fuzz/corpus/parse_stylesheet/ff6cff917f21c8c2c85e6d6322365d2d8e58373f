@@ -1,0 +1,3 @@
+.help.is-link {
+  color: hsl(var(--bulma-link-h), var(--bulma-link-s), var(--bulma-link-on-scheme-l));
+}

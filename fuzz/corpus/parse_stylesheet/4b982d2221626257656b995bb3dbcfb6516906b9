@@ -1,0 +1,5 @@
+@-moz-document regexp("https?:\/\/(([\w\-]{2,}\.)?(wiki(pedia|books|news|quote|source|versity|voyage)|wiktionary)|(www|test)\.(mediawiki|wiki(data|dot))|(meta|wikimania|commons|otrs-wiki|species|wikitech|incubator|outreach|foundation|donate)\.wikimedia)\.org\/.*"),
+               regexp("https?:\/\/wiki\.(archlinux|mozilla|nixos)\.(org|jp)\/.*$"),
+               regexp("https?:\/\/wikiless\.org\/.*$"){.vector-search-box-collapses #searchButton {
+    background: no-repeat center / 20px auto url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Cpath d='M12.2 13.6a7 7 0 1 1 1.4-1.4l5.4 5.4-1.4 1.4zM3 8a5 5 0 1 0 10 0A5 5 0 0 0 3 8z'/%3E%3C/svg%3E") !important;
+  }}

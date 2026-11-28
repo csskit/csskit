@@ -1,0 +1,3 @@
+[aria-busy=true] {
+  cursor: progress;
+}

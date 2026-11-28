@@ -1,0 +1,3 @@
+.alert-dark hr {
+  border-top-color: #b9bbbe;
+}

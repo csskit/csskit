@@ -1,0 +1,4 @@
+.uk-text-stroke {
+  -webkit-text-stroke: calc(1.4px + 0.002em);
+  -webkit-text-fill-color: transparent;
+}

@@ -1,0 +1,4 @@
+.field.label.border:not(.fill) > :is(input, textarea):is(:focus, [placeholder]:not(:placeholder-shown), .active),
+.field.label.border:not(.fill) > select {
+  clip-path: polygon(-2% -2%, 0.75rem -2%, 0.75rem 0.5rem, calc(100% - 1rem) 0.5rem, calc(100% - 1rem) -2%, 102% -2%, 102% 102%, -2% 102%);
+}

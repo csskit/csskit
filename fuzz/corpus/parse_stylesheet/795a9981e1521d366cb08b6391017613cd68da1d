@@ -1,0 +1,6 @@
+.exclusions-3 {
+  wrap-flow: auto;
+  wrap-through: auto;
+  display: minimum;
+  display: maximum;
+}

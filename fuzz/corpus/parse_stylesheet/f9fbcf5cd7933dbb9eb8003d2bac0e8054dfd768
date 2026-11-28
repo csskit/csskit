@@ -1,0 +1,1 @@
+a{animation:spin 1s;animation-timeline:scroll();animation-range:entry}

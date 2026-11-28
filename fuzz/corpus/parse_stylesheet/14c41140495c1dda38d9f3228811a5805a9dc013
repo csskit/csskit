@@ -1,0 +1,6 @@
+.ui.items > .item img.avatar,
+.ui.items > .item .avatar img {
+  width: '';
+  height: '';
+  border-radius: 500rem;
+}

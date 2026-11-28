@@ -1,0 +1,4 @@
+.mermaid .section {
+  stroke: none !important;
+  opacity: 0.3 !important;
+}

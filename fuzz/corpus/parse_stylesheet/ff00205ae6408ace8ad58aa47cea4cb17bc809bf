@@ -1,0 +1,8 @@
+@-moz-document domain("gist.github.com"){body {
+    background-color: var(--ghd-bg-color) !important;
+    background-image: var(--ghd-bg-img) !important;
+    background-clip: border-box !important;
+    background-origin: padding-box !important;
+    background-attachment: /*[[bg-attachment]]*/ !important;
+    /*[[bg-options]]*/
+  }}

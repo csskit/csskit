@@ -1,0 +1,3 @@
+nav.bottom ~ footer.fixed {
+  inset-block: 0 calc(var(--bottom, 0) + 4.5rem);
+}

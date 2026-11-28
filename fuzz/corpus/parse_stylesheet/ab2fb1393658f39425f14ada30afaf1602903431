@@ -1,0 +1,3 @@
+.fl-shrink4 {
+  flex-shrink: 4;
+}

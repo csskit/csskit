@@ -1,0 +1,4 @@
+.appearance-auto {
+  -webkit-appearance: auto;
+          appearance: auto;
+}

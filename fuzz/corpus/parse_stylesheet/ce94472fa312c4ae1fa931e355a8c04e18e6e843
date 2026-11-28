@@ -1,0 +1,7 @@
+.pf-v6-c-tabs__scroll-button::before {
+  border-color: var(--pf-v6-c-tabs__scroll-button--before--BorderColor);
+  border-block-start-width: 0;
+  border-block-end-width: var(--pf-v6-c-tabs__scroll-button--before--BorderBlockEndWidth);
+  border-inline-start-width: var(--pf-v6-c-tabs__scroll-button--before--BorderInlineStartWidth);
+  border-inline-end-width: var(--pf-v6-c-tabs__scroll-button--before--BorderInlineEndWidth);
+}
