@@ -1,4 +1,43 @@
-## [0.0.42] - 2026-11-26
+## [0.0.43] - 2026-11-28
+
+### Other Changes
+- Fuzz: Seed corpus from real-world CSS and persist it between nightly runs (#1758) ([#1758](https://github.com/csskit/csskit/pull/1758))
+
+
+### Css_ast
+- csskit_spec_generator/css_ast: Classify more computed value phrasings (#1755) ([#1755](https://github.com/csskit/csskit/pull/1755))
+- css_ast/csskit/csskit_transform: Fuse transforms and erase tree command walk (#1757) ([#1757](https://github.com/csskit/csskit/pull/1757))
+- css_lexer/css_parse/css_ast/csskit_derives: Establish recovery primitives (#1761) ([#1761](https://github.com/csskit/csskit/pull/1761))
+- css_ast: const up rule-root checks in VisitNode (#1762) ([#1762](https://github.com/csskit/csskit/pull/1762))
+- csskit_arena/css_parse/css_ast: Preserve malformed values and rules (#1764) ([#1764](https://github.com/csskit/csskit/pull/1764))
+- css_lexer/css_parse/css_ast: Preserve & recover blocks (#1767) ([#1767](https://github.com/csskit/csskit/pull/1767))
+- css_lexer/css_parse/css_ast: Keep compact writes lexically stable (#1768) ([#1768](https://github.com/csskit/csskit/pull/1768))
+
+
+### Css_lexer
+- css_lexer: Token Debug output (#1754) ([#1754](https://github.com/csskit/csskit/pull/1754))
+- css_lexer: Write verbatim-escaped idents as one slice (#1760) ([#1760](https://github.com/csskit/csskit/pull/1760))
+- csskit_transform: Lex reparsed text at a base offset (#1766) ([#1766](https://github.com/csskit/csskit/pull/1766))
+
+
+### Css_parse
+- css_parse: Add BlockContents for parsing a block's contents without braces (#1751) ([#1751](https://github.com/csskit/csskit/pull/1751))
+- css_parse: Return buffered cursors from Parser::next without the trivia loop (#1756) ([#1756](https://github.com/csskit/csskit/pull/1756))
+- css_parse: Reuse the block checkpoint when parsing declarations (#1765) ([#1765](https://github.com/csskit/csskit/pull/1765))
+
+
+### Csskit_derives
+- csskit_derives: Inline merge_metadata on rule roots (#1763) ([#1763](https://github.com/csskit/csskit/pull/1763))
+
+
+### Csskit_transform
+- coverage: update css-minify-tests (#1759) ([#1759](https://github.com/csskit/csskit/pull/1759))
+
+
+### Csskit_vscode
+- fix(deps): update dependency vscode-languageclient to v12 (#1752) ([#1752](https://github.com/csskit/csskit/pull/1752))
+
+## [0.0.42] - 2026-11-27
 
 ### Other Changes
 - Release: Replace `@release` markers with cargo set-version (#1718) ([#1718](https://github.com/csskit/csskit/pull/1718))
@@ -13,6 +52,7 @@
 - css_ast: Derive Clone, Copy, Debug, Eq, PartialEq on Inherits (#1746) ([#1746](https://github.com/csskit/csskit/pull/1746))
 - css_ast: Make the Id selector's hash token public (#1747) ([#1747](https://github.com/csskit/csskit/pull/1747))
 - css_parse: Keep a repeated !important within its declaration (#1737) ([#1737](https://github.com/csskit/csskit/pull/1737))
+- css_ast: End @property descriptor values at a semicolon (#1749) ([#1749](https://github.com/csskit/csskit/pull/1749))
 
 
 ### Css_parse
@@ -23,6 +63,7 @@
 - csskit_transform/csskit: Rewrite minifier transforms as in-place tree edits (#1731) ([#1731](https://github.com/csskit/csskit/pull/1731))
 - fix(deps): update dependencies (patch) (#1733) ([#1733](https://github.com/csskit/csskit/pull/1733))
 - csskit/csskit_napi/csskit_wasm/csskit_transform: Presize minify output (#1741) ([#1741](https://github.com/csskit/csskit/pull/1741))
+- Release v0.0.42 (#1717) ([#1717](https://github.com/csskit/csskit/pull/1717))
 
 
 ### Csskit_arena
