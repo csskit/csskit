@@ -331,7 +331,16 @@ fn convert_animation_type(animation_type: &str) -> Option<TokenStream> {
 fn convert_computed_value(computed_value: &str) -> Option<TokenStream> {
 	let normalized = computed_value.replace('\n', " ").to_lowercase();
 	let result = match normalized.as_str() {
+		"see individual properties" => {
+			quote! { computed_value_type = SeeIndividualProperties }
+		}
 		s if s.contains("as specified") && s.contains("absolute length") => {
+			quote! { computed_value_type = SpecifiedWithAbsoluteLengths }
+		}
+		s if s.contains("as specified")
+			&& s.contains("length")
+			&& (s.contains("values computed") || s.contains("made absolute")) =>
+		{
 			quote! { computed_value_type = SpecifiedWithAbsoluteLengths }
 		}
 		s if s.contains("as specified") && s.contains("absolute") && s.contains("url") => {
@@ -339,6 +348,16 @@ fn convert_computed_value(computed_value: &str) -> Option<TokenStream> {
 		}
 		s if s.starts_with("as specified") || s == "specified value" => {
 			quote! { computed_value_type = AsSpecified }
+		}
+		s if (s.starts_with("specified ") || s.starts_with("the specified "))
+			&& !s.contains("computed")
+			&& !s.contains("clamped")
+			&& !s.contains(" or ") =>
+		{
+			quote! { computed_value_type = AsSpecified }
+		}
+		"computed <length-percentage> value" | "a computed <length-percentage> value" => {
+			quote! { computed_value_type = AbsoluteLengthOrPercentage }
 		}
 		s if s.contains("absolute length") && s.contains("percentage") => {
 			quote! { computed_value_type = AbsoluteLengthOrPercentage }
