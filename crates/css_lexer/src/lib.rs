@@ -190,6 +190,7 @@ pub use whitespace_style::Whitespace;
 pub struct Lexer<'a> {
 	source: &'a str,
 	offset: SourceOffset,
+	base: u32,
 	token: Token,
 	features: Feature,
 	atoms: &'static dyn DynAtomSet,
@@ -198,12 +199,26 @@ pub struct Lexer<'a> {
 impl<'a> Lexer<'a> {
 	#[inline]
 	pub fn new(atoms: &'static dyn DynAtomSet, source: &'a str) -> Self {
-		Self { source, offset: SourceOffset::default(), token: Token::default(), features: Feature::default(), atoms }
+		Self::new_at(atoms, source, SourceOffset::default())
+	}
+
+	/// Create a lexer over `source` whose first byte sits at `base`, so every cursor offset is `base` plus the
+	/// position within `source`.
+	#[inline]
+	pub fn new_at(atoms: &'static dyn DynAtomSet, source: &'a str, base: SourceOffset) -> Self {
+		Self {
+			source,
+			offset: SourceOffset::default(),
+			base: base.0,
+			token: Token::default(),
+			features: Feature::default(),
+			atoms,
+		}
 	}
 
 	#[inline]
 	pub fn new_with_features(atoms: &'static dyn DynAtomSet, source: &'a str, features: Feature) -> Self {
-		Self { source, features, offset: SourceOffset::default(), token: Token::default(), atoms }
+		Self { features, ..Self::new(atoms, source) }
 	}
 
 	#[inline]
@@ -216,10 +231,10 @@ impl<'a> Lexer<'a> {
 		self.offset.0 as usize == self.source.len()
 	}
 
-	/// Current position in file
+	/// Current position in file, including the base offset given to [Lexer::new_at]
 	#[inline]
 	pub const fn offset(&self) -> SourceOffset {
-		self.offset
+		SourceOffset(self.offset.0 + self.base)
 	}
 
 	#[inline]
@@ -229,15 +244,16 @@ impl<'a> Lexer<'a> {
 
 	/// Rewinds the lexer back to the given checkpoint
 	pub fn rewind(&mut self, cursor: Cursor) {
-		debug_assert!(cursor.offset() <= self.offset());
-		self.offset = cursor.offset();
+		debug_assert!(cursor.offset() <= self.offset() && cursor.offset().0 >= self.base);
+		self.offset = SourceOffset(cursor.offset().0 - self.base);
 		self.token = cursor.token();
 	}
 
 	/// Advances the lexer to the end of the given token
 	pub fn hop(&mut self, cursor: Cursor) {
-		debug_assert!(cursor.offset().0 as usize >= (self.offset.0 + self.token.len()) as usize);
-		self.offset = cursor.offset();
+		debug_assert!(cursor.offset().0 as usize >= (self.offset().0 + self.token.len()) as usize);
+		debug_assert!(cursor.offset().0 >= self.base);
+		self.offset = SourceOffset(cursor.offset().0 - self.base);
 		self.token = cursor.token();
 	}
 
@@ -259,13 +275,28 @@ impl<'a> Iterator for Lexer<'a> {
 		}
 		let offset = self.offset;
 		let token = self.advance();
-		if token.kind() == Kind::Eof { None } else { Some(token.with_cursor(offset)) }
+		if token.kind() == Kind::Eof { None } else { Some(token.with_cursor(SourceOffset(offset.0 + self.base))) }
 	}
 }
 
 #[test]
 fn size_test() {
-	assert_eq!(::std::mem::size_of::<Lexer>(), 48);
+	assert_eq!(::std::mem::size_of::<Lexer>(), 56);
+}
+
+#[test]
+fn new_at_rewinds_within_base() {
+	let mut lexer = Lexer::new_at(&EmptyAtomSet::ATOMS, "a b", SourceOffset(100));
+	let start = lexer.checkpoint();
+	assert_eq!(lexer.offset(), SourceOffset(100));
+	lexer.advance();
+	assert_eq!(lexer.offset(), SourceOffset(101));
+	lexer.rewind(start);
+	assert_eq!(lexer.next().map(|cursor| cursor.offset()), Some(SourceOffset(100)));
+	let second = lexer.clone().nth(1).unwrap();
+	assert_eq!(second.offset(), SourceOffset(102));
+	lexer.hop(second);
+	assert_eq!(lexer.offset(), SourceOffset(102));
 }
 
 #[test]

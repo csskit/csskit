@@ -677,8 +677,7 @@ fn peek_and_next_with_whitsespace() {
 fn new_at_offsets_cursors_from_base() {
 	let str = "a b";
 	let alloc = crate::Arena::default();
-	let lexer = css_lexer::Lexer::new(&css_lexer::EmptyAtomSet::ATOMS, str)
-		.map(|cursor| Cursor::new(SourceOffset(cursor.offset().0 + 100), cursor.token()));
+	let lexer = css_lexer::Lexer::new_at(&css_lexer::EmptyAtomSet::ATOMS, str, SourceOffset(100));
 	let mut p = Parser::new_at(&alloc, str, SourceOffset(100), lexer);
 	assert_eq!(p.offset(), 100);
 	assert_eq!(p.source_from(SourceOffset(101)), " b");
@@ -699,8 +698,7 @@ fn new_at_eof_after_buffer_refill() {
 	let str = "0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21";
 	let end = 1000 + str.len() as u32;
 	let alloc = crate::Arena::default();
-	let lexer = css_lexer::Lexer::new(&css_lexer::EmptyAtomSet::ATOMS, str)
-		.map(|cursor| Cursor::new(SourceOffset(cursor.offset().0 + 1000), cursor.token()));
+	let lexer = css_lexer::Lexer::new_at(&css_lexer::EmptyAtomSet::ATOMS, str, SourceOffset(1000));
 	let mut p = Parser::new_at(&alloc, str, SourceOffset(1000), lexer);
 	let peeked = p.peek_n(23);
 	assert_eq!(peeked.token(), Kind::Eof);
