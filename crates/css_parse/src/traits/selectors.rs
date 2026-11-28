@@ -25,6 +25,19 @@ pub trait CompoundSelector<'a>: Sized + Parse<'a> {
 		p.parse::<Self::SelectorComponent>().map(Some)
 	}
 
+	/// True when `c` can start a compound selector. A terminator never does, even after whitespace that would peek as a
+	/// descendant combinator: [CompoundSelector::parse_compound_selector] trims that whitespace and rejects an empty
+	/// compound.
+	fn peek_compound_selector<I>(p: &Parser<'a, I>, c: Cursor) -> bool
+	where
+		I: Iterator<Item = Cursor> + Clone,
+		Self::SelectorComponent: Peek<'a>,
+	{
+		c != Kind::Eof
+			&& c != KindSet::LEFT_CURLY_RIGHT_PAREN_COMMA_OR_SEMICOLON
+			&& <Self::SelectorComponent>::peek(p, c)
+	}
+
 	fn parse_compound_selector<I>(p: &mut Parser<'a, I>) -> Result<Vec<'a, Self::SelectorComponent>>
 	where
 		I: Iterator<Item = Cursor> + Clone,
@@ -34,6 +47,9 @@ pub trait CompoundSelector<'a>: Sized + Parse<'a> {
 		p.skip_trivia();
 		while let Some(component) = Self::parse_compound_selector_part(p)? {
 			components.push(component);
+		}
+		if components.is_empty() {
+			Err(Diagnostic::new(p.peek_n(1), Diagnostic::unexpected))?
 		}
 		Ok(components)
 	}
@@ -121,7 +137,7 @@ pub trait SelectorComponent<'a>: Sized {
 				_ => {
 					p.set_skip(skip);
 					let value = p.parse::<Self::Combinator>().map(Self::build_combinator);
-					p.set_skip(KindSet::WHITESPACE);
+					p.set_skip(KindSet::TRIVIA);
 					p.consume_trivia_as_leading();
 					p.set_skip(skip);
 					value

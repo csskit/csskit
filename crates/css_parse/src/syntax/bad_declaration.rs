@@ -27,6 +27,9 @@ impl<'a> BadDeclaration<'a> {
 	{
 		let mut values = Vec::new_in(p.alloc());
 		while !p.at_end() && p.peek_n(1).offset() < end {
+			if <T!['}']>::peek(p, p.peek_n(1)) && p.next_is_stop() {
+				break;
+			}
 			values.push(Self::parse_value(p)?);
 		}
 		Ok(Self(values))

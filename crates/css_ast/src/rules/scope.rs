@@ -87,5 +87,7 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, ScopeRule, "@scope(.card){img{color:black}}");
 		assert_parse!(CssAtomSet::ATOMS, ScopeRule, "@scope(){}");
 		assert_parse!(CssAtomSet::ATOMS, ScopeRule, "@scope{img{color:black}}");
+		assert_parse!(CssAtomSet::ATOMS, ScopeRule, "@scope ( ) to (  ){}");
+		assert_parse!(CssAtomSet::ATOMS, ScopeRule, "@scope ( /**/ ){}");
 	}
 }

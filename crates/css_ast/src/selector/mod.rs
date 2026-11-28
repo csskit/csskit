@@ -74,7 +74,7 @@ impl<'a> NodeWithMetadata<CssMetadata> for SelectorList<'a> {
 }
 
 #[node]
-#[derive(Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
@@ -90,6 +90,17 @@ impl<'a> Parse<'a> for CompoundSelector<'a> {
 		I: Iterator<Item = Cursor> + Clone,
 	{
 		Ok(Self(Self::parse_compound_selector(p)?))
+	}
+}
+
+impl<'a> css_parse::Peek<'a> for CompoundSelector<'a> {
+	const PEEK_KINDSET: css_parse::KindSet = SelectorComponent::PEEK_KINDSET;
+
+	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
+		Self::peek_compound_selector(p, c)
 	}
 }
 
@@ -313,6 +324,9 @@ mod tests {
 		assert_visits!("a + b", CompoundSelector, Tag, HtmlTag, Combinator, Tag, HtmlTag);
 		assert_visits!("a ~ b", CompoundSelector, Tag, HtmlTag, Combinator, Tag, HtmlTag);
 		assert_visits!(".foo > .bar + .baz", CompoundSelector, Class, Combinator, Class, Combinator, Class);
+		assert_visits!("a >/**/ b", CompoundSelector, Tag, HtmlTag, Combinator, Tag, HtmlTag);
+		assert_visits!("a &/**/ b", CompoundSelector, Tag, HtmlTag, Combinator, Tag, HtmlTag);
+		assert_visits!("a +/**/ /**/ b", CompoundSelector, Tag, HtmlTag, Combinator, Tag, HtmlTag);
 	}
 
 	#[test]

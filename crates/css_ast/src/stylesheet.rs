@@ -251,10 +251,19 @@ mod tests {
 	}
 
 	#[test]
+	fn unclosed_top_level_starting_style() {
+		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "@starting-style {a", "@starting-style {a}");
+		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "@starting-style {a}", "@starting-style {a}");
+		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "@starting-style {b:c;}", "@starting-style {b:c;}");
+		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "@starting-style {b:c;", "@starting-style {b:c;}");
+	}
+
+	#[test]
 	fn stray_close_bracket_in_block() {
 		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "%{)", "%{)}");
 		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "t% {90)", "t% {90)}");
-		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "{--ty-2% {90)", "{--ty-2% {90)}}");
+		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "{--ty-2% {90)", "{--ty-2% {90})}");
+		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "{--ty-2% {90})}", "{--ty-2% {90})}");
 		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "%{]", "%{]}");
 	}
 
@@ -369,6 +378,15 @@ mod tests {
 		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "a{b:url(/(t", "a{b:url(/(t)}");
 		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, ":not(.a,b\\", ":not(.a,b\\\u{FFFD})");
 		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "a{b:url(/(c\\", "a{b:url(/(c\\\u{FFFD})}");
+	}
+
+	#[test]
+	fn curly_inside_unclosed_is_keeps_repair_stable() {
+		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "a:is(, {){}", "a:is(, {}){}");
+		assert_parse!(CssAtomSet::ATOMS, StyleSheet, "a:is(, {}){}");
+		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "a:is(,{){}", "a:is(,{}){}");
+		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "a{b:calc(]{)", "a{b:calc()]{})}");
+		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "a{b:calc()]{})}", "a{b:calc()]{})}");
 	}
 
 	#[test]

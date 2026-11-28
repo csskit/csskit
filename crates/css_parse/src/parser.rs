@@ -261,6 +261,7 @@ where
 	/// Records that a token of `kind` is missing before the next token and returns a zero-length cursor which stands
 	/// in for it. The cursor sits at the next token's offset so it keeps its place when cursors are written in
 	/// source order.
+	#[cold]
 	pub fn missing(&mut self, kind: Kind) -> Cursor {
 		let next = self.peek_n_with_skip(1, KindSet::NONE);
 		let cursor = Cursor::new(next.offset(), Token::dummy(kind));

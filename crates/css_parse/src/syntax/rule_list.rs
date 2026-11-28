@@ -72,7 +72,10 @@ where
 			if let Some(close_curly) = p.parse_if_peek::<T!['}']>()? {
 				return Ok(Self { open_curly, rules, close_curly, meta });
 			}
-			let rule = p.parse::<R>()?;
+			let old_stop = p.set_stop(KindSet::new(&[Kind::RightCurly]));
+			let rule = p.parse::<R>();
+			p.set_stop(old_stop);
+			let rule = rule?;
 			meta = meta.merge(rule.metadata());
 			rules.push(rule);
 		}

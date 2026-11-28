@@ -366,6 +366,15 @@ fn numbers_and_hashes_too_long_to_encode_split() {
 	}
 }
 
+#[test]
+fn nul_lexes_as_replacement_character() {
+	for source in ["-\0a", "-\0", "#\0", "#\0a", "@\0", "@\0a", "@-\0", "\0-\0", "a\0", "\\\0"] {
+		let replaced = source.replace('\0', "\u{FFFD}");
+		let kinds = |s: &str| Lexer::new(&EmptyAtomSet::ATOMS, s).map(|c| c.token().kind()).collect::<Vec<_>>();
+		assert_eq!(kinds(source), kinds(&replaced), "{source:?}");
+	}
+}
+
 #[cfg(test)]
 mod iterator_tests {
 	use super::*;

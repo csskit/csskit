@@ -64,6 +64,16 @@ impl<'a> ByteCursor<'a> {
 		}
 	}
 
+	/// Peek a char at offset `n` as CSS Syntax preprocessing sees it (a NUL in the source is U+FFFD), with its byte
+	/// length in the source.
+	#[inline(always)]
+	fn peek_preprocessed_at(&self, n: usize) -> (char, usize) {
+		match self.peek_char_at(n) {
+			EOF if self.pos + n < self.bytes.len() => (REPLACEMENT_CHARACTER, 1),
+			c => (c, c.len_utf8()),
+		}
+	}
+
 	/// Decode a non-ASCII char starting at `idx`. The byte at `idx` is >= 128.
 	fn decode_non_ascii_at(&self, idx: usize) -> char {
 		// SAFETY: self.bytes is valid UTF-8
@@ -869,7 +879,8 @@ impl<'a> Lexer<'a> {
 		match c {
 			'\0' => {
 				if !cursor.is_last() {
-					let (_, c2, c3) = cursor.peek3();
+					let (c2, len2) = cursor.peek_preprocessed_at(1);
+					let (c3, _) = cursor.peek_preprocessed_at(1 + len2);
 					if is_ident_start_sequence(REPLACEMENT_CHARACTER, c2, c3) {
 						return cursor.consume_ident_like_token(self.atoms);
 					}
@@ -905,8 +916,8 @@ impl<'a> Lexer<'a> {
 					cursor.advance_n(3);
 					return Token::CDC;
 				}
-				let c2 = cursor.peek_char_at(1);
-				let c3 = cursor.peek_char_at(1 + c2.len_utf8());
+				let (c2, len2) = cursor.peek_preprocessed_at(1);
+				let (c3, _) = cursor.peek_preprocessed_at(1 + len2);
 				if is_ident_start_sequence(c, c2, c3) {
 					return cursor.consume_ident_like_token(self.atoms);
 				}
@@ -933,8 +944,8 @@ impl<'a> Lexer<'a> {
 			}
 			// Hash / Pound Sign
 			'#' => {
-				let c1 = cursor.peek_char_at(1);
-				let c2 = cursor.peek_char_at(1 + c1.len_utf8());
+				let (c1, len1) = cursor.peek_preprocessed_at(1);
+				let (c2, _) = cursor.peek_preprocessed_at(1 + len1);
 				if is_ident(c1) || is_escape_sequence(c1, c2) {
 					cursor.consume_hash_token(self.atoms)
 				} else {
@@ -944,7 +955,9 @@ impl<'a> Lexer<'a> {
 			// Commercial At
 			'@' => {
 				cursor.pos += 1;
-				let (c1, c2, c3) = cursor.peek3();
+				let (c1, len1) = cursor.peek_preprocessed_at(0);
+				let (c2, len2) = cursor.peek_preprocessed_at(len1);
+				let (c3, _) = cursor.peek_preprocessed_at(len1 + len2);
 				if is_ident_start_sequence(c1, c2, c3) {
 					let (len, contains_non_lower_ascii, dashed, contains_escape, atom_bits, _) =
 						cursor.consume_ident_sequence(self.atoms);

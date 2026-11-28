@@ -30,7 +30,11 @@ impl<'a> Parse<'a> for SimpleBlock<'a> {
 		let stop = p.set_stop(KindSet::new(&[open.end()]));
 		let values = p.parse_infallible::<ComponentValues>();
 		p.set_stop(stop);
-		let close = p.parse_if_peek::<T![PairWiseEnd]>()?.unwrap_or_else(|| <T![PairWiseEnd]>::missing(p, open.end()));
+		let close = if p.peek_n(1) == open.end() {
+			p.parse::<T![PairWiseEnd]>()?
+		} else {
+			<T![PairWiseEnd]>::missing(p, open.end())
+		};
 		Ok(Self { open, values, close })
 	}
 }
@@ -81,6 +85,8 @@ mod tests {
 		assert_parse_recovers!(EmptyAtomSet::ATOMS, SimpleBlock, "(one(two)", "(one(two))");
 		assert_parse_recovers!(EmptyAtomSet::ATOMS, SimpleBlock, "(one(two", "(one(two))");
 		assert_parse_recovers!(EmptyAtomSet::ATOMS, SimpleBlock, "{a:[b", "{a:[b]}");
+		assert_parse_recovers!(EmptyAtomSet::ATOMS, SimpleBlock, "({)", "({})");
+		assert_parse_recovers!(EmptyAtomSet::ATOMS, SimpleBlock, "[(]", "[()]");
 	}
 
 	#[test]
